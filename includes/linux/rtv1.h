@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/10/20 11:42:04 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/10/24 17:11:30 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <math.h>
 # include <time.h>
 # include "libft.h"
-# include <X.h>
 # include <stdio.h>
 
 /*
@@ -115,8 +114,12 @@ typedef struct	s_args
 	t_ray		*ray_buf;
 }				t_args;
 
-t_ray	*create_ray_buffer(void);
+t_ray	*create_ray_buffer(t_mtx4 *v2w);
 t_vec4	ft_normalize(t_vec4 v);
+t_vec4	new_coord(t_vec4 p, t_mtx4 mtx);
+t_mtx4		ft_mtx_mult(t_mtx4 m1, t_mtx4 m2);
+t_mtx4		ft_translate(float t_x, float t_y, float t_z);
+t_mtx4		ft_rotation(char axis, float pitch);
 
 /*
 **	Quit and initialize functions

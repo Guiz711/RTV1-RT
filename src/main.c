@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/10/20 12:10:45 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/10/24 17:18:31 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,15 @@ int				main(int argc, char **argv)
 	return (0);
 }*/
 
-t_mtx4	camera_pos(void)
-{
-	t_mtx4 tmp1;
-	t_mtx4 tmp2;
-
-	
-}
-
 int		main(void)
 {
 	t_ray	*buf;
 	t_mtx4	v2w;
 
-	v2w = ft_mtx_mult(ft_translate(-1, 0, 1), ft_rotation('y', RAD(-25)));
-	buf = create_ray_buffer();
+	//camera in (1, 0, -1) 25deg rot
+	v2w = ft_mtx_mult(ft_translate(-10, 0, 0), ft_rotation('y', RAD(-25)));
+	v2w = ft_translate(-10, 0, 0);
+	buf = create_ray_buffer(&v2w);
 	free(buf);
 	return (0);
 }

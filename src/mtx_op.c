@@ -6,11 +6,11 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:20:46 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/10/19 13:14:26 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/10/24 17:09:10 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libmlxext.h"
+#include "rtv1.h"
 
 /*
 ** ft_mtx_mult(t_mtx4 mtx1, t_mtx4 mtx2) : Multiplies two matrices together.
