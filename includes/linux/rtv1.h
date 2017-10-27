@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/10/24 17:11:30 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/10/27 18:10:34 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # include "libft.h"
 # include <stdio.h>
 
+# define TRUE 1
+# define FALSE 0
+# define SUCCESS 0
+# define FAILURE -1
+
 /*
 **	Properties
 */
@@ -31,6 +36,8 @@
 # define FOVY 60
 # define COLOR_DEPTH 32
 # define ENDIAN 1
+
+# define EXTENSION_NAME ".scn"
 
 /*
 **	Error handling
@@ -42,8 +49,18 @@
 # define ERR_INIT_TEXTURES 4
 # define ERR_MAP 5
 # define ERR_NAME 6
+# define ERR_FILE_EXTENSION 7
+# define ERR_MALLOC 8
+# define ERR_FILE_HEADER 9
+# define ERR_PARSING 10
+
 
 # define RAD(x) (M_PI * (x) / 180)
+
+# define SPHERE 1
+# define CYLINDER 2
+# define CONE 3
+# define PLAN 4
 
 typedef struct	s_vec2
 {
@@ -80,15 +97,23 @@ typedef	struct	s_ray
 	t_vec4		dir;
 }				t_ray;
 
+typedef struct	s_sphere
+{
+	t_vec4		center;
+	double		radius;
+}				t_sphere;
+
 typedef struct	s_view
 {
-	double		fov;
-	t_vec2		center;
-	double		dist;
-	double		a_pitch;
-	double		dir;
-	t_vec2		pos;
+	t_vec4		orig;
+	double		orient;
 }				t_view;
+
+typedef struct	s_scene
+{
+	t_view		cam;
+	t_list		*items;
+}
 
 typedef struct	s_img
 {
@@ -114,12 +139,19 @@ typedef struct	s_args
 	t_ray		*ray_buf;
 }				t_args;
 
-t_ray	*create_ray_buffer(t_mtx4 *v2w);
+typedef struct	s_error
+{
+	int			type;
+	char		*detail;
+}
+
+t_ray	*create_ray_list(t_mtx4 *v2w);
 t_vec4	ft_normalize(t_vec4 v);
 t_vec4	new_coord(t_vec4 p, t_mtx4 mtx);
-t_mtx4		ft_mtx_mult(t_mtx4 m1, t_mtx4 m2);
-t_mtx4		ft_translate(float t_x, float t_y, float t_z);
-t_mtx4		ft_rotation(char axis, float pitch);
+t_mtx4	ft_mtx_mult(t_mtx4 m1, t_mtx4 m2);
+t_mtx4	ft_translate(float t_x, float t_y, float t_z);
+t_mtx4	ft_rotation(char axis, float pitch);
+int		parse_scene_file(/*t_scene *scene, */char* file_name);
 
 /*
 **	Quit and initialize functions

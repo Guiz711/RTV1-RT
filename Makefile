@@ -6,11 +6,11 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2017/10/24 17:07:33 by gmichaud         ###   ########.fr        #
+#    Updated: 2017/10/27 16:03:32 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = wolf3d
+NAME = rtv1
 
 OS = LINUX
 
@@ -27,7 +27,7 @@ endif
 
 SRC_PATH = src
 
-SRC_NAME = main.c init_rays.c vec_op.c matrices_calc.c matrices.c mtx_op.c
+SRC_NAME = main.c parser.c init_rays.c vec_op.c matrices_calc.c matrices.c mtx_op.c
 
 INC_NAME = rtv1.h inputs_linux.h X.h
 
@@ -47,7 +47,7 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
 
-GREEN = '\033[0;32m'
+GREEN = \033[32m
 
 all: $(NAME)
 
@@ -56,7 +56,7 @@ $(NAME): $(OBJ)
 #	make -C ./minilibx_macos
 	@make -C ./libft --no-print-directory
 	@$(CC) $(OBJ) -o $@ $(LIB_FLAGS) $(LIBS)
-	@echo -e $(GREEN)\[$(NAME)\] Compilation success
+	@echo "$(GREEN)[$(NAME)] Compilation success"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
@@ -66,14 +66,14 @@ clean:
 	@/bin/rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 	@make -C ./libft clean --no-print-directory
-	@echo -e $(GREEN)\[$(NAME)\] .o files deleted
+	@echo "$(GREEN)[$(NAME)] .o files deleted"
 #	make -C ./mlxext clean
 #	make -C ./minilibx_macos clean
 
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@make -C ./libft fclean --no-print-directory
-	@echo -e $(GREEN)\[$(NAME)\] executable file deleted
+	@echo  "$(GREEN)[$(NAME)] executable file deleted"
 #	/bin/rm -f ./mlxext/libmlxext.a
 #	/bin/rm -f ./minilibx_macos/libmlx.a
 

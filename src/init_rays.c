@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/10/24 17:13:52 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/10/26 16:38:09 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ t_vec2	ft_ndc_conv_2(t_vec2 v)
 	return (v_norm);
 }
 
-t_ray	init_ray(size_t i)
+t_ray	init_ray(size_t pos)
 {
 	t_vec2	pix;
 	t_ray	ray;
 
-	pix.y = i / WIN_WIDTH + 0.5;
-	pix.x = i - ((pix.y - 0.5) * WIN_WIDTH) + 0.5;
+	pix.y = pos / WIN_WIDTH + 0.5;
+	pix.x = pos - ((pix.y - 0.5) * WIN_WIDTH) + 0.5;
 	pix = ft_ndc_conv_2(pix);
 	ray.dir.x = (2 * pix.x - 1) * (WIN_WIDTH / WIN_HEIGHT) * tan(RAD(FOVY / 2));
 	ray.dir.y = (1 - 2 * pix.y) * tan(RAD(FOVY / 2));
@@ -41,26 +41,26 @@ t_ray	init_ray(size_t i)
 	return (ray);
 }
 
-t_ray	*create_ray_buffer(t_mtx4 *v2w)
+t_ray	*create_ray_list(t_mtx4 *v2w)
 {
 	size_t	len;
-	size_t	i;
-	t_ray	*buf;
+	size_t	pos;
+	t_ray	*ray_list;
 
 	len = WIN_WIDTH * WIN_HEIGHT;
-	if (!(buf = (t_ray*)malloc(sizeof(*buf) * len)))
+	if (!(ray_list = (t_ray*)malloc(sizeof(*ray_list) * len)))
 		return (NULL);
-	i = 0;
-	while (i < len)
+	pos = 0;
+	while (pos < len)
 	{
-		buf[i] = init_ray(i);
+		ray_list[pos] = init_ray(pos);
 		if (v2w)
 		{
-			buf[i].orig = new_coord(buf[i].orig, *v2w);
-			buf[i].dir = new_coord(buf[i].dir, *v2w);
+			ray_list[pos].orig = new_coord(ray_list[pos].orig, *v2w);
+			ray_list[pos].dir = new_coord(ray_list[pos].dir, *v2w);
 		}
-		printf("%f : %f\n", buf[i].orig.x, buf[i].orig.y);
-		i++;
+		printf("%f : %f\n", ray_list[pos].dir.x, ray_list[pos].dir.y);
+		pos++;
 	}
-	return (buf);
+	return (ray_list);
 }
