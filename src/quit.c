@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 09:47:55 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/09/25 09:32:57 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/13 09:44:59 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		quit(void *vargs, int status)
 	exit(status);
 }
 
-void	error(void *args, int type)
+void	write_error(void *args, int type)
 {
 	if (type == ERR_ARGS)
 	{

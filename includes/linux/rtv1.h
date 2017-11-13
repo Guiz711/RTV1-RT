@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/10/27 18:10:34 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/13 12:41:02 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define FOVY 60
 # define COLOR_DEPTH 32
 # define ENDIAN 1
+# define BUFF_SIZE 4096
 
 # define EXTENSION_NAME ".scn"
 
@@ -113,7 +114,7 @@ typedef struct	s_scene
 {
 	t_view		cam;
 	t_list		*items;
-}
+}				t_scene;
 
 typedef struct	s_img
 {
@@ -143,7 +144,7 @@ typedef struct	s_error
 {
 	int			type;
 	char		*detail;
-}
+}				t_error;
 
 t_ray	*create_ray_list(t_mtx4 *v2w);
 t_vec4	ft_normalize(t_vec4 v);
