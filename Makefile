@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2017/10/27 16:03:32 by gmichaud         ###   ########.fr        #
+#    Updated: 2017/11/14 11:19:30 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ OS = LINUX
 ifeq ($(OS),LINUX)
 	INC_FLAGS = -I./includes/linux -I./libft/includes
 	INC_PATH = includes/linux
-	#LIBS = -lft -lmlx -lXext -lX11 -lm
-	LIBS = -lft -lmlx -lm -framework OpenGL -framework Appkit
+	LIBS = -lft -lmlx -lXext -lX11 -lm
+	#LIBS = -lft -lmlx -lm -framework OpenGL -framework Appkit
 else
 	INC_FLAGS = -I./includes/osx -I./libft/includes
 	INC_PATH = includes/osx
@@ -27,7 +27,8 @@ endif
 
 SRC_PATH = src
 
-SRC_NAME = main.c parser.c init_rays.c vec_op.c matrices_calc.c matrices.c mtx_op.c
+SRC_NAME = main.c parser.c init_rays.c vec_op.c matrices_calc.c matrices.c mtx_op.c \
+			error.c
 
 INC_NAME = rtv1.h inputs_linux.h X.h
 
@@ -37,7 +38,7 @@ LIB_FLAGS = -L./libft
 
 CC = clang
 
-CFLAGS = -O2 -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

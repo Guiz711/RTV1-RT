@@ -6,16 +6,16 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:57:38 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/13 13:08:02 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/14 11:22:49 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		error(int type, char *text, t_error *err)
+#include "rtv1.h"
+
+void	error(t_err err)
 {
-	if (!text)
-		err->detail = NULL;
-	else
-		err->detail = text;
-	err->type = type;
-	return (FAILURE);
+	if (err == ERR_OPEN)
+		perror("Open error");
+	if (err == ERR_READ)
+		perror("Read error");
 }

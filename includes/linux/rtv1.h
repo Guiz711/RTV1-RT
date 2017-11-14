@@ -6,13 +6,14 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/13 12:41:02 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/14 11:19:09 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
 
+# include <errno.h>
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -44,17 +45,23 @@
 **	Error handling
 */
 
-# define ERR_ARGS 1
-# define ERR_INIT_MLX 2
-# define ERR_INIT_WIN 3
-# define ERR_INIT_TEXTURES 4
-# define ERR_MAP 5
-# define ERR_NAME 6
-# define ERR_FILE_EXTENSION 7
-# define ERR_MALLOC 8
-# define ERR_FILE_HEADER 9
-# define ERR_PARSING 10
-
+typedef enum	e_err
+{
+	NO_ERR,
+	ERR_ARGS,
+	ERR_INIT_MLX,
+	ERR_INIT_WIN,
+	ERR_INIT_TEXTURES,
+	ERR_MAP,
+	ERR_NAME,
+	ERR_FILE_EXTENSION,
+	ERR_MALLOC,
+	ERR_OPEN,
+	ERR_READ,
+	ERR_FILE_EMPTY,
+	ERR_FILE_HEADER,
+	ERR_PARSING,
+}				t_err;
 
 # define RAD(x) (M_PI * (x) / 180)
 
@@ -152,7 +159,8 @@ t_vec4	new_coord(t_vec4 p, t_mtx4 mtx);
 t_mtx4	ft_mtx_mult(t_mtx4 m1, t_mtx4 m2);
 t_mtx4	ft_translate(float t_x, float t_y, float t_z);
 t_mtx4	ft_rotation(char axis, float pitch);
-int		parse_scene_file(/*t_scene *scene, */char* file_name);
+t_err	parse_scene_file(t_scene *scene, char* file_name);
+void	error(t_err err);
 
 /*
 **	Quit and initialize functions
