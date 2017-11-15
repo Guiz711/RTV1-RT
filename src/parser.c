@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 15:45:44 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/14 13:18:11 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/15 11:56:09 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,20 @@ static void	init_scene(t_scene *scene)
 	scene->cam.orient = 0;
 }
 
-/*static int	verify_header(char **data)
+static int	verify_header(char **data)
 {
-	if (strncmp(*data, "RTV1_SCENE:", sizeof(**data) * 11))
+	size_t	header_size;
+	
+	header_size = ft_strlen("RTV1_SCENE:");
+	while (**data && ft_isspace(**data))
+		(*data)++;
+	if (strncmp(*data, "RTV1_SCENE:", header_size))
 		return (FAILURE);
+	*data += header_size;
 	return (SUCCESS);
-}*/
+}
 
-static size_t	len_without_spaces(const char *str)
+/*static size_t	len_without_spaces(const char *str)
 {
 	size_t	len;
 
@@ -71,7 +77,7 @@ static char		*strcat_without_spaces(char *dest, const char *src)
 		src++;
 	}
 	return (dest_begin);
-}
+}*/
 
 static t_err	file_len(char *file_name, size_t *file_size)
 {
@@ -84,7 +90,7 @@ static t_err	file_len(char *file_name, size_t *file_size)
 	while ((ret = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[ret] = '\0';
-		*file_size += len_without_spaces(buffer);
+		*file_size += ft_strlen(buffer);
 	}
 	if (ret == -1)
 		return (ERR_READ);
@@ -94,7 +100,7 @@ static t_err	file_len(char *file_name, size_t *file_size)
 	return (NO_ERR);
 }
 
-static t_err	get_data(char *file_name, char *data)
+static t_err	get_data(char *file_name, char **data)
 {
 	int		fd;
 	int		ret;
@@ -105,7 +111,7 @@ static t_err	get_data(char *file_name, char *data)
 	while ((ret = read(fd, buffer, BUFF_SIZE)) > 0)
 	{
 		buffer[ret] = '\0';
-		strcat_without_spaces(data, buffer);
+		ft_strcat(*data, buffer);
 	}
 	if (ret == -1)
 		return (ERR_READ);
@@ -113,21 +119,19 @@ static t_err	get_data(char *file_name, char *data)
 	return (NO_ERR);
 }
 
-static t_err	read_file(char *file_name, char *data)
+static t_err	read_file(char *file_name, char **data)
 {
 	t_err	err;
 	size_t	file_size;
 
 	err = NO_ERR;
 	file_size = 0;
-	data = NULL;
 	if ((err = file_len(file_name, &file_size)))
 		return (err);
-	if (!(data = ft_strnew(sizeof(*data) * file_size)))
+	if (!(*data = ft_strnew(sizeof(**data) * file_size)))
 		return (ERR_MALLOC);
 	if ((err = get_data(file_name, data)))
 		return (err);
-	ft_putstr(data);
 	return (NO_ERR);
 }
 
@@ -141,12 +145,12 @@ static t_err	fill_scene(t_scene *scene, char *file_name)
 	data = NULL;
 	scene = NULL;
 	data_start = NULL;
-	if ((err = read_file(file_name, data)))
+	if ((err = read_file(file_name, &data)))
 		return (err);
-	/*data_start = data;
+	data_start = data;
 	if (verify_header(&data))
-		return (error(ERR_FILE_HEADER));
-	if (get_objects(&data))
+		return (ERR_FILE_HEADER);
+	/*if (get_objects(&data))
 		return (error(ERR_PARSING));*/
 	return (NO_ERR);
 }
