@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/14 11:19:09 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/17 11:39:21 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@
 
 # define EXTENSION_NAME ".scn"
 
+# define RAD(x) (M_PI * (x) / 180)
+
+/*typedef			int	(*t_fctns)(t_scene, data, line);*/
+
 /*
 **	Error handling
 */
@@ -59,16 +63,18 @@ typedef enum	e_err
 	ERR_OPEN,
 	ERR_READ,
 	ERR_FILE_EMPTY,
-	ERR_FILE_HEADER,
 	ERR_PARSING,
 }				t_err;
 
-# define RAD(x) (M_PI * (x) / 180)
-
-# define SPHERE 1
-# define CYLINDER 2
-# define CONE 3
-# define PLAN 4
+typedef enum	e_obj
+{
+	NONE,
+	CAMERA,
+	SPHERE,
+	CYLINDER,
+	CONE,
+	PLAN,
+}				t_obj;
 
 typedef struct	s_vec2
 {
@@ -161,6 +167,8 @@ t_mtx4	ft_translate(float t_x, float t_y, float t_z);
 t_mtx4	ft_rotation(char axis, float pitch);
 t_err	parse_scene_file(t_scene *scene, char* file_name);
 void	error(t_err err);
+t_err	read_file(char *file_name, char **data);
+int		error_message(const char *message, size_t line);
 
 /*
 **	Quit and initialize functions

@@ -1,6 +1,6 @@
 RTV1_SCENE:
 {
-	camera:
+	sphere:
 	{
 		origin: 0, 0, 0;
 		orient: 45

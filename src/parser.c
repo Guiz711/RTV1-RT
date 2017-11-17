@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 15:45:44 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/15 11:56:09 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/17 12:52:36 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,103 +36,98 @@ static void	init_scene(t_scene *scene)
 	scene->cam.orient = 0;
 }
 
-static int	verify_header(char **data)
+static int	pass_spaces(char **data, size_t *line)
+{
+	int		space_presence;
+
+	space_presence = FALSE;
+	while (**data && ft_isspace(**data))
+	{
+		space_presence = TRUE;
+		if (**data == '\n')
+			(*line)++;
+		(*data)++;
+	}
+	return (space_presence);
+}
+
+static int	verify_header(char **data, size_t *line)
 {
 	size_t	header_size;
 	
 	header_size = ft_strlen("RTV1_SCENE:");
-	while (**data && ft_isspace(**data))
-		(*data)++;
+	pass_spaces(data, line);
 	if (strncmp(*data, "RTV1_SCENE:", header_size))
+	{
+		error_message("Wrong header, did you mean \"RTV1_SCENE:\"?", *line);
 		return (FAILURE);
+	}
 	*data += header_size;
 	return (SUCCESS);
 }
 
-/*static size_t	len_without_spaces(const char *str)
+static size_t	attribute_len(char *data)
 {
 	size_t	len;
 
 	len = 0;
-	while (*str)
-	{
-		if (!ft_isspace(*str))
-			len++;
-		str++;
-	}
+	while (!ft_isspace(data[len]) && data[len] != ':' && data[len])
+		len++;
 	return (len);
 }
 
-static char		*strcat_without_spaces(char *dest, const char *src)
+static int	get_object_type(char **data, t_obj *obj_type, size_t *line)
 {
-	char	*dest_begin;
+	size_t				i;
+	size_t				type_len;
+	static const char	*types[] = {"camera", "sphere", "cylinder",
+		"cone", "plan"};
 
-	dest_begin = dest;
-	while (*dest)
-		dest++;
-	while (*src)
+	type_len = attribute_len(*data);
+	i = 0;
+	while (types[i])
 	{
-		if (!ft_isspace(*src))
-			*dest++ = *src;
-		src++;
+		if (type_len == ft_strlen(types[i])
+			&& !ft_strncmp(*data, types[i], type_len))
+		{
+			*obj_type = i + 1;
+			*data += ft_strlen(types[i]);
+		}
+		i++;
 	}
-	return (dest_begin);
-}*/
-
-static t_err	file_len(char *file_name, size_t *file_size)
-{
-	int		fd;
-	int		ret;
-	char	buffer[BUFF_SIZE + 1];
-
-	if ((fd = open(file_name, O_RDONLY)) == -1)
-		return (ERR_OPEN);
-	while ((ret = read(fd, buffer, BUFF_SIZE)) > 0)
-	{
-		buffer[ret] = '\0';
-		*file_size += ft_strlen(buffer);
-	}
-	if (ret == -1)
-		return (ERR_READ);
-	if (*file_size == 0)
-		return (ERR_FILE_EMPTY);
-	close(fd);
-	return (NO_ERR);
+	if (*obj_type == NONE)
+		return (error_message("Unknown object type.", *line));
+	else if (pass_spaces(data, line) && **data == ':')
+		return (error_message("Spaces between object type and \':\'", *line));
+	else if (**data != ':')
+		return (error_message("Missing \':\'.", *line));
+	return (SUCCESS);
 }
 
-static t_err	get_data(char *file_name, char **data)
+static int	parse_object(t_scene *scene, char **data, size_t *line)
 {
-	int		fd;
-	int		ret;
-	char	buffer[BUFF_SIZE + 1];
+	t_obj	obj_type;
 
-	if ((fd = open(file_name, O_RDONLY)) == -1)
-		return (ERR_OPEN);
-	while ((ret = read(fd, buffer, BUFF_SIZE)) > 0)
-	{
-		buffer[ret] = '\0';
-		ft_strcat(*data, buffer);
-	}
-	if (ret == -1)
-		return (ERR_READ);
-	close(fd);
-	return (NO_ERR);
+	scene = NULL;
+	obj_type = NONE;
+	pass_spaces(data, line);
+	if (!get_object_type(data, &obj_type, line))
+		return (FAILURE);
+	return (SUCCESS);
 }
 
-static t_err	read_file(char *file_name, char **data)
+static int	get_objects(t_scene *scene, char **data, size_t *line)
 {
-	t_err	err;
-	size_t	file_size;
-
-	err = NO_ERR;
-	file_size = 0;
-	if ((err = file_len(file_name, &file_size)))
-		return (err);
-	if (!(*data = ft_strnew(sizeof(**data) * file_size)))
-		return (ERR_MALLOC);
-	if ((err = get_data(file_name, data)))
-		return (err);
-	return (NO_ERR);
+	pass_spaces(data, line);
+	if (**data != '{')
+		return (error_message("Missing \'{\'", *line));
+	(*data)++;
+	/*while(**data)
+	{*/
+		if (!parse_object(scene, data, line))
+			return (FAILURE);
+	//}
+	return (SUCCESS);
 }
 
 static t_err	fill_scene(t_scene *scene, char *file_name)
@@ -140,18 +135,20 @@ static t_err	fill_scene(t_scene *scene, char *file_name)
 	t_err	err;
 	char	*data;
 	char	*data_start;
+	size_t	line;
 
+	scene = NULL;
 	err = NO_ERR;
 	data = NULL;
-	scene = NULL;
 	data_start = NULL;
+	line = 1;
 	if ((err = read_file(file_name, &data)))
 		return (err);
 	data_start = data;
-	if (verify_header(&data))
-		return (ERR_FILE_HEADER);
-	/*if (get_objects(&data))
-		return (error(ERR_PARSING));*/
+	if (verify_header(&data, &line))
+		return (ERR_PARSING);
+	if (get_objects(scene, &data, &line))
+		return (ERR_PARSING);
 	return (NO_ERR);
 }
 
