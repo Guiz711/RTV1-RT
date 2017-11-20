@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/27 15:45:44 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/17 12:52:36 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:51:42 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,20 @@ static size_t	attribute_len(char *data)
 	return (len);
 }
 
-static int	get_object_type(char **data, t_obj *obj_type, size_t *line)
+static int	get_object_type(char **data, t_obj *obj_type, size_t *line, t_parser *parser)
 {
 	size_t				i;
 	size_t				type_len;
-	static const char	*types[] = {"camera", "sphere", "cylinder",
-		"cone", "plan"};
 
 	type_len = attribute_len(*data);
 	i = 0;
-	while (types[i])
+	while (parser->types[i])
 	{
-		if (type_len == ft_strlen(types[i])
-			&& !ft_strncmp(*data, types[i], type_len))
+		if (type_len == ft_strlen(parser->types[i])
+			&& !ft_strncmp(*data, parser->types[i], type_len))
 		{
 			*obj_type = i + 1;
-			*data += ft_strlen(types[i]);
+			*data += ft_strlen(parser->types[i]);
 		}
 		i++;
 	}
@@ -104,27 +102,81 @@ static int	get_object_type(char **data, t_obj *obj_type, size_t *line)
 	return (SUCCESS);
 }
 
-static int	parse_object(t_scene *scene, char **data, size_t *line)
+int	parse_sphere(t_scene *scene, char **data, size_t *line, t_props *props)
 {
-	t_obj	obj_type;
+	scene = NULL;
+	*data = NULL;
+	*line = 0;
+	if (!props)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	parse_cam(t_scene *scene, char **data, size_t *line, t_props *props)
+{
+	scene = NULL;
+	*data = NULL;
+	*line = 0;
+	if (!props)
+		return (FAILURE);
+	return (SUCCESS);
+	/*size_t	prop_len;
+	size_t	i;
+
+	while (**data != '}' && **data)
+	{
+		pass_spaces(data, line);
+		prop_len = attribute_len(*data);
+		i = 0;
+		while (parser->cam_props[i])
+		{
+			if (prop_len == ft_strlen(parser->cam_props[i])
+				&& !ft_strncmp(*data, "origin", prop_len))
+			if (init_origin(scene, data, line))
+				return (FAILURE);
+		}
+		else if (prop_len == ft_strlen("orient")
+			&& !ft_strncmp(*data, "orient", prop_len))
+		{
+			if (init_orient(scene, data, line))
+				return (FAILURE);
+		}
+		else
+			return (error_message("Unknown object type.", *line));
+	}*/
+}
+
+static int	parse_object(t_scene *scene, char **data, size_t *line,
+	t_parser *parser)
+{
+	t_obj				obj_type;
 
 	scene = NULL;
 	obj_type = NONE;
 	pass_spaces(data, line);
-	if (!get_object_type(data, &obj_type, line))
+	if (get_object_type(data, &obj_type, line, parser))
+		return (FAILURE);
+	pass_spaces(data, line);
+	if (**data != '{')
+		return (error_message("Missing \'{\'", *line));
+	if (parser->obj_f[obj_type](scene, data, line, parser->props))
 		return (FAILURE);
 	return (SUCCESS);
 }
 
 static int	get_objects(t_scene *scene, char **data, size_t *line)
 {
+	t_parser	parser;
+
+	if (!init_parser(&parser))
+		return (FAILURE);
 	pass_spaces(data, line);
 	if (**data != '{')
 		return (error_message("Missing \'{\'", *line));
 	(*data)++;
 	/*while(**data)
 	{*/
-		if (!parse_object(scene, data, line))
+		if (parse_object(scene, data, line, &parser))
 			return (FAILURE);
 	//}
 	return (SUCCESS);

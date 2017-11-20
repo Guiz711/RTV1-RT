@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/17 09:58:04 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:55:27 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,17 @@ int				main(int argc, char **argv)
 
 int		main(int argc, char **argv)
 {
-	t_scene *scene;
+	//t_scene *scene;
+	t_parser	parser;
 
-	scene = NULL;
+	//scene = NULL;
 	if (argc != 2)
 		return (0);
-	error(parse_scene_file(scene, argv[1]));
+	if (!argv[1])
+		return (0);
+	//error(parse_scene_file(scene, argv[1]));
+	init_parser(&parser);
+	ft_putchar('a');
+	ft_putendl(parser.props->cam[0]);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/17 11:39:21 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/11/20 13:53:50 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@
 # define EXTENSION_NAME ".scn"
 
 # define RAD(x) (M_PI * (x) / 180)
-
-/*typedef			int	(*t_fctns)(t_scene, data, line);*/
 
 /*
 **	Error handling
@@ -159,6 +157,21 @@ typedef struct	s_error
 	char		*detail;
 }				t_error;
 
+typedef struct	s_props
+{
+	char		**cam;
+	char		**sph;
+}				t_props;
+
+typedef			int (*t_fctn)(t_scene*, char**, size_t*, t_props*);
+
+typedef struct	s_parser
+{
+	char		**types;
+	t_fctn		*obj_f;
+	t_props		*props;
+}				t_parser;
+
 t_ray	*create_ray_list(t_mtx4 *v2w);
 t_vec4	ft_normalize(t_vec4 v);
 t_vec4	new_coord(t_vec4 p, t_mtx4 mtx);
@@ -169,6 +182,9 @@ t_err	parse_scene_file(t_scene *scene, char* file_name);
 void	error(t_err err);
 t_err	read_file(char *file_name, char **data);
 int		error_message(const char *message, size_t line);
+int		init_parser(t_parser *parser);
+int	parse_sphere(t_scene *scene, char **data, size_t *line, t_props *props);
+int	parse_cam(t_scene *scene, char **data, size_t *line, t_props *props);
 
 /*
 **	Quit and initialize functions
