@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:20:56 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/10/19 12:38:40 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/01 12:28:39 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_vec4	ft_normalize(t_vec4 v)
 	return (v);
 }
 
-t_vec4 ft_cross(t_vec4 u, t_vec4 v)
+t_vec4	ft_cross_product(t_vec4 u, t_vec4 v)
 {
 	t_vec4 w;
 
@@ -50,4 +50,9 @@ t_vec4 ft_cross(t_vec4 u, t_vec4 v)
 	w.z = u.x * v.y - u.y * v.x;
 	w.w = 1;
 	return (w);
+}
+
+double	ft_dot_product(t_vec4 u, t_vec4 v)
+{
+	return(u.x * v.x + u.y * v.y + u.z * v.z + u.w * v.w);
 }

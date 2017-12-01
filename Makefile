@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2017/11/20 12:11:45 by gmichaud         ###   ########.fr        #
+#    Updated: 2017/12/01 11:53:11 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ endif
 
 SRC_PATH = src
 
-SRC_NAME = main.c parser.c init_rays.c vec_op.c matrices_calc.c matrices.c mtx_op.c \
-			error.c read_file.c init_parser.c
+SRC_NAME = main.c init_vector.c init_rays.c vec_op.c matrices_calc.c matrices.c mtx_op.c \
+			error.c
 
 INC_NAME = rtv1.h inputs_linux.h X.h
 

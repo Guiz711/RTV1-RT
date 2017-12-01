@@ -1,14 +1,14 @@
-RTV1_SCENE:
+RTV1_SCENE
 {
-	sphere:
+	camera
 	{
-		origin: 0, 0, 0;
-		orient: 45
-	};
-	sphere:
+		origin	(0;0;0)
+		orient	(45)
+	}
+	sphere
 	{
-		origin: 0, 0, -1;
-		radius: 0.5;
-		color: "red"
+		origin	(0;0;-1)
+		radius	(0.5)
+		color	(0x00000000)
 	}
 }

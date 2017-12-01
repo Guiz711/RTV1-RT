@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/20 13:53:50 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/01 12:28:51 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <time.h>
 # include "libft.h"
 # include <stdio.h>
+# include <stdint.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -113,12 +114,13 @@ typedef struct	s_sphere
 {
 	t_vec4		center;
 	double		radius;
+	uint32_t	color;
 }				t_sphere;
 
 typedef struct	s_view
 {
 	t_vec4		orig;
-	double		orient;
+	t_vec4		orient;
 }				t_view;
 
 typedef struct	s_scene
@@ -163,28 +165,16 @@ typedef struct	s_props
 	char		**sph;
 }				t_props;
 
-typedef			int (*t_fctn)(t_scene*, char**, size_t*, t_props*);
-
-typedef struct	s_parser
-{
-	char		**types;
-	t_fctn		*obj_f;
-	t_props		*props;
-}				t_parser;
-
-t_ray	*create_ray_list(t_mtx4 *v2w);
+t_ray	*create_ray_array(t_mtx4 v2w);
 t_vec4	ft_normalize(t_vec4 v);
+double	ft_dot_product(t_vec4 u, t_vec4 v);
 t_vec4	new_coord(t_vec4 p, t_mtx4 mtx);
 t_mtx4	ft_mtx_mult(t_mtx4 m1, t_mtx4 m2);
 t_mtx4	ft_translate(float t_x, float t_y, float t_z);
 t_mtx4	ft_rotation(char axis, float pitch);
-t_err	parse_scene_file(t_scene *scene, char* file_name);
 void	error(t_err err);
-t_err	read_file(char *file_name, char **data);
 int		error_message(const char *message, size_t line);
-int		init_parser(t_parser *parser);
-int	parse_sphere(t_scene *scene, char **data, size_t *line, t_props *props);
-int	parse_cam(t_scene *scene, char **data, size_t *line, t_props *props);
+t_vec4	ft_init_vec4(float x, float y, float z, float w);
 
 /*
 **	Quit and initialize functions

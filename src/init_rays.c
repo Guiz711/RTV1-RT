@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/10/26 16:38:09 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/01 12:09:42 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_ray	init_ray(size_t pos)
 	return (ray);
 }
 
-t_ray	*create_ray_list(t_mtx4 *v2w)
+t_ray	*create_ray_array(t_mtx4 v2w)
 {
 	size_t	len;
 	size_t	pos;
@@ -54,12 +54,8 @@ t_ray	*create_ray_list(t_mtx4 *v2w)
 	while (pos < len)
 	{
 		ray_list[pos] = init_ray(pos);
-		if (v2w)
-		{
-			ray_list[pos].orig = new_coord(ray_list[pos].orig, *v2w);
-			ray_list[pos].dir = new_coord(ray_list[pos].dir, *v2w);
-		}
-		printf("%f : %f\n", ray_list[pos].dir.x, ray_list[pos].dir.y);
+		ray_list[pos].orig = new_coord(ray_list[pos].orig, v2w);
+		ray_list[pos].dir = new_coord(ray_list[pos].dir, v2w);
 		pos++;
 	}
 	return (ray_list);
