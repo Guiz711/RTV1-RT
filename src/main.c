@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/01 13:31:43 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/04 13:37:12 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,24 @@ void	init_scene(t_scene *scn)
 	scn->cam.orig = ft_init_vec4(0, 0, -3, 1);
 }
 
-int		check_intersection(t_vec4 dir, t_vec4 orig, t_vec4 ctr, double radius)
+double	get_distance(double a, double b, double c, double disc)
+{
+	double	res;
+	double	dist_1;
+	double	dist_2;
+
+	if (disc == 0)
+		return (-0.5 * b / a);
+	else
+	{
+		res = (b > 0) ? -0.5 * (b + sqrt(disc)) : -0.5 * (b - sqrt(disc));
+		dist_1 = res / a;
+		dist_2 = c / res;
+	}
+	return ((dist_1 < dist_2) ? dist_1 : dist_2);
+}
+
+double	check_intersection(t_vec4 dir, t_vec4 orig, t_vec4 ctr, double radius)
 {
 	t_vec4	diff;
 	double	a;
@@ -69,25 +86,42 @@ int		check_intersection(t_vec4 dir, t_vec4 orig, t_vec4 ctr, double radius)
 	c = ft_dot_product(diff, diff) - radius * radius;
 	disc = b * b - 4 * a * c;
 	if (disc < 0)
-		return (0);
-	else if (disc == 0)
-		return (1);
-	return (2);
+		return (-1);
+	return (get_distance(a, b, c, disc));
 }
 
 int		check_intersections(t_ray ray, t_scene scn)
 {
 	t_sphere	*sph;
-	int			inter;
+	double		inter;
+	double		final;
 
+	final = 0;
 	while (scn.items)
 	{
 		sph = (t_sphere*)scn.items->content;
 		inter = check_intersection(ray.dir, ray.orig, sph->center, sph->radius);
-		if (inter)
-			
+		if (final == 0 || inter < final)
+			final = inter;
 		scn.items = scn.items->next;
 	}
+	printf("%f ; ", final);
+	if (final)
+		return (TRUE);
+	return (FALSE);
+}
+
+int		raytracing(t_ray *ray_list, t_scene scn)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < WIN_HEIGHT * WIN_WIDTH)
+	{
+		check_intersections(ray_list[i], scn);
+		++i;
+	}
+	return (0);
 }
 
 int		main(void)
@@ -97,7 +131,6 @@ int		main(void)
 
 	init_scene(&scene);
 	ray_list = create_ray_array(ft_translate(0, 0, 2));
-	check_intersections(ray_list, scene);
-	printf("%f", ((t_sphere*)scene.items->content)->radius);
+	raytracing(ray_list, scene);
 	return (0);
 }
