@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/06 10:29:30 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/06 19:29:40 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,16 @@ t_ray	init_ray(size_t pos)
 {
 	t_vec2	pix;
 	t_ray	ray;
+	double	scale;
+	double	fovy;
 
+	scale = (double)WIN_WIDTH / (double)WIN_HEIGHT;
+	fovy = (double)FOVX / scale;
 	pix.y = pos / WIN_WIDTH + 0.5;
 	pix.x = pos - ((pix.y - 0.5) * WIN_WIDTH) + 0.5;
 	pix = ft_ndc_conv_2(pix);
-	ray.dir.x = (2 * pix.x - 1) * (WIN_WIDTH / WIN_HEIGHT) * tan(RAD(FOVY / 2));
-	ray.dir.y = (1 - 2 * pix.y) * tan(RAD(FOVY / 2));
+	ray.dir.x = (2 * pix.x - 1) * tan(RAD(fovy / 2)) * scale;
+	ray.dir.y = (1 - 2 * pix.y) * tan(RAD(fovy / 2));
 	ray.dir.z = -1;
 	ray.dir.w = 0;
 	ray.dir = ft_normalize(ray.dir);

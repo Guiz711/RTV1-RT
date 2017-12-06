@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/06 12:10:01 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/06 19:58:46 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,18 @@ void	init_scene(t_scene *scn)
 {
 	t_sphere	sphere;
 
-	sphere.center = ft_init_vec4(5, -5, -10, 1);
-	sphere.radius = 1;
+	sphere.center = ft_init_vec4(-13, 5, -40, 1);
+	sphere.radius = 3;
 	sphere.color = 0x00FF0000;
 	scn->items = ft_lstnew(&sphere, sizeof(sphere));
+	sphere.center = ft_init_vec4(-1, -2, -20, 1);
+	sphere.radius = 3;
+	sphere.color = 0x000000FF;
+	ft_lstadd(&(scn->items), ft_lstnew(&sphere, sizeof(sphere)));
+	sphere.center = ft_init_vec4(0, 0, -40, 1);
+	sphere.radius = 3;
+	sphere.color = 0x0000FF00;
+	ft_lstadd(&(scn->items), ft_lstnew(&sphere, sizeof(sphere)));
 	scn->cam.orient = ft_init_vec4(0, 0, 1, 0);
 	scn->cam.orig = ft_init_vec4(0, 0, -3, 1);
 }
@@ -108,24 +116,28 @@ void	put_pixel(int pos, t_img *img, unsigned int color)
 	//}
 }
 
-int		check_intersections(t_ray ray, t_scene scn)
+void	check_intersections(t_ray ray, t_scene scn, int pos, t_img *img)
 {
-	t_sphere	*sph;
-	double		inter;
-	double		final;
+	t_sphere		*sph;
+	unsigned int	color;
+	double			inter;
+	double			final;
 
-	final = 0;
+	color = 0;
+	final = 100000000000;
 	while (scn.items)
 	{
 		sph = (t_sphere*)scn.items->content;
 		inter = check_intersection(ray.dir, ray.orig, sph->center, sph->radius);
-		if (final == 0 || inter < final)
+		if (inter < final && inter != -1)
+		{
 			final = inter;
+			color = sph->color;
+		}
 		scn.items = scn.items->next;
 	}
 	if (final > 0)
-		return (TRUE);
-	return (FALSE);
+		put_pixel(pos, img, color);
 }
 
 int		raytracing(t_ray *ray_list, t_scene scn, t_env *env)
@@ -135,8 +147,7 @@ int		raytracing(t_ray *ray_list, t_scene scn, t_env *env)
 	i = 0;
 	while (i < WIN_HEIGHT * WIN_WIDTH)
 	{
-		if (check_intersections(ray_list[i], scn))
-			put_pixel(i, env->img, 0x00FF0000);
+		check_intersections(ray_list[i], scn, i, env->img);
 		++i;
 	}
 	return (0);
@@ -164,12 +175,14 @@ int		main(void)
 	t_env	env;
 	t_scene scene;
 	t_ray	*ray_list;
+	t_mtx4	v2w;
 
 	env.init = mlx_init();
 	env.win = mlx_new_window(env.init, WIN_WIDTH, WIN_HEIGHT, "RTV1");
 	init_img(&env);
 	init_scene(&scene);
-	ray_list = create_ray_array(ft_translate(0, 0, 2));
+	v2w = ft_mtx_mult(ft_translate(20, -5, 20), ft_rotation('y', RAD(30)));
+	ray_list = create_ray_array(ft_mtx_mult(v2w, ft_rotation('x', RAD(3))));
 	raytracing(ray_list, scene, &env);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	mlx_loop(env.init);

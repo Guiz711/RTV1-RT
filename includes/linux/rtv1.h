@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/06 10:39:16 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/06 19:31:02 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@
 **	Properties
 */
 
-# define WIN_HEIGHT 600
-# define WIN_WIDTH 600
-# define FOVY 60
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+# define FOVX 45
 # define COLOR_DEPTH 32
 # define ENDIAN 1
 # define BUFF_SIZE 4096
