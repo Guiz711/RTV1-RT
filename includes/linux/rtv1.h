@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/01 12:28:51 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/06 10:39:16 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 **	Properties
 */
 
-# define WIN_HEIGHT 10
-# define WIN_WIDTH 20
+# define WIN_HEIGHT 600
+# define WIN_WIDTH 600
 # define FOVY 60
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -143,6 +143,7 @@ typedef struct	s_env
 {
 	void		*init;
 	void		*win;
+	t_img		*img;
 }				t_env;
 
 typedef struct	s_args
