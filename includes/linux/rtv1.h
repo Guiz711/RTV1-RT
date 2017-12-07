@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/07 11:30:48 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/07 21:04:01 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef enum	e_err
 	ERR_PARSING,
 }				t_err;
 
-typedef enum	e_obj
+typedef enum	e_obj_type
 {
 	NONE,
 	CAMERA,
@@ -73,7 +73,7 @@ typedef enum	e_obj
 	CYLINDER,
 	CONE,
 	PLAN,
-}				t_obj;
+}				t_obj_type;
 
 typedef struct	s_vec2
 {
@@ -116,6 +116,43 @@ typedef struct	s_sphere
 	double		radius;
 	uint32_t	color;
 }				t_sphere;
+
+typedef struct	s_plane
+{
+	t_vec4		p;
+	t_vec4		normal;
+	uint32_t	color;
+}				t_plane;
+
+typedef struct	s_cone
+{
+	t_vec4		summit;
+	t_vec4		dir;
+	double		angle;
+	uint32_t	color;
+}				t_cone;
+
+typedef struct	s_cylinder
+{
+	t_vec4		p;
+	t_vec4		dir;
+	double		radius;
+	uint32_t	color;
+}				t_cylinder;
+
+typedef	struct		s_obj_lst
+{
+	t_obj_type		content_type;
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_obj_lst;
+
+typedef struct	s_obj
+{
+	t_obj_type	type;
+	void		*data;
+}				t_obj;
 
 typedef struct	s_view
 {
