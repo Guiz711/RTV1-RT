@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/06 19:58:46 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/07 11:39:12 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,38 +116,69 @@ void	put_pixel(int pos, t_img *img, unsigned int color)
 	//}
 }
 
-void	check_intersections(t_ray ray, t_scene scn, int pos, t_img *img)
+double	check_intersections(t_ray ray, t_list **items)
 {
 	t_sphere		*sph;
-	unsigned int	color;
+	t_list			*mark;
 	double			inter;
 	double			final;
 
-	color = 0;
 	final = 100000000000;
-	while (scn.items)
+	mark = NULL;
+	while (*items)
 	{
-		sph = (t_sphere*)scn.items->content;
+		sph = (t_sphere*)(*items)->content;
 		inter = check_intersection(ray.dir, ray.orig, sph->center, sph->radius);
 		if (inter < final && inter != -1)
 		{
 			final = inter;
-			color = sph->color;
+			mark = *items;
 		}
-		scn.items = scn.items->next;
+		*items = (*items)->next;
 	}
-	if (final > 0)
-		put_pixel(pos, img, color);
+	*items = mark;
+	return (final);
+}
+
+unsigned int	shade(unsigned int color, double f_ratio)
+{
+	unsigned char	*comp;
+
+	comp = (unsigned char*)&color;
+	comp[0] *= f_ratio;
+	comp[1] *= f_ratio;
+	comp[2] *= f_ratio;
+	return color;
 }
 
 int		raytracing(t_ray *ray_list, t_scene scn, t_env *env)
 {
-	size_t	i;
+	size_t		i;
+	t_list		*obj;
+	double		dist;
+	t_sphere	*sph;	
+	t_vec4		inter;
+	t_vec4		normal;
+	double		f_ratio;
 
 	i = 0;
 	while (i < WIN_HEIGHT * WIN_WIDTH)
 	{
-		check_intersections(ray_list[i], scn, i, env->img);
+		obj = scn.items;
+		dist = check_intersections(ray_list[i], &obj);
+		if (obj)
+		{
+			sph = (t_sphere*)obj->content;
+			inter = ft_init_vec4(ray_list[i].orig.x + ray_list[i].dir.x * dist,
+				ray_list[i].orig.y + ray_list[i].dir.y * dist,
+				ray_list[i].orig.z + ray_list[i].dir.z * dist, 1);
+			normal = ft_init_vec4(inter.x - sph->center.x,
+				inter.y - sph->center.y, inter.z - sph->center.z, 0);
+			normal = ft_normalize(normal);
+			f_ratio = ft_dot_product(normal, ft_init_vec4(-ray_list[i].dir.x,
+				-ray_list[i].dir.y, -ray_list[i].dir.z, 0));
+			put_pixel(i, env->img, shade(((t_sphere*)obj->content)->color, f_ratio));
+		}
 		++i;
 	}
 	return (0);
@@ -175,14 +206,15 @@ int		main(void)
 	t_env	env;
 	t_scene scene;
 	t_ray	*ray_list;
-	t_mtx4	v2w;
+	//t_mtx4	v2w;
 
 	env.init = mlx_init();
 	env.win = mlx_new_window(env.init, WIN_WIDTH, WIN_HEIGHT, "RTV1");
 	init_img(&env);
 	init_scene(&scene);
-	v2w = ft_mtx_mult(ft_translate(20, -5, 20), ft_rotation('y', RAD(30)));
-	ray_list = create_ray_array(ft_mtx_mult(v2w, ft_rotation('x', RAD(3))));
+	ray_list = create_ray_array(ft_translate(0, 0, 2));
+	//v2w = ft_mtx_mult(ft_translate(20, -5, 20), ft_rotation('y', RAD(30)));
+	//ray_list = create_ray_array(ft_mtx_mult(v2w, ft_rotation('x', RAD(3))));
 	raytracing(ray_list, scene, &env);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	mlx_loop(env.init);
