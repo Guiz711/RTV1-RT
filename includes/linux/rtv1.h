@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/07 21:04:01 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/08 13:42:25 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,9 @@ typedef	struct	s_ray
 {
 	t_vec4		orig;
 	t_vec4		dir;
+	double		inter_dist;
+	t_obj_lst	*inter_obj;
+	t_vec4		obj_normal;
 }				t_ray;
 
 typedef struct	s_sphere
@@ -148,12 +151,6 @@ typedef	struct		s_obj_lst
 	struct s_list	*next;
 }					t_obj_lst;
 
-typedef struct	s_obj
-{
-	t_obj_type	type;
-	void		*data;
-}				t_obj;
-
 typedef struct	s_view
 {
 	t_vec4		orig;
@@ -163,7 +160,7 @@ typedef struct	s_view
 typedef struct	s_scene
 {
 	t_view		cam;
-	t_list		*items;
+	t_list		*objs;
 }				t_scene;
 
 typedef struct	s_img
@@ -183,12 +180,23 @@ typedef struct	s_env
 	t_img		*img;
 }				t_env;
 
+typedef struct	s_poly2
+{
+	double	a;
+	double	b;
+	double	c;
+	double	disc;
+}				t_poly2;
+
+typedef double	(*t_inter_fct)(t_ray, void*);
+
 typedef struct	s_args
 {
 	t_env		*env;
-	t_view		*view;
+	t_scene		*scene;
 	t_img		*display;
 	t_ray		*ray_buf;
+	t_inter_fct	*obj_fct;
 }				t_args;
 
 typedef struct	s_error
@@ -196,12 +204,6 @@ typedef struct	s_error
 	int			type;
 	char		*detail;
 }				t_error;
-
-typedef struct	s_props
-{
-	char		**cam;
-	char		**sph;
-}				t_props;
 
 t_ray	*create_ray_array(t_mtx4 v2w);
 t_vec4	ft_normalize(t_vec4 v);

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/06 19:29:40 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/08 11:11:53 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ t_ray	*create_ray_array(t_mtx4 v2w)
 		ray_list[pos] = init_ray(pos);
 		ray_list[pos].orig = new_coord(ray_list[pos].orig, v2w);
 		ray_list[pos].dir = new_coord(ray_list[pos].dir, v2w);
+		ray_list[pos].inter_dist = 1e6;
+		ray_list[pos].inter_obj = NULL;
 		pos++;
 	}
 	return (ray_list);

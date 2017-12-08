@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/07 11:39:12 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:35:50 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,41 +63,6 @@ void	init_scene(t_scene *scn)
 	scn->cam.orig = ft_init_vec4(0, 0, -3, 1);
 }
 
-double	get_distance(double a, double b, double c, double disc)
-{
-	double	res;
-	double	dist_1;
-	double	dist_2;
-
-	if (disc == 0)
-		return (-0.5 * b / a);
-	else
-	{
-		res = (b > 0) ? -0.5 * (b + sqrt(disc)) : -0.5 * (b - sqrt(disc));
-		dist_1 = res / a;
-		dist_2 = c / res;
-	}
-	return ((dist_1 < dist_2) ? dist_1 : dist_2);
-}
-
-double	check_intersection(t_vec4 dir, t_vec4 orig, t_vec4 ctr, double radius)
-{
-	t_vec4	diff;
-	double	a;
-	double	b;
-	double	c;
-	double	disc;
-
-	diff = ft_init_vec4(orig.x - ctr.x, orig.y - ctr.y, orig.z - ctr.z, 0);
-	a = ft_dot_product(dir, dir);
-	b = 2 * ft_dot_product(dir, diff);
-	c = ft_dot_product(diff, diff) - radius * radius;
-	disc = b * b - 4 * a * c;
-	if (disc < 0)
-		return (-1);
-	return (get_distance(a, b, c, disc));
-}
-
 void	put_pixel(int pos, t_img *img, unsigned int color)
 {
 	char	*data;
@@ -114,30 +79,6 @@ void	put_pixel(int pos, t_img *img, unsigned int color)
 			//ft_memcpy(&data[((int)pos.y * width) + ((int)pos.x * inc)], &color,
 				//sizeof(color));
 	//}
-}
-
-double	check_intersections(t_ray ray, t_list **items)
-{
-	t_sphere		*sph;
-	t_list			*mark;
-	double			inter;
-	double			final;
-
-	final = 100000000000;
-	mark = NULL;
-	while (*items)
-	{
-		sph = (t_sphere*)(*items)->content;
-		inter = check_intersection(ray.dir, ray.orig, sph->center, sph->radius);
-		if (inter < final && inter != -1)
-		{
-			final = inter;
-			mark = *items;
-		}
-		*items = (*items)->next;
-	}
-	*items = mark;
-	return (final);
 }
 
 unsigned int	shade(unsigned int color, double f_ratio)
