@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 21:01:12 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/08 10:54:06 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/08 19:58:57 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size)
 {
 	t_obj_lst	*new;
 
-	if (!(new = (t_list*)malloc(sizeof(*new))))
+	if (!(new = (t_obj_lst*)malloc(sizeof(*new))))
 		return (NULL);
 	if (content == NULL)
 	{

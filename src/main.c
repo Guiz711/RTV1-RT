@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/08 12:35:50 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/10 10:58:23 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,40 @@ int				main(int argc, char **argv)
 void	init_scene(t_scene *scn)
 {
 	t_sphere	sphere;
+	t_plane		plane;
+	t_cylinder	cyl;
+	t_cone		cone;
 
-	sphere.center = ft_init_vec4(-13, 5, -40, 1);
+	sphere.center = ft_init_vec4(-13, 3, -40, 1);
 	sphere.radius = 3;
-	sphere.color = 0x00FF0000;
-	scn->items = ft_lstnew(&sphere, sizeof(sphere));
-	sphere.center = ft_init_vec4(-1, -2, -20, 1);
+	sphere.color = ft_init_vec3(0, 0.18, 0.18); //0x0000FFFF;
+	scn->objs = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
+	sphere.center = ft_init_vec4(12, -5, -45, 1);
+	sphere.radius = 5;
+	sphere.color = ft_init_vec3(0.18, 0, 0);//0x00FF0000;
+	obj_lstadd(&(scn->objs), obj_lstnew(SPHERE, &sphere, sizeof(sphere)));
+	sphere.center = ft_init_vec4(-5, 3, -30, 1);
 	sphere.radius = 3;
-	sphere.color = 0x000000FF;
-	ft_lstadd(&(scn->items), ft_lstnew(&sphere, sizeof(sphere)));
-	sphere.center = ft_init_vec4(0, 0, -40, 1);
-	sphere.radius = 3;
-	sphere.color = 0x0000FF00;
-	ft_lstadd(&(scn->items), ft_lstnew(&sphere, sizeof(sphere)));
+	sphere.color = ft_init_vec3(0, 0.18, 0);//0x0000FF00;
+	obj_lstadd(&(scn->objs), obj_lstnew(SPHERE, &sphere, sizeof(sphere)));
+	plane.p = ft_init_vec4(0, -5, 0, 1);
+	plane.normal = ft_normalize(ft_init_vec4(0, -1, 0, 0));
+	plane.color = ft_init_vec3(0.18, 0.18, 0.18);//0x00FFFFFF;
+	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));
+	cyl.p = ft_init_vec4(12, 0, -45, 1);
+	cyl.dir = ft_init_vec4(0, 1, 0, 0);
+	cyl.radius = 3;
+	cyl.color = ft_init_vec3(0.18, 0, 0);//0x00FF0000;
+	obj_lstadd(&(scn->objs), obj_lstnew(CYLINDER, &cyl, sizeof(cyl)));
+	cone.p = ft_init_vec4(-2, 0, -40, 1);
+	cone.dir = ft_init_vec4(-0.5, 1, 0, 0);
+	cone.angle = 30;
+	cone.ang_tan = 1 + SQUARE(tan(RAD(cone.angle * 0.5)));
+	cone.color = ft_init_vec3(0, 0, 0.18); //0x000000FF;
+	obj_lstadd(&(scn->objs), obj_lstnew(CONE, &cone, sizeof(cone)));
+	scn->light.dir = ft_init_vec4(1, -0.3, 0, 0);
+	scn->light.intensity = 3000;
+	scn->light.color = ft_init_vec3(1, 1, 1); //0x00FFFFFF
 	scn->cam.orient = ft_init_vec4(0, 0, 1, 0);
 	scn->cam.orig = ft_init_vec4(0, 0, -3, 1);
 }
@@ -81,48 +102,34 @@ void	put_pixel(int pos, t_img *img, unsigned int color)
 	//}
 }
 
-unsigned int	shade(unsigned int color, double f_ratio)
+unsigned int	facing_ratio(unsigned int color, double ratio)
 {
 	unsigned char	*comp;
 
 	comp = (unsigned char*)&color;
-	comp[0] *= f_ratio;
-	comp[1] *= f_ratio;
-	comp[2] *= f_ratio;
+	comp[0] *= ratio;
+	comp[1] *= ratio;
+	comp[2] *= ratio;
 	return color;
 }
 
-int		raytracing(t_ray *ray_list, t_scene scn, t_env *env)
+unsigned int	lambert_lightning(t_vec3 albedo, t_vec4 normal, t_light light)
 {
-	size_t		i;
-	t_list		*obj;
-	double		dist;
-	t_sphere	*sph;	
-	t_vec4		inter;
-	t_vec4		normal;
-	double		f_ratio;
+	uint32_t		hex_col;
+	t_vec4			light_inv;
+	float			ratio;
+	unsigned char	*comp;
 
-	i = 0;
-	while (i < WIN_HEIGHT * WIN_WIDTH)
-	{
-		obj = scn.items;
-		dist = check_intersections(ray_list[i], &obj);
-		if (obj)
-		{
-			sph = (t_sphere*)obj->content;
-			inter = ft_init_vec4(ray_list[i].orig.x + ray_list[i].dir.x * dist,
-				ray_list[i].orig.y + ray_list[i].dir.y * dist,
-				ray_list[i].orig.z + ray_list[i].dir.z * dist, 1);
-			normal = ft_init_vec4(inter.x - sph->center.x,
-				inter.y - sph->center.y, inter.z - sph->center.z, 0);
-			normal = ft_normalize(normal);
-			f_ratio = ft_dot_product(normal, ft_init_vec4(-ray_list[i].dir.x,
-				-ray_list[i].dir.y, -ray_list[i].dir.z, 0));
-			put_pixel(i, env->img, shade(((t_sphere*)obj->content)->color, f_ratio));
-		}
-		++i;
-	}
-	return (0);
+	hex_col = 0x00FFFFFF;
+	comp = (unsigned char*)&hex_col;
+	light_inv = ft_init_vec4(-light.dir.x, -light.dir.y, -light.dir.z, 0);
+	ratio = light.intensity * ft_dot_product(normal, light_inv);
+	if (ratio < 0)
+		ratio = 0;
+	comp[0] = albedo.z / M_PI * light.color.z * ratio;
+	comp[1] = albedo.y / M_PI * light.color.y * ratio;
+	comp[2] = albedo.x / M_PI * light.color.x * ratio;
+	return (hex_col);
 }
 
 int		init_img(t_env	*env)
@@ -142,21 +149,54 @@ int		init_img(t_env	*env)
 	return (1);
 }
 
+void	shade(t_args *args)
+{
+	size_t		i;
+	//double		ratio;
+	t_ray		*rays;
+	uint32_t	hex_col;
+
+	rays = args->ray_buf;
+	i = 0;
+	while (i < WIN_WIDTH * WIN_HEIGHT)
+	{
+		//ratio = ft_dot_product(rays[i].obj_normal, ft_init_vec4(-rays[i].dir.x,
+			//-rays[i].dir.y, -rays[i].dir.z, 0));
+		//if (rays[i].inter_obj && rays[i].inter_obj->content_type == PLANE)
+			//ratio = -ratio;
+		//hex_col = facing_ratio(rays[i].color, ratio);
+		hex_col = lambert_lightning(rays[i].color, rays[i].obj_normal, args->scene->light);
+		put_pixel(i, args->env->img, hex_col);
+		++i;
+	}
+}
+
 int		main(void)
 {
+	t_args	args;
 	t_env	env;
 	t_scene scene;
 	t_ray	*ray_list;
-	//t_mtx4	v2w;
+	t_mtx4	v2w;
 
 	env.init = mlx_init();
 	env.win = mlx_new_window(env.init, WIN_WIDTH, WIN_HEIGHT, "RTV1");
 	init_img(&env);
 	init_scene(&scene);
-	ray_list = create_ray_array(ft_translate(0, 0, 2));
-	//v2w = ft_mtx_mult(ft_translate(20, -5, 20), ft_rotation('y', RAD(30)));
-	//ray_list = create_ray_array(ft_mtx_mult(v2w, ft_rotation('x', RAD(3))));
-	raytracing(ray_list, scene, &env);
+	args.obj_fct[0] = &sphere_intersection;
+	args.obj_fct[1] = &plane_intersection;
+	args.obj_fct[2] = &cylinder_intersection;
+	args.obj_fct[3] = &cone_intersection;
+	//ray_list = create_ray_array(ft_translate(0, 0, 2));
+	v2w = ft_mtx_mult(ft_translate(-20, 5, 0), ft_rotation('y', RAD(-45)));
+	ray_list = create_ray_array(ft_mtx_mult(v2w, ft_translate(-10, 0, 0)));
+	//ray_list = create_ray_array(ft_mtx_mult(ft_translate(0, 10, 2), ft_rotation('x', RAD(-10))));
+	args.env = &env;
+	args.scene = &scene;
+	args.ray_buf = ray_list;
+	raytracing(&args);
+	shade(&args);
+	//fill_image(&args);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	mlx_loop(env.init);
 	return (0);

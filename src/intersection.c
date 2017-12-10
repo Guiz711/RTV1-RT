@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/08 13:32:52 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/10 10:15:02 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,50 @@ double			sphere_intersection(t_ray ray, void *obj)
 	return (get_sph_distance(poly));
 }
 
+double			cylinder_intersection(t_ray ray, void *obj)
+{
+	t_vec4		diff;
+	t_poly2		poly;
+	t_cylinder	*cyl;
+	double		dot1;
+	double		dot2;
+	
+	cyl = (t_cylinder*)obj;
+	diff = ft_init_vec4(ray.orig.x - cyl->p.x, ray.orig.y - cyl->p.y,
+		ray.orig.z - cyl->p.z, 0);
+	dot1 = ft_dot_product(ray.dir, cyl->dir);
+	dot2 = ft_dot_product(diff, cyl->dir);
+	poly.a = ft_dot_product(ray.dir, ray.dir) - SQUARE(dot1);
+	poly.b = 2 * (ft_dot_product(ray.dir, diff) - dot1 * dot2);
+	poly.c = ft_dot_product(diff, diff) - SQUARE(dot2) - SQUARE(cyl->radius);
+	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
+	if (poly.disc < 0)
+		return (-1);
+	return (get_sph_distance(poly));
+}
+
+double			cone_intersection(t_ray ray, void *obj)
+{
+	t_vec4		diff;
+	t_poly2		poly;
+	t_cone		*cone;
+	double		dot1;
+	double		dot2;
+	
+	cone = (t_cone*)obj;
+	diff = ft_init_vec4(ray.orig.x - cone->p.x, ray.orig.y - cone->p.y,
+		ray.orig.z - cone->p.z, 0);
+	dot1 = ft_dot_product(ray.dir, cone->dir);
+	dot2 = ft_dot_product(diff, cone->dir);
+	poly.a = ft_dot_product(ray.dir, ray.dir) - cone->ang_tan * SQUARE(dot1);
+	poly.b = 2 * (ft_dot_product(ray.dir, diff) - cone->ang_tan * dot1 * dot2);
+	poly.c = ft_dot_product(diff, diff) - cone->ang_tan * SQUARE(dot2);
+	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
+	if (poly.disc < 0)
+		return (-1);
+	return (get_sph_distance(poly));
+}
+
 double			plane_intersection(t_ray ray, void *obj)
 {
 	t_vec4	diff;
@@ -60,6 +104,8 @@ double			plane_intersection(t_ray ray, void *obj)
 		pln->p.z - ray.orig.z, 0);
 	denom = ft_dot_product(ray.dir, pln->normal);
 	if (denom > 1e-6)
-	dist = ft_dot_product(diff, pln->normal) / denom;
+		dist = ft_dot_product(diff, pln->normal) / denom;
+	else
+		dist = -1;
 	return (dist);
 }
