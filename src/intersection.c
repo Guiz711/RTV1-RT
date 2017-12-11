@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/10 10:15:02 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/11 16:12:37 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,17 @@ double			plane_intersection(t_ray ray, void *obj)
 {
 	t_vec4	diff;
 	double	denom;
+	double	frac;
 	double	dist;
 	t_plane	*pln;
 
 	pln = (t_plane*)obj;
-	diff = ft_init_vec4(pln->p.x - ray.orig.x, pln->p.y - ray.orig.y,
-		pln->p.z - ray.orig.z, 0);
+	diff = ft_init_vec4(ray.orig.x - pln->p.x, ray.orig.y - pln->p.y,
+		ray.orig.z - pln->p.z, 0);
+	frac = ft_dot_product(diff, pln->normal);
 	denom = ft_dot_product(ray.dir, pln->normal);
-	if (denom > 1e-6)
-		dist = ft_dot_product(diff, pln->normal) / denom;
+	if ((denom > 1e-6 && frac < 0) || (denom < 1e6 && frac > 0))
+		dist =  -frac / denom;
 	else
 		dist = -1;
 	return (dist);

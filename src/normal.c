@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:00:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/11 11:24:43 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/11 17:43:41 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@ t_vec4	plane_normal(t_ray ray, void *obj)
 	t_plane		*pln;
 	t_vec4		normal;
 
-	ray.color = ft_init_vec3(0, 0, 0);
+	ray.color = ray.color;
 	pln = (t_plane*)obj;
-	normal = ft_normalize(ft_init_vec4(-pln->normal.x, -pln->normal.y, -pln->normal.z, 0));
+	if (ft_dot_product(ray.dir, pln->normal) > 0)
+		normal = ft_normalize(ft_init_vec4(-pln->normal.x, -pln->normal.y, -pln->normal.z, 0));
+	else
+		normal = ft_normalize(ft_init_vec4(pln->normal.x, pln->normal.y, pln->normal.z, 0));
 	return (normal);
 }

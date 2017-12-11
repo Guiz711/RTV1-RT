@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/11 13:50:56 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/11 18:11:59 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,18 @@ void	init_scene(t_scene *scn)
 	plane.normal = ft_normalize(ft_init_vec4(0, 0, -1, 0));
 	plane.color = ft_init_vec3(0.18, 0.18, 0.18);//0x00FFFFFF;
 	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));
+	plane.p = ft_init_vec4(-20, 0, 0, 1);
+	plane.normal = ft_normalize(ft_init_vec4(-1, 0, 0, 0));
+	plane.color = ft_init_vec3(0.18, 0.18, 0.18);//0x00FFFFFF;
+	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));
+	plane.p = ft_init_vec4(20, 0, 0, 1);
+	plane.normal = ft_normalize(ft_init_vec4(1, 0, 0, 0));
+	plane.color = ft_init_vec3(0.18, 0.18, 0.18);//0x00FFFFFF;
+	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));
+	plane.p = ft_init_vec4(0, 20, 0, 1);
+	plane.normal = ft_normalize(ft_init_vec4(0, 1, 0, 0));
+	plane.color = ft_init_vec3(0.18, 0.18, 0.18);//0x00FFFFFF;
+	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));
 	cyl.p = ft_init_vec4(-10, 0, -45, 1);
 	cyl.dir = ft_init_vec4(0, 1, 0, 0);
 	cyl.radius = 3;
@@ -83,10 +95,10 @@ void	init_scene(t_scene *scn)
 	//obj_lstadd(&(scn->objs), obj_lstnew(CONE, &cone, sizeof(cone)));
 	//scn->light.type = DIRECTIONNAL;
 	//scn->light.vec = ft_normalize(ft_init_vec4(1, -0.7, -0.9, 0));
-	//scn->light.dir = ft_init_vec4(0, 0, -1, 0);
+	//scn->light.intensity = 6;
 	scn->light.type = POINT;
-	scn->light.vec = ft_init_vec4(-25, 10, -10, 1);
-	scn->light.intensity = 6000;
+	scn->light.vec = ft_init_vec4(19.5, 0, -20, 1);
+	scn->light.intensity = 4000;
 	scn->light.color = ft_init_vec3(1, 1, 1); //0x00FFFFFF
 	scn->cam.orient = ft_init_vec4(0, 0, 1, 0);
 	scn->cam.orig = ft_init_vec4(0, 0, -3, 1);
@@ -148,7 +160,7 @@ unsigned int	lambert_lightning(t_vec3 albedo, t_ray ray, t_light light)
 	return (hex_col);
 }
 
-unsigned int	shadowing(t_light light, t_ray *ray, t_args *args)
+int		shadowing(t_light light, t_ray *ray, t_args *args)
 {
 	t_ray		light_ray;
 	t_obj_lst	*objs;
@@ -159,6 +171,7 @@ unsigned int	shadowing(t_light light, t_ray *ray, t_args *args)
 	{
 		light_ray.dir = ft_init_vec4(-light.vec.x,
 			-light.vec.y, -light.vec.z, 0);
+		light_ray.inter_dist = 1e6;
 	}
 	else
 	{
@@ -167,12 +180,11 @@ unsigned int	shadowing(t_light light, t_ray *ray, t_args *args)
 		light_ray.inter_dist = ft_vec_norm(light_ray.dir);
 		light_ray.dir = ft_normalize(light_ray.dir);
 	}
-	light_ray.orig = ft_init_vec4(ray->inter.x, ray->inter.y, ray->inter.z, 1);
-	light_ray.inter_dist = 1e6;
+	light_ray.orig = ray->inter;//ft_init_vec4(ray->inter.x, ray->inter.y, ray->inter.z, 1);
 	while (objs)
 	{
 		inter = args->obj_fct[objs->content_type](light_ray, (void*)objs->content);
-		if (inter > 0 || (light.type == POINT && inter < light_ray.inter_dist))
+		if (inter > 0 && inter < light_ray.inter_dist)
 			return (0);
 		objs = objs->next;
 	}

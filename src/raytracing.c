@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/11 11:03:41 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/11 17:06:47 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	check_intersections(t_ray *ray, t_obj_lst *objs, t_inter_fct *obj_fct)
 	while (objs)
 	{
 		inter = obj_fct[objs->content_type](*ray, (void*)objs->content);
-		if (inter < ray->inter_dist && inter != -1)
+		if (inter < ray->inter_dist && inter > 0)
 		{
 			ray->inter_dist = inter;
 			ray->inter_obj = objs;
