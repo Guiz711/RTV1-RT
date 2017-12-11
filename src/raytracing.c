@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/08 22:44:21 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/11 11:03:41 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int		raytracing(t_args *args)
 	{
 		check_intersections(&(args->ray_buf[i]), args->scene->objs,
 			args->obj_fct);
+		rays[i].inter = ft_init_vec4(
+			rays[i].orig.x + rays[i].dir.x * rays[i].inter_dist,
+			rays[i].orig.y + rays[i].dir.y * rays[i].inter_dist,
+			rays[i].orig.z + rays[i].dir.z * rays[i].inter_dist, 1);
 		if (rays[i].inter_obj && rays[i].inter_obj->content_type == SPHERE)
 		{
 			rays[i].obj_normal = sphere_normal(rays[i],

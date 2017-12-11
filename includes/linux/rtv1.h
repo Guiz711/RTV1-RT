@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/10 10:12:57 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/11 13:21:45 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 **	Properties
 */
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1250
+# define WIN_HEIGHT 660
 # define FOVX 60
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -73,6 +73,12 @@ typedef enum	e_obj_type
 	CYLINDER,
 	CONE,
 }				t_obj_type;
+
+typedef	enum	e_lgt_type
+{
+	DIRECTIONNAL,
+	POINT,
+}				t_lgt_type;
 
 typedef struct	s_vec2
 {
@@ -136,7 +142,8 @@ typedef struct	s_cylinder
 
 typedef struct	s_light
 {
-	t_vec4		dir;
+	t_lgt_type	type;
+	t_vec4		vec;
 	float		intensity;
 	t_vec3		color;
 }				t_light;
@@ -153,6 +160,7 @@ typedef	struct	s_ray
 {
 	t_vec4		orig;
 	t_vec4		dir;
+	t_vec4		inter;
 	double		inter_dist;
 	t_obj_lst	*inter_obj;
 	t_vec4		obj_normal;
@@ -223,7 +231,8 @@ t_mtx4	ft_rotation(char axis, float pitch);
 void	error(t_err err);
 int		error_message(const char *message, size_t line);
 t_vec4	ft_init_vec4(float x, float y, float z, float w);
-t_vec3		ft_init_vec3(float x, float y, float z);
+t_vec3	ft_init_vec3(float x, float y, float z);
+float	ft_vec_norm(t_vec4 v);
 
 t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
