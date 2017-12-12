@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/11 15:26:26 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/12 18:23:39 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 # define WIN_WIDTH 1920//1250
 # define WIN_HEIGHT 1080//660
-# define FOVX 60
+# define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1
 # define BUFF_SIZE 4096
@@ -164,7 +164,8 @@ typedef	struct	s_ray
 	double		inter_dist;
 	t_obj_lst	*inter_obj;
 	t_vec4		obj_normal;
-	t_vec3		color;	
+	t_vec3		color;
+	t_vec3		col_ratio;
 }				t_ray;
 
 typedef struct	s_view
@@ -177,7 +178,7 @@ typedef struct	s_scene
 {
 	t_view		cam;
 	t_obj_lst	*objs;
-	t_light		light;
+	t_list		*light;
 }				t_scene;
 
 typedef struct	s_img

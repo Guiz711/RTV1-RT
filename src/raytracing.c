@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/11 17:06:47 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/12 08:32:41 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		raytracing(t_args *args)
 	{
 		check_intersections(&(args->ray_buf[i]), args->scene->objs,
 			args->obj_fct);
+		rays[i].col_ratio = ft_init_vec3(0, 0, 0);
 		rays[i].inter = ft_init_vec4(
 			rays[i].orig.x + rays[i].dir.x * rays[i].inter_dist,
 			rays[i].orig.y + rays[i].dir.y * rays[i].inter_dist,
