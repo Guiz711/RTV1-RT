@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/12 18:29:00 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/13 10:13:57 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,10 +187,10 @@ void	init_scene(t_scene *scn)
 	plane.color = ft_init_vec3(0.18, 0.22, 0.26);//0x00FFFFFF;
 	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));
 
-	plane.p = ft_init_vec4(0, 5, 0, 1);
+	/*plane.p = ft_init_vec4(0, 5, 0, 1);
 	plane.normal = ft_normalize(ft_init_vec4(0, 1, 0, 0));
 	plane.color = ft_init_vec3(0.22, 0.22, 0.22);//0x00FFFFFF;
-	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));
+	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));*/
 
 	cyl.p = ft_init_vec4(-5, 0, -20, 1);
 	cyl.dir = ft_init_vec4(0, 1, 0, 0);
@@ -232,9 +232,9 @@ void	init_scene(t_scene *scn)
 	light.color = ft_init_vec3(1, 1, 1); //0x00FFFFFF
 	scn->light = ft_lstnew(&light, sizeof(light));
 
-	light.type = POINT;
-	light.vec = ft_init_vec4(-12.5, 0, 0, 1);
-	light.intensity = 3000;
+	light.type = DIRECTIONNAL;
+	light.vec = ft_normalize(ft_init_vec4(1, -1, -1, 0));
+	light.intensity = 10;
 	light.color = ft_init_vec3(1, 1, 1); //0x00FFFFFF
 	//scn->light = ft_lstnew(&light, sizeof(light));
 	ft_lstadd(&(scn->light), ft_lstnew(&light, sizeof(light)));
