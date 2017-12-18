@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2017/12/08 19:57:48 by gmichaud         ###   ########.fr        #
+#    Updated: 2017/12/18 15:20:06 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ OS = LINUX
 ifeq ($(OS),LINUX)
 	INC_FLAGS = -I./includes/linux -I./libft/includes
 	INC_PATH = includes/linux
-	LIBS = -lft -lmlx -lXext -lX11 -lm
-	#LIBS = -lft -lmlx -lm -framework OpenGL -framework Appkit
+	#LIBS = -lft -lmlx -lXext -lX11 -lm
+	LIBS = -lft -lmlx -lm -framework OpenGL -framework Appkit
 else
 	INC_FLAGS = -I./includes/osx -I./libft/includes
 	INC_PATH = includes/osx

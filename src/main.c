@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/18 12:10:50 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/18 17:18:17 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,70 +128,89 @@ void	init_scene(t_scene *scn)
 {
 	t_sphere	sphere;
 	t_plane		plane;
-	//t_cylinder	cyl;
-	//t_cone		cone;
+	t_cylinder	cyl;
+	t_cone		cone;
 	t_light		light;
 	t_obj_lst	*new;
 
-	sphere.center = ft_init_vec4(0, 0, -10, 1);
-	sphere.radius = 3;
-	sphere.color = ft_init_vec3(0.05, 0.18, 0.05); //0x0000FFFF;
+	sphere.center = ft_init_vec4(0, -4.3, -23, 1);
+	sphere.radius = 0.7;
+	sphere.color = ft_init_vec3(0.05, 0.20, 0.05); //0x0000FFFF;
 	scn->objs = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
-	scn->objs->material.spec = 0.1;
-	scn->objs->material.n = 50;
+	scn->objs->material.spec = 0.5;
+	scn->objs->material.n = 80;
 
-	/*sphere.center = ft_init_vec4(-5, -5, -20, 1);
+	sphere.center = ft_init_vec4(-5, -5, -20, 1);
 	sphere.radius = 1.5;
 	sphere.color = ft_init_vec3(0.18, 0.05, 0.05);//0x00FF0000;
 	new = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
-	new->material.spec = 0;
+	new->material.spec = 0.6;
+	new->material.n = 100;
 	obj_lstadd(&(scn->objs), new);
 
 	sphere.center = ft_init_vec4(-5, 5, -20, 1);
 	sphere.radius = 1.5;
 	sphere.color = ft_init_vec3(0.18, 0.05, 0.05);//0x0000FF00;
 	new = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
-	new->material.spec = 0;
-	obj_lstadd(&(scn->objs), obj_lstnew(SPHERE, &sphere, sizeof(sphere)));
+	new->material.spec = 0.6;
+	new->material.n = 100;
+	obj_lstadd(&(scn->objs), new);
 
 	sphere.center = ft_init_vec4(-5, 5, -40, 1);
 	sphere.radius = 1.5;
 	sphere.color = ft_init_vec3(0.18, 0.05, 0.05);//0x0000FF00;
 	new = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
 	new->material.spec = 0;
-	obj_lstadd(&(scn->objs), obj_lstnew(SPHERE, &sphere, sizeof(sphere)));
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	sphere.center = ft_init_vec4(-5, -5, -40, 1);
 	sphere.radius = 1.5;
 	sphere.color = ft_init_vec3(0.18, 0.05, 0.05);//0x0000FF00;
 	new = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
 	new->material.spec = 0;
-	obj_lstadd(&(scn->objs), obj_lstnew(SPHERE, &sphere, sizeof(sphere)));
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	sphere.center = ft_init_vec4(5, -5, -40, 1);
 	sphere.radius = 1.5;
 	sphere.color = ft_init_vec3(0.18, 0.05, 0.05);//0x0000FF00;
-	obj_lstadd(&(scn->objs), obj_lstnew(SPHERE, &sphere, sizeof(sphere)));
+	new = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
+	new->material.spec = 0;
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	sphere.center = ft_init_vec4(5, 5, -40, 1);
 	sphere.radius = 1.5;
 	sphere.color = ft_init_vec3(0.18, 0.05, 0.05);//0x0000FF00;
-	obj_lstadd(&(scn->objs), obj_lstnew(SPHERE, &sphere, sizeof(sphere)));
+	new = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
+	new->material.spec = 0;
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	sphere.center = ft_init_vec4(5, 5, -20, 1);
 	sphere.radius = 1.5;
 	sphere.color = ft_init_vec3(0.18, 0.05, 0.05);//0x0000FF00;
-	obj_lstadd(&(scn->objs), obj_lstnew(SPHERE, &sphere, sizeof(sphere)));
+	new = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
+	new->material.spec = 0;
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	sphere.center = ft_init_vec4(5, -5, -20, 1);
 	sphere.radius = 1.5;
 	sphere.color = ft_init_vec3(0.18, 0.05, 0.05);//0x0000FF00;
-	obj_lstadd(&(scn->objs), obj_lstnew(SPHERE, &sphere, sizeof(sphere)));
+	new = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
+	new->material.spec = 0;
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	plane.p = ft_init_vec4(0, -5, 0, 1);
 	plane.normal = ft_normalize(ft_init_vec4(0, -1, 0, 0));
 	plane.color = ft_init_vec3(0.22, 0.22, 0.22);//0x00FFFFFF;
-	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));*/
+	new = obj_lstnew(PLANE, &plane, sizeof(plane));
+	new->material.spec = 0;
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	plane.p = ft_init_vec4(0, 0, -50, 1);
 	plane.normal = ft_normalize(ft_init_vec4(0, 0, -1, 0));
@@ -201,53 +220,68 @@ void	init_scene(t_scene *scn)
 	new->material.n = 0;
 	obj_lstadd(&(scn->objs), new);
 
-	/*plane.p = ft_init_vec4(0, 5, 0, 1);
+	plane.p = ft_init_vec4(0, 5, 0, 1);
 	plane.normal = ft_normalize(ft_init_vec4(0, 1, 0, 0));
 	plane.color = ft_init_vec3(0.22, 0.22, 0.22);
-	obj_lstadd(&(scn->objs), obj_lstnew(PLANE, &plane, sizeof(plane)));
+	new = obj_lstnew(PLANE, &plane, sizeof(plane));
+	new->material.spec = 0;
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	cyl.p = ft_init_vec4(-5, 0, -20, 1);
 	cyl.dir = ft_init_vec4(0, 1, 0, 0);
 	cyl.radius = 1;
 	cyl.color = ft_init_vec3(0.18, 0.05, 0.05);//0x00FF0000;
-	obj_lstadd(&(scn->objs), obj_lstnew(CYLINDER, &cyl, sizeof(cyl)));
+	new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl));
+	new->material.spec = 0.6;
+	new->material.n = 100;
+	obj_lstadd(&(scn->objs), new);
 
 	cyl.p = ft_init_vec4(5, 0, -20, 1);
 	cyl.dir = ft_init_vec4(0, 1, 0, 0);
 	cyl.radius = 1;
 	cyl.color = ft_init_vec3(0.18, 0.05, 0.05);//0x00FF0000;
-	obj_lstadd(&(scn->objs), obj_lstnew(CYLINDER, &cyl, sizeof(cyl)));
+	new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl));
+	new->material.spec = 0;
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	cyl.p = ft_init_vec4(-5, 0, -40, 1);
 	cyl.dir = ft_init_vec4(0, 1, 0, 0);
 	cyl.radius = 1;
 	cyl.color = ft_init_vec3(0.18, 0.05, 0.05);//0x00FF0000;
-	obj_lstadd(&(scn->objs), obj_lstnew(CYLINDER, &cyl, sizeof(cyl)));
+	new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl));
+	new->material.spec = 0;
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	cyl.p = ft_init_vec4(5, 0, -40, 1);
 	cyl.dir = ft_init_vec4(0, 1, 0, 0);
 	cyl.radius = 1;
 	cyl.color = ft_init_vec3(0.18, 0.05, 0.05);//0x00FF0000;
-	obj_lstadd(&(scn->objs), obj_lstnew(CYLINDER, &cyl, sizeof(cyl)));
+	new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl));
+	new->material.spec = 0;
+	new->material.n = 0;
+	obj_lstadd(&(scn->objs), new);
 
 	cone.p = ft_init_vec4(13, 0, -40, 1);
 	cone.dir = ft_init_vec4(0, 1, 0, 0);
 	cone.angle = 270;
 	cone.ang_tan = 1 + SQUARE(tan(RAD(cone.angle * 0.5)));
-	cone.color = ft_init_vec3(0.05, 0.05, 0.18); //0x000000FF;*/
+	cone.color = ft_init_vec3(0.05, 0.05, 0.18); //0x000000FF;
 	//obj_lstadd(&(scn->objs), obj_lstnew(CONE, &cone, sizeof(cone)));
 
 	//scn->light.type = DIRECTIONNAL;
 	//scn->light.vec = ft_normalize(ft_init_vec4(1, -0.7, -0.9, 0));
 	//scn->light.intensity = 6;
 	light.type = POINT;
-	light.vec = ft_init_vec4(12.5, 10, 0, 1);
-	light.intensity = 2000;
+	light.vec = ft_init_vec4(-12.5, 0, 0, 1);
+	light.intensity = 3000;
 	light.color = ft_init_vec3(1, 1, 1); //0x00FFFFFF
 	scn->light = ft_lstnew(&light, sizeof(light));
 
 	light.type = POINT;
-	light.vec = ft_init_vec4(-12.5, 0, 0, 1);
+	light.vec = ft_init_vec4(12.5, 0, 0, 1);
 	light.intensity = 3000;
 	light.color = ft_init_vec3(1, 1, 1); //0x00FFFFFF
 	//scn->light = ft_lstnew(&light, sizeof(light));
@@ -370,19 +404,23 @@ void	phong_shading(t_ray *ray, t_light light)
 
 	ldir = ft_init_vec4(-(ray->inter.x - light.vec.x),
 		-(ray->inter.y - light.vec.y), -(ray->inter.z - light.vec.z), 0);
+	ldir = ft_normalize(ldir);
+	//ldir = ft_init_vec4(ray->inter.x - light.vec.x,
+	//	ray->inter.y - light.vec.y, ray->inter.z - light.vec.z, 0);
 	ndotl = 2 * ft_dot_product(ray->obj_normal, ldir);
 	r = ft_init_vec4(ndotl * ray->obj_normal.x - ldir.x,
 		ndotl * ray->obj_normal.y - ldir.y,
 		ndotl * ray->obj_normal.z - ldir.z, 0);
+	r = ft_normalize(r);
 	ray->col_ratio.x = ray->col_ratio.x
-		+ pow(ft_dot_product(ray->obj_normal, r), ray->inter_obj->material.n)
-		* ray->inter_obj->material.spec;
+		+ (pow(ft_dot_product(ray->obj_normal, r), ray->inter_obj->material.n)
+		* ray->inter_obj->material.spec);
 	ray->col_ratio.y = ray->col_ratio.y
-		+ pow(ft_dot_product(ray->obj_normal, r), ray->inter_obj->material.n)
-		* ray->inter_obj->material.spec;
-	ray->col_ratio.y = ray->col_ratio.y
-		+ pow(ft_dot_product(ray->obj_normal, r), ray->inter_obj->material.n)
-		* ray->inter_obj->material.spec;
+		+ (pow(ft_dot_product(ray->obj_normal, r), ray->inter_obj->material.n)
+		* ray->inter_obj->material.spec);
+	ray->col_ratio.z = ray->col_ratio.z
+		+ (pow(ft_dot_product(ray->obj_normal, r), ray->inter_obj->material.n)
+		* ray->inter_obj->material.spec);
 }
 
 void	shade(t_args *args)
