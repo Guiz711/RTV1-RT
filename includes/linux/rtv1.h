@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/13 09:19:56 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/18 11:44:21 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ typedef struct	s_cylinder
 	t_vec4		dir;
 	double		radius;
 	t_vec3		color;
+	t_vec3		spec;
 }				t_cylinder;
 
 typedef struct	s_light
@@ -148,10 +149,17 @@ typedef struct	s_light
 	t_vec3		color;
 }				t_light;
 
+typedef struct		s_mat
+{
+	double			spec;
+	double			n;
+}					t_mat;
+
 typedef	struct		s_obj_lst
 {
 	t_obj_type		content_type;
 	void			*content;
+	t_mat			material;
 	size_t			content_size;
 	struct s_obj_lst	*next;
 }					t_obj_lst;
