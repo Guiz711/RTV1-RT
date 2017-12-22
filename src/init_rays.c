@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/08 11:11:53 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/22 12:53:21 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_ray	init_ray(size_t pos)
 	ray.dir.y = (1 - 2 * pix.y) * tan(RAD(fovy / 2));
 	ray.dir.z = -1;
 	ray.dir.w = 0;
-	ray.dir = ft_normalize(ray.dir);
+	ray.dir = normalize_vec4(ray.dir);
 	ray.orig.x = 0;
 	ray.orig.y = 0;
 	ray.orig.z = 0;
@@ -62,6 +62,8 @@ t_ray	*create_ray_array(t_mtx4 v2w)
 		ray_list[pos].dir = new_coord(ray_list[pos].dir, v2w);
 		ray_list[pos].inter_dist = 1e6;
 		ray_list[pos].inter_obj = NULL;
+		ray_list[pos].color = init_vec3(0, 0, 0);
+		ray_list[pos].col_ratio = init_vec3(0, 0, 0);
 		pos++;
 	}
 	return (ray_list);

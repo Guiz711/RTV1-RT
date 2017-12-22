@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/12 18:16:14 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/22 11:20:12 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ double			sphere_intersection(t_ray ray, void *obj)
 	t_sphere	*sph;
 
 	sph = (t_sphere*)obj;
-	diff = ft_init_vec4(ray.orig.x - sph->center.x, ray.orig.y - sph->center.y,
+	diff = init_vec4(ray.orig.x - sph->center.x, ray.orig.y - sph->center.y,
 		ray.orig.z - sph->center.z, 0);
-	poly.a = ft_dot_product(ray.dir, ray.dir);
-	poly.b = 2 * ft_dot_product(ray.dir, diff);
-	poly.c = ft_dot_product(diff, diff) - sph->radius * sph->radius;
+	poly.a = dot_vec4(ray.dir, ray.dir);
+	poly.b = 2 * dot_vec4(ray.dir, diff);
+	poly.c = dot_vec4(diff, diff) - sph->radius * sph->radius;
 	poly.disc = poly.b * poly.b - 4 * poly.a * poly.c;
 	if (poly.disc < 0)
 		return (-1);
@@ -57,13 +57,13 @@ double			cylinder_intersection(t_ray ray, void *obj)
 	double		dot2;
 	
 	cyl = (t_cylinder*)obj;
-	diff = ft_init_vec4(ray.orig.x - cyl->p.x, ray.orig.y - cyl->p.y,
+	diff = init_vec4(ray.orig.x - cyl->p.x, ray.orig.y - cyl->p.y,
 		ray.orig.z - cyl->p.z, 0);
-	dot1 = ft_dot_product(ray.dir, cyl->dir);
-	dot2 = ft_dot_product(diff, cyl->dir);
-	poly.a = ft_dot_product(ray.dir, ray.dir) - SQUARE(dot1);
-	poly.b = 2 * (ft_dot_product(ray.dir, diff) - dot1 * dot2);
-	poly.c = ft_dot_product(diff, diff) - SQUARE(dot2) - SQUARE(cyl->radius);
+	dot1 = dot_vec4(ray.dir, cyl->dir);
+	dot2 = dot_vec4(diff, cyl->dir);
+	poly.a = dot_vec4(ray.dir, ray.dir) - SQUARE(dot1);
+	poly.b = 2 * (dot_vec4(ray.dir, diff) - dot1 * dot2);
+	poly.c = dot_vec4(diff, diff) - SQUARE(dot2) - SQUARE(cyl->radius);
 	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
 	if (poly.disc < 0)
 		return (-1);
@@ -79,13 +79,13 @@ double			cone_intersection(t_ray ray, void *obj)
 	double		dot2;
 	
 	cone = (t_cone*)obj;
-	diff = ft_init_vec4(ray.orig.x - cone->p.x, ray.orig.y - cone->p.y,
+	diff = init_vec4(ray.orig.x - cone->p.x, ray.orig.y - cone->p.y,
 		ray.orig.z - cone->p.z, 0);
-	dot1 = ft_dot_product(ray.dir, cone->dir);
-	dot2 = ft_dot_product(diff, cone->dir);
-	poly.a = ft_dot_product(ray.dir, ray.dir) - cone->ang_tan * SQUARE(dot1);
-	poly.b = 2 * (ft_dot_product(ray.dir, diff) - cone->ang_tan * dot1 * dot2);
-	poly.c = ft_dot_product(diff, diff) - cone->ang_tan * SQUARE(dot2);
+	dot1 = dot_vec4(ray.dir, cone->dir);
+	dot2 = dot_vec4(diff, cone->dir);
+	poly.a = dot_vec4(ray.dir, ray.dir) - cone->ang_tan * SQUARE(dot1);
+	poly.b = 2 * (dot_vec4(ray.dir, diff) - cone->ang_tan * dot1 * dot2);
+	poly.c = dot_vec4(diff, diff) - cone->ang_tan * SQUARE(dot2);
 	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
 	if (poly.disc < 0)
 		return (-1);
@@ -101,10 +101,10 @@ double			plane_intersection(t_ray ray, void *obj)
 	t_plane	*pln;
 
 	pln = (t_plane*)obj;
-	diff = ft_init_vec4(ray.orig.x - pln->p.x, ray.orig.y - pln->p.y,
+	diff = init_vec4(ray.orig.x - pln->p.x, ray.orig.y - pln->p.y,
 		ray.orig.z - pln->p.z, 0);
-	frac = ft_dot_product(diff, pln->normal);
-	denom = ft_dot_product(ray.dir, pln->normal);
+	frac = dot_vec4(diff, pln->normal);
+	denom = dot_vec4(ray.dir, pln->normal);
 	if ((denom > 1e-6 && frac < 0) || (denom < 1e6 && frac > 0))
 		dist =  -frac / denom;
 	else

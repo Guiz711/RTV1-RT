@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/18 16:29:26 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/22 11:33:39 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <math.h>
 # include <time.h>
 # include "libft.h"
+# include "vectors.h"
 # include <stdio.h>
 # include <stdint.h>
 
@@ -33,8 +34,8 @@
 **	Properties
 */
 
-# define WIN_WIDTH 1920//1250
-# define WIN_HEIGHT 1080//660
+# define WIN_WIDTH 1250
+# define WIN_HEIGHT 660
 # define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -79,35 +80,6 @@ typedef	enum	e_lgt_type
 	DIRECTIONNAL,
 	POINT,
 }				t_lgt_type;
-
-typedef struct	s_vec2
-{
-	double		x;
-	double		y;
-}				t_vec2;
-
-typedef struct	s_vec3
-{
-	double		x;
-	double		y;
-	double		z;
-}				t_vec3;
-
-typedef struct	s_vec4
-{
-	double		x;
-	double		y;
-	double		z;
-	double		w;
-}				t_vec4;
-
-typedef struct	s_mtx4
-{
-	double		a[4];
-	double		b[4];
-	double		c[4];
-	double		d[4];
-}				t_mtx4;
 
 typedef struct	s_sphere
 {
@@ -231,17 +203,9 @@ typedef struct	s_error
 }				t_error;
 
 t_ray	*create_ray_array(t_mtx4 v2w);
-t_vec4	ft_normalize(t_vec4 v);
-double	ft_dot_product(t_vec4 u, t_vec4 v);
 t_vec4	new_coord(t_vec4 p, t_mtx4 mtx);
-t_mtx4	ft_mtx_mult(t_mtx4 m1, t_mtx4 m2);
-t_mtx4	ft_translate(float t_x, float t_y, float t_z);
-t_mtx4	ft_rotation(char axis, float pitch);
 void	error(t_err err);
 int		error_message(const char *message, size_t line);
-t_vec4	ft_init_vec4(float x, float y, float z, float w);
-t_vec3	ft_init_vec3(float x, float y, float z);
-float	ft_vec_norm(t_vec4 v);
 
 t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);

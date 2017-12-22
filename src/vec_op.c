@@ -6,13 +6,13 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:20:56 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/11 13:21:15 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/22 11:02:49 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-float	ft_vec_norm(t_vec4 v)
+float	norm_vec4(t_vec4 v)
 {
 	float norm;
 
@@ -20,11 +20,11 @@ float	ft_vec_norm(t_vec4 v)
 	return (norm);
 }
 
-t_vec4	ft_normalize(t_vec4 v)
+t_vec4	normalize_vec4(t_vec4 v)
 {
 	float	norm;
 
-	norm = ft_vec_norm(v);
+	norm = norm_vec4(v);
 	if (norm)
 	{
 		v.x = v.x / norm;
@@ -41,7 +41,7 @@ t_vec4	ft_normalize(t_vec4 v)
 	return (v);
 }
 
-t_vec4	ft_cross_product(t_vec4 u, t_vec4 v)
+t_vec4	cross_vec4(t_vec4 u, t_vec4 v)
 {
 	t_vec4 w;
 
@@ -52,7 +52,7 @@ t_vec4	ft_cross_product(t_vec4 u, t_vec4 v)
 	return (w);
 }
 
-double	ft_dot_product(t_vec4 u, t_vec4 v)
+double	dot_vec4(t_vec4 u, t_vec4 v)
 {
 	return(u.x * v.x + u.y * v.y + u.z * v.z + u.w * v.w);
 }

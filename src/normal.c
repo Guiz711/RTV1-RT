@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:00:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/11 17:43:41 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/22 11:22:30 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_vec4	sphere_normal(t_ray ray, void *obj)
 	t_vec4		normal;
 	
 	sph = (t_sphere*)obj;
-	normal = ft_init_vec4(ray.inter.x - sph->center.x,
+	normal = init_vec4(ray.inter.x - sph->center.x,
 		ray.inter.y - sph->center.y, ray.inter.z - sph->center.z, 0);
-	normal = ft_normalize(normal);
+	normal = normalize_vec4(normal);
 	return (normal);
 }
 
@@ -32,13 +32,13 @@ t_vec4	cylinder_normal(t_ray ray, void *obj)
 	t_vec4		normal;
 	
 	cyl = (t_cylinder*)obj;
-	diff = ft_init_vec4(ray.orig.x - cyl->p.x, ray.orig.y - cyl->p.y,
+	diff = init_vec4(ray.orig.x - cyl->p.x, ray.orig.y - cyl->p.y,
 		ray.orig.z - cyl->p.z, 0);
-	m = ft_dot_product(ray.dir, cyl->dir) * ray.inter_dist + ft_dot_product(diff, cyl->dir);
-	normal = ft_init_vec4(ray.inter.x - cyl->p.x - cyl->dir.x * m,
+	m = dot_vec4(ray.dir, cyl->dir) * ray.inter_dist + dot_vec4(diff, cyl->dir);
+	normal = init_vec4(ray.inter.x - cyl->p.x - cyl->dir.x * m,
 		ray.inter.y - cyl->p.y - cyl->dir.y * m,
 		ray.inter.z - cyl->p.z - cyl->dir.z * m, 0);
-	normal = ft_normalize(normal);
+	normal = normalize_vec4(normal);
 	return (normal);
 }
 
@@ -50,13 +50,13 @@ t_vec4	cone_normal(t_ray ray, void *obj)
 	t_vec4		normal;
 	
 	cone = (t_cone*)obj;
-	diff = ft_init_vec4(ray.orig.x - cone->p.x, ray.orig.y - cone->p.y,
+	diff = init_vec4(ray.orig.x - cone->p.x, ray.orig.y - cone->p.y,
 		ray.orig.z - cone->p.z, 0);
-	m = ft_dot_product(ray.dir, cone->dir) * ray.inter_dist + ft_dot_product(diff, cone->dir);
-	normal = ft_init_vec4(ray.inter.x - cone->p.x - cone->dir.x * m * cone->ang_tan,
+	m = dot_vec4(ray.dir, cone->dir) * ray.inter_dist + dot_vec4(diff, cone->dir);
+	normal = init_vec4(ray.inter.x - cone->p.x - cone->dir.x * m * cone->ang_tan,
 		ray.inter.y - cone->p.y - cone->dir.y * m * cone->ang_tan,
 		ray.inter.z - cone->p.z - cone->dir.z * m * cone->ang_tan, 0);
-	normal = ft_normalize(normal);
+	normal = normalize_vec4(normal);
 	return (normal);
 }
 
@@ -67,9 +67,9 @@ t_vec4	plane_normal(t_ray ray, void *obj)
 
 	ray.color = ray.color;
 	pln = (t_plane*)obj;
-	if (ft_dot_product(ray.dir, pln->normal) > 0)
-		normal = ft_normalize(ft_init_vec4(-pln->normal.x, -pln->normal.y, -pln->normal.z, 0));
+	if (dot_vec4(ray.dir, pln->normal) > 0)
+		normal = normalize_vec4(init_vec4(-pln->normal.x, -pln->normal.y, -pln->normal.z, 0));
 	else
-		normal = ft_normalize(ft_init_vec4(pln->normal.x, pln->normal.y, pln->normal.z, 0));
+		normal = normalize_vec4(init_vec4(pln->normal.x, pln->normal.y, pln->normal.z, 0));
 	return (normal);
 }
