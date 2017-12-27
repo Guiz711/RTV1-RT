@@ -6,33 +6,33 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/22 12:53:21 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/27 13:57:18 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vec2	ft_ndc_conv_2(t_vec2 v)
+t_vec2	ft_ndc_conv_2(t_vec2 v, int win_width, int win_height)
 {
 	t_vec2 v_norm;
 	
-	v_norm.x = v.x / WIN_WIDTH;
-	v_norm.y = v.y / WIN_HEIGHT;
+	v_norm.x = v.x / win_width;
+	v_norm.y = v.y / win_height;
 	return (v_norm);
 }
 
-t_ray	init_ray(size_t pos)
+t_ray	init_ray(t_env *env, size_t pos)
 {
 	t_vec2	pix;
 	t_ray	ray;
 	double	scale;
 	double	fovy;
 
-	scale = (double)WIN_WIDTH / (double)WIN_HEIGHT;
-	fovy = (double)FOVX / scale;
-	pix.y = pos / WIN_WIDTH + 0.5;
-	pix.x = pos - ((pix.y - 0.5) * WIN_WIDTH) + 0.5;
-	pix = ft_ndc_conv_2(pix);
+	scale = (double)env->win_width / (double)env->win_height;
+	fovy = (double)env->fov / scale;
+	pix.y = pos / (double)env->win_width + 0.5;
+	pix.x = pos - ((pix.y - 0.5) * env->win_width) + 0.5;
+	pix = ft_ndc_conv_2(pix, env->win_width, env->win_height);
 	ray.dir.x = (2 * pix.x - 1) * tan(RAD(fovy / 2)) * scale;
 	ray.dir.y = (1 - 2 * pix.y) * tan(RAD(fovy / 2));
 	ray.dir.z = -1;
@@ -45,26 +45,27 @@ t_ray	init_ray(size_t pos)
 	return (ray);
 }
 
-t_ray	*create_ray_array(t_mtx4 v2w)
+t_pixel		*create_ray_array(t_env *env, t_mtx4 v2w)
 {
 	size_t	len;
 	size_t	pos;
-	t_ray	*ray_list;
+	t_pixel	*pix_buf;
 
 	len = WIN_WIDTH * WIN_HEIGHT;
-	if (!(ray_list = (t_ray*)malloc(sizeof(*ray_list) * len)))
+	if (!(pix_buf = (t_pixel*)malloc(sizeof(*pix_buf) * len)))
 		return (NULL);
 	pos = 0;
 	while (pos < len)
 	{
-		ray_list[pos] = init_ray(pos);
-		ray_list[pos].orig = new_coord(ray_list[pos].orig, v2w);
-		ray_list[pos].dir = new_coord(ray_list[pos].dir, v2w);
-		ray_list[pos].inter_dist = 1e6;
-		ray_list[pos].inter_obj = NULL;
-		ray_list[pos].color = init_vec3(0, 0, 0);
-		ray_list[pos].col_ratio = init_vec3(0, 0, 0);
+		pix_buf[pos].p_ray = init_ray(env, pos);
+		pix_buf[pos].p_ray.orig = new_coord(pix_buf[pos].p_ray.orig, v2w);
+		pix_buf[pos].p_ray.dir = new_coord(pix_buf[pos].p_ray.dir, v2w);
+		pix_buf[pos].inter_dist = 1e6;
+		pix_buf[pos].inter_obj = NULL;
+		pix_buf[pos].col_ratio = init_vec3(0, 0, 0);
+		pix_buf[pos].normal = init_vec4(0, 0, 0, 0);
+		pix_buf[pos].inter = init_vec4(0, 0, 0, 1);
 		pos++;
 	}
-	return (ray_list);
+	return (pix_buf);
 }

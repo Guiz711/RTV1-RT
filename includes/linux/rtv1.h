@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/22 11:33:39 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/27 12:49:25 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ typedef enum	e_obj_type
 	CONE,
 }				t_obj_type;
 
+typedef enum	e_model
+{
+	PHONG,
+}				t_model;
+
 typedef	enum	e_lgt_type
 {
 	DIRECTIONNAL,
@@ -85,14 +90,12 @@ typedef struct	s_sphere
 {
 	t_vec4		center;
 	double		radius;
-	t_vec3		color;
 }				t_sphere;
 
 typedef struct	s_plane
 {
 	t_vec4		p;
 	t_vec4		normal;
-	t_vec3		color;
 }				t_plane;
 
 typedef struct	s_cone
@@ -101,7 +104,6 @@ typedef struct	s_cone
 	t_vec4		dir;
 	double		angle;
 	double		ang_tan;
-	t_vec3		color;
 }				t_cone;
 
 typedef struct	s_cylinder
@@ -109,30 +111,31 @@ typedef struct	s_cylinder
 	t_vec4		p;
 	t_vec4		dir;
 	double		radius;
-	t_vec3		color;
-	t_vec3		spec;
 }				t_cylinder;
 
 typedef struct	s_light
 {
 	t_lgt_type	type;
 	t_vec4		vec;
-	float		intensity;
-	t_vec3		color;
+	t_vec3		diff_i;
+	t_vec3		spec_i;
+	float		range;
 }				t_light;
 
 typedef struct		s_mat
 {
-	double			spec;
-	double			n;
+	t_model			model;
+	t_vec3			diff;
+	t_vec3			spec;
+	double			shin;
 }					t_mat;
 
 typedef	struct		s_obj_lst
 {
 	t_obj_type		content_type;
 	void			*content;
-	t_mat			material;
 	size_t			content_size;
+	t_mat			material;
 	struct s_obj_lst	*next;
 }					t_obj_lst;
 
@@ -140,13 +143,17 @@ typedef	struct	s_ray
 {
 	t_vec4		orig;
 	t_vec4		dir;
+}				t_ray;
+
+typedef struct	s_pixel
+{
+	t_ray		p_ray;
 	t_vec4		inter;
 	double		inter_dist;
 	t_obj_lst	*inter_obj;
-	t_vec4		obj_normal;
-	t_vec3		color;
+	t_vec4		normal;
 	t_vec3		col_ratio;
-}				t_ray;
+}				t_pixel;
 
 typedef struct	s_view
 {
@@ -175,6 +182,9 @@ typedef struct	s_env
 {
 	void		*init;
 	void		*win;
+	double		win_width;
+	double		win_height;
+	int			fov;
 	t_img		*img;
 }				t_env;
 
@@ -192,7 +202,7 @@ typedef struct	s_args
 {
 	t_env		*env;
 	t_scene		*scene;
-	t_ray		*ray_buf;
+	t_pixel		*pix_buf;
 	t_inter_fct	obj_fct[4];
 }				t_args;
 
