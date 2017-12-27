@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2017/12/22 11:50:19 by gmichaud         ###   ########.fr        #
+#    Updated: 2017/12/27 18:44:28 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ endif
 SRC_PATH = src
 
 SRC_NAME = main.c vec_init.c init_rays.c vec_op.c matrices_calc.c matrices.c mtx_op.c \
-			error.c obj_list.c intersection.c raytracing.c normal.c vec_add.c vec_rev.c \
+			error.c obj_list.c intersection.c trace_ray.c normal.c vec_add.c vec_rev.c \
 			vec_sub.c
 
 INC_NAME = rtv1.h vectors.h inputs_linux.h X.h

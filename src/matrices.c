@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 11:01:48 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/22 12:38:21 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/27 22:23:07 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** Returns an initialized matrix type struct.
 */
 
-t_mtx4		ft_translate(float t_x, float t_y, float t_z)
+t_mtx4		ft_translate(double t_x, double t_y, double t_z)
 {
 	t_mtx4	mtx;
 
@@ -41,23 +41,21 @@ t_mtx4		ft_translate(float t_x, float t_y, float t_z)
 	return (mtx);
 }
 
-t_mtx4		ft_rotation(char axis, float pitch)
+t_mtx4		ft_rotation(t_axis axis, double pitch)
 {
 	t_mtx4	mtx;
 
-	if (axis != 'x' && axis != 'y' && axis != 'z')
-		axis = 'x';
-	mtx.a[0] = (axis == 'x') ? 1 : cosf(pitch);
-	mtx.a[1] = (axis == 'z') ? -sinf(pitch) : 0;
-	mtx.a[2] = (axis == 'y') ? sinf(pitch) : 0;
+	mtx.a[0] = (axis == X) ? 1 : cosf(pitch);
+	mtx.a[1] = (axis == Z) ? -sinf(pitch) : 0;
+	mtx.a[2] = (axis == Y) ? sinf(pitch) : 0;
 	mtx.a[3] = 0;
-	mtx.b[0] = (axis == 'z') ? sinf(pitch) : 0;
-	mtx.b[1] = (axis == 'y') ? 1 : cosf(pitch);
-	mtx.b[2] = (axis == 'x') ? -sinf(pitch) : 0;
+	mtx.b[0] = (axis == Z) ? sinf(pitch) : 0;
+	mtx.b[1] = (axis == Y) ? 1 : cosf(pitch);
+	mtx.b[2] = (axis == X) ? -sinf(pitch) : 0;
 	mtx.b[3] = 0;
-	mtx.c[0] = (axis == 'y') ? -sinf(pitch) : 0;
-	mtx.c[1] = (axis == 'x') ? sinf(pitch) : 0;
-	mtx.c[2] = (axis == 'z') ? 1 : cosf(pitch);
+	mtx.c[0] = (axis == Y) ? -sinf(pitch) : 0;
+	mtx.c[1] = (axis == X) ? sinf(pitch) : 0;
+	mtx.c[2] = (axis == Z) ? 1 : cosf(pitch);
 	mtx.c[3] = 0;
 	mtx.d[0] = 0;
 	mtx.d[1] = 0;
@@ -66,7 +64,7 @@ t_mtx4		ft_rotation(char axis, float pitch)
 	return (mtx);
 }
 
-t_mtx4		ft_scale(float pitch_x, float pitch_y, float pitch_z)
+t_mtx4		ft_scale(double pitch_x, double pitch_y, double pitch_z)
 {
 	t_mtx4	mtx;
 

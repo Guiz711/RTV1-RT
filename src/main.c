@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/22 12:57:04 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/27 22:35:21 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -349,7 +349,7 @@ int		main(void)
 	//ray_list = create_ray_array(ft_translate(0, 0, 0));
 	v2w = ft_mtx_mult(ft_translate(-7, -10, -5), ft_rotation('x', RAD(65)));
 	//v2w = ft_mtx_mult(v2w, ft_rotation('x', RAD(-10)));
-	ray_list = create_ray_array(ft_mtx_mult(v2w, ft_rotation('y', RAD(-40))));
+	ray_list = create_ray_array(&env, ft_mtx_mult(v2w, ft_rotation('y', RAD(-40))));
 	//ray_list = create_ray_array(ft_mtx_mult(ft_translate(0, -10, -5), ft_rotation('x', RAD(0))));
 	args.env = &env;
 	args.scene = &scene;

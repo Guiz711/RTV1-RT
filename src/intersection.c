@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/22 11:20:12 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/27 22:28:35 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ double			sphere_intersection(t_ray ray, void *obj)
 	t_sphere	*sph;
 
 	sph = (t_sphere*)obj;
-	diff = init_vec4(ray.orig.x - sph->center.x, ray.orig.y - sph->center.y,
-		ray.orig.z - sph->center.z, 0);
+	diff = sub_vec4(ray.orig, sph->center);
+	//diff = init_vec4(ray.orig.x - sph->center.x, ray.orig.y - sph->center.y,
+		//ray.orig.z - sph->center.z, 0);
 	poly.a = dot_vec4(ray.dir, ray.dir);
 	poly.b = 2 * dot_vec4(ray.dir, diff);
 	poly.c = dot_vec4(diff, diff) - sph->radius * sph->radius;
@@ -57,8 +58,9 @@ double			cylinder_intersection(t_ray ray, void *obj)
 	double		dot2;
 	
 	cyl = (t_cylinder*)obj;
-	diff = init_vec4(ray.orig.x - cyl->p.x, ray.orig.y - cyl->p.y,
-		ray.orig.z - cyl->p.z, 0);
+	diff = sub_vec4(ray.orig, cyl->p);
+	//diff = init_vec4(ray.orig.x - cyl->p.x, ray.orig.y - cyl->p.y,
+		//ray.orig.z - cyl->p.z, 0);
 	dot1 = dot_vec4(ray.dir, cyl->dir);
 	dot2 = dot_vec4(diff, cyl->dir);
 	poly.a = dot_vec4(ray.dir, ray.dir) - SQUARE(dot1);
@@ -79,8 +81,9 @@ double			cone_intersection(t_ray ray, void *obj)
 	double		dot2;
 	
 	cone = (t_cone*)obj;
-	diff = init_vec4(ray.orig.x - cone->p.x, ray.orig.y - cone->p.y,
-		ray.orig.z - cone->p.z, 0);
+	diff = sub_vec4(ray.orig, cone->p);
+	//diff = init_vec4(ray.orig.x - cone->p.x, ray.orig.y - cone->p.y,
+		//ray.orig.z - cone->p.z, 0);
 	dot1 = dot_vec4(ray.dir, cone->dir);
 	dot2 = dot_vec4(diff, cone->dir);
 	poly.a = dot_vec4(ray.dir, ray.dir) - cone->ang_tan * SQUARE(dot1);
@@ -101,8 +104,9 @@ double			plane_intersection(t_ray ray, void *obj)
 	t_plane	*pln;
 
 	pln = (t_plane*)obj;
-	diff = init_vec4(ray.orig.x - pln->p.x, ray.orig.y - pln->p.y,
-		ray.orig.z - pln->p.z, 0);
+	diff = sub_vec4(ray.orig, pln->p);
+	//diff = init_vec4(ray.orig.x - pln->p.x, ray.orig.y - pln->p.y,
+		//ray.orig.z - pln->p.z, 0);
 	frac = dot_vec4(diff, pln->normal);
 	denom = dot_vec4(ray.dir, pln->normal);
 	if ((denom > 1e-6 && frac < 0) || (denom < 1e6 && frac > 0))

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/27 12:49:25 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/27 22:12:10 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 **	Error handling
 */
 
-typedef enum	e_err
+typedef enum		e_err
 {
 	NO_ERR,
 	ERR_ARGS,
@@ -73,17 +73,20 @@ typedef enum	e_obj_type
 	PLANE,
 	CYLINDER,
 	CONE,
+	COUNT,
 }				t_obj_type;
 
 typedef enum	e_model
 {
 	PHONG,
+	COUNT,
 }				t_model;
 
 typedef	enum	e_lgt_type
 {
 	DIRECTIONNAL,
 	POINT,
+	COUNT,
 }				t_lgt_type;
 
 typedef struct	s_sphere
@@ -98,29 +101,29 @@ typedef struct	s_plane
 	t_vec4		normal;
 }				t_plane;
 
-typedef struct	s_cone
+typedef struct		s_cone
 {
-	t_vec4		p;
-	t_vec4		dir;
-	double		angle;
-	double		ang_tan;
-}				t_cone;
+	t_vec4			p;
+	t_vec4			dir;
+	double			angle;
+	double			ang_tan;
+}					t_cone;
 
-typedef struct	s_cylinder
+typedef struct		s_cylinder
 {
-	t_vec4		p;
-	t_vec4		dir;
-	double		radius;
-}				t_cylinder;
+	t_vec4			p;
+	t_vec4			dir;
+	double			radius;
+}					t_cylinder;
 
-typedef struct	s_light
+typedef struct		s_light
 {
-	t_lgt_type	type;
-	t_vec4		vec;
-	t_vec3		diff_i;
-	t_vec3		spec_i;
-	float		range;
-}				t_light;
+	t_lgt_type		type;
+	t_vec4			vec;
+	t_vec3			diff_i;
+	t_vec3			spec_i;
+	float			range;
+}					t_light;
 
 typedef struct		s_mat
 {
@@ -130,13 +133,13 @@ typedef struct		s_mat
 	double			shin;
 }					t_mat;
 
-typedef	struct		s_obj_lst
+typedef	struct		s_o_lst
 {
 	t_obj_type		content_type;
 	void			*content;
 	size_t			content_size;
 	t_mat			material;
-	struct s_obj_lst	*next;
+	struct s_o_lst	*next;
 }					t_obj_lst;
 
 typedef	struct	s_ray
@@ -145,12 +148,17 @@ typedef	struct	s_ray
 	t_vec4		dir;
 }				t_ray;
 
+typedef struct	s_inter
+{
+	double		dist;
+	t_vec4		p;
+	t_obj_lst	*obj;
+}				t_inter;
+
 typedef struct	s_pixel
 {
 	t_ray		p_ray;
-	t_vec4		inter;
-	double		inter_dist;
-	t_obj_lst	*inter_obj;
+	t_inter		inter;
 	t_vec4		normal;
 	t_vec3		col_ratio;
 }				t_pixel;
@@ -197,12 +205,14 @@ typedef struct	s_poly2
 }				t_poly2;
 
 typedef double	(*t_inter_fct)(t_ray, void*);
+typedef t_vec4	(*t_norm_fct)(t_pixel*);
 
 typedef struct	s_args
 {
 	t_env		*env;
 	t_scene		*scene;
 	t_pixel		*pix_buf;
+	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
 }				t_args;
 
@@ -212,7 +222,7 @@ typedef struct	s_error
 	char		*detail;
 }				t_error;
 
-t_ray	*create_ray_array(t_mtx4 v2w);
+t_pixel			*create_ray_array(t_env *env, t_mtx4 v2w);
 t_vec4	new_coord(t_vec4 p, t_mtx4 mtx);
 void	error(t_err err);
 int		error_message(const char *message, size_t line);

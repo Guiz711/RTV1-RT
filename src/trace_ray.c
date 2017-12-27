@@ -1,50 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raytracing.c                                       :+:      :+:    :+:   */
+/*   trace_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/22 11:22:47 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/27 22:29:49 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	check_intersections(t_ray *ray, t_obj_lst *objs, t_inter_fct *obj_fct)
+t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct)
 {
-	double	inter;
+	t_inter	inter;
+	double	tmp_dist;
 
+	inter.dist = 1e6;
+	inter.obj = NULL;
+	inter.p = init_vec4(0, 0, 0, 1);
 	while (objs)
 	{
-		inter = obj_fct[objs->content_type](*ray, (void*)objs->content);
-		if (inter < ray->inter_dist && inter > 0)
+		tmp_dist = obj_fct[objs->content_type](ray, objs->content);
+		if (tmp_dist < inter.dist && tmp_dist > 0)
 		{
-			ray->inter_dist = inter;
-			ray->inter_obj = objs;
+			inter.dist = tmp_dist;
+			inter.obj = objs;
 		}
 		objs = objs->next;
 	}
+	inter.p = add_vec4(ray.orig, dmult_vec4(ray.dir, inter.dist));
+	inter.p.w = 1;
+	return (inter);
 }
 
-int		raytracing(t_args *args)
+int			trace_primary_rays(t_args *args)
 {
 	size_t		i;
-	t_ray		*rays;
+	size_t		len;
+	t_pixel		*pix;
 
-	rays = args->ray_buf;
+	pix = args->pix_buf;
+	len = args->env->win_width * args->env->win_height;
 	i = 0;
-	while (i < WIN_HEIGHT * WIN_WIDTH)
+	while (i < len)
 	{
-		check_intersections(&(args->ray_buf[i]), args->scene->objs,
+		pix[i].inter = trace_ray(pix[i].p_ray, args->scene->objs,
 			args->obj_fct);
-		rays[i].col_ratio = init_vec3(0, 0, 0);
-		rays[i].inter = init_vec4(
-			rays[i].orig.x + rays[i].dir.x * rays[i].inter_dist,
-			rays[i].orig.y + rays[i].dir.y * rays[i].inter_dist,
-			rays[i].orig.z + rays[i].dir.z * rays[i].inter_dist, 1);
-		if (rays[i].inter_obj && rays[i].inter_obj->content_type == SPHERE)
+		pix[i].normal = args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);
+		++i;
+	}
+	return (0);
+}
+
+		/*if (rays[i].inter_obj && rays[i].inter_obj->content_type == SPHERE)
 		{
 			rays[i].obj_normal = sphere_normal(rays[i],
 				rays[i].inter_obj->content);
@@ -67,8 +77,4 @@ int		raytracing(t_args *args)
 			rays[i].obj_normal = cone_normal(rays[i],
 				rays[i].inter_obj->content);
 			rays[i].color = ((t_cone*)rays[i].inter_obj->content)->color;
-		}
-		++i;
-	}
-	return (0);
-}
+		}*/

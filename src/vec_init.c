@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 13:05:43 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/22 11:16:29 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/27 22:18:00 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** Returns an initialized vector type struct.
 */
 
-t_vec2		init_vec2(float x, float y)
+t_vec2		init_vec2(double x, double y)
 {
 	t_vec2	vec2;
 
@@ -27,7 +27,7 @@ t_vec2		init_vec2(float x, float y)
 	return (vec2);
 }
 
-t_vec3		init_vec3(float x, float y, float z)
+t_vec3		init_vec3(double x, double y, double z)
 {
 	t_vec3	vec3;
 
@@ -37,7 +37,7 @@ t_vec3		init_vec3(float x, float y, float z)
 	return (vec3);
 }
 
-t_vec4		init_vec4(float x, float y, float z, float w)
+t_vec4		init_vec4(double x, double y, double z, double w)
 {
 	t_vec4	vec4;
 

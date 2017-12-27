@@ -6,15 +6,15 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:20:56 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/22 11:02:49 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/27 22:18:29 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-float	norm_vec4(t_vec4 v)
+double	norm_vec4(t_vec4 v)
 {
-	float norm;
+	double norm;
 
 	norm = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 	return (norm);
@@ -22,7 +22,7 @@ float	norm_vec4(t_vec4 v)
 
 t_vec4	normalize_vec4(t_vec4 v)
 {
-	float	norm;
+	double	norm;
 
 	norm = norm_vec4(v);
 	if (norm)
@@ -55,4 +55,12 @@ t_vec4	cross_vec4(t_vec4 u, t_vec4 v)
 double	dot_vec4(t_vec4 u, t_vec4 v)
 {
 	return(u.x * v.x + u.y * v.y + u.z * v.z + u.w * v.w);
+}
+
+t_vec4	dmult_vec4(t_vec4 u, double n)
+{
+	u.x *= n;
+	u.y *= n;
+	u.z *= n;
+	return (u);
 }
