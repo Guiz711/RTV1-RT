@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/27 22:29:49 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/28 12:57:18 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int			trace_primary_rays(t_args *args)
 	{
 		pix[i].inter = trace_ray(pix[i].p_ray, args->scene->objs,
 			args->obj_fct);
-		pix[i].normal = args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);
+		if (pix[i].inter.obj)
+		{
+			pix[i].normal = args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);
+		}
 		++i;
 	}
 	return (0);

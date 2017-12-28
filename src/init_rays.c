@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/27 22:33:55 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/28 12:52:57 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,17 @@ static t_ray	init_ray(t_env *env, size_t pos)
 
 	scale = (double)env->win_width / (double)env->win_height;
 	fovy = (double)env->fov / scale;
-	pix.y = pos / (double)env->win_width + 0.5;
-	pix.x = pos - ((pix.y - 0.5) * (double)env->win_width) + 0.5;
+	pix.y = pos / env->win_width + 0.5;
+	pix.x = pos - ((pix.y - 0.5) * env->win_width) + 0.5;
 	pix = ft_ndc_conv_2(pix, (double)env->win_width, (double)env->win_height);
-	ray.dir = normalize_vec4(init_vec4(
-		(2 * pix.x - 1) * tan(RAD(fovy / 2)) * scale,
-		(1 - 2 * pix.y) * tan(RAD(fovy / 2)), -1, 0));
+	ray.dir.x = (2 * pix.x - 1) * tan(RAD(fovy / 2)) * scale;
+  	ray.dir.y = (1 - 2 * pix.y) * tan(RAD(fovy / 2));
+  	ray.dir.z = -1;
+  	ray.dir.w = 0;
+	ray.dir = normalize_vec4(ray.dir);
+	//ray.dir = normalize_vec4(init_vec4(
+		//(2 * pix.x - 1) * tan(RAD(fovy / 2)) * scale,
+		//(1 - 2 * pix.y) * tan(RAD(fovy / 2)), -1, 0));
 	ray.orig = init_vec4(0, 0, 0, 1);
 	return (ray);
 }
@@ -55,6 +60,7 @@ t_pixel			*create_ray_array(t_env *env, t_mtx4 v2w)
 		pix_buf[pos].p_ray = init_ray(env, pos);
 		pix_buf[pos].p_ray.orig = new_coord(pix_buf[pos].p_ray.orig, v2w);
 		pix_buf[pos].p_ray.dir = new_coord(pix_buf[pos].p_ray.dir, v2w);
+		//printf("%f; %f; %f\n", pix_buf[pos].p_ray.dir.x, pix_buf[pos].p_ray.dir.y, pix_buf[pos].p_ray.dir.z);
 		pix_buf[pos].inter.dist = 1e6;
 		pix_buf[pos].inter.obj = NULL;
 		pix_buf[pos].inter.p = init_vec4(0, 0, 0, 1);

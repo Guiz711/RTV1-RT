@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:20:56 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/27 22:18:29 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/28 11:19:53 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ double	dot_vec4(t_vec4 u, t_vec4 v)
 }
 
 t_vec4	dmult_vec4(t_vec4 u, double n)
+{
+	u.x *= n;
+	u.y *= n;
+	u.z *= n;
+	return (u);
+}
+
+t_vec3	dmult_vec3(t_vec3 u, double n)
 {
 	u.x *= n;
 	u.y *= n;

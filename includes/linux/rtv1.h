@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/27 22:12:10 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/28 13:49:47 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,24 @@ typedef enum	e_obj_type
 	PLANE,
 	CYLINDER,
 	CONE,
-	COUNT,
+	COUNT_OBJ,
 }				t_obj_type;
 
-typedef enum	e_model
+typedef enum	e_shd
 {
+	NO_SHD,
+	FACING,
+	SHADOW,
+	LAMBERT,
 	PHONG,
-	COUNT,
-}				t_model;
+	COUNT_SHD,
+}				t_shd;
 
 typedef	enum	e_lgt_type
 {
 	DIRECTIONNAL,
 	POINT,
-	COUNT,
+	COUNT_LGT,
 }				t_lgt_type;
 
 typedef struct	s_sphere
@@ -127,7 +131,8 @@ typedef struct		s_light
 
 typedef struct		s_mat
 {
-	t_model			model;
+	t_shd			model;
+	t_vec3			amb;
 	t_vec3			diff;
 	t_vec3			spec;
 	double			shin;
@@ -171,6 +176,7 @@ typedef struct	s_view
 
 typedef struct	s_scene
 {
+	int			shd[4];
 	t_view		cam;
 	t_obj_lst	*objs;
 	t_list		*light;
@@ -190,8 +196,8 @@ typedef struct	s_env
 {
 	void		*init;
 	void		*win;
-	double		win_width;
-	double		win_height;
+	int			win_width;
+	int			win_height;
 	int			fov;
 	t_img		*img;
 }				t_env;
@@ -206,6 +212,7 @@ typedef struct	s_poly2
 
 typedef double	(*t_inter_fct)(t_ray, void*);
 typedef t_vec4	(*t_norm_fct)(t_pixel*);
+typedef void	(*t_shd_fct)(t_pixel*, t_scene*, size_t);
 
 typedef struct	s_args
 {
@@ -214,6 +221,7 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
+	t_shd_fct	shd_fct[5];
 }				t_args;
 
 typedef struct	s_error
@@ -233,11 +241,14 @@ double	cone_intersection(t_ray ray, void *obj);
 double	sphere_intersection(t_ray ray, void *obj);
 double	plane_intersection(t_ray ray, void *obj);
 double	cylinder_intersection(t_ray ray, void *obj);
-t_vec4	sphere_normal(t_ray ray, void *obj);
-t_vec4	plane_normal(t_ray ray, void *obj);
-t_vec4	cylinder_normal(t_ray ray, void *obj);
-t_vec4	cone_normal(t_ray ray, void *obj);
-int		raytracing(t_args *args);
+t_vec4	sphere_normal(t_pixel *pixel);
+t_vec4	plane_normal(t_pixel *pixel);
+t_vec4	cylinder_normal(t_pixel *pixel);
+t_vec4	cone_normal(t_pixel *pixel);
+int		manage_shaders(t_args *args);
+void	facing_ratio(t_pixel *pix, t_scene *scn, size_t size);
+void	raw_color(t_pixel *pix, t_scene *scn, size_t size);
+int			trace_primary_rays(t_args *args);
 
 /*
 **	Quit and initialize functions

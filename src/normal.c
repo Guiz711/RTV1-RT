@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:00:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/27 22:25:25 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/28 13:29:14 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ t_vec4	sphere_normal(t_pixel *pixel)
 	t_ray		*ray;
 	t_inter		*inter;
 	t_vec4		normal;
-	
-	sph = (t_sphere*)pixel->inter.obj;
+
+	sph = (t_sphere*)pixel->inter.obj->content;
 	ray = &pixel->p_ray;
 	inter = &pixel->inter;
 	normal = normalize_vec4(sub_vec4(inter->p, sph->center));
+	//printf("%f; %f; %f\n", normal.z, inter->p.z, sph->center.z);
 	return (normal);
 }
 
@@ -34,7 +35,7 @@ t_vec4	cylinder_normal(t_pixel *pixel)
 	double		m;
 	t_vec4		normal;
 	
-	cyl = (t_cylinder*)pixel->inter.obj;
+	cyl = (t_cylinder*)pixel->inter.obj->content;
 	ray = &pixel->p_ray;
 	diff = sub_vec4(ray->orig, cyl->p);
 	m = dot_vec4(ray->dir, cyl->dir) * pixel->inter.dist
@@ -54,7 +55,7 @@ t_vec4	cone_normal(t_pixel *pixel)
 	double		m;
 	t_vec4		normal;
 	
-	cone = (t_cone*)pixel->inter.obj;
+	cone = (t_cone*)pixel->inter.obj->content;
 	ray = &pixel->p_ray;
 	diff = sub_vec4(ray->orig, cone->p);
 	m = (dot_vec4(ray->dir, cone->dir) * pixel->inter.dist
@@ -73,7 +74,7 @@ t_vec4	plane_normal(t_pixel *pixel)
 	t_plane		*pln;
 	t_vec4		normal;
 
-	pln = (t_plane*)pixel->inter.obj;
+	pln = (t_plane*)pixel->inter.obj->content;
 	if (dot_vec4(pixel->p_ray.dir, pln->normal) > 0)
 		normal = normalize_vec4(rev_vec4(pln->normal));
 	else
