@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/28 13:43:34 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:25:42 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,15 +158,18 @@ void	init_scene(t_scene *scn)
 	light.spec_i = init_vec3(1, 1, 1); //0x00FFFFFF
 	scn->light = ft_lstnew(&light, sizeof(light));
 
-	/*light.type = POINT;
-	light.vec = init_vec4(12.5, 0, 0, 1);
-	light.intensity = 3000;
-	light.color = init_vec3(1, 1, 1); //0x00FFFFFF*/
+	light.type = POINT;
+	light.vec = init_vec4(12.5, 5, -12, 1);
+	light.range = 1500;
+	light.diff_i = init_vec3(1, 1, 1); //0x00FFFFFF*/
+	light.spec_i = init_vec3(1, 1, 1); //0x00FFFFFF*/
+	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
 
 	scn->cam.orient = init_vec4(0, 0, 1, 0);
 	scn->cam.orig = init_vec4(0, 0, -3, 1);
-	scn->shd[FACING] = 1;
+	scn->shd[FACING] = 0;
 	scn->shd[NO_SHD] = 0;
+	scn->shd[LAMBERT] = 1;
 }
 
 /*void	put_pixel(int pos, t_img *img, unsigned int color)
@@ -356,6 +359,7 @@ int		main(void)
 	args.norm_fct[3] = &cone_normal;
 	args.shd_fct[NO_SHD] = &raw_color;
 	args.shd_fct[FACING] = &facing_ratio;
+	args.shd_fct[LAMBERT] = &lambert_model;
 	pix = create_ray_array(&env, ft_translate(0, 0, 0));
 	//v2w = ft_mtx_mult(ft_translate(-7, -10, -5), ft_rotation('x', RAD(65)));
 	//v2w = ft_mtx_mult(v2w, ft_rotation('x', RAD(-10)));

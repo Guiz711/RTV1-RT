@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/28 13:49:47 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/28 16:49:55 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 **	Properties
 */
 
-# define WIN_WIDTH 1250
-# define WIN_HEIGHT 660
+# define WIN_WIDTH 1920//1250
+# define WIN_HEIGHT 1080//660
 # define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -212,7 +212,7 @@ typedef struct	s_poly2
 
 typedef double	(*t_inter_fct)(t_ray, void*);
 typedef t_vec4	(*t_norm_fct)(t_pixel*);
-typedef void	(*t_shd_fct)(t_pixel*, t_scene*, size_t);
+typedef void	(*t_shd_fct)(t_pixel*, t_scene*, t_light*, size_t);
 
 typedef struct	s_args
 {
@@ -246,8 +246,9 @@ t_vec4	plane_normal(t_pixel *pixel);
 t_vec4	cylinder_normal(t_pixel *pixel);
 t_vec4	cone_normal(t_pixel *pixel);
 int		manage_shaders(t_args *args);
-void	facing_ratio(t_pixel *pix, t_scene *scn, size_t size);
-void	raw_color(t_pixel *pix, t_scene *scn, size_t size);
+void	raw_color(t_pixel *pix, t_scene *scn, t_light *lgt, size_t size);
+void	facing_ratio(t_pixel *pix, t_scene *scn, t_light *lgt, size_t size);
+void	lambert_model(t_pixel *pix, t_scene *scn, t_light *lgt, size_t size);
 int			trace_primary_rays(t_args *args);
 
 /*
