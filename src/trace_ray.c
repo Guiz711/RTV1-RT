@@ -6,18 +6,18 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/28 12:57:18 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/29 09:51:52 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct)
+t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd)
 {
 	t_inter	inter;
 	double	tmp_dist;
 
-	inter.dist = 1e6;
+	inter.dist = ray.range;
 	inter.obj = NULL;
 	inter.p = init_vec4(0, 0, 0, 1);
 	while (objs)
@@ -27,6 +27,8 @@ t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct)
 		{
 			inter.dist = tmp_dist;
 			inter.obj = objs;
+			if (shd)
+				return (inter);
 		}
 		objs = objs->next;
 	}
@@ -47,7 +49,7 @@ int			trace_primary_rays(t_args *args)
 	while (i < len)
 	{
 		pix[i].inter = trace_ray(pix[i].p_ray, args->scene->objs,
-			args->obj_fct);
+			args->obj_fct, 0);
 		if (pix[i].inter.obj)
 		{
 			pix[i].normal = args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);

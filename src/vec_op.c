@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:20:56 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/28 11:19:53 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/29 12:34:26 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,13 @@ t_vec3	dmult_vec3(t_vec3 u, double n)
 	u.x *= n;
 	u.y *= n;
 	u.z *= n;
+	return (u);
+}
+
+t_vec3	mult_vec3(t_vec3 u, t_vec3 v)
+{
+	u.x *= v.x;
+	u.y *= v.y;
+	u.z *= v.z;
 	return (u);
 }

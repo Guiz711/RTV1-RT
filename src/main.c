@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/28 17:25:42 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/29 13:53:27 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,48 +128,89 @@ void	init_scene(t_scene *scn)
 {
 	t_sphere	sphere;
 	t_plane		plane;
+	t_cylinder	cyl;
+	t_cone		cone;
 	t_light		light;
 	t_obj_lst	*new;
 
-	sphere.center = init_vec4(0, 0, -10, 1);
+	sphere.center = init_vec4(0, 5, -10, 1);
 	sphere.radius = 2;
 	scn->objs = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
 	scn->objs->material.model = PHONG;
-	scn->objs->material.diff = init_vec3(0.05, 0.20, 0.05); //0x0000FFFF;
-	scn->objs->material.amb = init_vec3(0.05, 0.20, 0.05); //0x0000FFFF;
-	scn->objs->material.spec = init_vec3(0.05, 0.20, 0.05); //0x0000FFFF;
+	scn->objs->material.diff = init_vec3(0.2, 0.8, 0.2); //0x0000FFFF;
+	scn->objs->material.amb = init_vec3(0.2, 0.8, 0.2); //0x0000FFFF;
+	scn->objs->material.spec = init_vec3(1, 1, 1); //0x0000FFFF;
 	scn->objs->material.shin = 80;
 
-	plane.p = init_vec4(0, 0, -12, 1);
-	plane.normal = normalize_vec4(init_vec4(0, 0, -1, 0));
+	plane.p = init_vec4(0, 0, -20, 1);
+	plane.normal = normalize_vec4(init_vec4(0, 0, 1, 0));
 	new = obj_lstnew(PLANE, &plane, sizeof(plane));
-	new->material.model = LAMBERT;
-	new->material.amb = init_vec3(0.18, 0.22, 0.26);//0x00FFFFFF;
-	new->material.diff = init_vec3(0.18, 0.22, 0.26);//0x00FFFFFF;
-	new->material.spec = init_vec3(0.18, 0.22, 0.26);//0x00FFFFFF;
-	new->material.shin = 0;
+	new->material.model = PHONG;
+	new->material.amb = init_vec3(0.5, 0.5, 0.8);//0x00FFFFFF;
+	new->material.diff = init_vec3(0.5, 0.5, 0.8);//0x00FFFFFF;
+	new->material.spec = init_vec3(1, 1, 1);//0x00FFFFFF;
+	new->material.shin = 50;
+	obj_lstadd(&(scn->objs), new);
+
+	cyl.p = init_vec4(-15, 0, -10, 1);
+	cyl.dir = init_vec4(0, 1, 0, 0);
+	cyl.radius = 2;
+	new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl));
+	new->material.model = PHONG;
+	new->material.amb = init_vec3(0.2, 0.2, 0.8);//0x00FFFFFF;
+	new->material.diff = init_vec3(0.2, 0.2, 0.8);//0x00FFFFFF;
+	new->material.spec = init_vec3(0.05, 0.05, 0.05);//0x00FFFFFF;
+	new->material.shin = 1;
+	obj_lstadd(&(scn->objs), new);
+
+	cyl.p = init_vec4(15, 0, -10, 1);
+	cyl.dir = init_vec4(0, 1, 0, 0);
+	cyl.radius = 0.5;
+	new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl));
+	new->material.model = PHONG;
+	new->material.amb = init_vec3(0.9, 0.6, 0.05);//0x00FFFFFF;
+	new->material.diff = init_vec3(0.9, 0.6, 0.05);//0x00FFFFFF;
+	new->material.spec = init_vec3(0.2, 0.2, 0.2);//0x00FFFFFF;
+	new->material.shin = 10;
+	//obj_lstadd(&(scn->objs), new);
+
+	cone.p = init_vec4(15, 0, -10, 1);
+	cone.dir = init_vec4(0, 1, 0, 0);
+	cone.angle = 45;
+	cone.ang_tan = 1 + SQUARE(tan(RAD(cone.angle * 0.5)));
+	new = obj_lstnew(CONE, &cone, sizeof(cone));
+	new->material.model = PHONG;
+	new->material.amb = init_vec3(0.9, 0.6, 0.05);//0x00FFFFFF;
+	new->material.diff = init_vec3(0.9, 0.6, 0.05);//0x00FFFFFF;
+	new->material.spec = init_vec3(0.5, 0.5, 0.5);//0x00FFFFFF;
+	new->material.shin = 10;
 	obj_lstadd(&(scn->objs), new);
 
 	light.type = POINT;
-	light.vec = init_vec4(-12.5, -5, 5, 1);
+	light.vec = init_vec4(-20, 0, 20, 1);
 	//light.vec = normalize_vec4(init_vec4(1, -0.5, -0.5, 0));
-	light.range = 1000;
+	light.range = 3000;
 	light.diff_i = init_vec3(1, 1, 1); //0x00FFFFFF
 	light.spec_i = init_vec3(1, 1, 1); //0x00FFFFFF
+	light.atten = init_vec3(0.0005, 0.0005, 1);
 	scn->light = ft_lstnew(&light, sizeof(light));
 
 	light.type = POINT;
-	light.vec = init_vec4(12.5, 5, -12, 1);
-	light.range = 1500;
+	light.vec = init_vec4(-5, 0, 0, 1);
+	light.range = 500;
 	light.diff_i = init_vec3(1, 1, 1); //0x00FFFFFF*/
 	light.spec_i = init_vec3(1, 1, 1); //0x00FFFFFF*/
-	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
+	light.atten = init_vec3(1, 1, 1);
+//	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
 
 	scn->cam.orient = init_vec4(0, 0, 1, 0);
 	scn->cam.orig = init_vec4(0, 0, -3, 1);
+	scn->amb_i = init_vec3(0.15, 0.15, 0.15);
 	scn->shd[FACING] = 0;
 	scn->shd[NO_SHD] = 0;
 	scn->shd[LAMBERT] = 1;
+	scn->shd[PHONG] = 1;
+	scn->shd[SHADOW] = 1;
 }
 
 /*void	put_pixel(int pos, t_img *img, unsigned int color)
@@ -360,7 +401,8 @@ int		main(void)
 	args.shd_fct[NO_SHD] = &raw_color;
 	args.shd_fct[FACING] = &facing_ratio;
 	args.shd_fct[LAMBERT] = &lambert_model;
-	pix = create_ray_array(&env, ft_translate(0, 0, 0));
+	args.shd_fct[PHONG] = &phong_model;
+	pix = create_ray_array(&env, ft_translate(0, 0, 20));
 	//v2w = ft_mtx_mult(ft_translate(-7, -10, -5), ft_rotation('x', RAD(65)));
 	//v2w = ft_mtx_mult(v2w, ft_rotation('x', RAD(-10)));
 	//pix = create_ray_array(&env, ft_mtx_mult(v2w, ft_rotation('y', RAD(-40))));

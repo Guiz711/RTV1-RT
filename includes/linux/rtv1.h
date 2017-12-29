@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/28 16:49:55 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/29 13:20:50 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 **	Properties
 */
 
-# define WIN_WIDTH 1920//1250
-# define WIN_HEIGHT 1080//660
+# define WIN_WIDTH 1250
+# define WIN_HEIGHT 660
 # define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -126,7 +126,8 @@ typedef struct		s_light
 	t_vec4			vec;
 	t_vec3			diff_i;
 	t_vec3			spec_i;
-	float			range;
+	double			range;
+	t_vec3			atten;
 }					t_light;
 
 typedef struct		s_mat
@@ -151,6 +152,7 @@ typedef	struct	s_ray
 {
 	t_vec4		orig;
 	t_vec4		dir;
+	double		range;
 }				t_ray;
 
 typedef struct	s_inter
@@ -176,10 +178,11 @@ typedef struct	s_view
 
 typedef struct	s_scene
 {
-	int			shd[4];
+	int			shd[5];
 	t_view		cam;
 	t_obj_lst	*objs;
 	t_list		*light;
+	t_vec3		amb_i;
 }				t_scene;
 
 typedef struct	s_img
@@ -212,7 +215,6 @@ typedef struct	s_poly2
 
 typedef double	(*t_inter_fct)(t_ray, void*);
 typedef t_vec4	(*t_norm_fct)(t_pixel*);
-typedef void	(*t_shd_fct)(t_pixel*, t_scene*, t_light*, size_t);
 
 typedef struct	s_args
 {
@@ -221,7 +223,8 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
-	t_shd_fct	shd_fct[5];
+	void		(*shd_fct[5])(struct s_args*, t_light*, size_t);
+	//t_shd_fct	shd_fct[5];
 }				t_args;
 
 typedef struct	s_error
@@ -246,10 +249,12 @@ t_vec4	plane_normal(t_pixel *pixel);
 t_vec4	cylinder_normal(t_pixel *pixel);
 t_vec4	cone_normal(t_pixel *pixel);
 int		manage_shaders(t_args *args);
-void	raw_color(t_pixel *pix, t_scene *scn, t_light *lgt, size_t size);
-void	facing_ratio(t_pixel *pix, t_scene *scn, t_light *lgt, size_t size);
-void	lambert_model(t_pixel *pix, t_scene *scn, t_light *lgt, size_t size);
-int			trace_primary_rays(t_args *args);
+void	raw_color(t_args *args, t_light *lgt, size_t size);
+void	facing_ratio(t_args *args, t_light *lgt, size_t size);
+void	lambert_model(t_args *args, t_light *lgt, size_t size);
+void	phong_model(t_args *args, t_light *lgt, size_t size);
+int		trace_primary_rays(t_args *args);
+t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
 
 /*
 **	Quit and initialize functions

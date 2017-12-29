@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:14:06 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/28 11:20:08 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/29 12:34:41 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_vec4			cross_vec4(t_vec4 u, t_vec4 v);
 double			dot_vec4(t_vec4 u, t_vec4 v);
 t_vec4			dmult_vec4(t_vec4 u, double n);
 t_vec3			dmult_vec3(t_vec3 u, double n);
+t_vec3			mult_vec3(t_vec3 u, t_vec3 v);
 
 t_mtx4			ft_mtx_mult(t_mtx4 m1, t_mtx4 m2);
 t_mtx4			ft_scale(double pitch_x, double pitch_y, double pitch_z);

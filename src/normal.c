@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:00:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/28 16:18:18 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/29 13:44:12 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ t_vec4	cone_normal(t_pixel *pixel)
 	diff = sub_vec4(ray->orig, cone->p);
 	m = (dot_vec4(ray->dir, cone->dir) * pixel->inter.dist
 		+ dot_vec4(diff, cone->dir)) * cone->ang_tan;
-	normal = sub_vec4(pixel->inter.p, sub_vec4(cone->p,
-		dmult_vec4(cone->dir, m)));
-	/*normal = init_vec4(inter.p.x - cone->p.x - cone->dir.x * m * cone->ang_tan,
-		inter.p.y - cone->p.y - cone->dir.y * m * cone->ang_tan,
-		inter.p.z - cone->p.z - cone->dir.z * m * cone->ang_tan, 0);*/
+	//normal = sub_vec4(pixel->inter.p, sub_vec4(cone->p,
+		//dmult_vec4(cone->dir, m)));
+	normal = init_vec4(pixel->inter.p.x - cone->p.x - cone->dir.x * m,
+		pixel->inter.p.y - cone->p.y - cone->dir.y * m,
+	pixel->inter.p.z - cone->p.z - cone->dir.z * m, 0);
 	normal = normalize_vec4(normal);
 	return (normal);
 }

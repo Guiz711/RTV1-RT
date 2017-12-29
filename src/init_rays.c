@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/28 16:12:41 by gmichaud         ###   ########.fr       */
+/*   Updated: 2017/12/29 09:26:00 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_pixel			*create_ray_array(t_env *env, t_mtx4 v2w)
 		pix_buf[pos].p_ray = init_ray(env, pos);
 		pix_buf[pos].p_ray.orig = new_coord(pix_buf[pos].p_ray.orig, v2w);
 		pix_buf[pos].p_ray.dir = new_coord(pix_buf[pos].p_ray.dir, v2w);
-		//printf("%f; %f; %f\n", pix_buf[pos].p_ray.dir.x, pix_buf[pos].p_ray.dir.y, pix_buf[pos].p_ray.dir.z);
+		pix_buf[pos].p_ray.range = 1e6;
 		pix_buf[pos].inter.dist = 1e6;
 		pix_buf[pos].inter.obj = NULL;
 		pix_buf[pos].inter.p = init_vec4(0, 0, 0, 1);
