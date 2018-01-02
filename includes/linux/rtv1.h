@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/29 13:20:50 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/02 12:25:13 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 **	Properties
 */
 
-# define WIN_WIDTH 1250
-# define WIN_HEIGHT 660
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 # define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -176,15 +176,6 @@ typedef struct	s_view
 	t_vec4		orient;
 }				t_view;
 
-typedef struct	s_scene
-{
-	int			shd[5];
-	t_view		cam;
-	t_obj_lst	*objs;
-	t_list		*light;
-	t_vec3		amb_i;
-}				t_scene;
-
 typedef struct	s_img
 {
 	void		*ptr;
@@ -194,6 +185,26 @@ typedef struct	s_img
 	int			endian;
 	char		*data;
 }				t_img;
+
+typedef struct	s_poly2
+{
+	double		a;
+	double		b;
+	double		c;
+	double		disc;
+}				t_poly2;
+
+typedef double	(*t_inter_fct)(t_ray, void*);
+typedef t_vec4	(*t_norm_fct)(t_pixel*);
+
+typedef struct	s_scene
+{
+	int			shd[5];
+	t_view		cam;
+	t_obj_lst	*objs;
+	t_list		*light;
+	t_vec3		amb_i;
+}				t_scene;
 
 typedef struct	s_env
 {
@@ -205,17 +216,6 @@ typedef struct	s_env
 	t_img		*img;
 }				t_env;
 
-typedef struct	s_poly2
-{
-	double	a;
-	double	b;
-	double	c;
-	double	disc;
-}				t_poly2;
-
-typedef double	(*t_inter_fct)(t_ray, void*);
-typedef t_vec4	(*t_norm_fct)(t_pixel*);
-
 typedef struct	s_args
 {
 	t_env		*env;
@@ -224,7 +224,6 @@ typedef struct	s_args
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
 	void		(*shd_fct[5])(struct s_args*, t_light*, size_t);
-	//t_shd_fct	shd_fct[5];
 }				t_args;
 
 typedef struct	s_error
@@ -233,14 +232,14 @@ typedef struct	s_error
 	char		*detail;
 }				t_error;
 
-t_pixel			*create_ray_array(t_env *env, t_mtx4 v2w);
-t_vec4	new_coord(t_vec4 p, t_mtx4 mtx);
-void	error(t_err err);
-int		error_message(const char *message, size_t line);
+t_pixel		*init_pix_buffer(t_env *env, t_mtx4 v2w);
+t_vec4		new_coord(t_vec4 p, t_mtx4 mtx);
+void		error(t_err err);
+int			error_message(const char *message, size_t line);
 
 t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
-double	cone_intersection(t_ray ray, void *obj);
+double		cone_intersection(t_ray ray, void *obj);
 double	sphere_intersection(t_ray ray, void *obj);
 double	plane_intersection(t_ray ray, void *obj);
 double	cylinder_intersection(t_ray ray, void *obj);
