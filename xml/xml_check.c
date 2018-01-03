@@ -6,25 +6,11 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 03:07:36 by jgourdin          #+#    #+#             */
-/*   Updated: 2017/12/30 05:59:08 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/03 03:58:06 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <libxml/xmlmemory.h>
-#include <libxml/parser.h>
-#include <libxml/valid.h>
-#include <libxml/tree.h>
-#include <libxml/xmlschemas.h>
-#include <libxml/xmlstring.h>
-#include <libxml/xmlreader.h>
-#include <libxml/xmlIO.h>
-#include <libxml/xinclude.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "libft/includes/libft.h"
+#include "rtv1.h"
 
 /*
  * Pretty much the same method than parsing the xsd file, even if here

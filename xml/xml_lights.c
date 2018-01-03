@@ -6,11 +6,11 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 06:11:04 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/03 03:29:42 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/03 05:13:24 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "xml_parse.h"
+#include "rtv1.h"
 
 int				get_lights(xmlNodePtr node, t_scene *scn)
 {
@@ -21,23 +21,27 @@ int				get_lights(xmlNodePtr node, t_scene *scn)
 	if ((val = xmlGetProp(node, BAD_CAST"type")))
 		light.type = (char *)val;
 	if ((child = has_child(node, "vec")))
-		light.vec = ft_normalize(get_vec4_from_node(child));
-	obj_lstadd(&(scn->light), obj_lstnew(&light, sizeof(light)));
+		light.vec = get_vec4_from_node(child);
+	if ((child = has_child(node, "range")))
+		light.range = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
+	if ((child = has_child(node, "diff")))
+		light.diff_i = get_vec3_from_node(child);
+	if ((child = has_child(node, "spec")))
+		light.spec_i = get_vec3_from_node(child);
+	if ((child = has_child(node, "atten")))
+		light.atten = get_vec3_from_node(child);
+	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
 	return (1);
 }
 
 int				set_lights(t_list *lst, t_scene *scn)
 {
-	int i;
-
-	i = 0;
 	if (!lst)
 		return (-1);
 	while (lst)
 	{
 		get_lights((xmlNodePtr)lst->content, scn);
 		lst = lst->next;
-		i++;
 	}
 	ft_lstfree(&lst);
 	return (1);

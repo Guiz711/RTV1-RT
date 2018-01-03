@@ -6,11 +6,28 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 00:34:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/03 03:29:18 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/03 05:20:54 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "xml_parse.h"
+#include "rtv1.h"
+
+xmlNodePtr		has_child(xmlNodePtr a_node, char *attr)
+{
+	xmlChar		*cast;
+	xmlNodePtr	cur;
+
+	cur = NULL;
+	cur = a_node->children;
+	cast = (xmlChar *)attr;
+	while (cur)
+	{
+		if (!xmlStrcmp(cur->name, cast))
+			return (cur);
+		cur = cur->next;
+	}
+	return (NULL);
+}
 
 void			ft_lstfree(t_list **lst)
 {
@@ -129,6 +146,7 @@ int				check_file(char *path)
 	}
 	return (-1);
 }
+
 /*
  * The real Begining of the parsing, the function xmlKeepBlanksDefault set to 0
  * have to ignore useless blanks during the parsing if i well understand how
@@ -137,7 +155,7 @@ int				check_file(char *path)
  * xmlDocGetRootElement retrieve the root of the xmlfile.
 */
 
-int				parsedoc(char *path, t_scene *scn)
+int				parsedoc(char *path, t_scene *scene)
 {
 	xmlDocPtr	doc;
 	t_list		*lst;
@@ -152,13 +170,13 @@ int				parsedoc(char *path, t_scene *scn)
 		return (0);
 	}
 	lst = get_objects_nodes(doc);
-	set_objects(lst, scn);
+	set_objs(lst, scene);
 	ft_lstfree(&lst);
 	get_nodes_by_name(root, "camera", &lst);
-	set_camera((xmlNodePtr)(lst->content), scn);
+	set_camera((xmlNodePtr)(lst->content), scene);
 	ft_lstfree(&lst);
 	get_nodes_by_name(root, "light", &lst);
-	set_light(&lst, scn);
+	set_light(lst, scene);
 	return (1);
 }
 
@@ -180,10 +198,7 @@ int				parse_start(int argc, char **argv, t_scene *scn)
 	if ((fd = check_file(path)) != -1)
 	{
 		if (parsedoc(path, scn) > 0)
-		{
-			factory(scn);
 			return(1);
-		}
 	}
 	return (0);
 }
