@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/02 12:25:13 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/05 12:50:48 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 **	Properties
 */
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 660
 # define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -167,7 +167,9 @@ typedef struct	s_pixel
 	t_ray		p_ray;
 	t_inter		inter;
 	t_vec4		normal;
-	t_vec3		col_ratio;
+	t_vec3		amb_ratio;
+	t_vec3		diff_ratio;
+	t_vec3		spec_ratio;
 }				t_pixel;
 
 typedef struct	s_view
@@ -200,6 +202,7 @@ typedef t_vec4	(*t_norm_fct)(t_pixel*);
 typedef struct	s_scene
 {
 	int			shd[5];
+	int			render_mode;
 	t_view		cam;
 	t_obj_lst	*objs;
 	t_list		*light;
@@ -223,7 +226,8 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
-	void		(*shd_fct[5])(struct s_args*, t_light*, size_t);
+	void		(*rdr_fct[5])(struct s_args*, t_pixel*, size_t);
+	void		(*shd_fct[5])(struct s_args*, t_light*, t_pixel*);
 }				t_args;
 
 typedef struct	s_error
@@ -248,12 +252,13 @@ t_vec4	plane_normal(t_pixel *pixel);
 t_vec4	cylinder_normal(t_pixel *pixel);
 t_vec4	cone_normal(t_pixel *pixel);
 int		manage_shaders(t_args *args);
-void	raw_color(t_args *args, t_light *lgt, size_t size);
-void	facing_ratio(t_args *args, t_light *lgt, size_t size);
 void	lambert_model(t_args *args, t_light *lgt, size_t size);
 void	phong_model(t_args *args, t_light *lgt, size_t size);
 int		trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
+void	render_mode_0(t_args *args, t_pixel *pix, size_t pos);
+void	render_mode_1(t_args *args, t_pixel *pix, size_t pos);
+void	render_mode_2(t_args *args, t_pixel *pix, size_t pos);
 
 /*
 **	Quit and initialize functions

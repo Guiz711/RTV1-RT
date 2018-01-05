@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:46:04 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/29 13:55:42 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/05 13:31:03 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,64 +24,43 @@ void	put_pixel(int pos, t_img *img, unsigned int color)
 	ft_memcpy(&data[pos * inc], &color, sizeof(color));
 }
 
-void	fill_img_buffer(t_env *env, t_pixel *pix)
+void	process_color(t_env *env, t_pixel *pix, size_t pos)
 {
-	size_t		i;
-	size_t		size;
+	t_vec3		ratio;
 	uint32_t	hex_col;
 	unsigned	char *comp;
 
-	size = env->win_width * env->win_height;
-	i = 0;
-	while (i < size)
-	{
-		hex_col = 0;
-		comp = (unsigned char*)&hex_col;
-		comp[0] = fmax(fmin((int)(pix[i].col_ratio.z * 255), 255), 0);
-		comp[1] = fmax(fmin((int)(pix[i].col_ratio.y * 255), 255), 0);
-		comp[2] = fmax(fmin((int)(pix[i].col_ratio.x * 255), 255), 0);
-		put_pixel(i, env->img, hex_col);
-		++i;
-	}
+	ratio.x = fmin(pix->amb_ratio.x + pix->diff_ratio.x, 1) + pix->spec_ratio.x;
+	ratio.y = fmin(pix->amb_ratio.y + pix->diff_ratio.y, 1) + pix->spec_ratio.y;
+	ratio.z = fmin(pix->amb_ratio.z + pix->diff_ratio.z, 1) + pix->spec_ratio.z;
+	hex_col = 0;
+	comp = (unsigned char*)&hex_col;
+	comp[0] = fmax(fmin((int)(ratio.z * 255), 255), 0);
+	comp[1] = fmax(fmin((int)(ratio.y * 255), 255), 0);
+	comp[2] = fmax(fmin((int)(ratio.x * 255), 255), 0);
+	put_pixel(pos, env->img, hex_col);
 }
 
-void	raw_color(t_args *args, t_light *lgt, size_t size)
+void	render_mode_0(t_args *args, t_pixel *pix, size_t pos)
 {
-	t_pixel	*pix;
-	size_t	i;
-
-	lgt = NULL;
-	pix = args->pix_buf;
-	i = 0;
-	while (i < size)
-	{
-		if (pix[i].inter.obj)
-			pix[i].col_ratio = dmult_vec3(pix[i].inter.obj->material.amb, 1);
-		++i;
-	}
+	if (pix->inter.obj)
+		pix->diff_ratio = dmult_vec3(pix->inter.obj->material.amb, 1);
+	process_color(args->env, pix, pos);
 }
 
-void	facing_ratio(t_args *args, t_light *lgt, size_t size)
+void	render_mode_1(t_args *args, t_pixel *pix, size_t pos)
 {
-	t_pixel	*pix;
 	double	dot;
-	size_t	i;
 
-	lgt = NULL;
-	pix = args->pix_buf;
-	i = 0;
-	while (i < size)
+	if (pix->inter.obj)
 	{
-		if (pix[i].inter.obj)
-		{
-			dot = fmax(0, -dot_vec4(pix[i].normal, pix[i].p_ray.dir));
-			pix[i].col_ratio = dmult_vec3(pix[i].inter.obj->material.amb, dot);
-		}
-		++i;
+		dot = fmax(0, -dot_vec4(pix->normal, pix->p_ray.dir));
+		pix->diff_ratio = dmult_vec3(pix->inter.obj->material.amb, dot);
 	}
+	process_color(args->env, pix, pos);
 }
 
-int		shadow(t_args *args, t_pixel *pix, t_light *light)
+/*int		shadow(t_args *args, t_pixel *pix, t_light *light)
 {
 	t_ray		light_ray;
 	t_obj_lst	*objs;
@@ -105,7 +84,7 @@ int		shadow(t_args *args, t_pixel *pix, t_light *light)
 	if (inter.dist < light_ray.range)
 		return (0);
 	return (1);	
-}
+}*/
 
 double	light_attenuation(t_light *light, double dist)
 {
@@ -135,52 +114,36 @@ t_vec3	diffuse_lambert(t_pixel *pix, t_light *light)
 	else
 	{
 		dir = rev_vec4(sub_vec4(pix->inter.p, light->vec));
-		//intensity = light->range / (4 * M_PI * norm_vec4(dir));
 		intensity = light_attenuation(light, norm_vec4(dir));
 		dir = normalize_vec4(dir);
 	}
 	ratio = intensity * dot_vec4(pix->normal, dir);
-	col.z = fmax(0, diff.z * light->diff_i.z * ratio);
-	col.y = fmax(0, diff.y * light->diff_i.y * ratio);
-	col.x = fmax(0, diff.x * light->diff_i.x * ratio);
+	col.z = fmax(0, diff.z * fmin(1, light->diff_i.z) * ratio);
+	col.y = fmax(0, diff.y * fmin(1, light->diff_i.y) * ratio);
+	col.x = fmax(0, diff.x * fmin(1, light->diff_i.x) * ratio);
 	return (col);
 }
 
-void	lambert_model(t_args *args, t_light *lgt, size_t size)
+void	render_mode_2(t_args *args, t_pixel *pix, size_t pos)
 {
-	t_pixel	*pix;
 	t_list	*light;
-	int		vis;
-	size_t	i;
 
-	lgt = NULL;
-	pix = args->pix_buf;
-	vis = 1;
-	i = 0;
-	while (i < size)
+	if (pix->inter.obj)
 	{
-		if (pix[i].inter.obj && pix[i].inter.obj->material.model == LAMBERT)
+		light = args->scene->light;
+		while (light)
 		{
-			light = args->scene->light;
-			while (light)
-			{
-				if (args->scene->shd[SHADOW])
-					vis = shadow(args, &pix[i], (t_light*)light->content);
-				if (vis)
-				{
-					pix[i].col_ratio = add_vec3(pix[i].col_ratio,
-						diffuse_lambert(&pix[i], (t_light*)light->content));
-				}
-				light = light->next;
-			}
-			pix[i].col_ratio = add_vec3(pix[i].col_ratio,
-				mult_vec3(pix[i].inter.obj->material.amb, args->scene->amb_i));
+			pix->diff_ratio = add_vec3(pix->diff_ratio,
+			diffuse_lambert(pix, (t_light*)light->content));
+			light = light->next;
 		}
-		++i;
+		pix->amb_ratio = add_vec3(pix->amb_ratio,
+			mult_vec3(pix->inter.obj->material.amb, args->scene->amb_i));
 	}
+	process_color(args->env, pix, pos);
 }
 
-t_vec3	specular_phong(t_pixel *pix, t_light *light)
+/*t_vec3	specular_phong(t_pixel *pix, t_light *light)
 {
 	t_vec3	ratio;
 	t_vec4	r;
@@ -192,7 +155,6 @@ t_vec3	specular_phong(t_pixel *pix, t_light *light)
 	r = normalize_vec4(sub_vec4(dmult_vec4(pix->normal, ndotl), ldir));
 	ratio.x = light->spec_i.x * pix->inter.obj->material.spec.x *
 		(pow(dot_vec4(pix->normal, r), pix->inter.obj->material.shin));
-		//* ray->inter_obj->material.spec);
 	ratio.y = light->spec_i.y * pix->inter.obj->material.spec.y *
 		(pow(dot_vec4(pix->normal, r), pix->inter.obj->material.shin));
 	ratio.z = light->spec_i.z * pix->inter.obj->material.spec.z *
@@ -234,36 +196,4 @@ void	phong_model(t_args *args, t_light *lgt, size_t size)
 		}
 		++i;
 	}
-}
-
-void	manage_lighting(t_args *args, size_t size)
-{
-	size_t	i;
-
-	i = 3;
-	while (i < COUNT_SHD)
-	{
-		if (args->scene->shd[i])
-		{
-			args->shd_fct[i](args, NULL, size);
-		}
-		++i;
-	}
-}
-
-int		manage_shaders(t_args *args)
-{
-	t_scene	*scn;
-	size_t	size;
-
-	scn = args->scene;
-	size = args->env->win_width * args->env->win_height;
-	if (scn->shd[NO_SHD])
-		args->shd_fct[NO_SHD](args, NULL, size);
-	else if (scn->shd[FACING])
-		args->shd_fct[FACING](args, NULL, size);
-	else
-		manage_lighting(args, size);
-	fill_img_buffer(args->env, args->pix_buf);
-	return (0);
-}
+}*/

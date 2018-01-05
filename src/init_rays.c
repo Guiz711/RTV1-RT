@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/02 11:42:42 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/05 13:00:59 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ t_pixel			*init_pix_buffer(t_env *env, t_mtx4 v2w)
 		pix_buf[pos].inter.obj = NULL;
 		pix_buf[pos].inter.p = init_vec4(0, 0, 0, 1);
 		pix_buf[pos].normal = init_vec4(0, 0, 0, 0);
-		pix_buf[pos].col_ratio = init_vec3(0, 0, 0);
+		pix_buf[pos].amb_ratio = init_vec3(0, 0, 0);
+		pix_buf[pos].diff_ratio = init_vec3(0, 0, 0);
+		pix_buf[pos].spec_ratio = init_vec3(0, 0, 0);
 		++pos;
 	}
 	return (pix_buf);

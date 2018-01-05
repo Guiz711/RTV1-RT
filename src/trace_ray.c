@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/29 09:51:52 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/05 12:13:30 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,35 +51,9 @@ int			trace_primary_rays(t_args *args)
 		pix[i].inter = trace_ray(pix[i].p_ray, args->scene->objs,
 			args->obj_fct, 0);
 		if (pix[i].inter.obj)
-		{
 			pix[i].normal = args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);
-		}
+		args->rdr_fct[args->scene->render_mode](args, &pix[i], i);
 		++i;
 	}
 	return (0);
 }
-
-		/*if (rays[i].inter_obj && rays[i].inter_obj->content_type == SPHERE)
-		{
-			rays[i].obj_normal = sphere_normal(rays[i],
-				rays[i].inter_obj->content);
-			rays[i].color = ((t_sphere*)rays[i].inter_obj->content)->color;
-		}
-		else if (rays[i].inter_obj && rays[i].inter_obj->content_type == PLANE)
-		{
-			rays[i].obj_normal = plane_normal(rays[i],
-				rays[i].inter_obj->content);
-			rays[i].color = ((t_plane*)rays[i].inter_obj->content)->color;
-		}
-		else if (rays[i].inter_obj && rays[i].inter_obj->content_type == CYLINDER)
-		{
-			rays[i].obj_normal = cylinder_normal(rays[i],
-				rays[i].inter_obj->content);
-			rays[i].color = ((t_cylinder*)rays[i].inter_obj->content)->color;
-		}
-		else if (rays[i].inter_obj && rays[i].inter_obj->content_type == CONE)
-		{
-			rays[i].obj_normal = cone_normal(rays[i],
-				rays[i].inter_obj->content);
-			rays[i].color = ((t_cone*)rays[i].inter_obj->content)->color;
-		}*/

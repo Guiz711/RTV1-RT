@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/02 13:37:14 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/05 13:50:15 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	init_scene(t_scene *scn)
 	light.vec = init_vec4(-20, 0, 20, 1);
 	//light.vec = normalize_vec4(init_vec4(1, -0.5, -0.5, 0));
 	light.range = 3000;
-	light.diff_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF
+	light.diff_i = init_vec3(10, 10, 10); //0x00FFFFFF
 	light.spec_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF
 	light.atten = init_vec3(0.0005, 0.0005, 1);
 	scn->light = ft_lstnew(&light, sizeof(light));
@@ -122,10 +122,18 @@ void	init_scene(t_scene *scn)
 	light.atten = init_vec3(0.0005, 0.0005, 1);
 	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
 
+		light.type = POINT;
+	light.vec = init_vec4(-20.3, 0, 20, 1);
+	light.range = 3000;
+	light.diff_i = init_vec3(1, 1, 1); //0x00FFFFFF*/
+	light.spec_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
+	light.atten = init_vec3(0.0005, 0.0005, 1);
+	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
+
 	light.type = POINT;
 	light.vec = init_vec4(-20, -0.3, 20, 1);
 	light.range = 3000;
-	light.diff_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
+	light.diff_i = init_vec3(0.6, 0.6, 0.6); //0x00FFFFFF*/
 	light.spec_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
 	light.atten = init_vec3(0.0005, 0.0005, 1);
 	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
@@ -136,16 +144,17 @@ void	init_scene(t_scene *scn)
 	light.diff_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
 	light.spec_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
 	light.atten = init_vec3(0.0005, 0.0005, 1);
-	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
+	//ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
 
 	scn->cam.orient = init_vec4(0, 0, 1, 0);
 	scn->cam.orig = init_vec4(0, 0, -3, 1);
 	scn->amb_i = init_vec3(0.15, 0.15, 0.15);
+	scn->render_mode = 2;
 	scn->shd[FACING] = 0;
-	scn->shd[NO_SHD] = 0;
-	scn->shd[LAMBERT] = 1;
-	scn->shd[PHONG] = 1;
-	scn->shd[SHADOW] = 1;
+	scn->shd[NO_SHD] = 1;
+	scn->shd[LAMBERT] = 0;
+	scn->shd[PHONG] = 0;
+	scn->shd[SHADOW] = 0;
 }
 
 int		init_img(t_env	*env)
@@ -190,10 +199,11 @@ void	init_fct_arr(t_args *args)
 	args->norm_fct[1] = &plane_normal;
 	args->norm_fct[2] = &cylinder_normal;
 	args->norm_fct[3] = &cone_normal;
-	args->shd_fct[NO_SHD] = &raw_color;
-	args->shd_fct[FACING] = &facing_ratio;
-	args->shd_fct[LAMBERT] = &lambert_model;
-	args->shd_fct[PHONG] = &phong_model;
+	args->rdr_fct[0] = &render_mode_0;
+	args->rdr_fct[1] = &render_mode_1;
+	args->rdr_fct[2] = &render_mode_2;
+	//args->shd_fct[LAMBERT] = &lambert_model;
+	//args->shd_fct[PHONG] = &phong_model;
 }
 
 int		init_args(t_args *args, t_env *env, t_scene *scene)
@@ -215,7 +225,7 @@ int		main(void)
 
 	init_args(&args, &env, &scene);
 	trace_primary_rays(&args);
-	manage_shaders(&args);
+	//manage_shaders(&args);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	mlx_loop(env.init);
 	return (0);
