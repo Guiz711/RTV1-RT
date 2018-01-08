@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scene>
+	<display fov="45">
+		<size x="0" y="0"/>
+	</display>
+
+	<camera>
+		<origin x ="0" y="0" z="0"/>
+		<orientation x="0" y="0" z="0"/>
+	</camera>
+
+	<general>
+		<ambiant val="0"/>
+		<shader> blabla </shader>
+	</general>
+
+	<lights>
+		<light type="directional">
+			<vec x="0" y="0" z="0"/>
+			<diffuse x="0" y="0" z="0"/>
+			<spec x="0" y="0" z="0"/>
+			<range nb="0"/>
+		</light>
+
+		<light type="point">
+			<vec x="0" y="0" z="0"/>
+			<diffuse x="0" y="0" z="0"/>
+			<spec x="0" y="0" z="0"/>
+			<range nb="0"/>
+		</light>
+	</lights>
+
+	<objects>
+		<plane>
+			<material>
+				<spec x="0" y="0" z="0"/>
+				<diffuse x="0" y="0" z="0"/>
+				<shininess nb="0"/>
+			</material>
+			<point x="0" y="0" z="0"/>
+			<normal x="0" y="0" z="0"/>
+		</plane>
+
+		<sphere radius="100">
+			<material>
+				<spec x="0" y="0" z="0"/>
+				<diffuse x="0" y="0" z="0"/>
+				<shininess nb="0"/>
+			</material>
+			<center x="0" y="0" z="0"/>
+		</sphere>
+
+		<cylindre radius="30">
+			<material>
+				<spec x="0" y="0" z="0"/>
+				<diffuse x="0" y="0" z="0"/>
+				<shininess nb="0"/>
+			</material>
+			<point x="0" y="0" z="0"/>
+			<dir x="0" y="0" z="0"/>
+		</cylindre>
+
+		<cone radius="45">
+			<material>
+				<spec x="0" y="0" z="0"/>
+				<diffuse x="0" y="0" z="0"/>
+				<shininess nb="0"/>
+			</material>
+			<point x="0" y="0" z="0"/>
+			<dir x="0" y="0" z="0"/>
+		</cone>
+	</objects>
+</scene>

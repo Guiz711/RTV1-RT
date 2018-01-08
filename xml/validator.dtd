@@ -1,0 +1,102 @@
+<!ELEMENT scene (display,  camera, general, lights, objects)>
+
+<!--DIPLAY-->
+
+<!ELEMENT display (size)>
+<!ATTLIST display fov CDATA #IMPLIED>
+
+<!--CAMERA-->
+
+<!ELEMENT camera (origin, orientation)>
+<!ELEMENT origin EMPTY>
+<!ATTLIST origin
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT orientation EMPTY>
+<!ATTLIST orientation
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+
+<!--GENERAL-->
+
+<!ELEMENT general (ambiant, shader+)>
+<!ELEMENT ambiant EMPTY>
+<!ATTLIST ambiant val CDATA #REQUIRED>
+<!ELEMENT shader (#PCDATA)
+
+
+<!--MATH-->
+
+<!ELEMENT range EMPTY>
+<!ATTLIST range CDATA #REQUIRED>
+<!ELEMENT point EMPTY>
+<!ATTLIST point
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT dir EMPTY>
+<!ATTLIST dir
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT normal EMPTY>
+<!ATTLIST normal
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT center EMPTY>
+<!ATTLIST center
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+
+<!--LIGHTS-->
+
+<!ELEMENT lights (light+)>
+<!ELEMENT light (vec, diffuse, spec, range)>
+<!ATTLIST light type CDATA #REQUIRED>
+<!ELEMENT vec EMPTY>
+<!ATTLIST vec
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT diffuse EMPTY>
+<!ATTLIST diffuse
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT spec EMPTY>
+<!ATTLIST spec
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+
+<!--MATERIAL-->
+
+<!ELEMENT material (spec, diffuse, shininess)>
+<!ELEMENT spec EMPTY>
+<!ATTLIST spec
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT diffuse EMPTY>
+<!ATTLIST diffuse
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT shininess EMPTY>
+<!ATTLIST shininess nb CDATA #REQUIRED>
+
+<!--OBJECTS-->
+
+<!ELEMENT objects (plane | cone | cylindre | sphere)+>
+<!ELEMENT plane (material, point, normal)>
+<!ELEMENT sphere (material, center)>
+<!ELEMENT cylindre (material, point, dir)>
+<!ELEMENT cone (material, point, dir)>
+<!ATTLIST sphere radius CDATA #REQUIRED>
+<!ATTLIST cylindre radius CDATA #REQUIRED>
+<!ATTLIST cone radius CDATA #REQUIRED>
+
