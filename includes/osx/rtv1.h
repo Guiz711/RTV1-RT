@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/21 06:42:38 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/22 04:26:14 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,10 @@
 # include <fcntl.h>
 # include <math.h>
 # include <time.h>
-# include "libft.h"
+# include <libft.h>
 # include "vectors.h"
 # include <stdio.h>
 # include <stdint.h>
-# include "xml_parser.h"
 
 
 # define TRUE 1
@@ -210,6 +209,8 @@ typedef struct	s_scene
 	t_list		*light;
 	t_vec3		amb_i;
 }				t_scene;
+
+# include "xml_parser.h"
 
 typedef struct	s_env
 {

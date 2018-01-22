@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/05 13:50:15 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/22 04:32:33 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	init_scene(t_scene *scn)
 	scn->objs->material.spec = init_vec3(1, 1, 1); //0x0000FFFF;
 	scn->objs->material.shin = 80;
 
-	plane.p = init_vec4(0, 0, -20, 1);
+	plane.p = init_vec4(0, 0, 0.5, 1);
 	plane.normal = normalize_vec4(init_vec4(0, 0, 1, 0));
 	new = obj_lstnew(PLANE, &plane, sizeof(plane));
 	new->material.model = PHONG;
@@ -205,11 +205,86 @@ void	init_fct_arr(t_args *args)
 	//args->shd_fct[LAMBERT] = &lambert_model;
 	//args->shd_fct[PHONG] = &phong_model;
 }
-
-int		init_args(t_args *args, t_env *env, t_scene *scene)
+/*
+static void	print_hoho(t_scene *scene)
 {
+	printf("************ SHD *************\n");
+		for (int i = 0; i<COUNT_SHD;i++)
+			printf("\t\t%d -> %d \n", i, scene->shd[i]);
+	printf("******** RENDER MODE *********\n");
+		printf("\t\t%d \n", scene->render_mode);
+	printf("******** AMB_I **************\n");
+	printf("amb_i: %f %f %f\n", scene->amb_i.x, scene->amb_i.y, scene->amb_i.z);
+	printf("************ CAM ************\n");
+		printf("origin: %f %f %f %f\n", scene->cam.orig.x, scene->cam.orig.y, scene->cam.orig.z, scene->cam.orig.w);
+		
+		printf("orient: %f %f %f %f\n", scene->cam.orient.x, scene->cam.orient.y, scene->cam.orient.z, scene->cam.orient.w);
+	printf("*********** OBJ **********\n");
+	char *a[] = {"spere"," plane", "cylinder", "cone",};
+	char *b[] = {"NO_SHD","FACING", "SHADOW", "LAMBERT", "PHONG",};
+	for (t_obj_lst *obj = scene->objs; obj != NULL; obj = obj->next)
+	{
+		void *p;
+		(void)p;
+		union bi{
+			t_sphere *sphere;
+			t_plane	 *plane;
+			t_cone  *cone;
+			t_cylinder  *cylinder;
+		} bin;
+		printf("\t\ttype: %s\n", a[obj->content_type]);
+		if (obj->content_type == 0)
+			bin.sphere = (t_sphere*)obj->content;
+		else if (obj->content_type == 1)
+			bin.plane = (t_plane*)obj->content;
+		else if (obj->content_type == 2)
+			bin.cylinder = (t_cylinder*)obj->content;
+		else if (obj->content_type == 3)
+			bin.cone = (t_cone*)obj->content;
+		if (obj->content_type == 0)
+			printf("center: %f %f %f %f\nradius: %f\n", bin.sphere->center.x, bin.sphere->center.y, bin.sphere->center.z, bin.sphere->center.w, bin.sphere->radius);
+		else if (obj->content_type == 1)
+			printf("point: %f %f %f %f\nnormal: %f %f %f %f\n", bin.plane->p.x, bin.plane->p.y, bin.plane->p.z, bin.plane->p.w, bin.plane->normal.x, bin.plane->normal.y, bin.plane->normal.z, bin.plane->normal.w);
+		else if (obj->content_type == 2)
+			printf("point: %f %f %f %f\ndirection: %f %f %f %f\nradius: %f\n", bin.cylinder->p.x, bin.cylinder->p.y, bin.cylinder->p.z, bin.cylinder->p.w, bin.cylinder->dir.x, bin.cylinder->dir.y, bin.cylinder->dir.z, bin.cylinder->dir.w, bin.cylinder->radius);
+		else if (obj->content_type == 3)
+			printf("point: %f %f %f %f\ndirection: %f %f %f %f\nangle: %f\nangle_tan: %f\n", bin.cone->p.x, bin.cone->p.y, bin.cone->p.z, bin.cone->p.w, bin.cone->dir.x, bin.cone->dir.y, bin.cone->dir.z, bin.cone->dir.w, bin.cone->angle, bin.cone->ang_tan);
+		printf("model: %s\n", b[obj->material.model]);
+		printf("amb: %f %f %f\n", obj->material.amb.x,obj->material.amb.y,obj->material.amb.z);
+		printf("diff: %f %f %f\n", obj->material.diff.x,obj->material.diff.y,obj->material.diff.z);
+		printf("spec: %f %f %f\n", obj->material.spec.x,obj->material.spec.y,obj->material.spec.z);
+		printf("shin: %f\n", obj->material.shin);
+		if (obj->next != NULL)
+			printf("**************************\n");
+	}
+	printf("*********** LIGHT *************\n");
+	char *c[] = {"DIRECTIONNAL","POINT",};
+	for(t_list *lst = scene->light; lst != NULL; lst = lst->next)
+	{
+		(void)c;
+		t_light *lgt = (t_light*)lst->content;
+		printf("type: %s\n", c[lgt->type]);
+		printf("type_num: %d\n", lgt->type);
+		printf("vec: %f %f %f %f\n", lgt->vec.x,lgt->vec.y,lgt->vec.z,lgt->vec.w);
+		printf("diff_i: %f %f %f \n", lgt->diff_i.x,lgt->diff_i.y,lgt->diff_i.z);
+		printf("spec_i: %f %f %f \n", lgt->spec_i.x,lgt->spec_i.y,lgt->spec_i.z);
+		printf("range: %f\n", lgt->range);
+		printf("atten: %f %f %f \n", lgt->atten.x,lgt->atten.y,lgt->atten.z);
+		if (lst->next != NULL)
+			printf("********************\n");
+	}
+	printf("********************************\n");
+}
+
+*/
+int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
+{
+	(void)path;
 	init_env(env);
-	init_scene(scene);
+	//init_scene(scene);
+	xml_parse(path, scene);
+	//printf("%f kkkkkk\n",(t_light*)(scene->light));
+	//print_hoho(scene);
 	init_fct_arr(args);
 	args->env = env;
 	args->scene = scene;
@@ -217,13 +292,17 @@ int		init_args(t_args *args, t_env *env, t_scene *scene)
 	return (SUCCESS);
 }
 
-int		main(void)
+int		main(int argc, char **argv)
 {
 	t_args	args;
 	t_env	env;
 	t_scene scene;
-
-	init_args(&args, &env, &scene);
+	if (argc != 2)
+	{
+		ft_putstr("Usage: ./rtv1 docname\n");
+		return (0);
+	}
+	init_args(&args, &env, &scene, argv[1]);
 	trace_primary_rays(&args);
 	//manage_shaders(&args);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
