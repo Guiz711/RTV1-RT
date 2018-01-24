@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   xml_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 00:34:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/22 03:11:21 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/22 12:41:02 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "xml_parser.h"
 
 
 /*

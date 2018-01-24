@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/21 06:42:38 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/22 11:26:56 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "vectors.h"
 # include <stdio.h>
 # include <stdint.h>
-# include "xml_parser.h"
 
 
 # define TRUE 1

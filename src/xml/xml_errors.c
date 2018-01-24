@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   xml_errors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 05:59:23 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/21 06:34:44 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/22 12:40:43 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "xml_parser.h"
 
 /*
  * Clean up the memory allocated by the libxml with CleanupParser.

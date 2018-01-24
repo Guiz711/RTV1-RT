@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/22 11:24:54 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/24 10:42:39 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 # define PARSER_H
 
 #include "rtv1.h"
-#include "../libxml/xmlmemory.h"
-#include "../libxml/parser.h"
-#include "../libxml/tree.h"
-#include "../libxml/xmlIO.h"
-#include "../libxml/xinclude.h"
-#include "../libxml/valid.h"
-#include "../libxml/xmlschemas.h"
-#include "../libxml/xmlstring.h"
-#include "../libxml/xmlreader.h"
+#include <libft.h>
+#include "xmlmemory.h"
+#include "parser.h"
+#include "tree.h"
+#include "xmlIO.h"
+#include "xinclude.h"
+#include "valid.h"
+#include "xmlschemas.h"
+#include "xmlstring.h"
+#include "xmlreader.h"
 
-t_shd			char_to_shd(char *str);
+t_shd		char_to_shd(char *str);
 int			xml_parse(char *path, t_scene *scn);
 int			set_objs(t_list *lst, t_scene *scn);
 int			set_lights(t_list *lst, t_scene *scn);

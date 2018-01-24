@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   xml_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 06:12:34 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/20 07:35:53 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/22 12:40:32 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "xml_parser.h"
 
 int				set_camera(xmlNodePtr node, t_scene *scn)
 {

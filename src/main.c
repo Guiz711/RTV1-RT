@@ -6,11 +6,12 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/22 04:32:33 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/22 13:21:50 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "xml_parser.h"
 
 /*static void		events(void *args)
 {
@@ -282,6 +283,8 @@ int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 	(void)path;
 	init_env(env);
 	//init_scene(scene);
+	scene->objs = NULL;
+	scene->light = NULL;
 	xml_parse(path, scene);
 	//printf("%f kkkkkk\n",(t_light*)(scene->light));
 	//print_hoho(scene);
@@ -297,12 +300,21 @@ int		main(int argc, char **argv)
 	t_args	args;
 	t_env	env;
 	t_scene scene;
+	t_obj_lst *objs;
+
 	if (argc != 2)
 	{
 		ft_putstr("Usage: ./rtv1 docname\n");
 		return (0);
 	}
 	init_args(&args, &env, &scene, argv[1]);
+	objs = scene.objs;
+	while (objs)
+	{
+		printf("%p\n", objs->next);
+		objs = objs->next;
+	}
+	printf("\n");
 	trace_primary_rays(&args);
 	//manage_shaders(&args);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);

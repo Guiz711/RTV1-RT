@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   xml_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 03:07:36 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/22 03:08:25 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/22 12:40:38 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+#include "xml_parser.h"
 
 /*
  * Pretty much the same method than parsing the xsd file, even if here

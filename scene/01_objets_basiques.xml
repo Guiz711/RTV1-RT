@@ -11,7 +11,7 @@
 		<light>
 			<type type="POINT"/>
 			<vec x="-20" y="0" z="20" w="1"/>
-			<diffuse x="10" y="10" z="10"/>
+			<diffuse x="0.1" y="0.1" z="0.1"/>
 			<spec x="0.2" y="0.2" z="0.2"/>
 			<range nb="3000"/>
 			<atten x="0.0005" y="0.0005" z="1"/>
