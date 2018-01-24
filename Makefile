@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/01/24 10:45:04 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/01/24 13:30:15 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,12 @@ NAME = rtv1
 OS = LINUX
 
 ifeq ($(OS),LINUX)
-	INC_FLAGS = -I./includes/linux -I./libft/includes -I./includes/libxml
-	INC_PATH = includes/linux
+	INC_FLAGS = -I./includes/linux -I./libft/includes -I./includes/libxml \
+	-I./includes
 	LIBS = -lft -lmlx -lXext -lX11 -lm -lxml2
 else
-	INC_FLAGS = -I./includes/osx -I./libft/includes -I./includes/libxml
-	INC_PATH = includes/osx
+	INC_FLAGS = -I./includes/osx -I./libft/includes -I./includes/libxml \
+	-I./includes
 	LIBS = -lft -lmlx -lm -framework OpenGL -framework Appkit \
 		`~/.brew/Cellar/libxml2/2.9.7/bin/xml2-config --cflags --libs`
 
@@ -34,20 +34,26 @@ CC = clang
 
 CFLAGS = -Wall -Wextra -Werror
 
-INC_NAME = rtv1.h vectors.h inputs_linux.h X.h xml_parser.h
-
 SRC_PATH = src
 
-SRC_NAME = main.c vec_init.c init_rays.c vec_op.c matrices_calc.c matrices.c \
-			mtx_op.c error.c obj_list.c intersection.c trace_ray.c normal.c \
-			vec_add.c vec_rev.c vec_sub.c shader.c
+SRC_NAME = main.c init_rays.c error.c obj_list.c intersection.c trace_ray.c \
+			normal.c shader.c
 
-PARSER_PATH = xml
+SRC_VEC_PATH = vectors
 
-PARSER_NAME = xml_check.c xml_lights.c xml_parser.c xml_camera.c xml_errors.c \
+SRC_VEC_NAME = vec_init.c vec_add.c vec_rev.c vec_sub.c vec_op.c matrices.c \
+				matrices_calc.c matrices_op.c
+
+VECTORS = $(addprefix $(SRC_VEC_PATH)/, $(SRC_VEC_NAME))
+
+SRC_NAME += $(VECTORS)
+
+SRC_PARSER_PATH = xml
+
+SRC_PARSER_NAME = xml_check.c xml_lights.c xml_parser.c xml_camera.c xml_errors.c \
 				xml_objects.c xml_tools.c xml_tools2.c
 
-PARSER = $(addprefix $(PARSER_PATH)/, $(PARSER_NAME))
+PARSER = $(addprefix $(SRC_PARSER_PATH)/, $(SRC_PARSER_NAME))
 
 SRC_NAME += $(PARSER)
 
@@ -57,25 +63,27 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
-#OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 OBJ_NAME = $(SRC:.c=.o)
-INC = $(addprefix $(INC_PATH)/,$(INC_NAME))
-OBJS = obj/*.o
+OBJS = obj/$(OBJ_NAME)
+
 GREEN = \033[32m
 
 all: $(NAME)
 
-$(NAME): $(OBJ_NAME)
+$(NAME): compilation_end
 ifeq ($(OS), MACOS)
-	make -C ./minilibx_macos
+	@make -C ./minilibx_macos
 endif
 	@make -C ./libft --no-print-directory
 	@$(CC) $(OBJS) -o $@ $(LIB_FLAGS) $(LIBS)
 	@echo "$(GREEN)[$(NAME)] Compilation success"
 
-%.o: %.c $(INC)
+compilation_end: $(OBJ_NAME)
+	@echo "$(GREEN)[$(NAME)] .o created"
+
+%.o: %.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(INC_FLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(INC_FLAGS) -o $@ -c $<
 	@mv $@ $(OBJ_PATH)
 
 clean:
@@ -85,7 +93,7 @@ clean:
 	@make -C ./libft clean --no-print-directory
 	@echo "$(GREEN)[$(NAME)] .o files deleted"
 ifeq ($(OS), MACOS)
-	make -C ./minilibx_macos clean
+	@make -C ./minilibx_macos clean
 endif
 
 fclean: clean
@@ -93,7 +101,7 @@ fclean: clean
 	@make -C ./libft fclean --no-print-directory
 	@echo  "$(GREEN)[$(NAME)] executable file deleted"
 ifeq ($(OS), MACOS)
-	/bin/rm -f ./minilibx_macos/libmlx.a
+	@/bin/rm -f ./minilibx_macos/libmlx.a
 endif
 
 re: fclean $(NAME)

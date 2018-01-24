@@ -6,11 +6,13 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2017/09/25 12:10:06 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/01/24 13:27:08 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
+INC_FLAGS = -I./includes
 
 SRC = ft_memset.c ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		ft_isdigit.c ft_isprint.c ft_itoa.c ft_lstadd.c ft_lstnew.c \
@@ -27,11 +29,13 @@ SRC = ft_memset.c ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		ft_lstpush_back.c ft_isupper.c ft_islower.c ft_realloc.c ft_isgraph.c \
 		ft_lstlen.c get_next_line.c
 
-HEADER = ./includes/libft.h
-
 CC = clang
 
 CFLAGS = -Wall -Wextra -Werror
+
+OBJ_NAME = $(SRC_NAME:.c=.o)
+
+OBJS = obj/$(OBJ_NAME.o)
 
 OBJ = $(SRC:.c=.o)
 
@@ -39,13 +43,20 @@ GREEN = '\033[0;32m'
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): compilation_end
 	@ar rc $@ $(OBJ)
 	@ranlib $@
 	@echo -e $(GREEN)\[$(NAME)\] Compilation success
 
+compilation_end: $(OBJ_NAME)
+	@echo "$(GREEN)[$(NAME)] .o created"
+
 %.o: %.c $(HEADER)
 	@$(CC) $(CFLAGS) -I ./includes -o $@ -c $<
+%.o: %.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@$(CC) $(CFLAGS) $(INC_FLAGS) -o $@ -c $<
+	@mv $@ $(OBJ_PATH)
 
 clean:
 	@/bin/rm -f $(OBJ)
