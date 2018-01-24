@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/01/24 13:27:08 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/01/24 18:14:00 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME = libft.a
 
 INC_FLAGS = -I./includes
 
-SRC = ft_memset.c ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
+SRC_PATH = src
+
+SRC_NAME = ft_memset.c ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		ft_isdigit.c ft_isprint.c ft_itoa.c ft_lstadd.c ft_lstnew.c \
 		ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_isblank.c\
 		ft_memcpy.c ft_memdel.c ft_memmove.c ft_putchar.c ft_isspace.c\
@@ -33,26 +35,26 @@ CC = clang
 
 CFLAGS = -Wall -Wextra -Werror
 
-OBJ_NAME = $(SRC_NAME:.c=.o)
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
-OBJS = obj/$(OBJ_NAME.o)
+OBJ_PATH = obj
 
-OBJ = $(SRC:.c=.o)
+OBJ_NAME = $(SRC:.c=.o)
 
-GREEN = '\033[0;32m'
+OBJ = $(subst $(SRC_PATH),$(OBJ_PATH),$(OBJ_NAME))
+
+GREEN = \033[32m
 
 all: $(NAME)
 
 $(NAME): compilation_end
 	@ar rc $@ $(OBJ)
 	@ranlib $@
-	@echo -e $(GREEN)\[$(NAME)\] Compilation success
+	@echo "$(GREEN)[$(NAME)] Compilation success"
 
 compilation_end: $(OBJ_NAME)
 	@echo "$(GREEN)[$(NAME)] .o created"
 
-%.o: %.c $(HEADER)
-	@$(CC) $(CFLAGS) -I ./includes -o $@ -c $<
 %.o: %.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(CFLAGS) $(INC_FLAGS) -o $@ -c $<
@@ -60,10 +62,11 @@ compilation_end: $(OBJ_NAME)
 
 clean:
 	@/bin/rm -f $(OBJ)
-	@echo -e $(GREEN)\[$(NAME)\] .o files deleted
+	@rmdir $(OBJ_PATH) 2> /dev/null || true
+	@echo "$(GREEN)[$(NAME)] .o files deleted"
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@echo -e $(GREEN)\[$(NAME)\] executable file deleted
+	@echo "$(GREEN)[$(NAME)] executable file deleted"
 
 re: fclean $(NAME)
