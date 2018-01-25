@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:11:12 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/22 12:41:14 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/25 18:15:18 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,7 @@ void				shd_scene(int *shd_arr, char *string)
 	db = ft_strsplit(string, '|');
 	while (db[++i])
 	{
-		if (ft_strcmp(db[i], "NO_SHD") == 0)
-			p = NO_SHD;
-		else if (ft_strcmp(db[i], "FACING") == 0)
-			p = FACING;
-		else if (ft_strcmp(db[i], "SHADOW") == 0)
-			p = SHADOW;
-		else if (ft_strcmp(db[i], "LAMBERT") == 0)
+		if (ft_strcmp(db[i], "LAMBERT") == 0)
 			p = LAMBERT;
 		else if (ft_strcmp(db[i], "PHONG") == 0)
 			p = PHONG;
@@ -47,7 +41,7 @@ t_shd				char_to_shd(char *str)
 {
 	if (!ft_strcmp(str, "PHONG"))
 		return (PHONG);
-	return (NO_SHD);
+	return (LAMBERT);
 }
 t_vec3			get_vec3_from_node(xmlNodePtr node)
 {

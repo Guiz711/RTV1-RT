@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/22 12:41:25 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/25 18:33:30 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,6 @@ typedef enum	e_obj_type
 
 typedef enum	e_shd
 {
-	NO_SHD,
-	FACING,
-	SHADOW,
 	LAMBERT,
 	PHONG,
 	COUNT_SHD,
@@ -230,7 +227,8 @@ typedef struct	s_args
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
 	void		(*rdr_fct[5])(struct s_args*, t_pixel*, size_t);
-	void		(*shd_fct[5])(struct s_args*, t_light*, t_pixel*);
+	//void		(*shd_fct[5])(struct s_args*, t_light*, t_pixel*);
+	t_vec3		(*spec_fct[1])(t_pixel*, t_light*);
 }				t_args;
 
 typedef struct	s_error
@@ -246,22 +244,46 @@ int			error_message(const char *message, size_t line);
 
 t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
-double		cone_intersection(t_ray ray, void *obj);
-double	sphere_intersection(t_ray ray, void *obj);
-double	plane_intersection(t_ray ray, void *obj);
-double	cylinder_intersection(t_ray ray, void *obj);
-t_vec4	sphere_normal(t_pixel *pixel);
-t_vec4	plane_normal(t_pixel *pixel);
-t_vec4	cylinder_normal(t_pixel *pixel);
-t_vec4	cone_normal(t_pixel *pixel);
-int		manage_shaders(t_args *args);
-void	lambert_model(t_args *args, t_light *lgt, size_t size);
-void	phong_model(t_args *args, t_light *lgt, size_t size);
-int		trace_primary_rays(t_args *args);
+
+int			manage_shaders(t_args *args);
+void		lambert_model(t_args *args, t_light *lgt, size_t size);
+void		phong_model(t_args *args, t_light *lgt, size_t size);
+int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
-void	render_mode_0(t_args *args, t_pixel *pix, size_t pos);
-void	render_mode_1(t_args *args, t_pixel *pix, size_t pos);
-void	render_mode_2(t_args *args, t_pixel *pix, size_t pos);
+
+/*
+**	Primitive intersection functions
+*/
+
+double		cone_intersection(t_ray ray, void *obj);
+double		sphere_intersection(t_ray ray, void *obj);
+double		plane_intersection(t_ray ray, void *obj);
+double		cylinder_intersection(t_ray ray, void *obj);
+
+/*
+**	Primitive surface normal functions
+*/
+
+t_vec4		sphere_normal(t_pixel *pixel);
+t_vec4		plane_normal(t_pixel *pixel);
+t_vec4		cylinder_normal(t_pixel *pixel);
+t_vec4		cone_normal(t_pixel *pixel);
+
+/*
+**	Render management functions
+*/
+
+void		render_mode_0(t_args *args, t_pixel *pix, size_t pos);
+void		render_mode_1(t_args *args, t_pixel *pix, size_t pos);
+void		render_mode_2(t_args *args, t_pixel *pix, size_t pos);
+void		render_mode_3(t_args *args, t_pixel *pix, size_t pos);
+void		render_mode_4(t_args *args, t_pixel *pix, size_t pos);
+
+/*
+**	Specular Highlight functions
+*/
+
+t_vec3		specular_phong(t_pixel *pix, t_light *light);
 
 /*
 **	Quit and initialize functions
@@ -269,14 +291,6 @@ void	render_mode_2(t_args *args, t_pixel *pix, size_t pos);
 
 /*
 **	Events functions
-*/
-
-/*
-**	Map handling functions
-*/
-
-/*
-**	Ray casting functions
 */
 
 /*

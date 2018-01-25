@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/22 13:21:50 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/25 18:26:28 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,11 +151,6 @@ void	init_scene(t_scene *scn)
 	scn->cam.orig = init_vec4(0, 0, -3, 1);
 	scn->amb_i = init_vec3(0.15, 0.15, 0.15);
 	scn->render_mode = 2;
-	scn->shd[FACING] = 0;
-	scn->shd[NO_SHD] = 1;
-	scn->shd[LAMBERT] = 0;
-	scn->shd[PHONG] = 0;
-	scn->shd[SHADOW] = 0;
 }
 
 int		init_img(t_env	*env)
@@ -203,6 +198,9 @@ void	init_fct_arr(t_args *args)
 	args->rdr_fct[0] = &render_mode_0;
 	args->rdr_fct[1] = &render_mode_1;
 	args->rdr_fct[2] = &render_mode_2;
+	args->rdr_fct[3] = &render_mode_3;
+	args->rdr_fct[4] = &render_mode_4;
+	args->spec_fct[PHONG - 1] = &specular_phong; 
 	//args->shd_fct[LAMBERT] = &lambert_model;
 	//args->shd_fct[PHONG] = &phong_model;
 }
@@ -286,7 +284,6 @@ int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 	scene->objs = NULL;
 	scene->light = NULL;
 	xml_parse(path, scene);
-	//printf("%f kkkkkk\n",(t_light*)(scene->light));
 	//print_hoho(scene);
 	init_fct_arr(args);
 	args->env = env;
@@ -309,14 +306,7 @@ int		main(int argc, char **argv)
 	}
 	init_args(&args, &env, &scene, argv[1]);
 	objs = scene.objs;
-	while (objs)
-	{
-		printf("%p\n", objs->next);
-		objs = objs->next;
-	}
-	printf("\n");
 	trace_primary_rays(&args);
-	//manage_shaders(&args);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	mlx_loop(env.init);
 	return (0);
