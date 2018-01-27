@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/25 18:26:28 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/27 17:24:10 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,8 +204,8 @@ void	init_fct_arr(t_args *args)
 	//args->shd_fct[LAMBERT] = &lambert_model;
 	//args->shd_fct[PHONG] = &phong_model;
 }
-/*
-static void	print_hoho(t_scene *scene)
+
+/*static void	print_hoho(t_scene *scene)
 {
 	printf("************ SHD *************\n");
 		for (int i = 0; i<COUNT_SHD;i++)
@@ -274,8 +274,8 @@ static void	print_hoho(t_scene *scene)
 	}
 	printf("********************************\n");
 }
-
 */
+
 int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 {
 	(void)path;
@@ -283,7 +283,8 @@ int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 	//init_scene(scene);
 	scene->objs = NULL;
 	scene->light = NULL;
-	xml_parse(path, scene);
+	if (!xml_parse(path, scene))
+		exit(-1);
 	//print_hoho(scene);
 	init_fct_arr(args);
 	args->env = env;
@@ -307,7 +308,6 @@ int		main(int argc, char **argv)
 	init_args(&args, &env, &scene, argv[1]);
 	objs = scene.objs;
 	trace_primary_rays(&args);
-	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	mlx_loop(env.init);
 	return (0);
 }

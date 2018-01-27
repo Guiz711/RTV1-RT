@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<scene shd ="NO_SHD" render_mode ="4">
+<scene render_mode ="2">
 	<camera>
 		<origin x ="0" y="0" z="-3" w="1"/>
 		<orientation x="0" y="0" z="1" w="0"/>
@@ -46,8 +46,8 @@
 			<radius nb="1"/>
 			<model model="PHONG"/>
 			<amb x="0.2" y="0.2" z="0.8"/>
-			<diffuse x="0.2" y="0.2" z="0.8"/>
 			<spec x="1" y="1" z="1"/>
+			<diffuse x="0.2" y="0.2" z="0.8"/>
 			<shininess nb="1"/>
 		</cylindre>
 
@@ -57,8 +57,8 @@
 			<angle nb="45"/>
 			<model model="PHONG"/>
 			<amb x="0.9" y="0.6" z="0.05"/>
-			<diffuse x="0.9" y="0.6" z="0.05"/>
 			<spec x="1.2" y="1.2" z="1.2"/>
+			<diffuse x="0.9" y="0.6" z="0.05"/>
 			<shininess nb="10"/>
 		</cone>
 	</objects>

@@ -2,19 +2,19 @@
 
 <scene render_mode = "2">
 	<camera>
-		<origin x ="0" y="0" z="-3" w="1"/>
+		<origin x ="g" y="10" z="-20" w="1"/>
 		<orientation x="0" y="0" z="1" w="0"/>
-		<amb_i x="0.15" y="0.15" z="0.15"/>
+		<amb_i x="f" y="0.15" z="0.15"/>
 	</camera>
 
 	<lights>
 		<light>
 			<type type="POINT"/>
 			<vec x="-20" y="0" z="20" w="1"/>
-			<diffuse x="0.1" y="0.1" z="0.1"/>
+			<diffuse x="10" y="10" z="10"/>
 			<spec x="0.2" y="0.2" z="0.2"/>
-			<range nb="3000"/>
-			<atten x="0.0005" y="0.0005" z="1"/>
+			<range nb="rsgdrgsefsrgeafsrefdsge"/>
+			<atten x="0awdawd" y="0.0005" z="1"/>
 		</light>
 
 		<light>
@@ -23,11 +23,11 @@
 			<diffuse x="0.2" y="0.2" z="0.2"/>
 			<spec x="0.2" y="0.2" z="0.2"/>
 			<range nb="3000"/>
-			<atten x="0.0005" y ="0.0005" z="1"/>
+			<atten x="0.5" y ="0.0005" z="1"/>
 		</light>
 
 		<light>
-			<type type="POINT"/>
+			<type type="Balala"/>
 			<vec x="-20.3" y="0" z="20" w="1"/>
 			<diffuse x="1" y="1" z="1"/>
 			<spec x="0.2" y="0.2" z="0.2"/>
@@ -46,7 +46,7 @@
 
 		<light>
 			<type type="POINT"/>
-			<vec x="-20.3" y="-0.3" z="20" w="1"/>
+			<vec x="====" y="-0.3" z="20" w="1"/>
 			<diffuse x="0.2" y="0.2" z="0.2"/>
 			<spec x="0.2" y="0.2" z="0.2"/>
 			<range nb="3000"/>
@@ -59,7 +59,7 @@
 		<plane>
 			<p x="0" y="0" z="-20" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>
-			<model model="PHONG"/>
+			<model model="KKKKK"/>
 			<amb x="0.5" y="0.5" z="0.8"/>
 			<spec x="1" y="1" z="1"/>
 			<diffuse x="0.5" y="0.5" z="0.8"/>
@@ -67,8 +67,18 @@
 		</plane>
 
 		<sphere>
-			<radius nb="2"/>
+			<radius nb="fesfes"/>
 			<center x="0" y="5" z="-10" w="1"/>
+			<model model="PHONG"/>
+			<amb x="0.2" y="0.8" z="0.2"/>
+			<spec x="1" y="1" z="1"/>
+			<diffuse x="0.2" y="0.8" z="0.2"/>
+			<shininess nb="80"/>
+		</sphere>
+
+		<sphere>
+			<radius nb="5"/>
+			<center x="10" y="7" z="-4" w="1"/>
 			<model model="PHONG"/>
 			<amb x="0.2" y="0.8" z="0.2"/>
 			<spec x="1" y="1" z="1"/>
@@ -88,7 +98,7 @@
 		</cylindre>
 
 		<cylindre>
-			<p x="15" y="0" z="-10" w="1"/>
+			<p x="10000000000000000000000000000000000000000000000000000" y="0" z="-10" w="1"/>
 			<dir x="0" y="1" z="0" w="0"/>
 			<radius nb="0.5"/>
 			<model model="PHONG"/>

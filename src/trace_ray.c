@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/22 12:50:05 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/27 17:25:02 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int			trace_primary_rays(t_args *args)
 		args->rdr_fct[args->scene->render_mode](args, &pix[i], i);
 		++i;
 	}
+	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
 	return (0);
 }

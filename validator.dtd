@@ -1,0 +1,107 @@
+<!ELEMENT scene (camera, lights, objects)>
+<!ATTLIST scene render_mode CDATA #IMPLIED>
+
+<!--CAMERA-->
+
+<!ELEMENT camera (origin, orientation, amb_i)>
+<!ELEMENT origin EMPTY>
+<!ATTLIST origin
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED
+		w CDATA #REQUIRED>
+<!ELEMENT orientation EMPTY>
+<!ATTLIST orientation
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED
+		w CDATA #REQUIRED>
+<!ELEMENT amb_i EMPTY>
+<!ATTLIST amb_i
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+
+
+<!--MATH-->
+
+<!ELEMENT range EMPTY>
+<!ATTLIST range nb CDATA #REQUIRED>
+
+<!ELEMENT radius EMPTY>
+<!ATTLIST radius nb CDATA #REQUIRED>
+
+<!ELEMENT shininess EMPTY>
+<!ATTLIST shininess nb CDATA #REQUIRED>
+
+<!ELEMENT model EMPTY>
+<!ATTLIST model model CDATA #REQUIRED>
+
+<!ELEMENT angle EMPTY>
+<!ATTLIST angle nb CDATA #REQUIRED>
+
+<!ELEMENT p EMPTY>
+<!ATTLIST p
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED
+		w CDATA #REQUIRED>
+<!ELEMENT dir EMPTY>
+<!ATTLIST dir
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED
+		w CDATA #REQUIRED>
+<!ELEMENT normal EMPTY>
+<!ATTLIST normal
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED
+		w CDATA #REQUIRED>
+<!ELEMENT center EMPTY>
+<!ATTLIST center
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED
+		w CDATA #REQUIRED>
+<!ELEMENT spec EMPTY>
+<!ATTLIST spec
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT diffuse EMPTY>
+<!ATTLIST diffuse
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+<!ELEMENT amb EMPTY>
+<!ATTLIST amb
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+
+<!--LIGHTS-->
+
+<!ELEMENT lights (light+)>
+<!ELEMENT light (type, vec, diffuse, spec, range, atten)>
+<!ELEMENT type EMPTY>
+<!ATTLIST type type CDATA #REQUIRED>
+<!ELEMENT vec EMPTY>
+<!ATTLIST vec
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED
+		w CDATA #REQUIRED>
+<!ELEMENT atten EMPTY>
+<!ATTLIST atten
+		x CDATA #REQUIRED
+		y CDATA #REQUIRED
+		z CDATA #REQUIRED>
+
+<!--OBJECTS-->
+
+<!ELEMENT objects (plane | cone | cylindre | sphere)+>
+<!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess)>
+<!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess)>
+<!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess)>
+<!ELEMENT cone (p, dir, angle, model, amb, spec, diffuse, shininess)>

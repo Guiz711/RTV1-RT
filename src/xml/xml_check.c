@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 03:07:36 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/22 12:40:38 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/27 17:17:49 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,12 @@ int				check_valid(xmlDocPtr doc)
 {
 	xmlValidCtxtPtr	vctxt;
 	int				dtd;
-	int				xsd;
+//	int				xsd;
 
 	if (!(vctxt = xmlNewValidCtxt()))
 		return (0);
-	if (!(dtd = dtd_validate("validator.dtd", doc)) ||
-				!(xsd = xsd_validate("validator.xsd", doc)))
+	if (!(dtd = dtd_validate("validator.dtd", doc)))
+		// ||!(xsd = xsd_validate("validator.xsd", doc)))
 		return (0);
 	return (1);
 }
