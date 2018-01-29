@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/01/24 18:26:21 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/01/26 11:55:59 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,12 @@ NAME = rtv1
 
 # For linux, write LINUX
 # For mac, write MACOS
-OS = MACOS
+OS = LINUX
 
 ifeq ($(OS),LINUX)
 	INC_FLAGS = -I./includes/linux -I./libft/includes -I./includes/libxml \
 	-I./includes
-	LIBS = -lft -lmlx -lXext -lX11 -lm -lxml2
+	LIBS = -lft -lmlx -lXext -lX11 -lm -lxml2 -lpthread
 else
 	INC_FLAGS = -I./includes/osx -I./libft/includes -I./includes/libxml \
 	-I./includes
@@ -37,7 +37,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRC_PATH = src
 
 SRC_NAME = main.c init_rays.c error.c obj_list.c intersection.c trace_ray.c \
-			normal.c shader.c
+			normal.c shader.c threading.c
 
 SRC_VEC_PATH = vectors
 

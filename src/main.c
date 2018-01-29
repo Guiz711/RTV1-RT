@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/25 18:26:28 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/26 13:51:48 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,8 +279,8 @@ static void	print_hoho(t_scene *scene)
 int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 {
 	(void)path;
-	init_env(env);
 	//init_scene(scene);
+	init_env(env);
 	scene->objs = NULL;
 	scene->light = NULL;
 	xml_parse(path, scene);
@@ -306,7 +306,9 @@ int		main(int argc, char **argv)
 	}
 	init_args(&args, &env, &scene, argv[1]);
 	objs = scene.objs;
-	trace_primary_rays(&args);
+	ft_putchar('a');
+	manage_threads(&args);
+	//trace_primary_rays(&args);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	mlx_loop(env.init);
 	return (0);

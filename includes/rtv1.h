@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/25 18:33:30 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/26 13:47:16 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "vectors.h"
 # include <stdio.h>
 # include <stdint.h>
+# include <pthread.h>
 
 
 # define TRUE 1
@@ -41,6 +42,8 @@
 # define COLOR_DEPTH 32
 # define ENDIAN 1
 # define BUFF_SIZE 4096
+
+# define THREADS_NUMBER 5
 
 # define EXTENSION_NAME ".scn"
 
@@ -237,6 +240,15 @@ typedef struct	s_error
 	char		*detail;
 }				t_error;
 
+typedef struct	s_thread
+{
+	t_args		*args;
+	t_img		*img;
+	size_t		start;
+	size_t		end;
+}				t_thread;
+
+
 t_pixel		*init_pix_buffer(t_env *env, t_mtx4 v2w);
 t_vec4		new_coord(t_vec4 p, t_mtx4 mtx);
 void		error(t_err err);
@@ -250,6 +262,7 @@ void		lambert_model(t_args *args, t_light *lgt, size_t size);
 void		phong_model(t_args *args, t_light *lgt, size_t size);
 int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
+int			manage_threads(t_args *args);
 
 /*
 **	Primitive intersection functions
