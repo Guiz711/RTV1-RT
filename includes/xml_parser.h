@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/24 10:42:39 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:47:06 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			xml_parse(char *path, t_scene *scn);
 int			set_objs(t_list *lst, t_scene *scn);
 int			set_lights(t_list *lst, t_scene *scn);
 int			set_camera(xmlNodePtr node, t_scene *scn);
-t_vec3		get_vec3_from_node(xmlNodePtr node);
+t_vec3		get_color_from_node(xmlNodePtr node);
 t_vec4		get_vec4_from_node(xmlNodePtr node);
 int			xsd_error(void);
 int			dtd_error(xmlDtdPtr dtd);

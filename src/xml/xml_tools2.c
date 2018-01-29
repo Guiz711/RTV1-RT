@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:11:12 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/25 18:15:18 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:20:38 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ t_shd				char_to_shd(char *str)
 		return (PHONG);
 	return (LAMBERT);
 }
-t_vec3			get_vec3_from_node(xmlNodePtr node)
+t_vec3			get_color_from_node(xmlNodePtr node)
 {
 	t_vec3	new;
 
-	new.x = atof((char *)(xmlGetProp(node, BAD_CAST"x")));
-	new.y = atof((char *)(xmlGetProp(node, BAD_CAST"y")));
-	new.z = atof((char *)(xmlGetProp(node, BAD_CAST"z")));
+	new.x = atof((char *)(xmlGetProp(node, BAD_CAST"r")));
+	new.y = atof((char *)(xmlGetProp(node, BAD_CAST"g")));
+	new.z = atof((char *)(xmlGetProp(node, BAD_CAST"b")));
 	return (new);
 }
 
@@ -64,3 +64,10 @@ t_vec4			get_vec4_from_node(xmlNodePtr node)
 	return (new);
 }
 
+int		get_modes_nbr(t_args *args)
+{
+	int	mode_nbr;
+
+	mode_nbr = sizeof(args->rdr_fct) / 8;
+	return(mode_nbr);
+}

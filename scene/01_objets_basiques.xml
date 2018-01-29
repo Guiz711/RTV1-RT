@@ -4,17 +4,17 @@
 	<camera>
 		<origin x ="0" y="0" z="-3" w="1"/>
 		<orientation x="0" y="0" z="1" w="0"/>
-		<amb_i x="0.05" y="0.05" z="0.05"/>
+		<amb_i r="0.05" g="0.05" b="0.05"/>
 	</camera>
 
 	<lights>
 		<light>
 			<type type="POINT"/>
 			<vec x="-20" y="0" z="20" w="1"/>
-			<diffuse x="1.2" y="1.2" z="1.2"/>
-			<spec x="0.3" y="0.3" z="0.3"/>
+			<diffuse r="1.2" g="1.2" b="1.2"/>
+			<spec r="0.3" g="0.3" b="0.3"/>
 			<range nb="3000"/>
-			<atten x="0.0005" y="0.0005" z="1"/>
+			<atten r="0.0005" g="0.0005" b="1"/>
 		</light>
 	</lights>
 
@@ -24,9 +24,9 @@
 			<p x="0" y="0" z="-20" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>
 			<model model="PHONG"/>
-			<amb x="0.5" y="0.5" z="0.8"/>
-			<spec x="1" y="1" z="1"/>
-			<diffuse x="0.5" y="0.5" z="0.8"/>
+			<amb r="0.5" g="0.5" b="0.8"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="0.5" g="0.5" b="0.8"/>
 			<shininess nb="50"/>
 		</plane>
 
@@ -34,9 +34,9 @@
 			<radius nb="2"/>
 			<center x="0" y="5" z="-10" w="1"/>
 			<model model="PHONG"/>
-			<amb x="0.2" y="0.8" z="0.2"/>
-			<spec x="1" y="1" z="1"/>
-			<diffuse x="0.2" y="0.8" z="0.2"/>
+			<amb r="0.2" g="0.8" b="0.2"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="0.2" g="0.8" b="0.2"/>
 			<shininess nb="80"/>
 		</sphere>
 
@@ -45,9 +45,9 @@
 			<dir x="0" y="1" z="0" w="0"/>
 			<radius nb="2"/>
 			<model model="PHONG"/>
-			<amb x="0.2" y="0.2" z="0.8"/>
-			<spec x="1" y="1" z="1"/>
-			<diffuse x="0.2" y="0.2" z="0.8"/>
+			<amb r="0.2" g="0.2" b="0.8"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="0.2" g="0.2" b="0.8"/>
 			<shininess nb="1"/>
 		</cylindre>
 
@@ -56,9 +56,9 @@
 			<dir x="0" y="1" z="0" w="0"/>
 			<angle nb="45"/>
 			<model model="PHONG"/>
-			<amb x="0.9" y="0.6" z="0.05"/>
-			<spec x="1.2" y="1.2" z="1.2"/>
-			<diffuse x="0.9" y="0.6" z="0.05"/>
+			<amb r="0.9" g="0.6" b="0.05"/>
+			<spec r="1.2" g="1.2" b="1.2"/>
+			<diffuse r="0.9" g="0.6" b="0.05"/>
 			<shininess nb="10"/>
 		</cone>
 	</objects>
