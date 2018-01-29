@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 06:12:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/22 13:00:04 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:48:40 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int				create_sphere(xmlNodePtr node, t_scene *scn)
 	if ((child = has_child(node, "model")))
 		new->material.model = char_to_shd(((char *)xmlGetProp(child, BAD_CAST"model")));
 	if ((child = has_child(node, "amb")))
-		new->material.amb = get_vec3_from_node(child);
+		new->material.amb = get_color_from_node(child);
 	if ((child = has_child(node, "diffuse")))
-		new->material.diff = get_vec3_from_node(child);
+		new->material.diff = get_color_from_node(child);
 	if ((child = has_child(node, "spec")))
-		new->material.spec = get_vec3_from_node(child);
+		new->material.spec = get_color_from_node(child);
 	if ((child = has_child(node, "shininess")))
 		new->material.shin = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
 	obj_lstadd(&(scn->objs), new);
@@ -54,11 +54,11 @@ int				create_plane(xmlNodePtr node, t_scene *scn)
 	if ((child = has_child(node, "model")))
 		new->material.model = char_to_shd(((char *)xmlGetProp(child, BAD_CAST"model")));
 	if ((child = has_child(node, "amb")))
-		new->material.amb = get_vec3_from_node(child);
+		new->material.amb = get_color_from_node(child);
 	if ((child = has_child(node, "spec")))
-		new->material.spec = get_vec3_from_node(child);
+		new->material.spec = get_color_from_node(child);
 	if ((child = has_child(node, "diffuse")))
-		new->material.diff = get_vec3_from_node(child);
+		new->material.diff = get_color_from_node(child);
 	if ((child = has_child(node, "shininess")))
 		new->material.shin = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
 	obj_lstadd(&(scn->objs), new);
@@ -83,11 +83,11 @@ int				create_cone(xmlNodePtr node, t_scene *scn)
 	if ((child = has_child(node, "model")))
 		new->material.model = char_to_shd(((char *)xmlGetProp(child, BAD_CAST"model")));
 	if ((child = has_child(node, "diffuse")))
-		new->material.diff = get_vec3_from_node(child);
+		new->material.diff = get_color_from_node(child);
 	if ((child = has_child(node, "spec")))
-		new->material.spec = get_vec3_from_node(child);
+		new->material.spec = get_color_from_node(child);
 	if ((child = has_child(node, "amb")))
-		new->material.amb = get_vec3_from_node(child);
+		new->material.amb = get_color_from_node(child);
 	if ((child = has_child(node, "shininess")))
 		new->material.shin = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
 	obj_lstadd(&(scn->objs), new);
@@ -112,11 +112,11 @@ int				create_cylinder(xmlNodePtr node, t_scene *scn)
 	if ((child = has_child(node, "model")))
 	new->material.model = char_to_shd(((char *)xmlGetProp(child, BAD_CAST"model")));
 	if ((child = has_child(node, "diffuse")))
-		new->material.diff = get_vec3_from_node(child);
+		new->material.diff = get_color_from_node(child);
 	if ((child = has_child(node, "spec")))
-		new->material.spec = get_vec3_from_node(child);
+		new->material.spec = get_color_from_node(child);
 	if ((child = has_child(node, "amb")))
-		new->material.amb = get_vec3_from_node(child);
+		new->material.amb = get_color_from_node(child);
 	if ((child = has_child(node, "shininess")))
 		new->material.shin = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
 	obj_lstadd(&(scn->objs), new);

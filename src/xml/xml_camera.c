@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 06:12:34 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/22 12:40:32 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:12:18 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int				set_camera(xmlNodePtr node, t_scene *scn)
 	if ((child = has_child(node, "orientation")))
 		scn->cam.orient = get_vec4_from_node(child);
 	if ((child = has_child(node, "amb_i")))
-		scn->amb_i = get_vec3_from_node(child);
+		scn->amb_i = get_color_from_node(child);
 	return (1);
 }
