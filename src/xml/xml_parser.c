@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 00:34:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/27 17:21:35 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/01/29 10:05:11 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int				parsedoc(char *path, t_scene *scene)
 		return (0);
 	}
 	scene->render_mode = ft_atoi((char *)xmlGetProp(root, BAD_CAST"render_mode"));
-	if (scene->render_mode >2 || scene->render_mode < 0)
+	if (scene->render_mode > 4 || scene->render_mode < 0)
 		scene->render_mode = 0;
 	lst = get_objects_nodes(doc);
 	set_objs(lst, scene);

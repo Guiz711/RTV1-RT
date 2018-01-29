@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/29 09:18:23 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 12:10:23 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,6 +293,40 @@ int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 	return (SUCCESS);
 }
 
+void	benchmark(int res, char *def)
+{
+	static struct timespec start;
+	struct timespec finish;
+	double elapsed;
+
+	if (!res)
+		clock_gettime(CLOCK_MONOTONIC, &start);
+	else
+	{
+		clock_gettime(CLOCK_MONOTONIC, &finish);
+		elapsed = (finish.tv_sec - start.tv_sec);
+		elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+		printf("%s : %f\n", def, elapsed);
+	}
+}
+
+void	benchmark_total(int res, char *def)
+{
+	static struct timespec start;
+	struct timespec finish;
+	double elapsed;
+
+	if (!res)
+		clock_gettime(CLOCK_MONOTONIC, &start);
+	else
+	{
+		clock_gettime(CLOCK_MONOTONIC, &finish);
+		elapsed = (finish.tv_sec - start.tv_sec);
+		elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+		printf("%s : %f\n", def, elapsed);
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	t_args	args;
@@ -300,16 +334,24 @@ int		main(int argc, char **argv)
 	t_scene scene;
 	t_obj_lst *objs;
 
+	benchmark_total(0, NULL);
 	if (argc != 2)
 	{
 		ft_putstr("Usage: ./rtv1 docname\n");
 		return (0);
 	}
+	benchmark(0, NULL);
 	init_args(&args, &env, &scene, argv[1]);
 	objs = scene.objs;
+	benchmark(1, "init time");
+	benchmark(0, NULL);
 	manage_threads(&args);
+	benchmark(1, "graphics calc time");
+	benchmark(0, NULL);
 	//trace_primary_rays(&args);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
+	benchmark(1, "display time");
+	benchmark_total(1, "total time");
 	mlx_loop(env.init);
 	return (0);
 }

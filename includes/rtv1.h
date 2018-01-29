@@ -6,23 +6,23 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/26 13:47:16 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 12:16:25 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RTV1_H
 # define RTV1_H
 
-# include <errno.h>
+# include <errno.h> // to remove?
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
-# include <time.h>
-# include <libft.h>
+# include <time.h> // to remove?
+# include "libft.h"
 # include "vectors.h"
-# include <stdio.h>
+# include <stdio.h> // to remove?
 # include <stdint.h>
 # include <pthread.h>
 
@@ -229,7 +229,7 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
-	void		(*rdr_fct[5])(struct s_args*, t_pixel*, size_t);
+	void		(*rdr_fct[6])(struct s_args*, t_pixel*, size_t);
 	//void		(*shd_fct[5])(struct s_args*, t_light*, t_pixel*);
 	t_vec3		(*spec_fct[1])(t_pixel*, t_light*);
 }				t_args;
