@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/29 12:16:25 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 17:38:21 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define ENDIAN 1
 # define BUFF_SIZE 4096
 
-# define THREADS_NUMBER 5
+# define THREADS_NUMBER 8
 
 # define EXTENSION_NAME ".scn"
 

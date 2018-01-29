@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:20:46 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/24 12:56:09 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:18:23 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_mtx4 mtx_mult_a_b(t_mtx4 m1, t_mtx4 m2)
 	return (m);
 }
 
-t_mtx4		ft_mtx_mult(t_mtx4 m1, t_mtx4 m2)
+t_mtx4		mtx4_mult(t_mtx4 m1, t_mtx4 m2)
 {
 	t_mtx4	m;
 

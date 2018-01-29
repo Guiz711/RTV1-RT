@@ -2,7 +2,7 @@
 
 <scene render_mode="4">
 	<camera>
-		<origin x="0" y="0" z="-3" w="1"/>
+		<origin x="0" y="0" z="20" w="1"/>
 		<orientation x="0" y="0" z="1" w="0"/>
 		<amb_i x="0.2" y="0.2" z="0.2"/>
 	</camera>

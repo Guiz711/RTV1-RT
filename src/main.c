@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/29 12:10:23 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 16:29:29 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,14 @@ void	init_fct_arr(t_args *args)
 }
 */
 
+t_mtx4	get_camera_to_world(t_view *view)
+{
+	t_mtx4	translation;
+
+	translation = translate(view->orig.x, view->orig.y, view->orig.z);
+	return (translation);
+}
+
 int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 {
 	(void)path;
@@ -289,7 +297,7 @@ int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 	init_fct_arr(args);
 	args->env = env;
 	args->scene = scene;
-	args->pix_buf = init_pix_buffer(env, ft_translate(0, 0, 20));
+	args->pix_buf = init_pix_buffer(env, get_camera_to_world(&scene->cam));
 	return (SUCCESS);
 }
 

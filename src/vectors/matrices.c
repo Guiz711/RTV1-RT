@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 11:01:48 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/12/27 22:23:07 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:18:59 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** Returns an initialized matrix type struct.
 */
 
-t_mtx4		ft_translate(double t_x, double t_y, double t_z)
+t_mtx4		translate(double t_x, double t_y, double t_z)
 {
 	t_mtx4	mtx;
 
@@ -41,7 +41,7 @@ t_mtx4		ft_translate(double t_x, double t_y, double t_z)
 	return (mtx);
 }
 
-t_mtx4		ft_rotation(t_axis axis, double pitch)
+t_mtx4		rotate(t_axis axis, double pitch)
 {
 	t_mtx4	mtx;
 
@@ -64,7 +64,7 @@ t_mtx4		ft_rotation(t_axis axis, double pitch)
 	return (mtx);
 }
 
-t_mtx4		ft_scale(double pitch_x, double pitch_y, double pitch_z)
+t_mtx4		scale(double pitch_x, double pitch_y, double pitch_z)
 {
 	t_mtx4	mtx;
 
@@ -87,7 +87,7 @@ t_mtx4		ft_scale(double pitch_x, double pitch_y, double pitch_z)
 	return (mtx);
 }
 
-t_mtx4		ft_identity(void)
+t_mtx4		identity(void)
 {
 	t_mtx4	mtx;
 

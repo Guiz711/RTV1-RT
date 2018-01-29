@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/01/26 11:55:59 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/01/29 14:49:41 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = rtv1
 
 # For linux, write LINUX
 # For mac, write MACOS
-OS = LINUX
+OS = MACOS
 
 ifeq ($(OS),LINUX)
 	INC_FLAGS = -I./includes/linux -I./libft/includes -I./includes/libxml \
