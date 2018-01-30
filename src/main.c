@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/29 16:29:29 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 10:49:56 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,10 +278,17 @@ void	init_fct_arr(t_args *args)
 
 t_mtx4	get_camera_to_world(t_view *view)
 {
+	t_vec3	orient;
 	t_mtx4	translation;
+	t_mtx4	rotation;
 
+	orient = init_vec3(RAD(view->orient.x),
+		RAD(view->orient.y), RAD(view->orient.z));
 	translation = translate(view->orig.x, view->orig.y, view->orig.z);
-	return (translation);
+	printf("%f; %f; %f\n", view->orient.x, view->orient.y, view->orient.z);
+	//rotation = rotate(Y, RAD(view->orient.y));
+	rotation = quat_to_mtx(euler_to_quat(orient));
+	return (mtx4_mult(translation, rotation));
 }
 
 int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)

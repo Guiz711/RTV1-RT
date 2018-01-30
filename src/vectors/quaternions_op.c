@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 16:44:36 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/29 17:48:42 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:01:36 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,19 @@ t_vec4	mult_quat(t_vec4 q1, t_vec4 q2)
 	t_vec4	qr;
 
 	qr.x = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
-	qr.y = q1.w * q2.y - q1.x * q2.z + q1.y * q2.w + q1.z * q2.x;
-	qr.z = q1.w * q2.z + q1.x * q2.y - q1.y * q2.x + q1.z * q2.w;
+	qr.y = q1.w * q2.y + q1.y * q2.w + q1.z * q2.x - q1.x * q2.z;
+	qr.z = q1.w * q2.z + q1.z * q2.w + q1.x * q2.y - q1.y * q2.x;
 	qr.w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;
 	return (qr);
 }
+
+// t_vec4	mult_quat(t_vec4 q1, t_vec4 q2)
+// {
+// 	t_vec4	qr;
+
+// 	qr.x = q1.w * q2.x + q1.x * q2.w + q1.y * q2.z - q1.z * q2.y;
+// 	qr.y = q1.w * q2.y + q1.y * q2.w + q1.z * q2.x - q1.x * q2.z;
+// 	qr.z = q1.w * q2.z + q1.z * q2.w + q1.x * q2.y - q1.y * q2.x;
+// 	qr.w = q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;
+// 	return (normalize_quat(qr));
+// }

@@ -6,16 +6,17 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:14:06 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/29 17:48:39 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 10:05:49 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTORS_H
 # define VECTORS_H
 
-# include <math.h>;
+# include <math.h>
 
 # define RAD(x) (M_PI * (x) / 180)
+# define SQUARE(x) ((x) * (x))
 
 typedef enum	e_axis
 {
@@ -76,12 +77,18 @@ double			dot_vec4(t_vec4 u, t_vec4 v);
 t_vec4			dmult_vec4(t_vec4 u, double n);
 t_vec3			dmult_vec3(t_vec3 u, double n);
 t_vec3			mult_vec3(t_vec3 u, t_vec3 v);
+t_vec3			vec4_to_vec3(t_vec4  v);
 
 t_mtx4			mtx4_mult(t_mtx4 m1, t_mtx4 m2);
 t_mtx4			scale(double pitch_x, double pitch_y, double pitch_z);
 t_mtx4			translate(double t_x, double t_y, double t_z);
-t_mtx4			rotation(t_axis axis, double pitch);
+t_mtx4			rotate(t_axis axis, double pitch);
 
+t_vec4			axisangle_to_quat(t_vec4 axis, double angle);
+t_vec4			euler_to_quat(t_vec3 rot);
+t_mtx4			quat_to_mtx(t_vec4	q);
+double			norm_quat(t_vec4 q);
+t_vec4			normalize_quat(t_vec4 q);
 t_vec4			mult_quat(t_vec4 q1, t_vec4 q2);
 
 #endif

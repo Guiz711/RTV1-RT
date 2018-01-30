@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/01/29 14:49:41 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/01/30 10:07:50 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = rtv1
 
 # For linux, write LINUX
 # For mac, write MACOS
-OS = MACOS
+OS = LINUX
 
 ifeq ($(OS),LINUX)
 	INC_FLAGS = -I./includes/linux -I./libft/includes -I./includes/libxml \
@@ -42,7 +42,7 @@ SRC_NAME = main.c init_rays.c error.c obj_list.c intersection.c trace_ray.c \
 SRC_VEC_PATH = vectors
 
 SRC_VEC_NAME = vec_init.c vec_add.c vec_rev.c vec_sub.c vec_op.c matrices.c \
-				matrices_calc.c matrices_op.c
+				matrices_calc.c matrices_op.c quaternions.c quaternions_op.c
 
 VECTORS = $(addprefix $(SRC_VEC_PATH)/,$(SRC_VEC_NAME))
 

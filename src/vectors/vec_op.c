@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:20:56 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/29 17:08:52 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 10:01:23 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,9 @@ t_vec3	mult_vec3(t_vec3 u, t_vec3 v)
 	u.y *= v.y;
 	u.z *= v.z;
 	return (u);
+}
+
+t_vec3	vec4_to_vec3(t_vec4  v)
+{
+	return (init_vec3(v.x, v.y, v.z));
 }
