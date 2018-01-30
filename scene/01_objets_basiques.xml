@@ -2,8 +2,8 @@
 
 <scene render_mode ="2">
 	<camera>
-		<origin x ="0" y="0" z="-3" w="1"/>
-		<orientation x="0" y="0" z="1" w="0"/>
+		<origin x ="0" y="0" z="20" w="1"/>
+		<orientation x="0" y="0" z="0" w="0"/>
 		<amb_i r="0.05" g="0.05" b="0.05"/>
 	</camera>
 

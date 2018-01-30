@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec_op.c                                           :+:      :+:    :+:   */
+/*   vec_op_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/16 13:20:56 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 10:01:23 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:59:20 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "vectors.h"
 
 double	norm_vec4(t_vec4 v)
 {
@@ -60,43 +60,4 @@ t_vec4	cross_vec3(t_vec3 u, t_vec3 v)
 	w.y = u.z * v.x - u.x * v.z;
 	w.z = u.x * v.y - u.y * v.x;
 	return (w);
-}
-
-double	dot_vec4(t_vec4 u, t_vec4 v)
-{
-	return(u.x * v.x + u.y * v.y + u.z * v.z + u.w * v.w);
-}
-
-double	dot_vec3(t_vec3 u, t_vec3 v)
-{
-	return(u.x * v.x + u.y * v.y + u.z * v.z);
-}
-
-t_vec4	dmult_vec4(t_vec4 u, double n)
-{
-	u.x *= n;
-	u.y *= n;
-	u.z *= n;
-	return (u);
-}
-
-t_vec3	dmult_vec3(t_vec3 u, double n)
-{
-	u.x *= n;
-	u.y *= n;
-	u.z *= n;
-	return (u);
-}
-
-t_vec3	mult_vec3(t_vec3 u, t_vec3 v)
-{
-	u.x *= v.x;
-	u.y *= v.y;
-	u.z *= v.z;
-	return (u);
-}
-
-t_vec3	vec4_to_vec3(t_vec4  v)
-{
-	return (init_vec3(v.x, v.y, v.z));
 }

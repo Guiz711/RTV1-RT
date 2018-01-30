@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 09:59:53 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:06:23 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <stdint.h>
 # include <pthread.h>
 
+# define KEY_PRESS_MASK	(1L<<0)  
+# define KEY_PRESS 2
 
 # define TRUE 1
 # define FALSE 0
@@ -263,6 +265,7 @@ void		phong_model(t_args *args, t_light *lgt, size_t size);
 int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
 int			manage_threads(t_args *args);
+int			keypress(int keycode, void *args);
 
 /*
 **	Primitive intersection functions

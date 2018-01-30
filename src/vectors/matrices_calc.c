@@ -6,11 +6,15 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 12:15:36 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/10/24 17:08:47 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:59:38 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "vectors.h"
+
+/*
+** transforms a point by a matrix
+*/
 
 t_vec4	new_coord(t_vec4 p, t_mtx4 mtx)
 {
@@ -26,15 +30,3 @@ t_vec4	new_coord(t_vec4 p, t_mtx4 mtx)
 	p.w = tmp[3];
 	return (p);
 }
-
-/*void	update_map(t_map *map, t_mtx4 mtx)
-{
-	int		i;
-
-	i = 0;
-	while (i < map->vlst->size)
-	{
-		map->vlst->cache[i].pos = new_coord(map->vlst->cache[i].pos, mtx);
-		i++;
-	}
-}*/

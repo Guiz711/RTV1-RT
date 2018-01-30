@@ -6,11 +6,11 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:20:46 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/29 15:18:23 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:58:57 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "vectors.h"
 
 /*
 ** ft_mtx_mult(t_mtx4 mtx1, t_mtx4 mtx2) : Multiplies two matrices together.

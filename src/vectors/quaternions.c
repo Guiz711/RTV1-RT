@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 17:35:53 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 11:08:31 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 11:48:09 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,4 @@ t_vec4	euler_to_quat(t_vec3 rot)
 	y_quat = axisangle_to_quat(init_vec4(0, 1, 0, 0), -rot.y);
 	z_quat = axisangle_to_quat(init_vec4(0, 0, 1, 0), -rot.z);
 	return (mult_quat(z_quat, mult_quat(x_quat, y_quat)));
-	//return (z_quat);
-}
-
-t_mtx4	quat_to_mtx(t_vec4	q)
-{
-	t_mtx4	m;
-
-	m.a[0] = 1 - 2 * (q.y * q.y + q.z * q.z);
-	m.a[1] = 2 * (q.x * q.y + q.z * q.w);
-	m.a[2] = 2 * (q.x * q.z - q.y * q.w);
-	m.a[3] = 0;
-	m.b[0] = 2 * (q.x * q.y - q.z * q.w);
-	m.b[1] = 1 - 2 * (q.x * q.x + q.z * q.z);
-	m.b[2] = 2 * (q.y * q.z + q.x * q.w);
-	m.b[3] = 0;
-	m.c[0] = 2 * (q.x * q.z + q.y * q.w);
-	m.c[1] = 2 * (q.y * q.z - q.x * q.w);
-	m.c[2] = 1 - 2 * (q.x * q.x + q.y * q.y);
-	m.c[3] = 0;
-	m.d[0] = 0;
-	m.d[1] = 0;
-	m.d[2] = 0;
-	m.d[3] = 1;
-	return (m);
 }

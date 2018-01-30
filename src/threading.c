@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/26 13:48:07 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 12:53:48 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		manage_threads(t_args *args)
 		{
 			while (i--)
 				pthread_cancel(t[i]);
-			return (0);
+			return (FAILURE);
 		}
 		i++;
 	}
@@ -73,8 +73,8 @@ int		manage_threads(t_args *args)
 	while (i < THREADS_NUMBER)
 	{
 		if (pthread_join(t[i], NULL))
-			return (0);
+			return (FAILURE);
 		i++;
 	}
-	return (1);
+	return (SUCCESS);
 }

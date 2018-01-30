@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/01/30 10:07:50 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/01/30 13:09:05 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,12 +37,13 @@ CFLAGS = -Wall -Wextra -Werror
 SRC_PATH = src
 
 SRC_NAME = main.c init_rays.c error.c obj_list.c intersection.c trace_ray.c \
-			normal.c shader.c threading.c
+			normal.c shader.c threading.c events.c
 
 SRC_VEC_PATH = vectors
 
-SRC_VEC_NAME = vec_init.c vec_add.c vec_rev.c vec_sub.c vec_op.c matrices.c \
-				matrices_calc.c matrices_op.c quaternions.c quaternions_op.c
+SRC_VEC_NAME = vec_init.c vec_add.c vec_rev.c vec_sub.c vec_op_1.c vec_op_2.c \
+				matrices.c matrices_calc.c matrices_op.c quaternions.c \
+				quaternions_op.c
 
 VECTORS = $(addprefix $(SRC_VEC_PATH)/,$(SRC_VEC_NAME))
 

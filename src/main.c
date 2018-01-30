@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 10:49:56 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:06:39 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,115 +43,6 @@ int				main(int argc, char **argv)
 	events(&args);
 	return (0);
 }*/
-
-void	init_scene(t_scene *scn)
-{
-	t_sphere	sphere;
-	t_plane		plane;
-	t_cylinder	cyl;
-	t_cone		cone;
-	t_light		light;
-	t_obj_lst	*new;
-
-	sphere.center = init_vec4(0, 5, -10, 1);
-	sphere.radius = 2;
-	scn->objs = obj_lstnew(SPHERE, &sphere, sizeof(sphere));
-	scn->objs->material.model = PHONG;
-	scn->objs->material.diff = init_vec3(0.2, 0.8, 0.2); //0x0000FFFF;
-	scn->objs->material.amb = init_vec3(0.2, 0.8, 0.2); //0x0000FFFF;
-	scn->objs->material.spec = init_vec3(1, 1, 1); //0x0000FFFF;
-	scn->objs->material.shin = 80;
-
-	plane.p = init_vec4(0, 0, 0.5, 1);
-	plane.normal = normalize_vec4(init_vec4(0, 0, 1, 0));
-	new = obj_lstnew(PLANE, &plane, sizeof(plane));
-	new->material.model = PHONG;
-	new->material.amb = init_vec3(0.5, 0.5, 0.8);//0x00FFFFFF;
-	new->material.diff = init_vec3(0.5, 0.5, 0.8);//0x00FFFFFF;
-	new->material.spec = init_vec3(1, 1, 1);//0x00FFFFFF;
-	new->material.shin = 50;
-	obj_lstadd(&(scn->objs), new);
-
-	cyl.p = init_vec4(-15, 0, -10, 1);
-	cyl.dir = init_vec4(0, 1, 0, 0);
-	cyl.radius = 2;
-	new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl));
-	new->material.model = PHONG;
-	new->material.amb = init_vec3(0.2, 0.2, 0.8);//0x00FFFFFF;
-	new->material.diff = init_vec3(0.2, 0.2, 0.8);//0x00FFFFFF;
-	new->material.spec = init_vec3(0.05, 0.05, 0.05);//0x00FFFFFF;
-	new->material.shin = 1;
-	obj_lstadd(&(scn->objs), new);
-
-	cyl.p = init_vec4(15, 0, -10, 1);
-	cyl.dir = init_vec4(0, 1, 0, 0);
-	cyl.radius = 0.5;
-	new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl));
-	new->material.model = PHONG;
-	new->material.amb = init_vec3(0.9, 0.6, 0.05);//0x00FFFFFF;
-	new->material.diff = init_vec3(0.9, 0.6, 0.05);//0x00FFFFFF;
-	new->material.spec = init_vec3(0.2, 0.2, 0.2);//0x00FFFFFF;
-	new->material.shin = 10;
-	//obj_lstadd(&(scn->objs), new);
-
-	cone.p = init_vec4(15, 0, -10, 1);
-	cone.dir = init_vec4(0, 1, 0, 0);
-	cone.angle = 45;
-	cone.ang_tan = 1 + SQUARE(tan(RAD(cone.angle * 0.5)));
-	new = obj_lstnew(CONE, &cone, sizeof(cone));
-	new->material.model = PHONG;
-	new->material.amb = init_vec3(0.9, 0.6, 0.05);//0x00FFFFFF;
-	new->material.diff = init_vec3(0.9, 0.6, 0.05);//0x00FFFFFF;
-	new->material.spec = init_vec3(0.5, 0.5, 0.5);//0x00FFFFFF;
-	new->material.shin = 10;
-	obj_lstadd(&(scn->objs), new);
-
-	light.type = POINT;
-	light.vec = init_vec4(-20, 0, 20, 1);
-	//light.vec = normalize_vec4(init_vec4(1, -0.5, -0.5, 0));
-	light.range = 3000;
-	light.diff_i = init_vec3(10, 10, 10); //0x00FFFFFF
-	light.spec_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF
-	light.atten = init_vec3(0.0005, 0.0005, 1);
-	scn->light = ft_lstnew(&light, sizeof(light));
-
-	light.type = POINT;
-	light.vec = init_vec4(-20.3, 0, 20, 1);
-	light.range = 3000;
-	light.diff_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
-	light.spec_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
-	light.atten = init_vec3(0.0005, 0.0005, 1);
-	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
-
-		light.type = POINT;
-	light.vec = init_vec4(-20.3, 0, 20, 1);
-	light.range = 3000;
-	light.diff_i = init_vec3(1, 1, 1); //0x00FFFFFF*/
-	light.spec_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
-	light.atten = init_vec3(0.0005, 0.0005, 1);
-	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
-
-	light.type = POINT;
-	light.vec = init_vec4(-20, -0.3, 20, 1);
-	light.range = 3000;
-	light.diff_i = init_vec3(0.6, 0.6, 0.6); //0x00FFFFFF*/
-	light.spec_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
-	light.atten = init_vec3(0.0005, 0.0005, 1);
-	ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
-
-	light.type = POINT;
-	light.vec = init_vec4(-20.3, -0.3, 20, 1);
-	light.range = 3000;
-	light.diff_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
-	light.spec_i = init_vec3(0.2, 0.2, 0.2); //0x00FFFFFF*/
-	light.atten = init_vec3(0.0005, 0.0005, 1);
-	//ft_lstadd(&scn->light, ft_lstnew(&light, sizeof(light)));
-
-	scn->cam.orient = init_vec4(0, 0, 1, 0);
-	scn->cam.orig = init_vec4(0, 0, -3, 1);
-	scn->amb_i = init_vec3(0.15, 0.15, 0.15);
-	scn->render_mode = 2;
-}
 
 int		init_img(t_env	*env)
 {
@@ -201,8 +92,6 @@ void	init_fct_arr(t_args *args)
 	args->rdr_fct[3] = &render_mode_3;
 	args->rdr_fct[4] = &render_mode_4;
 	args->spec_fct[PHONG - 1] = &specular_phong; 
-	//args->shd_fct[LAMBERT] = &lambert_model;
-	//args->shd_fct[PHONG] = &phong_model;
 }
 
 /*static void	print_hoho(t_scene *scene)
@@ -285,8 +174,6 @@ t_mtx4	get_camera_to_world(t_view *view)
 	orient = init_vec3(RAD(view->orient.x),
 		RAD(view->orient.y), RAD(view->orient.z));
 	translation = translate(view->orig.x, view->orig.y, view->orig.z);
-	printf("%f; %f; %f\n", view->orient.x, view->orient.y, view->orient.z);
-	//rotation = rotate(Y, RAD(view->orient.y));
 	rotation = quat_to_mtx(euler_to_quat(orient));
 	return (mtx4_mult(translation, rotation));
 }
@@ -294,7 +181,6 @@ t_mtx4	get_camera_to_world(t_view *view)
 int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 {
 	(void)path;
-	//init_scene(scene);
 	init_env(env);
 	scene->objs = NULL;
 	scene->light = NULL;
@@ -360,13 +246,15 @@ int		main(int argc, char **argv)
 	objs = scene.objs;
 	benchmark(1, "init time");
 	benchmark(0, NULL);
-	manage_threads(&args);
+	if (manage_threads(&args) == FAILURE)
+		trace_primary_rays(&args);
 	benchmark(1, "graphics calc time");
 	benchmark(0, NULL);
-	//trace_primary_rays(&args);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	benchmark(1, "display time");
 	benchmark_total(1, "total time");
+	//mlx_hook(env.win, 17, 0L, &quit, &args);
+	mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &keypress, &args);
 	mlx_loop(env.init);
 	return (0);
 }
