@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scene render_mode="4">
+	<camera>
+		<origin x="-19" y="-9" z="50" w="1"/>
+		<orientation x="10" y="-30" z="10" w="0"/>
+		<amb_i r="0.2" g="0.2" b="0.2"/>
+	</camera>
+
+	<lights>
+		<light>
+			<type type="POINT"/>
+			<vec x="-14" y="-8" z="5" w="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<spec r="0.3" g="0.3" b="0.3"/>
+			<range nb="3000"/>
+			<atten r="0.003" g="0.003" b="1"/>
+		</light>
+
+		<light>
+			<type type="POINT"/>
+			<vec x="14" y="-8" z="5" w="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<spec r="0.3" g="0.3" b="0.3"/>
+			<range nb="3000"/>
+			<atten r="0.003" g="0.003" b="1"/>
+		</light>
+	</lights>
+
+
+	<objects>
+		<plane>
+			<p x="0" y="0" z="-20" w="1"/>
+			<normal x="0" y="0" z="1" w="0"/>
+			<model model="LAMBERT"/>
+			<amb r="0.5" g="0.5" b="0.8"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="0.5" g="0.5" b="0.8"/>
+			<shininess nb="50"/>
+		</plane>
+
+		<plane>
+			<p x="-20" y="0" z="0" w="1"/>
+			<normal x="1" y="0" z="0" w="0"/>
+			<model model="LAMBERT"/>
+			<amb r="0.5" g="0.5" b="0.8"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="50"/>
+		</plane>
+
+		<plane>
+			<p x="20" y="0" z="0" w="1"/>
+			<normal x="1" y="0" z="0" w="0"/>
+			<model model="LAMBERT"/>
+			<amb r="0.5" g="0.5" b="0.8"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="50"/>
+		</plane>
+
+		<plane>
+			<p x="0" y="-10" z="0" w="1"/>
+			<normal x="0" y="1" z="0" w="0"/>
+			<model model="LAMBERT"/>
+			<amb r="0.5" g="0.5" b="0.8"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="50"/>
+		</plane>
+
+		<plane>
+			<p x="0" y="10" z="0" w="1"/>
+			<normal x="0" y="1" z="0" w="0"/>
+			<model model="LAMBERT"/>
+			<amb r="0.5" g="0.5" b="0.8"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="50"/>
+		</plane>
+
+		<sphere>
+			<radius nb="2"/>
+			<center x="0" y="-8.1" z="-6" w="1"/>
+			<model model="PHONG"/>
+			<amb r="1" g="0.1" b="0.1"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="0.1" b="0.1"/>
+			<shininess nb="80"/>
+		</sphere>
+
+		<cylindre>
+			<p x="-12" y="0" z="-12" w="1"/>
+			<dir x="0" y="1" z="0" w="0"/>
+			<radius nb="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</cylindre>
+
+		<sphere>
+			<radius nb="1.5"/>
+			<center x="-12" y="-10" z="-12" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</sphere>
+
+		<sphere>
+			<radius nb="1.5"/>
+			<center x="-12" y="10" z="-12" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</sphere>
+
+		<cylindre>
+			<p x="-12" y="0" z="0" w="1"/>
+			<dir x="0" y="1" z="0" w="0"/>
+			<radius nb="1"/>
+			<model model="PHONG"/>
+			<amb r="0.2" g="0.2" b="0.2"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</cylindre>
+
+		<sphere>
+			<radius nb="1.5"/>
+			<center x="-12" y="10" z="0" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</sphere>
+
+		<sphere>
+			<radius nb="1.5"/>
+			<center x="-12" y="-10" z="0" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</sphere>
+
+		<cylindre>
+			<p x="12" y="0" z="-12" w="1"/>
+			<dir x="0" y="1" z="0" w="0"/>
+			<radius nb="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</cylindre>
+
+		<sphere>
+			<radius nb="1.5"/>
+			<center x="12" y="-10" z="-12" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</sphere>
+
+		<sphere>
+			<radius nb="1.5"/>
+			<center x="12" y="10" z="-12" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</sphere>
+
+		<cylindre>
+			<p x="12" y="0" z="0" w="1"/>
+			<dir x="0" y="1" z="0" w="0"/>
+			<radius nb="1"/>
+			<model model="PHONG"/>
+			<amb r="0.2" g="0.2" b="0.2"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</cylindre>
+
+		<sphere>
+			<radius nb="1.5"/>
+			<center x="12" y="10" z="0" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</sphere>
+
+		<sphere>
+			<radius nb="1.5"/>
+			<center x="12" y="-10" z="0" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.6" g="0.6" b="0.6"/>
+			<diffuse r="0.2" g="0.2" b="0.2"/>
+			<shininess nb="5"/>
+		</sphere>
+	</objects>
+</scene>
