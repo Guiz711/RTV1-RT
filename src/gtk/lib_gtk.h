@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 12:46:43 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/05 16:57:32 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/07 16:58:11 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #define LIB_GTK_H
 
 #include "rtv1.h"
-#include <libft.h>
-#include <gtk/gtk.h>
+#include <libft/includes/libft.h>
+#include "gtk/gtk.h"
 
 typedef struct		s_gtk_win
 {
