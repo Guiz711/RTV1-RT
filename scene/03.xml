@@ -9,8 +9,8 @@
 
 	<lights>
 		<light>
-			<type type="POINT"/>
-			<vec x="15" y="-10" z="10" w="1"/>
+			<type type="DIRECTIONAL"/>
+			<vec x="-1" y="0" z="0" w="0"/>
 			<diffuse r="1" g="1" b="1"/>
 			<spec r="1" g="1" b="1"/>
 			<range nb="3000"/>
@@ -29,13 +29,14 @@
 			<diffuse r="0.5" g="0.2" b="0.5"/>
 			<shininess nb="150"/>
 		</sphere>
+
 		<plane>
 			<p x="0" y="0" z="-20" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>
 			<model model="LAMBERT"/>
-			<amb r="0.3" g="0.3" b="0.3"/>
+			<amb r="0.5" g="0.5" b="0.8"/>
 			<spec r="1" g="1" b="1"/>
-			<diffuse r="0.3" g="0.3" b="0.3"/>
+			<diffuse r="0.5" g="0.5" b="0.8"/>
 			<shininess nb="50"/>
 		</plane>
 	</objects>

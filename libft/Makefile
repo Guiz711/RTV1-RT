@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
+#    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/01/24 18:14:00 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/02/08 13:01:11 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,13 +52,12 @@ $(NAME): compilation_end
 	@ranlib $@
 	@echo "$(GREEN)[$(NAME)] Compilation success"
 
-compilation_end: $(OBJ_NAME)
+compilation_end: $(OBJ)
 	@echo "$(GREEN)[$(NAME)] .o created"
 
-%.o: %.c
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	@$(CC) $(CFLAGS) $(INC_FLAGS) -o $@ -c $<
-	@mv $@ $(OBJ_PATH)
 
 clean:
 	@/bin/rm -f $(OBJ)

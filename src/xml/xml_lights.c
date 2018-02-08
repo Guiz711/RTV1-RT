@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_lights.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 06:11:04 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/29 15:12:34 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:39:57 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_lgt_type		char_to_lgt(char *str)
 {
 	if (!ft_strcmp(str, "POINT"))
 		return (POINT);
+	else if (!ft_strcmp(str, "DIRECTIONAL"))
+		return (DIRECTIONAL);
 	return (POINT);
 }
 

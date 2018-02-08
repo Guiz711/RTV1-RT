@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/08 11:22:22 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/08 13:20:40 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 **	Properties
 */
 
-# define WIN_WIDTH 1200
-# define WIN_HEIGHT 660
+# define WIN_WIDTH 1440
+# define WIN_HEIGHT 780
 # define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -92,7 +92,7 @@ typedef enum	e_shd
 
 typedef	enum	e_lgt_type
 {
-	DIRECTIONNAL,
+	DIRECTIONAL,
 	POINT,
 	COUNT_LGT,
 }				t_lgt_type;
@@ -253,18 +253,13 @@ typedef struct	s_thread
 
 t_pixel		*init_pix_buffer(t_env *env, t_mtx4 v2w);
 t_vec4		new_coord(t_vec4 p, t_mtx4 mtx);
-void		error(t_err err);
-int			error_message(const char *message, size_t line);
 
 t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
 
-int			manage_shaders(t_args *args);
-void		lambert_model(t_args *args, t_light *lgt, size_t size);
 t_vec3		diffuse_lambert(t_pixel *pix, t_light *light);
 void		process_color(t_env *env, t_pixel *pix, size_t pos);
 int			shadow(t_args *args, t_pixel *pix, t_light *light);
-void		phong_model(t_args *args, t_light *lgt, size_t size);
 int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
 int			manage_threads(t_args *args);

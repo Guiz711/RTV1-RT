@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:46:04 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/08 11:22:12 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:38:18 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_vec3	diffuse_lambert(t_pixel *pix, t_light *light)
 	double			intensity;
 
 	diff = pix->inter.obj->material.diff;
-	if (light->type == DIRECTIONNAL)
+	if (light->type == DIRECTIONAL)
 	{
 		dir = rev_vec4(light->vec);
 		intensity = 1;
@@ -57,7 +57,7 @@ int		shadow(t_args *args, t_pixel *pix, t_light *light)
 	t_inter		inter;
 
 	objs = args->scene->objs;
-	if (light->type == DIRECTIONNAL)
+	if (light->type == DIRECTIONAL)
 	{
 		light_ray.dir = rev_vec4(light->vec);
 		light_ray.range = 1e6;

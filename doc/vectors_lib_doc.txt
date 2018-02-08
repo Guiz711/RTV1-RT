@@ -124,11 +124,41 @@ Return Value :
 A t_vec4 structure containing the normalized vector.
 
 
+Vector cross product :
+----------------------
 
+Prototypes :
 t_vec4			cross_vec3(t_vec3 u, t_vec3 v);
 t_vec4			cross_vec4(t_vec4 u, t_vec4 v);
+
+Calculates the cross product of two vectors.
+
+Parameters :
+Two t_vecX structures u and v
+
+Return Value :
+A t_vecX structure containing the result of the cross product.
+
+
+Vector dot product :
+--------------------
+
+Prototypes :
 double			dot_vec3(t_vec3 u, t_vec3 v);
 double			dot_vec4(t_vec4 u, t_vec4 v);
+
+Calculates the dot product of two vectors.
+
+Parameters :
+Two t_vecX structures u and v.
+
+Return Value :
+A double variable containing the result of the dot product.
+
+
+
+
+
 t_vec3			dmult_vec3(t_vec3 u, double n);
 t_vec4			dmult_vec4(t_vec4 u, double n);
 t_vec3			mult_vec3(t_vec3 u, t_vec3 v);
