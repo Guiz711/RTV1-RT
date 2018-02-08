@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 13:06:23 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/08 11:22:22 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define RTV1_H
 
 # include <errno.h> // to remove?
-# include <mlx.h>
+# include "mlx.h"
+# include "inputs.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -232,7 +233,6 @@ typedef struct	s_args
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
 	void		(*rdr_fct[6])(struct s_args*, t_pixel*, size_t);
-	//void		(*shd_fct[5])(struct s_args*, t_light*, t_pixel*);
 	t_vec3		(*spec_fct[1])(t_pixel*, t_light*);
 }				t_args;
 
@@ -261,11 +261,15 @@ void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
 
 int			manage_shaders(t_args *args);
 void		lambert_model(t_args *args, t_light *lgt, size_t size);
+t_vec3		diffuse_lambert(t_pixel *pix, t_light *light);
+void		process_color(t_env *env, t_pixel *pix, size_t pos);
+int			shadow(t_args *args, t_pixel *pix, t_light *light);
 void		phong_model(t_args *args, t_light *lgt, size_t size);
 int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
 int			manage_threads(t_args *args);
 int			keypress(int keycode, void *args);
+int			quit(t_args *args);
 
 /*
 **	Primitive intersection functions

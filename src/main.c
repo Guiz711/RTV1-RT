@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 13:06:39 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/08 11:05:42 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,7 @@ int		main(int argc, char **argv)
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	benchmark(1, "display time");
 	benchmark_total(1, "total time");
-	//mlx_hook(env.win, 17, 0L, &quit, &args);
+	mlx_hook(env.win, 17, 0L, &quit, &args);
 	mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &keypress, &args);
 	mlx_loop(env.init);
 	return (0);

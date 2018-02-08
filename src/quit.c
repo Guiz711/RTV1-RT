@@ -3,58 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 09:47:55 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/11/13 09:44:59 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/08 11:07:20 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "rtv1.h"
 
-int		quit(void *vargs, int status)
+static void		free_obj_lst(t_obj_lst **obj_lst)
 {
-	t_args	*args;
+	t_obj_lst	*tmp;
 
-	if (!vargs)
-		exit(status);
-	args = (t_args*)vargs;
-	if (args->wall.ptr)
-		mlx_destroy_image(args->env->init, args->wall.ptr);
-	if (args->wpon.ptr)
-		mlx_destroy_image(args->env->init, args->wpon.ptr);
-	if (args->map)
+	if (obj_lst)
 	{
-		if (args->map->data)
-			free(args->map->data);
-		free(args->map);
+		tmp = (*obj_lst)->next;
+		while (tmp)
+		{
+			free((*obj_lst)->content);
+			free(*obj_lst);
+			*obj_lst = tmp;
+			tmp = tmp->next;
+		}
+		*obj_lst = NULL;
 	}
-	if (args->env->win)
-		mlx_destroy_window(args->env->init, args->env->win);
-	if (args->env->init)
-		free(args->env->init);
-	exit(status);
 }
 
-void	write_error(void *args, int type)
+static void		free_light(void *content, size_t content_size)
 {
-	if (type == ERR_ARGS)
-	{
-		ft_putendl("arguments error: first argument must be the mapfile name,");
-		ft_putendl("second argument \"print\" is optional");
-	}
-	if (type == ERR_INIT_MLX)
-		ft_putendl("error: mlx pointer could'nt be initialized");
-	if (type == ERR_INIT_WIN)
-		ft_putendl("error: mlx window could'nt be initialized");
-	if (type == ERR_INIT_TEXTURES)
-		ft_putendl("error: textures could'nt be initialized");
-	if (type == ERR_MAP)
-		ft_putendl("error: map could'nt be loaded");
-	if (type == ERR_NAME)
-	{
-		ft_putendl("error: wrong map file name.");
-		ft_putendl("The map has to be valid and have the .map extension.");
-	}
-	quit(args, EXIT_FAILURE);
+	if (content_size)
+		free((t_light*)content);
+}
+
+int				quit(t_args *args)
+{
+	if (!args)
+		exit(EXIT_SUCCESS);
+	if (args->env->img)
+		mlx_destroy_image(args->env->init, args->env->img->ptr);
+	if (args->scene->objs)
+		free_obj_lst(&args->scene->objs);
+	if (args->scene->light)
+		ft_lstdel(&args->scene->light, &free_light);
+	if (args->pix_buf)
+		free(args->pix_buf);
+	if (args->env->win)
+		mlx_destroy_window(args->env->init, args->env->win);
+	// if (args->env->init)
+	// 	free(args->env->init);
+	exit(EXIT_SUCCESS);
 }
