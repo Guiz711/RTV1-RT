@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/27 17:25:02 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/09 10:06:57 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int			trace_primary_rays(t_args *args)
 		if (pix[i].inter.obj)
 			pix[i].normal = args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);
 		args->rdr_fct[args->scene->render_mode](args, &pix[i], i);
+		process_color(args->env, &pix[i], i);
 		++i;
 	}
-	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
 	return (0);
 }

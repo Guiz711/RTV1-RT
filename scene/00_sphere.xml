@@ -2,8 +2,8 @@
 
 <scene render_mode ="4">
 	<camera>
-		<origin x ="0" y="0" z="0" w="1"/>
-		<orientation x="0" y="0" z="0" w="0"/>
+		<origin x ="0" y="-15" z="0" w="1"/>
+		<orientation x="45" y="" z="0" w="0"/>
 		<amb_i r="0" g="0" b="0"/>
 	</camera>
 
@@ -24,9 +24,9 @@
 			<radius nb="2"/>
 			<center x="0" y="0" z="-10" w="1"/>
 			<model model="PHONG"/>
-			<amb r="0.2" g="0.2" b="0.2"/>
+			<amb r="0" g="0" b="0"/>
 			<spec r="1" g="1" b="1"/>
-			<diffuse r="0.5" g="0.2" b="0.5"/>
+			<diffuse r="0" g="0" b="0"/>
 			<shininess nb="150"/>
 		</sphere>
 		<plane>

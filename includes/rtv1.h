@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/08 13:20:40 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/09 14:39:46 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 
 # define THREADS_NUMBER 8
 
+# define REFLEXION_DEPTH 60
 # define EXTENSION_NAME ".scn"
 
 # define RAD(x) (M_PI * (x) / 180)
@@ -139,6 +140,7 @@ typedef struct		s_mat
 	t_shd			model;
 	t_vec3			amb;
 	t_vec3			diff;
+	t_vec3			refl;
 	t_vec3			spec;
 	double			shin;
 }					t_mat;
