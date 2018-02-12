@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/09 14:39:46 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/12 13:21:48 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 
 # define THREADS_NUMBER 8
 
-# define REFLEXION_DEPTH 60
+# define REFLEXION_DEPTH 10
 # define EXTENSION_NAME ".scn"
 
 # define RAD(x) (M_PI * (x) / 180)
@@ -165,6 +165,7 @@ typedef struct	s_inter
 {
 	double		dist;
 	t_vec4		p;
+	t_vec4		normal;
 	t_obj_lst	*obj;
 }				t_inter;
 
@@ -172,7 +173,6 @@ typedef struct	s_pixel
 {
 	t_ray		p_ray;
 	t_inter		inter;
-	t_vec4		normal;
 	t_vec3		amb_ratio;
 	t_vec3		diff_ratio;
 	t_vec3		spec_ratio;
@@ -234,7 +234,7 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
-	void		(*rdr_fct[6])(struct s_args*, t_pixel*, size_t);
+	void		(*rdr_fct[6])(struct s_args*, t_pixel*);
 	t_vec3		(*spec_fct[1])(t_pixel*, t_light*);
 }				t_args;
 
@@ -260,7 +260,7 @@ t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
 
 t_vec3		diffuse_lambert(t_pixel *pix, t_light *light);
-void		process_color(t_env *env, t_pixel *pix, size_t pos);
+void		process_color(t_env *env, t_pixel *pix, size_t pos, t_vec3 pix_col);
 int			shadow(t_args *args, t_pixel *pix, t_light *light);
 int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
@@ -290,11 +290,11 @@ t_vec4		cone_normal(t_pixel *pixel);
 **	Render management functions
 */
 
-void		render_mode_0(t_args *args, t_pixel *pix, size_t pos);
-void		render_mode_1(t_args *args, t_pixel *pix, size_t pos);
-void		render_mode_2(t_args *args, t_pixel *pix, size_t pos);
-void		render_mode_3(t_args *args, t_pixel *pix, size_t pos);
-void		render_mode_4(t_args *args, t_pixel *pix, size_t pos);
+void		render_mode_0(t_args *args, t_pixel *pix);
+void		render_mode_1(t_args *args, t_pixel *pix);
+void		render_mode_2(t_args *args, t_pixel *pix);
+void		render_mode_3(t_args *args, t_pixel *pix);
+void		render_mode_4(t_args *args, t_pixel *pix);
 
 /*
 **	Specular Highlight functions

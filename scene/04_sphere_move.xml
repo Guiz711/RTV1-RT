@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<scene render_mode ="2">
+<scene render_mode ="4">
 	<camera>
-		<origin x ="0" y="-15" z="-5" w="1"/>
-		<orientation x="70" y="-20" z="-25" w="0"/>
+		<origin x ="0" y="-10" z="0" w="1"/>
+		<orientation x="40" y="-20" z="-25" w="0"/>
+		<!-- <origin x="0" y="0" z="0" w="1"/> -->
+		<!-- <orientation x="0" y="0" z="0" w="0"/> -->
 		<amb_i r="0" g="0" b="0"/>
 	</camera>
 
@@ -42,21 +44,34 @@
 			<radius nb="2"/>
 			<center x="4" y="0" z="-10" w="1"/>
 			<model model="PHONG"/>
-			<!-- <amb r="0.3" g="0.87" b="0.937"/> -->
-			<amb r="0" g="0" b="0"/>
+			<amb r="0.3" g="0.87" b="0.937"/>
+			<!-- <amb r="0" g="0" b="0"/> -->
 			<spec r="1" g="1" b="1"/>
-			<!-- <diffuse r="0.3" g="0.87" b="0.937"/> -->
-			<diffuse r="0.5" g="0.5" b="0.5"/>
+			<diffuse r="0.3" g="0.87" b="0.937"/>
+			<!-- <diffuse r="0.5" g="0.5" b="0.5"/> -->
 			<shininess nb="150"/>
 		</sphere>
-		<!-- <plane>
+		<plane>
 			<p x="0" y="0" z="-12" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>
-			<model model="LAMBERT"/>
-			<amb r="0.4" g="0.4" b="0.4"/>
+			<model model="PHONG"/>
+			<!-- <amb r="0.4" g="0.4" b="0.4"/> -->
+			<amb r="0.1" g="0.1" b="0.1"/>
 			<spec r="1" g="1" b="1"/>
-			<diffuse r="0.4" g="0.4" b="0.4"/>
+			<!-- <diffuse r="0.4" g="0.4" b="0.4"/> -->
+			<diffuse r="0.1" g="0.1" b="0.1"/>
 			<shininess nb="50"/>
-		</plane> -->
+		</plane>
+		<plane>
+			<p x="0" y="0" z="12" w="1"/>
+			<normal x="0" y="0" z="1" w="0"/>
+			<model model="LAMBERT"/>
+			<!-- <amb r="0.4" g="0.4" b="0.4"/> -->
+			<amb r="1" g="1" b="1"/>
+			<spec r="1" g="1" b="1"/>
+			<!-- <diffuse r="0.4" g="0.4" b="0.4"/> -->
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="50"/>
+		</plane>
 	</objects>
 </scene>

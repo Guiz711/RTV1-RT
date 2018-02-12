@@ -6,40 +6,37 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 11:12:13 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/09 11:42:44 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/10 19:25:59 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	render_mode_0(t_args *args, t_pixel *pix, size_t pos)
+void	render_mode_0(t_args *args, t_pixel *pix)
 {
 	args = NULL;
-	pos = 0;
 	if (pix->inter.obj)
 		pix->diff_ratio = dmult_vec3(pix->inter.obj->material.amb, 1);
 	// process_color(args->env, pix, pos);
 }
 
-void	render_mode_1(t_args *args, t_pixel *pix, size_t pos)
+void	render_mode_1(t_args *args, t_pixel *pix)
 {
 	double	dot;
 
 	args = NULL;
-	pos = 0;
 	if (pix->inter.obj)
 	{
-		dot = fmax(0, -dot_vec4(pix->normal, pix->p_ray.dir));
+		dot = fmax(0, -dot_vec4(pix->inter.normal, pix->p_ray.dir));
 		pix->diff_ratio = dmult_vec3(pix->inter.obj->material.amb, dot);
 	}
 	// process_color(args->env, pix, pos);
 }
 
-void	render_mode_2(t_args *args, t_pixel *pix, size_t pos)
+void	render_mode_2(t_args *args, t_pixel *pix)
 {
 	t_list	*light;
 
-	pos = 0;
 	if (pix->inter.obj)
 	{
 		light = args->scene->light;
@@ -55,11 +52,10 @@ void	render_mode_2(t_args *args, t_pixel *pix, size_t pos)
 	// process_color(args->env, pix, pos);
 }
 
-void	render_mode_3(t_args *args, t_pixel *pix, size_t pos)
+void	render_mode_3(t_args *args, t_pixel *pix)
 {
 	t_list	*light;
 
-	pos = 0;
 	if (pix->inter.obj)
 	{
 		light = args->scene->light;
@@ -78,11 +74,10 @@ void	render_mode_3(t_args *args, t_pixel *pix, size_t pos)
 	// process_color(args->env, pix, pos);
 }
 
-void	render_mode_4(t_args *args, t_pixel *pix, size_t pos)
+void	render_mode_4(t_args *args, t_pixel *pix)
 {
 	t_list	*light;
 
-	pos = 0;
 	if (pix->inter.obj)
 	{
 		light = args->scene->light;
