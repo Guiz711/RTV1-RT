@@ -3,45 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:00:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 13:12:53 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:21:41 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-t_vec4	sphere_normal(t_pixel *pixel)
+t_vec4	sphere_normal(t_ray *ray, t_inter *inter)
 {
 	t_sphere	*sph;
-	t_ray		*ray;
 	t_inter		*inter;
 	t_vec4		normal;
 
-	sph = (t_sphere*)pixel->inter.obj->content;
-	ray = &pixel->p_ray;
-	inter = &pixel->inter;
+	ray = NULL;
+	sph = (t_sphere*)inter->obj->content;
 	normal = normalize_vec4(sub_vec4(inter->p, sph->center));
 	return (normal);
 }
 
-t_vec4	cylinder_normal(t_pixel *pixel)
+t_vec4	cylinder_normal(t_ray *ray, t_inter *inter)
 {
 	t_cylinder	*cyl;
-	t_ray		*ray;
 	t_vec4		diff;
 	double		m;
 	t_vec4		normal;
 	
-	cyl = (t_cylinder*)pixel->inter.obj->content;
-	ray = &pixel->p_ray;
+	cyl = (t_cylinder*)inter->obj->content;
 	diff = sub_vec4(ray->orig, cyl->p);
-	m = dot_vec4(ray->dir, cyl->dir) * pixel->inter.dist
+	m = dot_vec4(ray->dir, cyl->dir) * inter->dist
 		+ dot_vec4(diff, cyl->dir);
-	normal = init_vec4(pixel->inter.p.x - cyl->p.x - cyl->dir.x * m,
-		pixel->inter.p.y - cyl->p.y - cyl->dir.y * m,
-		pixel->inter.p.z - cyl->p.z - cyl->dir.z * m, 0);
+	normal = init_vec4(inter->p.x - cyl->p.x - cyl->dir.x * m,
+		inter->p.y - cyl->p.y - cyl->dir.y * m,
+		inter->p.z - cyl->p.z - cyl->dir.z * m, 0);
 	normal = normalize_vec4(normal);
 	return (normal);
 }

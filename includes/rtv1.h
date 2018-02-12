@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/12 13:21:48 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:10:57 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
 
 t_vec3		diffuse_lambert(t_pixel *pix, t_light *light);
-void		process_color(t_env *env, t_pixel *pix, size_t pos, t_vec3 pix_col);
+void		convert_color(t_env *env, size_t pos, t_vec3 pix_col);
 int			shadow(t_args *args, t_pixel *pix, t_light *light);
 int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
