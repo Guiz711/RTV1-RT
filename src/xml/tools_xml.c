@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:08:20 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/22 12:40:25 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:53:30 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void			ft_lstpush(t_list **alst, t_list *new)
 }
 
 /*
- * A little recursiv function to get every objects from the file.
- * xmlStrcmp find every nodes which is named "name".
-*/ 
+** A little recursiv function to get every objects from the file.
+** xmlStrcmp find every nodes which is named "name".
+*/
 
 void			get_nodes_by_name(xmlNodePtr cur, char *name, t_list **lst)
 {
@@ -78,8 +78,8 @@ void			get_nodes_by_name(xmlNodePtr cur, char *name, t_list **lst)
 }
 
 /*
- * Here we get objects from the xml file and create a lst for each
- * one.
+** Here we get objects from the xml file and create a lst for each
+** one.
 */
 
 t_list			*get_objects_nodes(xmlDocPtr doc)
@@ -106,4 +106,3 @@ t_list			*get_objects_nodes(xmlDocPtr doc)
 	}
 	return (lst2);
 }
-

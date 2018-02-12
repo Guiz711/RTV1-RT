@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_lights.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/30 06:11:04 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/08 12:39:57 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/02/12 16:51:56 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/02/12 16:52:21 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				get_lights(xmlNodePtr node, t_scene *scn)
 	t_light		light;
 	xmlNodePtr	child;
 
-	if ((child = has_child(node,"type")))
+	if ((child = has_child(node, "type")))
 		light.type = char_to_lgt(((char *)xmlGetProp(child, BAD_CAST"type")));
 	if ((child = has_child(node, "vec")))
 		light.vec = get_vec4_from_node(child);

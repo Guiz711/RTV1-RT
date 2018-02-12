@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<scene render_mode="4">
+<scene render ="4">
 	<camera>
 		<origin x="-19" y="-9" z="50" w="1"/>
 		<orientation x="10" y="-30" z="10" w="0"/>

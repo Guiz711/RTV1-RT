@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/02/08 13:01:25 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/02/12 16:33:25 by jgourdin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ SRC_NAME += $(VECTORS)
 SRC_PARSER_PATH = xml
 
 SRC_PARSER_NAME = xml_check.c xml_lights.c xml_parser.c xml_camera.c xml_errors.c \
-				xml_objects.c xml_tools.c xml_tools2.c
+				xml_objects.c xml_tools.c xml_tools2.c xml_material.c xml_transform.c
 
 PARSER = $(addprefix $(SRC_PARSER_PATH)/,$(SRC_PARSER_NAME))
 
