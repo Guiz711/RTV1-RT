@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/12 11:09:09 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/13 10:05:39 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,8 +254,9 @@ int		main(int argc, char **argv)
 	objs = scene.objs;
 	benchmark(1, "init time");
 	benchmark(0, NULL);
-	if (manage_threads(&args) == FAILURE)
-		trace_primary_rays(&args);
+	manage_threads(&args);
+	// if (manage_threads(&args) == FAILURE)
+		// trace_primary_rays(&args);
 	benchmark(1, "graphics calc time");
 	benchmark(0, NULL);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);

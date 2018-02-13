@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/12 13:35:20 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/13 11:05:25 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,35 +30,43 @@ void	init(t_thread *t, t_args *args)
 	}
 }
 
-void	reflected_ray(t_ray *ray, t_inter *inter, t_vec4 normal)
+t_ray	reflected_ray(t_vec4 ray_dir, t_inter *inter)
 {
-	double ndotr;
+	double	ndotr;
+	t_ray	refl;
 
-	ndotr = dot_vec4(normal, ray->dir);
-	ray->dir = normalize_vec4(add_vec4(ray->dir, dmult_vec4(normal, -2 * ndotr)));
-	ray->orig = add_vec4(inter->p, dmult_vec4(normal, 0.0000007));
+	ndotr = dot_vec4(inter->normal, ray_dir);
+	refl.dir = normalize_vec4(add_vec4(ray_dir,
+		dmult_vec4(inter->normal, -2 * ndotr)));
+	refl.orig = add_vec4(inter->p, dmult_vec4(inter->normal, 0.0000007));
+	refl.range = 1e6;
+	return (refl);
 }
 
-t_vec3	recursive_ray(t_args *args, t_pixel *pix, int depth, size_t i)
+t_vec3	recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 {
+	t_ray	refl;
+	t_inter	inter;
+	t_color	color_comp;
 	t_vec3	prim_color;
 	t_vec3	refl_color;
 	
 	if (depth > REFLEXION_DEPTH)
 		return (init_vec3(0, 0, 0));
+	color_comp.amb_ratio = init_vec3(0, 0, 0);
+	color_comp.diff_ratio = init_vec3(0, 0, 0);
+	color_comp.spec_ratio = init_vec3(0, 0, 0);
 	prim_color = init_vec3(0, 0, 0);
 	refl_color = init_vec3(0, 0, 0);
-	pix->inter = trace_ray(pix->p_ray, args->scene->objs, args->obj_fct, 0);
-	if (pix->inter.obj)
+	inter = trace_ray(ray, args->scene->objs, args->obj_fct, 0);
+	if (inter.obj)
 	{
-		pix->inter.normal = args->norm_fct[pix->inter.obj->content_type](pix);
-		args->rdr_fct[args->scene->render_mode](args, pix);
-		prim_color = add_vec3(pix->amb_ratio, add_vec3(pix->diff_ratio, pix->spec_ratio));
-		pix->amb_ratio = init_vec3(0, 0, 0);
-		pix->diff_ratio = init_vec3(0, 0, 0);
-		pix->spec_ratio = init_vec3(0, 0, 0);
-		reflected_ray(&pix->p_ray, &pix->inter, pix->inter.normal);
-		refl_color = recursive_ray(args, pix, depth + 1, i);
+		inter.normal = args->norm_fct[inter.obj->content_type](&ray, &inter);
+		args->rdr_fct[args->scene->render_mode](args, &ray, &inter, &color_comp);
+		prim_color = add_vec3(color_comp.amb_ratio,
+			add_vec3(color_comp.diff_ratio, color_comp.spec_ratio));
+		refl = reflected_ray(ray.dir, &inter);
+		refl_color = recursive_ray(args, refl, depth + 1, i);
 	}
 	return (add_vec3(prim_color, dmult_vec3(refl_color, 0.8)));
 }
@@ -75,16 +83,8 @@ static void	*trace_rays_threads(void *vt_args)
 	i = ((t_thread*)vt_args)->start;
 	while (i < ((t_thread*)vt_args)->end)
 	{
-		pix_col = recursive_ray(args, &pix[i], 0, i);
-		// pix[i].inter = trace_ray(pix[i].p_ray, args->scene->objs,
-		// 	args->obj_fct, 0);
-		// if (pix[i].inter.obj)
-		// {
-		// 	pix[i].normal =
-		// 		args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);
-		// }
-		// args->rdr_fct[args->scene->render_mode](args, &pix[i], i);
-		process_color(args->env, &pix[i], i, pix_col);
+		pix_col = recursive_ray(args, pix[i].p_ray, 0, i);
+		convert_color(args->env, i, pix_col);
 		++i;
 	}
 	return (NULL);
