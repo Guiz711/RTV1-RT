@@ -6,19 +6,21 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:11:12 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/29 15:20:38 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:40:07 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "xml_parser.h"
 
-void				shd_scene(int *shd_arr, char *string)
+void			shd_scene(int *shd_arr, char *string)
 {
-	char **db = NULL;
-	int i = -1;
-	int p = -1;
+	char		**db;
+	int			i;
+	int			p;
 
+	i = -1;
+	p = -1;
 	db = ft_strsplit(string, '|');
 	while (db[++i])
 	{
@@ -37,15 +39,16 @@ void				shd_scene(int *shd_arr, char *string)
 	free(db);
 }
 
-t_shd				char_to_shd(char *str)
+t_shd			char_to_shd(char *str)
 {
 	if (!ft_strcmp(str, "PHONG"))
 		return (PHONG);
 	return (LAMBERT);
 }
+
 t_vec3			get_color_from_node(xmlNodePtr node)
 {
-	t_vec3	new;
+	t_vec3		new;
 
 	new.x = atof((char *)(xmlGetProp(node, BAD_CAST"r")));
 	new.y = atof((char *)(xmlGetProp(node, BAD_CAST"g")));
@@ -55,7 +58,7 @@ t_vec3			get_color_from_node(xmlNodePtr node)
 
 t_vec4			get_vec4_from_node(xmlNodePtr node)
 {
-	t_vec4	new;
+	t_vec4		new;
 
 	new.x = atof((char *)(xmlGetProp(node, BAD_CAST"x")));
 	new.y = atof((char *)(xmlGetProp(node, BAD_CAST"y")));
@@ -64,10 +67,10 @@ t_vec4			get_vec4_from_node(xmlNodePtr node)
 	return (new);
 }
 
-int		get_modes_nbr(t_args *args)
+int				get_modes_nbr(t_args *args)
 {
-	int	mode_nbr;
+	int			mode_nbr;
 
 	mode_nbr = sizeof(args->rdr_fct) / 8;
-	return(mode_nbr);
+	return (mode_nbr);
 }

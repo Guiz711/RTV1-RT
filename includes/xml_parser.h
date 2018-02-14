@@ -6,25 +6,29 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/29 15:47:06 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/12 17:24:29 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef XML_PARSER_H
+# define XML_PARSER_H
 
-#include "rtv1.h"
-#include <libft.h>
-#include "xmlmemory.h"
-#include "parser.h"
-#include "tree.h"
-#include "xmlIO.h"
-#include "xinclude.h"
-#include "valid.h"
-#include "xmlschemas.h"
-#include "xmlstring.h"
-#include "xmlreader.h"
+# include "rtv1.h"
+# include <libft.h>
+# include "xmlmemory.h"
+# include "parser.h"
+# include "tree.h"
+# include "xmlIO.h"
+# include "xinclude.h"
+# include "valid.h"
+# include "xmlschemas.h"
+# include "xmlstring.h"
+# include "xmlreader.h"
 
+int			get_obj(xmlNodePtr node, t_scene *scn);
+t_vec4		ft_obj_translation(xmlNodePtr node, t_vec4 ori_pos);
+t_vec4		ft_obj_rotation(xmlNodePtr node, t_vec4 ori_orient);
+t_mat		xml_parse_material(xmlNodePtr node);
 t_shd		char_to_shd(char *str);
 int			xml_parse(char *path, t_scene *scn);
 int			set_objs(t_list *lst, t_scene *scn);
@@ -43,6 +47,5 @@ void		get_nodes_by_name(xmlNodePtr cur, char *name, t_list **lst);
 xmlNodePtr	has_child(xmlNodePtr a_node, char *attr);
 void		shd_scene(int *shd_arr, char *string);
 t_list		*get_objects_nodes(xmlDocPtr doc);
-
 
 #endif

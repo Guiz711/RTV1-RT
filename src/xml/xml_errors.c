@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 05:59:23 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/01/22 12:40:43 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:52:48 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "xml_parser.h"
 
 /*
- * Clean up the memory allocated by the libxml with CleanupParser.
+** Clean up the memory allocated by the libxml with CleanupParser.
 */
 
 int		xsd_error(void)
@@ -36,6 +36,7 @@ int		xml_alloc_error(void)
 	ft_putstr("Error happened\n");
 	exit(-1);
 }
+
 int		xml_error(void)
 {
 	ft_putstr("Wrong xml file\n");

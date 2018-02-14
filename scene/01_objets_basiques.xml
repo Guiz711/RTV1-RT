@@ -35,9 +35,9 @@
 			<center x="0" y="5" z="-10" w="1"/>
 			<model model="PHONG"/>
 			<amb r="0.2" g="0.8" b="0.2"/>
-			<spec r="1" g="1" b="1"/>
+			<spec r="1.5" g="1.5" b="1.5"/>
 			<diffuse r="0.2" g="0.8" b="0.2"/>
-			<shininess nb="80"/>
+			<shininess nb="100"/>
 		</sphere>
 
 		<cylindre>
