@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:46:04 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/13 09:53:17 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:38:18 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ double	light_attenuation(t_light *light, double dist)
 	return (fmax(0, fmin(1, intensity)));
 }
 
-t_vec3	diffuse_lambert(t_inter *inter, t_light *light)
+t_vec3	diffuse_lambert(t_pixel *pix, t_light *light)
 {
 	t_vec4			dir;
 	t_vec3			col;
@@ -31,7 +31,7 @@ t_vec3	diffuse_lambert(t_inter *inter, t_light *light)
 	double			ratio;
 	double			intensity;
 
-	diff = inter->obj->material.diff;
+	diff = pix->inter.obj->material.diff;
 	if (light->type == DIRECTIONAL)
 	{
 		dir = rev_vec4(light->vec);
@@ -39,22 +39,24 @@ t_vec3	diffuse_lambert(t_inter *inter, t_light *light)
 	}
 	else
 	{
-		dir = rev_vec4(sub_vec4(inter->p, light->vec));
+		dir = rev_vec4(sub_vec4(pix->inter.p, light->vec));
 		intensity = light_attenuation(light, norm_vec4(dir));
 		dir = normalize_vec4(dir);
 	}
-	ratio = intensity * dot_vec4(inter->normal, dir);
+	ratio = intensity * dot_vec4(pix->normal, dir);
 	col.z = fmax(0, diff.z * light->diff_i.z * ratio);
 	col.y = fmax(0, diff.y * light->diff_i.y * ratio);
 	col.x = fmax(0, diff.x * light->diff_i.x * ratio);
 	return (col);
 }
 
-int		shadow(t_args *args, t_inter *inter, t_light *light)
+int		shadow(t_args *args, t_pixel *pix, t_light *light)
 {
 	t_ray		light_ray;
-	t_inter		obturation;
+	t_obj_lst	*objs;
+	t_inter		inter;
 
+	objs = args->scene->objs;
 	if (light->type == DIRECTIONAL)
 	{
 		light_ray.dir = rev_vec4(light->vec);
@@ -62,32 +64,33 @@ int		shadow(t_args *args, t_inter *inter, t_light *light)
 	}
 	else
 	{
-		light_ray.dir = rev_vec4(sub_vec4(inter->p, light->vec));;
+		light_ray.dir = rev_vec4(sub_vec4(pix->inter.p, light->vec));;
 		light_ray.range = norm_vec4(light_ray.dir);
 		light_ray.dir = normalize_vec4(light_ray.dir);
 	}
-	light_ray.orig = add_vec4(inter->p,
-		dmult_vec4(inter->normal, 0.000007));
+	light_ray.orig = add_vec4(pix->inter.p, dmult_vec4(pix->normal, 0.000007));
 	light_ray.orig.w = 1;
-	obturation = trace_ray(light_ray, args->scene->objs, args->obj_fct, 1);
-	if (obturation.dist < light_ray.range)
+	inter = trace_ray(light_ray, args->scene->objs, args->obj_fct, 1);
+	if (inter.dist < light_ray.range)
 		return (0);
-	return (1);
+	return (1);	
 }
 
-t_vec3	specular_phong(t_inter *inter, t_light *light)
+t_vec3	specular_phong(t_pixel *pix, t_light *light)
 {
 	t_vec3	ratio;
-	t_vec4	light_dir;
-	t_ray	refl;
+	t_vec4	r;
+	t_vec4	ldir;
+	double	ndotl;
 
-	light_dir = normalize_vec4(rev_vec4(sub_vec4(inter->p, light->vec)));
-	refl = reflected_ray(light_dir, inter);
-	ratio.x = light->spec_i.x * inter->obj->material.spec.x *
-		(pow(dot_vec4(inter->normal, refl.dir), inter->obj->material.shin));
-	ratio.y = light->spec_i.y * inter->obj->material.spec.y *
-		(pow(dot_vec4(inter->normal, refl.dir), inter->obj->material.shin));
-	ratio.z = light->spec_i.z * inter->obj->material.spec.z *
-		(pow(dot_vec4(inter->normal, refl.dir), inter->obj->material.shin));
+	ldir = normalize_vec4(rev_vec4(sub_vec4(pix->inter.p, light->vec)));
+	ndotl = 2 * dot_vec4(pix->normal, ldir);
+	r = normalize_vec4(sub_vec4(dmult_vec4(pix->normal, ndotl), ldir));
+	ratio.x = light->spec_i.x * pix->inter.obj->material.spec.x *
+		(pow(dot_vec4(pix->normal, r), pix->inter.obj->material.shin));
+	ratio.y = light->spec_i.y * pix->inter.obj->material.spec.y *
+		(pow(dot_vec4(pix->normal, r), pix->inter.obj->material.shin));
+	ratio.z = light->spec_i.z * pix->inter.obj->material.spec.z *
+		(pow(dot_vec4(pix->normal, r), pix->inter.obj->material.shin));
 	return (ratio);
 }
