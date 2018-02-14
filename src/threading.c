@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/13 11:05:25 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:49:11 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ t_vec3	recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 			add_vec3(color_comp.diff_ratio, color_comp.spec_ratio));
 		refl = reflected_ray(ray.dir, &inter);
 		refl_color = recursive_ray(args, refl, depth + 1, i);
+		refl_color = mult_vec3(refl_color, inter.obj->material.refl);
 	}
-	return (add_vec3(prim_color, dmult_vec3(refl_color, 0.8)));
+	return (add_vec3(prim_color, refl_color));
 }
 
 static void	*trace_rays_threads(void *vt_args)

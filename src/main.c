@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/13 10:05:39 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:55:27 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,33 @@ int		get_coord(int button, int x, int y, void *args)
 	return (1);
 }
 
+void	add_refl_ratio(t_scene *scene)
+{
+	t_obj_lst		*tmp;
+	unsigned int	id;
+
+	tmp = scene->objs;
+	id = 0;
+	while (tmp)
+	{
+		tmp->id = id++;
+		if (tmp->id == 3)
+			tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
+		else if (tmp->id == 0)
+			tmp->material.refl = init_vec3(1, 1, 1);
+		else if (tmp->id == 1)
+			tmp->material.refl = init_vec3(1, 1, 1);
+		// else if (tmp->id == 2)
+			// tmp->material.refl = init_vec3(0.5, 0.5, 0.5);
+		// else if (tmp->id == 4)
+			// tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
+		else
+			tmp->material.refl = init_vec3(0, 0, 0);
+		tmp = tmp->next;
+	}
+	
+}
+
 int		main(int argc, char **argv)
 {
 	t_args	args;
@@ -252,6 +279,7 @@ int		main(int argc, char **argv)
 	benchmark(0, NULL);
 	init_args(&args, &env, &scene, argv[1]);
 	objs = scene.objs;
+	add_refl_ratio(&scene);
 	benchmark(1, "init time");
 	benchmark(0, NULL);
 	manage_threads(&args);

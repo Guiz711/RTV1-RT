@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/13 10:21:15 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/14 13:54:30 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 
 # define THREADS_NUMBER 8
 
-# define REFLEXION_DEPTH 2
+# define REFLEXION_DEPTH 3
 # define EXTENSION_NAME ".scn"
 
 # define RAD(x) (M_PI * (x) / 180)
@@ -147,6 +147,7 @@ typedef struct		s_mat
 
 typedef	struct		s_o_lst
 {
+	unsigned int	id;
 	t_obj_type		content_type;
 	void			*content;
 	size_t			content_size;
