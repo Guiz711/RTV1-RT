@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/12 17:19:14 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/13 10:21:15 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 
 # define THREADS_NUMBER 8
 
+# define REFLEXION_DEPTH 2
 # define EXTENSION_NAME ".scn"
 
 # define RAD(x) (M_PI * (x) / 180)
@@ -139,6 +140,7 @@ typedef struct		s_mat
 	t_shd			model;
 	t_vec3			amb;
 	t_vec3			diff;
+	t_vec3			refl;
 	t_vec3			spec;
 	double			shin;
 }					t_mat;
@@ -163,17 +165,22 @@ typedef struct	s_inter
 {
 	double		dist;
 	t_vec4		p;
+	t_vec4		normal;
 	t_obj_lst	*obj;
 }				t_inter;
+
+typedef struct	s_color
+{
+	t_vec3		amb_ratio;
+	t_vec3		diff_ratio;
+	t_vec3		spec_ratio;
+}				t_color;
 
 typedef struct	s_pixel
 {
 	t_ray		p_ray;
 	t_inter		inter;
-	t_vec4		normal;
-	t_vec3		amb_ratio;
-	t_vec3		diff_ratio;
-	t_vec3		spec_ratio;
+	t_color		color;
 }				t_pixel;
 
 typedef struct	s_view
@@ -201,7 +208,7 @@ typedef struct	s_poly2
 }				t_poly2;
 
 typedef double	(*t_inter_fct)(t_ray, void*);
-typedef t_vec4	(*t_norm_fct)(t_pixel*);
+typedef t_vec4	(*t_norm_fct)(t_ray*, t_inter*);
 
 typedef struct	s_scene
 {
@@ -232,8 +239,8 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
-	void		(*rdr_fct[6])(struct s_args*, t_pixel*, size_t);
-	t_vec3		(*spec_fct[1])(t_pixel*, t_light*);
+	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
+	t_vec3		(*spec_fct[1])(t_inter*, t_light*);
 }				t_args;
 
 typedef struct	s_error
@@ -257,14 +264,15 @@ t_vec4		new_coord(t_vec4 p, t_mtx4 mtx);
 t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
 
-t_vec3		diffuse_lambert(t_pixel *pix, t_light *light);
-void		process_color(t_env *env, t_pixel *pix, size_t pos);
-int			shadow(t_args *args, t_pixel *pix, t_light *light);
+t_vec3		diffuse_lambert(t_inter *inter, t_light *light);
+void		convert_color(t_env *env, size_t pos, t_vec3 pix_col);
+int			shadow(t_args *args, t_inter *inter, t_light *light);
 int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
 int			manage_threads(t_args *args);
 int			keypress(int keycode, void *args);
 int			quit(t_args *args);
+t_ray		reflected_ray(t_vec4 ray_dir, t_inter *inter);
 
 /*
 **	Primitive intersection functions
@@ -279,26 +287,26 @@ double		cylinder_intersection(t_ray ray, void *obj);
 **	Primitive surface normal functions
 */
 
-t_vec4		sphere_normal(t_pixel *pixel);
-t_vec4		plane_normal(t_pixel *pixel);
-t_vec4		cylinder_normal(t_pixel *pixel);
-t_vec4		cone_normal(t_pixel *pixel);
+t_vec4		sphere_normal(t_ray *ray, t_inter *inter);
+t_vec4		plane_normal(t_ray *ray, t_inter *inter);
+t_vec4		cylinder_normal(t_ray *ray, t_inter *inter);
+t_vec4		cone_normal(t_ray *ray, t_inter *inter);
 
 /*
 **	Render management functions
 */
 
-void		render_mode_0(t_args *args, t_pixel *pix, size_t pos);
-void		render_mode_1(t_args *args, t_pixel *pix, size_t pos);
-void		render_mode_2(t_args *args, t_pixel *pix, size_t pos);
-void		render_mode_3(t_args *args, t_pixel *pix, size_t pos);
-void		render_mode_4(t_args *args, t_pixel *pix, size_t pos);
+void	render_mode_0(t_args *args, t_ray *ray, t_inter *inter, t_color *color);
+void	render_mode_1(t_args *args, t_ray *ray, t_inter *inter, t_color *color);
+void	render_mode_2(t_args *args, t_ray *ray, t_inter *inter, t_color *color);
+void	render_mode_3(t_args *args, t_ray *ray, t_inter *inter, t_color *color);
+void	render_mode_4(t_args *args, t_ray *ray, t_inter *inter, t_color *color);
 
 /*
 **	Specular Highlight functions
 */
 
-t_vec3		specular_phong(t_pixel *pix, t_light *light);
+t_vec3		specular_phong(t_inter *inter, t_light *light);
 
 /*
 **	Quit and initialize functions

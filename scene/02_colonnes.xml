@@ -2,10 +2,10 @@
 
 <scene render ="4">
 	<camera>
-		<!-- <origin x="-19" y="-9" z="50" w="1"/> -->
-		<origin x="0" y="0" z="30" w="1"/>
-		<!-- <orientation x="10" y="-30" z="10" w="0"/> -->
+		<origin x="0" y="-" z="30" w="1"/>
 		<orientation x="0" y="0" z="0" w="0"/>
+		<!-- <origin x="-19" y="-9" z="50" w="1"/> -->
+		<!-- <orientation x="10" y="-30" z="10" w="0"/> -->
 		<amb_i r="0.2" g="0.2" b="0.2"/>
 	</camera>
 
@@ -16,7 +16,7 @@
 			<diffuse r="1" g="1" b="1"/>
 			<spec r="0.3" g="0.3" b="0.3"/>
 			<range nb="3000"/>
-			<atten r="0.003" g="0.003" b="1"/>
+			<atten r="0.01" g="0.01" b="1"/>
 		</light>
 
 		<light>
@@ -25,7 +25,7 @@
 			<diffuse r="1" g="1" b="1"/>
 			<spec r="0.3" g="0.3" b="0.3"/>
 			<range nb="3000"/>
-			<atten r="0.003" g="0.003" b="1"/>
+			<atten r="0.01" g="0.01" b="1"/>
 		</light>
 	</lights>
 

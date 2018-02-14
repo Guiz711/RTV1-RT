@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/08 11:05:42 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/13 10:05:39 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,14 @@ void	benchmark_total(int res, char *def)
 	}
 }
 
+int		get_coord(int button, int x, int y, void *args)
+{
+	if (button == 1)
+		printf("%d, %d\n", x, y);
+	args = NULL;
+	return (1);
+}
+
 int		main(int argc, char **argv)
 {
 	t_args	args;
@@ -246,8 +254,9 @@ int		main(int argc, char **argv)
 	objs = scene.objs;
 	benchmark(1, "init time");
 	benchmark(0, NULL);
-	if (manage_threads(&args) == FAILURE)
-		trace_primary_rays(&args);
+	manage_threads(&args);
+	// if (manage_threads(&args) == FAILURE)
+		// trace_primary_rays(&args);
 	benchmark(1, "graphics calc time");
 	benchmark(0, NULL);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
@@ -255,6 +264,7 @@ int		main(int argc, char **argv)
 	benchmark_total(1, "total time");
 	mlx_hook(env.win, 17, 0L, &quit, &args);
 	mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &keypress, &args);
+	mlx_mouse_hook(env.win, &get_coord, (void*)&args);
 	mlx_loop(env.init);
 	return (0);
 }
