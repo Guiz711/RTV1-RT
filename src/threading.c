@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/08 11:10:55 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:32:44 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,28 @@ static void	*trace_rays_threads(void *vt_args)
 	t_args		*args;
 	size_t		i;
 	t_pixel		*pix;
+	int			taux;
 
 	args = ((t_thread*)vt_args)->args;
 	pix = args->pix_buf;
 	i = ((t_thread*)vt_args)->start;
+	taux = 0;
 	while (i < ((t_thread*)vt_args)->end)
 	{
 		pix[i].inter = trace_ray(pix[i].p_ray, args->scene->objs,
 			args->obj_fct, 0);
 		if (pix[i].inter.obj)
 		{
-			pix[i].normal =
-				args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);
+			pix[i].normal = args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);
 		}
-		args->rdr_fct[args->scene->render_mode](args, &pix[i], i);
-		++i;
+		while(taux < PIXEL)
+		{
+			args->rdr_fct[args->scene->render_mode](args, &pix[i], i);
+			++i;
+			pix[i] = pix[i - 1];
+			taux++;
+		}
+		taux = 0;
 	}
 	return (NULL);
 }

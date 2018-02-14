@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/08 11:05:42 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:05:31 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,13 +241,16 @@ int		main(int argc, char **argv)
 		ft_putstr("Usage: ./rtv1 docname\n");
 		return (0);
 	}
+	printf("?????\n");
 	benchmark(0, NULL);
 	init_args(&args, &env, &scene, argv[1]);
 	objs = scene.objs;
 	benchmark(1, "init time");
 	benchmark(0, NULL);
+	printf("awdadawdawd\n");
 	if (manage_threads(&args) == FAILURE)
 		trace_primary_rays(&args);
+	printf("asefgrrgrgrg\n");
 	benchmark(1, "graphics calc time");
 	benchmark(0, NULL);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);

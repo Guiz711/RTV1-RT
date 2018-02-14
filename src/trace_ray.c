@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/27 17:25:02 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:42:50 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,24 @@ int			trace_primary_rays(t_args *args)
 	size_t		i;
 	size_t		len;
 	t_pixel		*pix;
+	int			taux;
 
 	pix = args->pix_buf;
 	len = args->env->win_width * args->env->win_height;
 	i = 0;
+	taux = -1;
 	while (i < len)
 	{
-		pix[i].inter = trace_ray(pix[i].p_ray, args->scene->objs,
-			args->obj_fct, 0);
+		if (taux == PIXEL || taux == -1)
+		{
+			pix[i].inter = trace_ray(pix[i].p_ray, args->scene->objs,
+				args->obj_fct, 0);
+			taux = 0;
+		}
+		taux++;
 		if (pix[i].inter.obj)
 			pix[i].normal = args->norm_fct[pix[i].inter.obj->content_type](&pix[i]);
-		args->rdr_fct[args->scene->render_mode](args, &pix[i], i);
+			args->rdr_fct[args->scene->render_mode](args, &pix[i], i);
 		++i;
 	}
 	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);

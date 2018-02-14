@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/14 15:03:17 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:23:22 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 **	Properties
 */
 
+# define PIXEL 18
 # define WIN_WIDTH 1440
 # define WIN_HEIGHT 780
 # define FOVX 90
