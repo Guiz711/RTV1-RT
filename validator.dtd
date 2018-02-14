@@ -1,5 +1,5 @@
 <!ELEMENT scene (camera, lights, objects)>
-<!ATTLIST scene render_mode CDATA #IMPLIED>
+<!ATTLIST scene render CDATA #IMPLIED>
 
 <!--CAMERA-->
 
