@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 17:21:54 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/14 14:59:28 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ t_mat		xml_parse_material(xmlNodePtr node)
 
 int			set_objs(t_list *lst, t_scene *scn)
 {
+	scn->nb_obj = 0;
 	if (!lst)
 		return (-1);
 	while (lst)
 	{
+		scn->nb_obj++;
 		get_obj((xmlNodePtr)lst->content, scn);
 		lst = lst->next;
 	}

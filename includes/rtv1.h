@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/12 17:19:14 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/14 15:03:17 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct		s_mat
 
 typedef	struct		s_o_lst
 {
+	size_t			id_obj;
 	t_obj_type		content_type;
 	void			*content;
 	size_t			content_size;
@@ -205,6 +206,8 @@ typedef t_vec4	(*t_norm_fct)(t_pixel*);
 
 typedef struct	s_scene
 {
+	size_t		nb_obj;
+	size_t		nb_light;
 	int			shd[5];
 	int			render_mode;
 	t_view		cam;
