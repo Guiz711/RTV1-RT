@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 11:44:39 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 19:34:34 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,7 @@ int			move_cam(int keycode, t_args *args);
 int			quit(t_args *args);
 t_ray		reflected_ray(t_vec4 ray_dir, t_inter *inter);
 int			modif_scale_obj(int keycode, t_args *args);
+int			double_not_null(double d);
 /*
 **	Primitive intersection functions
 */

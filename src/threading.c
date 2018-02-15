@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 19:01:08 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 20:35:34 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ t_ray	reflected_ray(t_vec4 ray_dir, t_inter *inter)
 	return (refl);
 }
 
-// int		vec3_not_null(t_vec3 v)
-// {
-// 	if ((v.x > 1e-6 || v.x < -1e-6) && (v.y > 1e-6 || v.y < -1e-6)
-// 		&& (v.z > 1e-6 || v.z < -1e-6))
-// 		return TRUE;
-// 	return FALSE;
-// }
+int		double_not_null(double d)
+{
+	if (d > 1e-6 || d < -1e-6)
+		return TRUE;
+	return FALSE;
+}
 
 t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter)
 {
@@ -79,6 +78,40 @@ t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter)
 	return (refr);
 }
 
+void	invert(double *a, double *b)
+{
+	double c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
+}
+
+double	fresnel_calc(t_vec4 normal, t_vec4 ray_dir, double n1, double n2)
+{
+	double	refl;
+	double	ndotr;
+	double	r0;
+	double	ratio;
+	double 	sinx;
+
+	ndotr = dot_vec4(normal, ray_dir);
+	if (ndotr < 0)
+		invert(&n1, &n2);
+	ndotr = dot_vec4(normal, ray_dir);
+	r0 = SQUARE((n1 - n2) / (n1 + n2));
+	if (n2 > n1)
+	{
+		ratio = n2 / n1;
+		sinx = SQUARE(ratio) * (1 - SQUARE(ndotr));
+		if (sinx > 1)
+			return (1);
+		ndotr = -sqrt(1 - sinx);
+	}
+	refl = r0 + (1 - r0) * pow((1 + ndotr), 5);
+	return (refl);
+}
+
 t_vec3	recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 {
 	t_ray	reflect;
@@ -88,6 +121,7 @@ t_vec3	recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 	t_vec3	prim_color;
 	t_vec3	refl_color;
 	t_vec3	refr_color;
+	double	refl_ratio;
 	double	diff_ratio;
 	
 	if (depth > REFLEXION_DEPTH)
@@ -109,23 +143,25 @@ t_vec3	recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 			dmult_vec3(add_vec3(color_comp.diff_ratio, color_comp.amb_ratio), inter.obj->material.reflect.x));
 		// prim_color = add_vec3(color_comp.spec_ratio,
 			// add_vec3(color_comp.diff_ratio, color_comp.amb_ratio));
+		refl_ratio = fresnel_calc(inter.normal, ray.dir, 1, inter.obj->material.refract);
+		refl_ratio = inter.obj->material.reflect.y + (1.0 - inter.obj->material.reflect.y) * refl_ratio;
+		// refl_ratio = inter.obj->material.reflect.y * refl_ratio;
 		if (inter.obj->material.reflect.y != 0)
 		{
 			reflect = reflected_ray(ray.dir, &inter);
 			refl_color = recursive_ray(args, reflect, depth + 1, i);
-			refl_color = dmult_vec3(refl_color, inter.obj->material.reflect.y);
+			refl_color = dmult_vec3(refl_color, refl_ratio);
 		}
-		if (1 - inter.obj->material.reflect.x < 1e-6 && 1 - inter.obj->material.reflect.x > -1e-6 )
+		if (double_not_null(1 - inter.obj->material.reflect.x))
 		{
 			refract = refracted_ray(ray.dir, &inter);
 			refr_color = recursive_ray(args, refract, depth + 1, i);
 			//refr_color = mult_vec3(refr_color, inter.obj->material.diff);
 		}
-		diff_ratio = 1 - inter.obj->material.reflect.y;
+		diff_ratio = 1 - refl_ratio;
 		refr_color = dmult_vec3(refr_color, diff_ratio * (1 - inter.obj->material.reflect.x));
 		// refr_color = dmult_vec3(refr_color, diff_ratio);
 	}
-
 	return (add_vec3(prim_color, add_vec3(refr_color, refl_color)));
 }
 
