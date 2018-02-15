@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 06:12:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/14 15:05:55 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:55:02 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int				create_sphere(xmlNodePtr node, t_scene *scn)
 		sphere.center = ft_obj_translation(child, sphere.center);
 	if (!(new = obj_lstnew(SPHERE, &sphere, sizeof(sphere))))
 		ft_putendl("error\n");
-	new->id_obj = scn->nb_obj;
 	new->material = xml_parse_material(node);
 	obj_lstadd(&(scn->objs), new);
 	return (1);
@@ -51,7 +50,6 @@ int				create_plane(xmlNodePtr node, t_scene *scn)
 		plane.normal = ft_obj_rotation(child, plane.normal);
 	if (!(new = obj_lstnew(PLANE, &plane, sizeof(plane))))
 		ft_putendl("error\n");
-	new->id_obj = scn->nb_obj;
 	new->material = xml_parse_material(node);
 	obj_lstadd(&(scn->objs), new);
 	return (1);
@@ -77,7 +75,6 @@ int				create_cone(xmlNodePtr node, t_scene *scn)
 		cone.dir = ft_obj_rotation(child, cone.dir);
 	if (!(new = obj_lstnew(CONE, &cone, sizeof(cone))))
 		ft_putendl("error\n");
-	new->id_obj = scn->nb_obj;
 	new->material = xml_parse_material(node);
 	obj_lstadd(&(scn->objs), new);
 	return (1);
@@ -103,7 +100,6 @@ int				create_cylinder(xmlNodePtr node, t_scene *scn)
 		cyl.dir = ft_obj_rotation(child, cyl.dir);
 	if (!(new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl))))
 		ft_putendl("error\n");
-	new->id_obj = scn->nb_obj;
 	new->material = xml_parse_material(node);
 	obj_lstadd(&(scn->objs), new);
 	return (1);

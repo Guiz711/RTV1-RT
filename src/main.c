@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/14 16:05:31 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/15 04:10:32 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,41 @@ void	benchmark_total(int res, char *def)
 	}
 }
 
+int		get_coord(int button, int x, int y, void *args)
+{
+	if (button == 1)
+		printf("%d, %d\n", x, y);
+	args = NULL;
+	return (1);
+}
+
+void	add_refl_ratio(t_scene *scene)
+{
+	t_obj_lst		*tmp;
+	unsigned int	id;
+
+	tmp = scene->objs;
+	id = 0;
+	while (tmp)
+	{
+		tmp->id = id++;
+		if (tmp->id == 3)
+			tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
+		else if (tmp->id == 0)
+			tmp->material.refl = init_vec3(1, 1, 1);
+		else if (tmp->id == 1)
+			tmp->material.refl = init_vec3(1, 1, 1);
+		// else if (tmp->id == 2)
+			// tmp->material.refl = init_vec3(0.5, 0.5, 0.5);
+		// else if (tmp->id == 4)
+			// tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
+		else
+			tmp->material.refl = init_vec3(0, 0, 0);
+		tmp = tmp->next;
+	}
+	
+}
+
 int		main(int argc, char **argv)
 {
 	t_args	args;
@@ -241,23 +276,24 @@ int		main(int argc, char **argv)
 		ft_putstr("Usage: ./rtv1 docname\n");
 		return (0);
 	}
-	printf("?????\n");
 	benchmark(0, NULL);
 	init_args(&args, &env, &scene, argv[1]);
 	objs = scene.objs;
+	add_refl_ratio(&scene);
 	benchmark(1, "init time");
 	benchmark(0, NULL);
-	printf("awdadawdawd\n");
-	if (manage_threads(&args) == FAILURE)
-		trace_primary_rays(&args);
-	printf("asefgrrgrgrg\n");
+	manage_threads(&args);
+	// if (manage_threads(&args) == FAILURE)
+		// trace_primary_rays(&args);
 	benchmark(1, "graphics calc time");
 	benchmark(0, NULL);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	benchmark(1, "display time");
 	benchmark_total(1, "total time");
 	mlx_hook(env.win, 17, 0L, &quit, &args);
+	mlx_key_hook(env.win, move_cam, &args); 
 	mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &keypress, &args);
+	mlx_mouse_hook(env.win, &get_coord, (void*)&args);
 	mlx_loop(env.init);
 	return (0);
 }
