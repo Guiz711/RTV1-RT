@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/14 13:55:27 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 04:10:32 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,7 @@ int		main(int argc, char **argv)
 	benchmark(1, "display time");
 	benchmark_total(1, "total time");
 	mlx_hook(env.win, 17, 0L, &quit, &args);
+	mlx_key_hook(env.win, move_cam, &args); 
 	mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &keypress, &args);
 	mlx_mouse_hook(env.win, &get_coord, (void*)&args);
 	mlx_loop(env.init);

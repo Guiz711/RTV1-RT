@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 17:21:54 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/15 02:15:42 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,19 @@ t_mat		xml_parse_material(xmlNodePtr node)
 		material.spec = get_color_from_node(child);
 	if ((child = has_child(node, "shininess")))
 		material.shin = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
+	/*if ((child = has_child(node, "reflet")))
+		material.refl = get_color_from_node(child);
+	if ((child = has_child(node, "indice_refraction")))
+		material.i_refr = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
+if ((child = has_child(node, "indice_reflection")))
+		material.i_refl = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
+	if ((child = has_child(node, "light_absorb")))
+		material.l_abs = get_color_from_node(child);
+	material.transp = (child = has_child(node, "transparent") ? 1 : 0);
+		material.l_abs = get_color_from_node(child);
+*/
 	return (material);
-	printf("Salut\n");
+
 }
 
 int			set_objs(t_list *lst, t_scene *scn)

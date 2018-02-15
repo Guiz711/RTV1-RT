@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/14 13:54:30 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 02:58:45 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@
 /*
 **	Properties
 */
-
+# define UP 13
+# define BACK 1
+# define LEFT 0
+# define RIGHT 2
 # define WIN_WIDTH 1440
 # define WIN_HEIGHT 780
 # define FOVX 90
@@ -142,6 +145,9 @@ typedef struct		s_mat
 	t_vec3			diff;
 	t_vec3			refl;
 	t_vec3			spec;
+	t_vec3			l_abs;
+	double			i_refr;
+	double			i_refl;
 	double			shin;
 }					t_mat;
 
@@ -258,7 +264,7 @@ typedef struct	s_thread
 	size_t		end;
 }				t_thread;
 
-
+t_mtx4		get_camera_to_world(t_view *view);
 t_pixel		*init_pix_buffer(t_env *env, t_mtx4 v2w);
 t_vec4		new_coord(t_vec4 p, t_mtx4 mtx);
 
@@ -272,6 +278,7 @@ int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
 int			manage_threads(t_args *args);
 int			keypress(int keycode, void *args);
+int			move_cam(int keycode, t_args *args);
 int			quit(t_args *args);
 t_ray		reflected_ray(t_vec4 ray_dir, t_inter *inter);
 
