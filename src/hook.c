@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/15 09:07:56 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/15 09:38:08 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int			move_cam(int keycode, t_args *args)
 		trans_ori_cam(args, keycode);
 	else if ((keycode == 9 || keycode == 8) && args->env->sel_obj != 0)
 		modif_scale_obj(keycode, args);
-	else if ((keycode == 
+//	else if ((keycode == 126 || keycode == 125 || keycode == 124 || keycode == 123) && args->env->select_obj != 0)
+//		modif_rot_obj(keycode, args);
 	else
 		return (0);
 	//mlx_destroy_image(args->env->init, args->env->win);
@@ -94,13 +95,36 @@ int			modif_scale_obj(int keycode, t_args *args)
 	return (0);
 }
 
+/*int			modif_trans_obj(int keycode, t_args *args)
+{
+	t_plane			*plan;
+	t_cone			*cone;
+	t_cylinder		*cyl;
+	t_obj_lst		*tmp;
 
-
-
-
-
-
-
-
-
-
+	tmp = args->scene->objs;
+	while (args->scene->objs->id_obj != args->env->sel_obj && args->scene->objs)
+		args->scene->objs = args->scene->objs->next;
+	if (args->scene->objs->content_type == PLANE)
+	{
+		plan = (t_plane*)args->scene->objs->content;
+		plan->normal = (keycode == 8 ? plan->normal * 1.5 : sphere->radius / 1.5) ;
+		args->scene->objs->content = sphere;
+	}
+	else if (args->scene->objs->content_type == CONE)
+	{
+		cone = (t_cone*)args->scene->objs->content;
+		cone->angle = (keycode == 8 ? cone->angle * 1.5 : cone->angle / 1.5) ;
+		;
+		args->scene->objs->content = cone;
+	}
+	else if (args->scene->objs->content_type == CYLINDER)
+	{
+		cyl = (t_cylinder*)args->scene->objs->content;
+		cyl->radius =  (keycode == 8 ? cyl->radius * 1.5 : cyl->radius / 1.5) ;
+		args->scene->objs->content = cyl;
+	}
+	args->scene->objs = tmp;
+	return (0);
+}
+*/

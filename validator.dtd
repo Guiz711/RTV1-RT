@@ -1,7 +1,7 @@
 <!ELEMENT scene (camera, lights, objects)>
 <!ATTLIST scene
 			render CDATA #IMPLIED
-			refra CDATA #IMPLIED>
+			global_refract CDATA #IMPLIED>
 
 <!--CAMERA-->
 
@@ -81,14 +81,14 @@
 		r CDATA #REQUIRED
 		g CDATA #REQUIRED
 		b CDATA #REQUIRED>
-<!ELEMENT i_refr EMPTY>
-<!ATTLIST i_refr
+<!ELEMENT refract EMPTY>
+<!ATTLIST refract
 		r CDATA #REQUIRED
 		g CDATA #REQUIRED
 		b CDATA #REQUIRED>
-<!ELEMENT i_refl EMPTY>
-<!ATTLIST i_refl nb CDATA #REQUIRED>
-<!ELEMENT transp EMPTY>
+<!ELEMENT reflect EMPTY>
+<!ATTLIST reflect nb CDATA #REQUIRED>
+<!ELEMENT transparency EMPTY>
 <!--LIGHTS-->
 
 <!ELEMENT lights (light+)>
@@ -110,7 +110,7 @@
 <!--OBJECTS-->
 
 <!ELEMENT objects (plane | cone | cylindre | sphere)+>
-<!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess, i_refr, i_refl, transp?)>
-<!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess, i_refr, i_refl, transp?)>
-<!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess, i_refr, i_refl, transp? )>
-<!ELEMENT cone (p, dir, angle, model, amb, spec, diffuse, shininess, i_refr, i_refl, transp?)>
+<!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess, refract, reflect, transparency?)>
+<!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess, refract, reflect, transparency?)>
+<!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess, refract, reflect, transparency? )>
+<!ELEMENT cone (p, dir, angle, model, amb, spec, diffuse, shininess, refract, reflect, transparency?)>

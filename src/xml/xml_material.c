@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/15 09:25:16 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/15 09:48:59 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ t_mat		xml_parse_material(xmlNodePtr node)
 		material.spec = get_color_from_node(child);
 	if ((child = has_child(node, "shininess")))
 		material.shin = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
-	if ((child = has_child(node, "i_refr")))
-		material.i_refr = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
-	if ((child = has_child(node, "i_refl")))
-		material.i_refl = get_color_from_node(child);
-	if ((child = has_child(node, "transp")))
-		material.transp = 1;
+	if ((child = has_child(node, "refract")))
+		material.refract = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
+	if ((child = has_child(node, "reflect")))
+		material.reflect = get_color_from_node(child);
+	if ((child = has_child(node, "transparency")))
+		material.transparency = 1;
 	else
-		material.transp = 0;
+		material.transparency = 0;
 */
 	return (material);
 
