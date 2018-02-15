@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/25 17:43:02 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:45:01 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ static double	get_sph_distance(t_poly2 poly)
 		dist_1 = res / poly.a;
 		dist_2 = poly.c / res;
 	}
+	if (dist_1 < 0)
+		return (dist_2);
+	if (dist_2 < 0)
+		return (dist_1);
 	return ((dist_1 < dist_2) ? dist_1 : dist_2);
 }
 

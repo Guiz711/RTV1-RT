@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 10:36:08 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 10:55:13 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,36 +236,36 @@ int		get_coord(int button, int x, int y, void *args)
 	return (1);
 }
 
-void	add_refl_ratio(t_scene *scene)
-{
-	t_obj_lst		*tmp;
-	unsigned int	id;
+// void	add_refl_ratio(t_scene *scene)
+// {
+// 	t_obj_lst		*tmp;
+// 	unsigned int	id;
 
-	tmp = scene->objs;
-	id = 0;
-	while (tmp)
-	{
-		tmp->id = id++;
-		tmp->material.refl = init_vec3(0, 0, 0);
-		tmp->material.transparent = 0;
-		if (tmp->id == 3)
-			tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
-		else if (tmp->id == 0)
-			tmp->material.refl = init_vec3(1, 1, 1);
-		else if (tmp->id == 1)
-			tmp->material.refl = init_vec3(1, 1, 1);
-		else if (tmp->id == 2)
-		{
-			tmp->material.refl = init_vec3(0.5, 0.5, 0.5);
-			tmp->material.diff = init_vec3(1.5, 0.3, 0.3);
-			tmp->material.transparent = 1;
-		}
-		// else if (tmp->id == 4)
-			// tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
-		tmp = tmp->next;
-	}
+// 	tmp = scene->objs;
+// 	id = 0;
+// 	while (tmp)
+// 	{
+// 		tmp->id = id++;
+// 		tmp->material.refl = init_vec3(0, 0, 0);
+// 		tmp->material.transparent = 0;
+// 		if (tmp->id == 3)
+// 			tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
+// 		else if (tmp->id == 0)
+// 			tmp->material.refl = init_vec3(1, 1, 1);
+// 		else if (tmp->id == 1)
+// 			tmp->material.refl = init_vec3(1, 1, 1);
+// 		else if (tmp->id == 2)
+// 		{
+// 			tmp->material.refl = init_vec3(0.5, 0.5, 0.5);
+// 			tmp->material.diff = init_vec3(1.5, 0.3, 0.3);
+// 			tmp->material.transparent = 1;
+// 		}
+// 		// else if (tmp->id == 4)
+// 			// tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
+// 		tmp = tmp->next;
+// 	}
 	
-}
+// }
 
 int		main(int argc, char **argv)
 {
@@ -283,7 +283,7 @@ int		main(int argc, char **argv)
 	benchmark(0, NULL);
 	init_args(&args, &env, &scene, argv[1]);
 	objs = scene.objs;
-	add_refl_ratio(&scene);
+	// add_refl_ratio(&scene);
 	benchmark(1, "init time");
 	benchmark(0, NULL);
 	manage_threads(&args);

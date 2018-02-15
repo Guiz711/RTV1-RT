@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 10:35:21 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 11:44:39 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,18 +143,16 @@ typedef struct		s_mat
 	t_shd			model;
 	t_vec3			amb;
 	t_vec3			diff;
-	t_vec3			refl;
 	t_vec3			spec;
 	t_vec3			l_abs;
-	double			i_refr;
-	t_vec3			i_refl;
+	double			refract;
+	t_vec3			reflect;
 	double			shin;
-	bool			transp;
+	int				transparency;
 }					t_mat;
 
 typedef	struct		s_o_lst
 {
-	unsigned int	id;
 	unsigned int	id_obj;
 	t_obj_type		content_type;
 	void			*content;

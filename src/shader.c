@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:46:04 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/13 09:53:17 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:21:59 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		shadow(t_args *args, t_inter *inter, t_light *light)
 		dmult_vec4(inter->normal, 0.000007));
 	light_ray.orig.w = 1;
 	obturation = trace_ray(light_ray, args->scene->objs, args->obj_fct, 1);
-	if (obturation.dist < light_ray.range)
+	if (obturation.dist < light_ray.range && !obturation.obj->material.transparency)
 		return (0);
 	return (1);
 }
@@ -84,10 +84,10 @@ t_vec3	specular_phong(t_inter *inter, t_light *light)
 	light_dir = normalize_vec4(rev_vec4(sub_vec4(inter->p, light->vec)));
 	refl = reflected_ray(light_dir, inter);
 	ratio.x = light->spec_i.x * inter->obj->material.spec.x *
-		(pow(dot_vec4(inter->normal, refl.dir), inter->obj->material.shin));
+		(pow(dot_vec4(inter->normal, light_dir), inter->obj->material.shin));
 	ratio.y = light->spec_i.y * inter->obj->material.spec.y *
-		(pow(dot_vec4(inter->normal, refl.dir), inter->obj->material.shin));
+		(pow(dot_vec4(inter->normal, light_dir), inter->obj->material.shin));
 	ratio.z = light->spec_i.z * inter->obj->material.spec.z *
-		(pow(dot_vec4(inter->normal, refl.dir), inter->obj->material.shin));
+		(pow(dot_vec4(inter->normal, light_dir), inter->obj->material.shin));
 	return (ratio);
 }

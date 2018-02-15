@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/15 09:38:08 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/15 11:57:31 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int			select_obj(int button, int x, int y, t_args *args)
 		args->env->sel_obj = inter.obj->id_obj;
 	else
 		args->env->sel_obj = 0;
+	printf("%d\n", y * WIN_WIDTH + x);
 	ft_putstr("Objet selectionne : ");
 	ft_putnbr(args->env->sel_obj);
 	ft_putstr("\n");

@@ -81,13 +81,13 @@
 		r CDATA #REQUIRED
 		g CDATA #REQUIRED
 		b CDATA #REQUIRED>
-<!ELEMENT refract EMPTY>
-<!ATTLIST refract
+<!ELEMENT reflect EMPTY>
+<!ATTLIST reflect
 		r CDATA #REQUIRED
 		g CDATA #REQUIRED
 		b CDATA #REQUIRED>
-<!ELEMENT reflect EMPTY>
-<!ATTLIST reflect nb CDATA #REQUIRED>
+<!ELEMENT refract EMPTY>
+<!ATTLIST refract nb CDATA #REQUIRED>
 <!ELEMENT transparency EMPTY>
 <!--LIGHTS-->
 

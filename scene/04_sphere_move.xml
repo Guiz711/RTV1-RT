@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<scene render ="4">
+<scene render="4" global_refract="1">
 	<camera>
 		<origin x ="0" y="-10" z="0" w="1"/>
 		<orientation x="40" y="-20" z="-25" w="0"/>
-		<!-- <origin x="0" y="0" z="0" w="1"/> -->
+		<!-- <origin x="0" y="0" z="10" w="1"/> -->
 		<!-- <orientation x="0" y="0" z="0" w="0"/> -->
 		<amb_i r="0" g="0" b="0"/>
 	</camera>
@@ -27,29 +27,40 @@
 			<center x="0" y="0" z="-10" w="1"/>
 			<model model="PHONG"/>
 			<amb r="0.01" g="0.38" b="0.5"/>
-			<spec r="0" g="0" b="0"/>
+			<spec r="0.2" g="0.2" b="0.2"/>
 			<diffuse r="0.01" g="0.38" b="0.5"/>
-			<shininess nb="150"/>
+			<shininess nb="1"/>
+			<refract nb="0"/>
+			<reflect r="0" g="0" b="0"/>
+			<!-- <transparency nb="0"/> -->
 		</sphere>
 		<sphere>
 			<radius nb="2"/>
 			<center x="2" y="4" z="-10" w="1"/>
 			<model model="PHONG"/>
 			<amb r="0" g="0.769" b="1"/>
-			<spec r="0.3" g="0.3" b="0.3"/>
+			<spec r="0.5" g="0.5" b="0.5"/>
 			<diffuse r="0" g="0.769" b="1"/>
 			<shininess nb="150"/>
+			<refract nb="0"/>
+			<reflect r="0.5" g="0.5" b="0.5"/>
+			<!-- <transparency nb="0"/> -->
 		</sphere>
 		<sphere>
 			<radius nb="2"/>
 			<center x="4" y="0" z="-10" w="1"/>
+			<!-- <center x="1" y="-2" z="-7" w="1"/> -->
 			<model model="PHONG"/>
-			<amb r="0.3" g="0.87" b="0.937"/>
+			<amb r="0.3" g="0.3" b="0.3"/>
 			<!-- <amb r="0" g="0" b="0"/> -->
-			<spec r="0" g="0" b="0"/>
-			<diffuse r="0.3" g="0.87" b="0.937"/>
+			<spec r="0.3" g="0.3" b="0.3"/>
+			<diffuse r="1" g="1" b="1"/>
 			<!-- <diffuse r="0.5" g="0.5" b="0.5"/> -->
 			<shininess nb="150"/>
+			<refract nb="1.125"/>
+			<!-- <reflect r="0.3" g="0.3" b="0.3"/> -->
+			<reflect r="0" g="0" b="0"/>
+			<transparency/>
 		</sphere>
 		<plane>
 			<p x="0" y="0" z="-12" w="1"/>
@@ -59,8 +70,11 @@
 			<amb r="0.1" g="0.1" b="0.1"/>
 			<spec r="1" g="1" b="1"/>
 			<!-- <diffuse r="0.4" g="0.4" b="0.4"/> -->
-			<diffuse r="0.1" g="0.1" b="0.1"/>
+			<diffuse r="0.3" g="0.3" b="0.3"/>
 			<shininess nb="50"/>
+			<refract nb="0"/>
+			<reflect r="0.5" g="0.5" b="0.5"/>
+			<!-- <transparency nb="0"/> -->
 		</plane>
 		<plane>
 			<p x="0" y="0" z="12" w="1"/>
@@ -72,6 +86,21 @@
 			<!-- <diffuse r="0.4" g="0.4" b="0.4"/> -->
 			<diffuse r="1" g="1" b="1"/>
 			<shininess nb="50"/>
+			<refract nb="0"/>
+			<reflect r="0.8" g="0.8" b="0.8"/>
+			<!-- <transparency nb="0"/> -->
 		</plane>
+		<!-- <plane>
+			<p x="0" y="0" z="7" w="1"/>
+			<normal x="0" y="0" z="1" w="0"/>
+			<model model="LAMBERT"/>
+			<amb r="0" g="0" b="0"/>
+			<spec r="0.3" g="0.3" b="0.3"/>
+			<diffuse r="0.7" g="0.7" b="0.7"/>
+			<shininess nb="50"/>
+			<refract nb="1.125"/>
+			<reflect r="0.3" g="0.3" b="0.3"/>
+			<transparency/>
+		</plane> -->
 	</objects>
 </scene>

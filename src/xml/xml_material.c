@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_material.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/15 09:48:59 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:43:45 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ t_mat		xml_parse_material(xmlNodePtr node)
 	if ((child = has_child(node, "shininess")))
 		material.shin = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "refract")))
-		material.refract = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
+		material.refract = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "reflect")))
 		material.reflect = get_color_from_node(child);
 	if ((child = has_child(node, "transparency")))
 		material.transparency = 1;
 	else
 		material.transparency = 0;
-*/
+// */
 	return (material);
 
 }
