@@ -27,7 +27,7 @@
 			<center x="0" y="0" z="-10" w="1"/>
 			<model model="PHONG"/>
 			<amb r="0.01" g="0.38" b="0.5"/>
-			<spec r="1" g="1" b="1"/>
+			<spec r="0" g="0" b="0"/>
 			<diffuse r="0.01" g="0.38" b="0.5"/>
 			<shininess nb="150"/>
 		</sphere>
@@ -36,7 +36,7 @@
 			<center x="2" y="4" z="-10" w="1"/>
 			<model model="PHONG"/>
 			<amb r="0" g="0.769" b="1"/>
-			<spec r="1" g="1" b="1"/>
+			<spec r="0.3" g="0.3" b="0.3"/>
 			<diffuse r="0" g="0.769" b="1"/>
 			<shininess nb="150"/>
 		</sphere>
@@ -46,7 +46,7 @@
 			<model model="PHONG"/>
 			<amb r="0.3" g="0.87" b="0.937"/>
 			<!-- <amb r="0" g="0" b="0"/> -->
-			<spec r="1" g="1" b="1"/>
+			<spec r="0" g="0" b="0"/>
 			<diffuse r="0.3" g="0.87" b="0.937"/>
 			<!-- <diffuse r="0.5" g="0.5" b="0.5"/> -->
 			<shininess nb="150"/>
@@ -68,7 +68,7 @@
 			<model model="LAMBERT"/>
 			<!-- <amb r="0.4" g="0.4" b="0.4"/> -->
 			<amb r="1" g="1" b="1"/>
-			<spec r="1" g="1" b="1"/>
+			<spec r="0" g="0" b="0"/>
 			<!-- <diffuse r="0.4" g="0.4" b="0.4"/> -->
 			<diffuse r="1" g="1" b="1"/>
 			<shininess nb="50"/>

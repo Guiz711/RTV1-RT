@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/14 13:49:11 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 09:38:36 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,33 @@ t_ray	reflected_ray(t_vec4 ray_dir, t_inter *inter)
 	return (refl);
 }
 
+int		vec3_not_null(t_vec3 v)
+{
+	if ((v.x > 1e-6 || v.x < -1e-6) && (v.y > 1e-6 || v.y < -1e-6)
+		&& (v.z > 1e-6 || v.z < -1e-6))
+		return TRUE;
+	return FALSE;
+}
+
+t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter)
+{
+	t_ray	refr;
+
+	refr.dir = ray_dir;
+	refr.orig = add_vec4(inter->p, dmult_vec4(inter->normal, -0.0000007));
+	refr.range = 1e6;
+	return (refr);
+}
+
 t_vec3	recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 {
-	t_ray	refl;
+	t_ray	reflect;
+	t_ray	refract;
 	t_inter	inter;
 	t_color	color_comp;
 	t_vec3	prim_color;
 	t_vec3	refl_color;
+	t_vec3	refr_color;
 	
 	if (depth > REFLEXION_DEPTH)
 		return (init_vec3(0, 0, 0));
@@ -58,18 +78,31 @@ t_vec3	recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 	color_comp.spec_ratio = init_vec3(0, 0, 0);
 	prim_color = init_vec3(0, 0, 0);
 	refl_color = init_vec3(0, 0, 0);
+	refr_color = init_vec3(0, 0, 0);
 	inter = trace_ray(ray, args->scene->objs, args->obj_fct, 0);
 	if (inter.obj)
 	{
 		inter.normal = args->norm_fct[inter.obj->content_type](&ray, &inter);
 		args->rdr_fct[args->scene->render_mode](args, &ray, &inter, &color_comp);
-		prim_color = add_vec3(color_comp.amb_ratio,
-			add_vec3(color_comp.diff_ratio, color_comp.spec_ratio));
-		refl = reflected_ray(ray.dir, &inter);
-		refl_color = recursive_ray(args, refl, depth + 1, i);
-		refl_color = mult_vec3(refl_color, inter.obj->material.refl);
+		if (!inter.obj->material.transparent)
+		{
+			prim_color = add_vec3(color_comp.amb_ratio,
+				add_vec3(color_comp.diff_ratio, color_comp.spec_ratio));
+		}
+		if (vec3_not_null(inter.obj->material.refl))
+		{
+			reflect = reflected_ray(ray.dir, &inter);
+			refl_color = recursive_ray(args, reflect, depth + 1, i);
+			refl_color = mult_vec3(refl_color, inter.obj->material.refl);
+		}
+		if (inter.obj->material.transparent)
+		{
+			refract = refracted_ray(ray.dir, &inter);
+			refr_color = recursive_ray(args, refract, depth + 1, i);
+			refr_color = mult_vec3(refr_color, inter.obj->material.diff);
+		}
 	}
-	return (add_vec3(prim_color, refl_color));
+	return (add_vec3(prim_color, add_vec3(refr_color, refl_color)));
 }
 
 static void	*trace_rays_threads(void *vt_args)

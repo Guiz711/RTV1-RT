@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/14 13:54:30 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 09:17:01 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct		s_mat
 	t_vec3			refl;
 	t_vec3			spec;
 	double			shin;
+	int				transparent;
 }					t_mat;
 
 typedef	struct		s_o_lst
