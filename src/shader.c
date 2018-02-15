@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:46:04 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 13:21:59 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 19:06:06 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		shadow(t_args *args, t_inter *inter, t_light *light)
 		dmult_vec4(inter->normal, 0.000007));
 	light_ray.orig.w = 1;
 	obturation = trace_ray(light_ray, args->scene->objs, args->obj_fct, 1);
-	if (obturation.dist < light_ray.range && !obturation.obj->material.transparency)
+	if (obturation.dist < light_ray.range && obturation.obj->material.reflect.x == 1)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 13:20:40 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 19:05:58 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd)
 		{
 			inter.dist = tmp_dist;
 			inter.obj = objs;
-			if (shd && !objs->material.transparency)
+			if (shd && objs->material.reflect.x == 1)
 				return (inter);
 		}
 		objs = objs->next;

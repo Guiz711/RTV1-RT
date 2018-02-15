@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 11:12:13 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 13:18:12 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:46:39 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	render_mode_4(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 		{
 			if (shadow(args, inter, (t_light*)light->content))
 			{
-				if (!inter->obj->material.transparency)
+				// if (!inter->obj->material.transparency)
 					color->diff_ratio = add_vec3(color->diff_ratio,
 						diffuse_lambert(inter, (t_light*)light->content));
 				if (inter->obj->material.model != LAMBERT)
