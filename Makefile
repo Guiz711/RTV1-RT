@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/02/15 02:15:09 by jgourdin         ###   ########.fr        #
+#    Updated: 2018/02/15 08:47:02 by jgourdin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ endif
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-flto -O3 -march=native
 
 SRC_PATH = src
 

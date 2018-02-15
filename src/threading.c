@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 04:15:18 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/15 07:47:59 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,13 @@ static void	*trace_rays_threads(void *vt_args)
 	size_t		i;
 	t_pixel		*pix;
 	t_vec3		pix_col;
-	int			y;
 
-	y = 4;
 	args = ((t_thread*)vt_args)->args;
 	pix = args->pix_buf;
 	i = ((t_thread*)vt_args)->start;
 	while (i < ((t_thread*)vt_args)->end)
 	{
-		if (y == 36)
-		{
-			pix_col = recursive_ray(args, pix[i].p_ray, 0, i);
-			y = 0;
-		}
-		y++;
+		pix_col = recursive_ray(args, pix[i].p_ray, 0, i);
 		convert_color(args->env, i, pix_col);
 		++i;
 	}
