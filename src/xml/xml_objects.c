@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 06:12:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 16:55:02 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/15 07:32:42 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int				create_sphere(xmlNodePtr node, t_scene *scn)
 	if (!(new = obj_lstnew(SPHERE, &sphere, sizeof(sphere))))
 		ft_putendl("error\n");
 	new->material = xml_parse_material(node);
+	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);
 	return (1);
 }
@@ -51,6 +52,7 @@ int				create_plane(xmlNodePtr node, t_scene *scn)
 	if (!(new = obj_lstnew(PLANE, &plane, sizeof(plane))))
 		ft_putendl("error\n");
 	new->material = xml_parse_material(node);
+	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);
 	return (1);
 }
@@ -76,6 +78,7 @@ int				create_cone(xmlNodePtr node, t_scene *scn)
 	if (!(new = obj_lstnew(CONE, &cone, sizeof(cone))))
 		ft_putendl("error\n");
 	new->material = xml_parse_material(node);
+	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);
 	return (1);
 }
@@ -101,6 +104,7 @@ int				create_cylinder(xmlNodePtr node, t_scene *scn)
 	if (!(new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl))))
 		ft_putendl("error\n");
 	new->material = xml_parse_material(node);
+	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);
 	return (1);
 }

@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/02/08 13:01:11 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/02/15 08:48:43 by jgourdin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRC_NAME = ft_memset.c ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-flto -O3 -march=native
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 

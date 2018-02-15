@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/02/12 16:33:25 by jgourdin         ###   ########.fr        #
+#    Updated: 2018/02/15 08:47:02 by jgourdin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,12 +33,12 @@ endif
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-flto -O3 -march=native
 
 SRC_PATH = src
 
 SRC_NAME = main.c init_rays.c obj_list.c intersection.c trace_ray.c colors.c\
-			render_modes.c normal.c shader.c threading.c events.c quit.c
+			render_modes.c normal.c shader.c threading.c events.c quit.c hook.c
 
 SRC_VEC_PATH = vectors
 

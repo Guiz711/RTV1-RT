@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 09:17:01 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 10:35:21 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@
 /*
 **	Properties
 */
-
+# define UP 13
+# define BACK 1
+# define LEFT 0
+# define RIGHT 2
 # define WIN_WIDTH 1440
 # define WIN_HEIGHT 780
 # define FOVX 90
@@ -142,13 +145,17 @@ typedef struct		s_mat
 	t_vec3			diff;
 	t_vec3			refl;
 	t_vec3			spec;
+	t_vec3			l_abs;
+	double			i_refr;
+	t_vec3			i_refl;
 	double			shin;
-	int				transparent;
+	bool			transp;
 }					t_mat;
 
 typedef	struct		s_o_lst
 {
 	unsigned int	id;
+	unsigned int	id_obj;
 	t_obj_type		content_type;
 	void			*content;
 	size_t			content_size;
@@ -214,8 +221,10 @@ typedef t_vec4	(*t_norm_fct)(t_ray*, t_inter*);
 
 typedef struct	s_scene
 {
+	unsigned int	nb_obj;
 	int			shd[5];
 	int			render_mode;
+	double		refra;
 	t_view		cam;
 	t_obj_lst	*objs;
 	t_list		*light;
@@ -226,6 +235,7 @@ typedef struct	s_scene
 
 typedef struct	s_env
 {
+	unsigned int	sel_obj;
 	void		*init;
 	void		*win;
 	int			win_width;
@@ -259,7 +269,8 @@ typedef struct	s_thread
 	size_t		end;
 }				t_thread;
 
-
+int			select_obj(int button, int x, int y, t_args *args);
+t_mtx4		get_camera_to_world(t_view *view);
 t_pixel		*init_pix_buffer(t_env *env, t_mtx4 v2w);
 t_vec4		new_coord(t_vec4 p, t_mtx4 mtx);
 
@@ -273,9 +284,10 @@ int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
 int			manage_threads(t_args *args);
 int			keypress(int keycode, void *args);
+int			move_cam(int keycode, t_args *args);
 int			quit(t_args *args);
 t_ray		reflected_ray(t_vec4 ray_dir, t_inter *inter);
-
+int			modif_scale_obj(int keycode, t_args *args);
 /*
 **	Primitive intersection functions
 */
@@ -325,5 +337,4 @@ t_vec3		specular_phong(t_inter *inter, t_light *light);
 /*
 **	Utility functions
 */
-
 #endif

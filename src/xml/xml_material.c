@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 17:21:54 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/15 09:48:59 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,27 @@ t_mat		xml_parse_material(xmlNodePtr node)
 		material.spec = get_color_from_node(child);
 	if ((child = has_child(node, "shininess")))
 		material.shin = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
+	if ((child = has_child(node, "refract")))
+		material.refract = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
+	if ((child = has_child(node, "reflect")))
+		material.reflect = get_color_from_node(child);
+	if ((child = has_child(node, "transparency")))
+		material.transparency = 1;
+	else
+		material.transparency = 0;
+*/
 	return (material);
-	printf("Salut\n");
+
 }
 
 int			set_objs(t_list *lst, t_scene *scn)
 {
+	scn->nb_obj = 0;
 	if (!lst)
 		return (-1);
 	while (lst)
 	{
+		scn->nb_obj++;
 		get_obj((xmlNodePtr)lst->content, scn);
 		lst = lst->next;
 	}

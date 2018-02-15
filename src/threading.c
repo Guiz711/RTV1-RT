@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 09:38:36 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/15 10:36:22 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,6 @@ int		manage_threads(t_args *args)
 			return (FAILURE);
 		i++;
 	}
+	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
 	return (SUCCESS);
 }
