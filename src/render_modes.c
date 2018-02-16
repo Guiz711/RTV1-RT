@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 11:12:13 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 16:46:39 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/16 13:18:04 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	render_mode_3(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 void	render_mode_4(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 {
 	t_list	*light;
+	double	shad_ratio;
 
 	ray = NULL;
 	if (inter->obj)
@@ -83,16 +84,16 @@ void	render_mode_4(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 		light = args->scene->light;
 		while (light)
 		{
-			if (shadow(args, inter, (t_light*)light->content))
+			shad_ratio = shadow(args, inter, (t_light*)light->content);
+			if (!double_not_null(1 - shad_ratio))
 			{
-				// if (!inter->obj->material.transparency)
-					color->diff_ratio = add_vec3(color->diff_ratio,
-						diffuse_lambert(inter, (t_light*)light->content));
+				color->diff_ratio = add_vec3(color->diff_ratio,
+					dmult_vec3(diffuse_lambert(inter, (t_light*)light->content), shad_ratio));
 				if (inter->obj->material.model != LAMBERT)
 				{
 					color->spec_ratio = add_vec3(color->spec_ratio,
-					args->spec_fct[inter->obj->material.model - 1](inter,
-						(t_light*)light->content));
+					dmult_vec3(args->spec_fct[inter->obj->material.model - 1](inter,
+						(t_light*)light->content), shad_ratio));
 				}
 			}
 			light = light->next;

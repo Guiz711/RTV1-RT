@@ -19,6 +19,14 @@
 			<range nb="3000"/>
 			<atten r="0.0005" g="0.0005" b="1"/>
 		</light>
+		<!-- <light>
+			<type type="DIRECTIONAL"/>
+			<vec x="0.3" y="0" z="-1" w="0"/>
+			<diffuse r="1" g="1" b="1"/>
+			<spec r="1" g="1" b="1"/>
+			<range nb="3000"/>
+			<atten r="0.0005" g="0.0005" b="1"/>
+		</light> -->
 	</lights>
 
 
@@ -31,8 +39,9 @@
 			<spec r="0.2" g="0.2" b="0.2"/>
 			<diffuse r="0.01" g="0.7" b="0.38"/>
 			<shininess nb="1"/>
-			<refract nb="0"/>
-			<reflect r="1" g="0" b="0"/>
+			<refract nb="1.460"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
 			<!-- <transparency nb="0"/> -->
 		</sphere>
 		<sphere>
@@ -43,9 +52,10 @@
 			<spec r="0.3" g="0.3" b="0.3"/>
 			<diffuse r="0" g="0.769" b="1"/>
 			<shininess nb="150"/>
-			<refract nb="0"/>
+			<refract nb="1"/>
+			<reflect nb="0.3"/>
+			<opacity nb="1"/>
 			<!-- <reflect r="0.5" g="0.5" b="0.5"/> -->
-			<reflect r="1" g="0.3" b="0.3"/>
 			<!-- <transparency nb="0"/> -->
 		</sphere>
 		<sphere>
@@ -55,13 +65,14 @@
 			<model model="PHONG"/>
 			<amb r="0" g="0" b="0"/>
 			<!-- <amb r="0" g="0" b="0"/> -->
-			<spec r="0.4" g="0.4" b="0.4"/>
+			<spec r="0.1" g="0.1" b="0.1"/>
 			<!-- <diffuse r="1" g="1" b="1"/> -->
 			<diffuse r="0" g="0" b="0"/>
 			<shininess nb="150"/>
 			<refract nb="1"/>
+			<reflect nb="0.3"/>
+			<opacity nb="0.2"/>
 			<!-- <reflect r="0.4" g="0.1" b="0.1"/> -->
-			<reflect r="0.1" g="0.7" b="0.1"/>
 			<!-- <transparency/> -->
 		</sphere>
 		<plane>
@@ -70,12 +81,13 @@
 			<model model="PHONG"/>
 			<!-- <amb r="0.4" g="0.4" b="0.4"/> -->
 			<amb r="0.1" g="0.1" b="0.1"/>
-			<spec r="0.5" g="0.5" b="0.5"/>
-			<diffuse r="0.4" g="0.4" b="0.4"/>
+			<spec r="0" g="0" b="0"/>
+			<diffuse r="0.8" g="0.8" b="0.8"/>
 			<!-- <diffuse r="0.1" g="0.1" b="0.1"/> -->
-			<shininess nb="50"/>
-			<refract nb="1"/>
-			<reflect r="1" g="0.5" b="0.5"/>
+			<shininess nb="1"/>
+			<refract nb="1.635"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
 			<!-- <transparency nb="0"/> -->
 		</plane>
 		<plane>
@@ -86,8 +98,9 @@
 			<spec r="0" g="0" b="0"/>
 			<diffuse r="1" g="1" b="1"/>
 			<shininess nb="50"/>
-			<refract nb="0"/>
-			<reflect r="1" g="0" b="0"/>
+			<refract nb="1.460"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
 		</plane>
 		<!-- <plane>
 			<p x="0" y="0" z="7" w="1"/>

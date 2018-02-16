@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/15 13:43:45 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/16 10:58:52 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ t_mat		xml_parse_material(xmlNodePtr node)
 	if ((child = has_child(node, "refract")))
 		material.refract = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "reflect")))
-		material.reflect = get_color_from_node(child);
-	if ((child = has_child(node, "transparency")))
-		material.transparency = 1;
-	else
-		material.transparency = 0;
+		// material.reflect = get_color_from_node(child);
+		material.reflect = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	if ((child = has_child(node, "opacity")))
+		material.opacity = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	// if ((child = has_child(node, "transparency")))
+	// 	material.transparency = 1;
+	// else
+	// 	material.transparency = 0;
 // */
 	return (material);
 

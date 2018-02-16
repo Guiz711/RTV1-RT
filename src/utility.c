@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 11:15:53 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/12 14:10:00 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/16 13:25:18 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,20 @@ void	convert_color(t_env *env, size_t pos, t_vec3 pix_col)
 	comp[1] = fmax(fmin((int)(pix_col.y * 255), 255), 0);
 	comp[2] = fmax(fmin((int)(pix_col.x * 255), 255), 0);
 	put_pixel(pos, env->img, hex_col);
+}
+
+int		double_not_null(double d)
+{
+	if (d > 1e-6 || d < -1e-6)
+		return TRUE;
+	return FALSE;
+}
+
+void	invert(double *a, double *b)
+{
+	double c;
+
+	c = *a;
+	*a = *b;
+	*b = c;
 }

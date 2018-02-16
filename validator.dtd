@@ -81,14 +81,18 @@
 		r CDATA #REQUIRED
 		g CDATA #REQUIRED
 		b CDATA #REQUIRED>
-<!ELEMENT reflect EMPTY>
+<!-- <!ELEMENT reflect EMPTY>
 <!ATTLIST reflect
 		r CDATA #REQUIRED
 		g CDATA #REQUIRED
-		b CDATA #REQUIRED>
+		b CDATA #REQUIRED> -->
 <!ELEMENT refract EMPTY>
 <!ATTLIST refract nb CDATA #REQUIRED>
-<!ELEMENT transparency EMPTY>
+<!ELEMENT reflect EMPTY>
+<!ATTLIST reflect nb CDATA #REQUIRED>
+<!ELEMENT opacity EMPTY>
+<!ATTLIST opacity nb CDATA #REQUIRED>
+<!-- <!ELEMENT transparency EMPTY> -->
 <!--LIGHTS-->
 
 <!ELEMENT lights (light+)>
@@ -110,7 +114,7 @@
 <!--OBJECTS-->
 
 <!ELEMENT objects (plane | cone | cylindre | sphere)+>
-<!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess, refract, reflect, transparency?)>
-<!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess, refract, reflect, transparency?)>
-<!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess, refract, reflect, transparency? )>
-<!ELEMENT cone (p, dir, angle, model, amb, spec, diffuse, shininess, refract, reflect, transparency?)>
+<!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess, refract, reflect, opacity)>
+<!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess, refract, reflect, opacity)>
+<!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess, refract, reflect, opacity)>
+<!ELEMENT cone (p, dir, angle, model, amb, spec, diffuse, shininess, refract, reflect, opacity)>

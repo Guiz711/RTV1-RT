@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 19:34:34 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/16 13:45:37 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,11 +144,10 @@ typedef struct		s_mat
 	t_vec3			amb;
 	t_vec3			diff;
 	t_vec3			spec;
-	t_vec3			l_abs;
 	double			refract;
-	t_vec3			reflect;
+	double			reflect;
 	double			shin;
-	int				transparency;
+	double			opacity;
 }					t_mat;
 
 typedef	struct		s_o_lst
@@ -171,6 +170,7 @@ typedef	struct	s_ray
 typedef struct	s_inter
 {
 	double		dist;
+	double		shad_atten;
 	t_vec4		p;
 	t_vec4		normal;
 	t_obj_lst	*obj;
@@ -277,9 +277,9 @@ void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
 
 t_vec3		diffuse_lambert(t_inter *inter, t_light *light);
 void		convert_color(t_env *env, size_t pos, t_vec3 pix_col);
-int			shadow(t_args *args, t_inter *inter, t_light *light);
+double		shadow(t_args *args, t_inter *inter, t_light *light);
 int			trace_primary_rays(t_args *args);
-t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shd);
+t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, t_ray *light);
 int			manage_threads(t_args *args);
 int			keypress(int keycode, void *args);
 int			move_cam(int keycode, t_args *args);
@@ -287,6 +287,12 @@ int			quit(t_args *args);
 t_ray		reflected_ray(t_vec4 ray_dir, t_inter *inter);
 int			modif_scale_obj(int keycode, t_args *args);
 int			double_not_null(double d);
+void		invert(double *a, double *b);
+t_vec3		recursive_ray(t_args *args, t_ray ray, int depth, size_t i);
+double	fresnel_calc(t_vec4 normal, t_vec4 ray_dir, double n1, double n2);
+t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter);
+t_ray	reflected_ray(t_vec4 ray_dir, t_inter *inter);
+
 /*
 **	Primitive intersection functions
 */
