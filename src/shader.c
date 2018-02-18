@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:46:04 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/16 13:45:05 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/16 22:00:12 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ double	shadow(t_args *args, t_inter *inter, t_light *light)
 	light_ray.orig = add_vec4(inter->p,
 		dmult_vec4(inter->normal, 0.000007));
 	light_ray.orig.w = 1;
-	obturation = trace_ray(light_ray, args->scene->objs, args->obj_fct, &light_ray);
+	obturation = trace_ray(light_ray, args->scene->objs, args->obj_fct, 1);
 	return (1 - obturation.shad_atten);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/16 13:48:16 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/16 22:03:37 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void		shadow_attenuation_calc(t_mat *mat, t_inter *inter)
 {
 	if (!double_not_null(1 - mat->opacity))
-	{
 		inter->shad_atten = 1;
-	}
-	else if (inter->dist > 0)
+	else
 		inter->shad_atten += mat->opacity;
 }
 
@@ -34,7 +32,7 @@ t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shad)
 	while (objs)
 	{
 		tmp_dist = obj_fct[objs->content_type](ray, objs->content);
-		if (shad && tmp_dist < ray.range)
+		if (shad && tmp_dist < ray.range && tmp_dist > 0)
 		{
 			inter.dist = tmp_dist;
 			inter.obj = objs;
@@ -42,7 +40,7 @@ t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shad)
 			if (inter.shad_atten >= 1.0)
 				return (inter);
 		}
-		else if (tmp_dist < inter.dist && tmp_dist > 0)
+		else if (!shad && tmp_dist < inter.dist && tmp_dist > 0)
 		{
 			inter.dist = tmp_dist;
 			inter.obj = objs;
@@ -119,7 +117,7 @@ t_vec3		recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 	final_color = init_vec3(0, 0, 0);
 	if (depth > REFLEXION_DEPTH)
 		return (final_color);
-	inter = trace_ray(ray, args->scene->objs, args->obj_fct, NULL);
+	inter = trace_ray(ray, args->scene->objs, args->obj_fct, 0);
 	if (inter.obj)
 		final_color = get_final_color(args, &ray, &inter, depth, i);
 	return (final_color);

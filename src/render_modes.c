@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 11:12:13 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/16 13:18:04 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/16 22:24:51 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,11 @@ void	render_mode_4(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 	double	shad_ratio;
 
 	ray = NULL;
-	if (inter->obj)
-	{
 		light = args->scene->light;
 		while (light)
 		{
 			shad_ratio = shadow(args, inter, (t_light*)light->content);
-			if (!double_not_null(1 - shad_ratio))
+			if (double_not_null(shad_ratio))
 			{
 				color->diff_ratio = add_vec3(color->diff_ratio,
 					dmult_vec3(diffuse_lambert(inter, (t_light*)light->content), shad_ratio));
@@ -100,5 +98,4 @@ void	render_mode_4(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 		}
 		color->amb_ratio = add_vec3(color->amb_ratio,
 			mult_vec3(inter->obj->material.amb, args->scene->amb_i));
-	}
 }

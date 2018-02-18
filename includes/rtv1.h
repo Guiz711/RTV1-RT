@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/16 13:45:37 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/16 22:05:11 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,7 @@ t_vec3		diffuse_lambert(t_inter *inter, t_light *light);
 void		convert_color(t_env *env, size_t pos, t_vec3 pix_col);
 double		shadow(t_args *args, t_inter *inter, t_light *light);
 int			trace_primary_rays(t_args *args);
-t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, t_ray *light);
+t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shad);
 int			manage_threads(t_args *args);
 int			keypress(int keycode, void *args);
 int			move_cam(int keycode, t_args *args);
