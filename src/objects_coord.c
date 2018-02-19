@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:43:42 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 13:35:33 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 21:18:33 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,43 @@ double	sine_wave(double angle, double scale, t_vec4 obj_coords)
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	return ((sin(obj_coords.x * 2 * M_PI * scale) + 1) * 0.5);
+}
+
+double	sine_cosine_wave(double angle, double scale, t_vec4 obj_coords)
+{
+	t_mtx4	rotation;
+
+	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
+	obj_coords = new_coord(obj_coords, rotation);
+	return ((cos(obj_coords.y * 2 * M_PI * scale)
+		* sin(obj_coords.x * 2 * M_PI * scale) + 1) * 0.5);
+}
+
+double	stripes(double angle, double scale, t_vec4 obj_coords)
+{
+	t_mtx4	rotation;
+	double	modulo;
+
+	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
+	obj_coords = new_coord(obj_coords, rotation);
+	modulo = obj_coords.x * scale - floor(obj_coords.x * scale);
+	if (modulo < 0.5) 
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
+double	checkerboard(double angle, double scale, t_vec4 obj_coords)
+{
+	t_mtx4	rotation;
+	double	xmodulo;
+	double	ymodulo;
+
+	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
+	obj_coords = new_coord(obj_coords, rotation);
+	xmodulo = obj_coords.x * scale - floor(obj_coords.x * scale);
+	ymodulo = obj_coords.y * scale - floor(obj_coords.y * scale);
+	return ((xmodulo < 0.5) ^ (ymodulo < 0.5));
 }
 
 double	plane_texture(t_args *args, t_inter *inter)

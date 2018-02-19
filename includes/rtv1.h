@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 13:35:44 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 21:19:34 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ typedef enum		e_err
 typedef enum	e_texture
 {
 	SINUS,
+	SINUS_COSINUS,
+	STRIPES,
+	CHECKERBOARD,
 	NO_TEXT
 }				t_texture;
 
@@ -259,7 +262,7 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
-	t_text_fct	text_fct[2];
+	t_text_fct	text_fct[4];
 	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
 	t_vec3		(*spec_fct[1])(t_inter*, t_light*);
 }				t_args;
@@ -305,6 +308,9 @@ t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter);
 t_ray	reflected_ray(t_vec4 ray_dir, t_inter *inter);
 double	plane_texture(t_args *args, t_inter *inter);
 double	sine_wave(double angle, double scale, t_vec4 obj_coords);
+double	sine_cosine_wave(double angle, double scale, t_vec4 obj_coords);
+double	stripes(double angle, double scale, t_vec4 obj_coords);
+double	checkerboard(double angle, double scale, t_vec4 obj_coords);
 
 /*
 **	Primitive intersection functions

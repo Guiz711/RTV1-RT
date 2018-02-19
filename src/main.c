@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 13:36:23 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 21:25:56 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ void	init_fct_arr(t_args *args)
 	args->rdr_fct[4] = &render_mode_4;
 	args->spec_fct[PHONG - 1] = &specular_phong;
 	args->text_fct[0] = &sine_wave;
+	args->text_fct[1] = &sine_cosine_wave;
+	args->text_fct[2] = &stripes;
+	args->text_fct[3] = &checkerboard;
 }
 
 /*static void	print_hoho(t_scene *scene)
@@ -246,9 +249,9 @@ void	add_texture(t_scene *scene)
 	id = 0;
 	while (tmp)
 	{
-		tmp->material.texture = SINUS;
-		tmp->material.text_angle = -45;
-		tmp->material.text_scale = 2;
+		tmp->material.texture = CHECKERBOARD;
+		tmp->material.text_angle = -0;
+		tmp->material.text_scale = 0.25;
 		// else if (tmp->id == 4)
 			// tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
 		tmp = tmp->next;
