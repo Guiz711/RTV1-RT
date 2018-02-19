@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/12 17:24:29 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/19 21:44:22 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "xmlstring.h"
 # include "xmlreader.h"
 
+t_texture	char_to_texture(char *str);
 int			get_obj(xmlNodePtr node, t_scene *scn);
 t_vec4		ft_obj_translation(xmlNodePtr node, t_vec4 ori_pos);
 t_vec4		ft_obj_rotation(xmlNodePtr node, t_vec4 ori_orient);

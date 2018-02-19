@@ -84,13 +84,16 @@
 			<diffuse r="0.8" g="0.8" b="0.8"/>
 			<shininess nb="1"/>
 			<refract nb="1.635"/>
-			<reflect nb="0"/>
+			<reflect nb="0.6"/>
 			<opacity nb="1"/>
+			<texture texture="CHECKERBOARD"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0.25"/>
 		</plane>
 		<plane>
 			<p x="0" y="0" z="21" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>
-			<model model="LAMBERT"/>
+			<model model="PHONG"/>
 			<amb r="1" g="1" b="1"/>
 			<spec r="0" g="0" b="0"/>
 			<diffuse r="1" g="1" b="1"/>
@@ -98,6 +101,9 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0.25"/>
 		</plane>
 		<!-- <plane>
 			<p x="0" y="0" z="7" w="1"/>

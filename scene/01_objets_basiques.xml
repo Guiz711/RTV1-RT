@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<scene render_mode ="4">
+<scene render ="4">
 	<camera>
 		<origin x ="0" y="0" z="20" w="1"/>
 		<orientation x="0" y="0" z="0" w="0"/>
@@ -28,6 +28,9 @@
 			<spec r="1" g="1" b="1"/>
 			<diffuse r="0.5" g="0.5" b="0.8"/>
 			<shininess nb="50"/>
+			<texture texture="SINUS"/>
+			<texture_scale nb="2"/>
+			<texture_angle nb="2"/>
 		</plane>
 
 		<sphere>

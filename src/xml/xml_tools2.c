@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:11:12 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 16:40:07 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/19 22:09:13 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@ void			shd_scene(int *shd_arr, char *string)
 	while (db[++i])
 		ft_strdel(&db[i]);
 	free(db);
+}
+
+t_texture			char_to_texture(char *str)
+{
+	if (!ft_strcmp(str, "SINUS"))
+		return (SINUS);
+	if (!ft_strcmp(str, "SINUS_COSINUS"))
+		return (SINUS_COSINUS);
+	if (!ft_strcmp(str, "STRIPES"))
+		return (STRIPES);
+	if (!ft_strcmp(str, "CHECKERBOARD"))
+		return (CHECKERBOARD);
+	return (NO_TEXT);
 }
 
 t_shd			char_to_shd(char *str)

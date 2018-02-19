@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 21:25:56 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 22:00:57 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ int		get_coord(int button, int x, int y, void *args)
 	return (1);
 }
 
-void	add_texture(t_scene *scene)
+/*void	add_texture(t_scene *scene)
 {
 	t_obj_lst		*tmp;
 	unsigned int	id;
@@ -257,7 +257,7 @@ void	add_texture(t_scene *scene)
 		tmp = tmp->next;
 	}
 	
-}
+}*/
 
 int		main(int argc, char **argv)
 {
@@ -275,7 +275,7 @@ int		main(int argc, char **argv)
 	benchmark(0, NULL);
 	init_args(&args, &env, &scene, argv[1]);
 	objs = scene.objs;
-	add_texture(&scene);
+	//add_texture(&scene);
 	benchmark(1, "init time");
 	benchmark(0, NULL);
 	manage_threads(&args);
