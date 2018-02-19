@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/16 22:03:37 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 13:31:07 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ t_vec3		get_primary_color(t_args *args, t_ray *ray, t_inter *inter)
 	prim_color = init_vec3(0, 0, 0);
 	args->rdr_fct[args->scene->render_mode](args, ray, inter, &color_comp);
 	prim_color = add_vec3(color_comp.diff_ratio, color_comp.amb_ratio);
+	if (inter->obj->content_type == PLANE && inter->obj->material.texture != NO_TEXT)
+		prim_color = dmult_vec3(prim_color, plane_texture(args, inter));
 	prim_color = dmult_vec3(prim_color, inter->obj->material.opacity);
 	prim_color = add_vec3(prim_color, color_comp.spec_ratio);
 	return (prim_color);

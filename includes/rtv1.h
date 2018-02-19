@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/16 22:05:11 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 13:35:44 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ typedef enum		e_err
 	ERR_PARSING,
 }				t_err;
 
+typedef enum	e_texture
+{
+	SINUS,
+	NO_TEXT
+}				t_texture;
+
 typedef enum	e_obj_type
 {
 	SPHERE,
@@ -141,6 +147,9 @@ typedef struct		s_light
 typedef struct		s_mat
 {
 	t_shd			model;
+	t_texture		texture;
+	double			text_angle;
+	double			text_scale;
 	t_vec3			amb;
 	t_vec3			diff;
 	t_vec3			spec;
@@ -216,6 +225,7 @@ typedef struct	s_poly2
 
 typedef double	(*t_inter_fct)(t_ray, void*);
 typedef t_vec4	(*t_norm_fct)(t_ray*, t_inter*);
+typedef double	(*t_text_fct)(double, double, t_vec4);
 
 typedef struct	s_scene
 {
@@ -249,6 +259,7 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
+	t_text_fct	text_fct[2];
 	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
 	t_vec3		(*spec_fct[1])(t_inter*, t_light*);
 }				t_args;
@@ -292,6 +303,8 @@ t_vec3		recursive_ray(t_args *args, t_ray ray, int depth, size_t i);
 double	fresnel_calc(t_vec4 normal, t_vec4 ray_dir, double n1, double n2);
 t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter);
 t_ray	reflected_ray(t_vec4 ray_dir, t_inter *inter);
+double	plane_texture(t_args *args, t_inter *inter);
+double	sine_wave(double angle, double scale, t_vec4 obj_coords);
 
 /*
 **	Primitive intersection functions

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices_calc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/10 12:15:36 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 11:59:38 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 12:06:16 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 t_vec4	new_coord(t_vec4 p, t_mtx4 mtx)
 {
-	float	tmp[4];
+	double	tmp[4];
 
 	tmp[0] = p.x * mtx.a[0] + p.y * mtx.a[1] + p.z * mtx.a[2] + p.w * mtx.a[3];
 	tmp[1] = p.x * mtx.b[0] + p.y * mtx.b[1] + p.z * mtx.b[2] + p.w * mtx.b[3];
