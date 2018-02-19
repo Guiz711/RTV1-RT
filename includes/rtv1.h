@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 21:19:34 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/20 00:42:50 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,29 @@
 /*
 **	Properties
 */
-# define UP 13
-# define BACK 1
-# define LEFT 0
-# define RIGHT 2
-# define WIN_WIDTH 1440
-# define WIN_HEIGHT 780
+# define FORWARD 126
+# define BACK 125
+# define UP 78
+# define DOWN 69
+# define LEFT 123
+# define RIGHT 124
+# define Q_TRANSX 12
+# define W_TRANSY 13
+# define E_TRANSZ 14
+# define A_TRANSX 0
+# define S_TRANSY 1
+# define D_TRANSZ 2
+# define R_ROTX 15
+# define T_ROTY 17
+# define Y_ROTZ 16
+# define F_ROTX 3
+# define G_ROTY 5
+# define H_ROTZ 4
+# define C_SCALE 8
+# define V_SCALE 9
+
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 1000
 # define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -244,8 +261,27 @@ typedef struct	s_scene
 
 # include "xml_parser.h"
 
+typedef struct	s_hook
+{
+	int			up_down;
+	int			backforw;
+	int			left_right;
+	int			scale;
+	int			trans_x;
+	int			trans_y;
+	int			trans_z;
+	int			rot_x;
+	int			rot_y;
+	int			rot_z;
+}				t_hook;
+
+
 typedef struct	s_env
 {
+	t_hook			hook;
+	int				rendertmp;
+	unsigned int	moving;
+	unsigned int	aliasing;
 	unsigned int	sel_obj;
 	void		*init;
 	void		*win;
@@ -281,7 +317,14 @@ typedef struct	s_thread
 	size_t		end;
 }				t_thread;
 
+int			hook(int keycode, t_args *args);
+int			check_hook(t_args *args);
+int			init_hook(t_env *env);
 int			select_obj(int button, int x, int y, t_args *args);
+int			modif_scale_obj(t_args *args);
+int			modif_trans_obj(t_args *args);
+int			modif_rot_obj(t_args *args);
+
 t_mtx4		get_camera_to_world(t_view *view);
 t_pixel		*init_pix_buffer(t_env *env, t_mtx4 v2w);
 t_vec4		new_coord(t_vec4 p, t_mtx4 mtx);
@@ -296,10 +339,8 @@ int			trace_primary_rays(t_args *args);
 t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *obj_fct, int shad);
 int			manage_threads(t_args *args);
 int			keypress(int keycode, void *args);
-int			move_cam(int keycode, t_args *args);
 int			quit(t_args *args);
 t_ray		reflected_ray(t_vec4 ray_dir, t_inter *inter);
-int			modif_scale_obj(int keycode, t_args *args);
 int			double_not_null(double d);
 void		invert(double *a, double *b);
 t_vec3		recursive_ray(t_args *args, t_ray ray, int depth, size_t i);

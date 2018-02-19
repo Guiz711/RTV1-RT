@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/16 10:35:09 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 23:04:20 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,22 @@ static void	*trace_rays_threads(void *vt_args)
 	size_t		i;
 	t_pixel		*pix;
 	t_vec3		pix_col;
+	int			y;
 
+	y = -1;
 	args = ((t_thread*)vt_args)->args;
 	pix = args->pix_buf;
 	i = ((t_thread*)vt_args)->start;
 	while (i < ((t_thread*)vt_args)->end)
 	{
-		pix_col = recursive_ray(args, pix[i].p_ray, 0, i);
+		if ((unsigned int)y == args->env->aliasing || y == -1)
+		{
+			pix_col = recursive_ray(args, pix[i].p_ray, 0, i);
+			y = -1;
+		}
 		convert_color(args->env, i, pix_col);
 		++i;
+		++y;
 	}
 	return (NULL);
 }
@@ -56,6 +63,8 @@ int		manage_threads(t_args *args)
 	int			i;
 
 	i = 0;
+	if (args->env->moving == 1)
+		check_hook(args);
 	init(&thread[0], args);
 	while (i < THREADS_NUMBER)
 	{
@@ -75,5 +84,6 @@ int		manage_threads(t_args *args)
 		i++;
 	}
 	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
+	init_hook(args->env);
 	return (SUCCESS);
 }

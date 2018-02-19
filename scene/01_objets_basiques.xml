@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
-<scene render ="4">
+<scene render ="4" global_refract="1">
 	<camera>
 		<origin x ="0" y="0" z="20" w="1"/>
 		<orientation x="0" y="0" z="0" w="0"/>
@@ -26,11 +26,14 @@
 			<model model="PHONG"/>
 			<amb r="0.5" g="0.5" b="0.8"/>
 			<spec r="1" g="1" b="1"/>
-			<diffuse r="0.5" g="0.5" b="0.8"/>
-			<shininess nb="50"/>
-			<texture texture="SINUS"/>
-			<texture_scale nb="2"/>
-			<texture_angle nb="2"/>
+			<diffuse r="0.8" g="0.8" b="0.8"/>
+			<shininess nb="1"/>
+			<refract nb="1.460"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<texture texture="CHECKERBOARD"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0.25"/>
 		</plane>
 
 		<sphere>
@@ -41,6 +44,9 @@
 			<spec r="1.5" g="1.5" b="1.5"/>
 			<diffuse r="0.2" g="0.8" b="0.2"/>
 			<shininess nb="100"/>
+			<refract nb="1.460"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
 		</sphere>
 
 		<cylindre>
@@ -52,6 +58,9 @@
 			<spec r="1" g="1" b="1"/>
 			<diffuse r="0.2" g="0.2" b="0.8"/>
 			<shininess nb="1"/>
+			<refract nb="1.460"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
 		</cylindre>
 
 		<cone>
@@ -63,6 +72,9 @@
 			<spec r="1.2" g="1.2" b="1.2"/>
 			<diffuse r="0.9" g="0.6" b="0.05"/>
 			<shininess nb="10"/>
+			<refract nb="1.460"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
 		</cone>
 	</objects>
 </scene>

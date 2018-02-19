@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/13 10:04:58 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 23:49:37 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,35 @@ t_pixel			*init_pix_buffer(t_env *env, t_mtx4 v2w)
 	size_t	len;
 	size_t	pos;
 	t_pixel	*pix_buf;
+	int		i;
 
 	len = WIN_WIDTH * WIN_HEIGHT;
 	if (!(pix_buf = (t_pixel*)malloc(sizeof(*pix_buf) * len)))
 		return (NULL);
 	pos = 0;
+	i = -1;
 	while (pos < len)
 	{
-		pix_buf[pos].p_ray = init_ray(env, pos);
-		pix_buf[pos].p_ray.orig = new_coord(pix_buf[pos].p_ray.orig, v2w);
-		pix_buf[pos].p_ray.dir = new_coord(pix_buf[pos].p_ray.dir, v2w);
-		pix_buf[pos].p_ray.range = 1e6;
-		pix_buf[pos].inter.dist = 1e6;
-		pix_buf[pos].inter.obj = NULL;
-		pix_buf[pos].inter.p = init_vec4(0, 0, 0, 1);
-		pix_buf[pos].inter.normal = init_vec4(0, 0, 0, 0);
-		pix_buf[pos].color.amb_ratio = init_vec3(0, 0, 0);
-		pix_buf[pos].color.diff_ratio = init_vec3(0, 0, 0);
-		pix_buf[pos].color.spec_ratio = init_vec3(0, 0, 0);
+		if (i < (int)env->aliasing && i != -1)
+		{
+			pix_buf[pos] = pix_buf[pos - 1];
+			i++;
+		}
+		else
+		{
+			pix_buf[pos].p_ray = init_ray(env, pos);
+			pix_buf[pos].p_ray.orig = new_coord(pix_buf[pos].p_ray.orig, v2w);
+			pix_buf[pos].p_ray.dir = new_coord(pix_buf[pos].p_ray.dir, v2w);
+			pix_buf[pos].p_ray.range = 1e6;
+			pix_buf[pos].inter.dist = 1e6;
+			pix_buf[pos].inter.obj = NULL;
+			pix_buf[pos].inter.p = init_vec4(0, 0, 0, 1);
+			pix_buf[pos].inter.normal = init_vec4(0, 0, 0, 0);
+			pix_buf[pos].color.amb_ratio = init_vec3(0, 0, 0);
+			pix_buf[pos].color.diff_ratio = init_vec3(0, 0, 0);
+			pix_buf[pos].color.spec_ratio = init_vec3(0, 0, 0);
+			i = 0;
+		}
 		++pos;
 	}
 	return (pix_buf);

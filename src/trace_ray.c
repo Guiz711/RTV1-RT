@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 13:31:07 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/19 23:51:44 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_vec3		get_primary_color(t_args *args, t_ray *ray, t_inter *inter)
 {
 	t_color	color_comp;
 	t_vec3	prim_color;
-	
+
 	color_comp.amb_ratio = init_vec3(0, 0, 0);
 	color_comp.diff_ratio = init_vec3(0, 0, 0);
 	color_comp.spec_ratio = init_vec3(0, 0, 0);
@@ -73,9 +73,9 @@ t_vec3		get_primary_color(t_args *args, t_ray *ray, t_inter *inter)
 double		get_refl_ratio(t_inter *inter, t_ray *ray)
 {
 	double	refl_ratio;
-	
+
 	refl_ratio = fresnel_calc(inter->normal, ray->dir, 1,
-		inter->obj->material.refract);
+			inter->obj->material.refract);
 	refl_ratio = inter->obj->material.reflect
 		+ (1.0 - inter->obj->material.reflect) * refl_ratio;
 	return (refl_ratio);
@@ -107,7 +107,7 @@ t_vec3		get_final_color(t_args *args, t_ray *ray, t_inter *inter, int depth, siz
 		refr_color = recursive_ray(args, new_ray, depth + 1, i);
 	}
 	refr_color = dmult_vec3(refr_color,
-		(1 - refl_ratio) * (1 - inter->obj->material.opacity));
+			(1 - refl_ratio) * (1 - inter->obj->material.opacity));
 	return (add_vec3(prim_color, add_vec3(refr_color, refl_color)));
 }
 
@@ -115,13 +115,13 @@ t_vec3		recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 {
 	t_inter	inter;
 	t_vec3	final_color;
-	
+
 	final_color = init_vec3(0, 0, 0);
 	if (depth > REFLEXION_DEPTH)
 		return (final_color);
 	inter = trace_ray(ray, args->scene->objs, args->obj_fct, 0);
 	if (inter.obj)
-		final_color = get_final_color(args, &ray, &inter, depth, i);
+			final_color = get_final_color(args, &ray, &inter, depth, i);
 	return (final_color);
 }
 

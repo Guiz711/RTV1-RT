@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 22:00:57 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/19 23:03:32 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,26 @@ int		init_img(t_env	*env)
 	return (SUCCESS);
 }
 
+int		init_hook(t_env *env)
+{
+	env->hook.up_down = 0;
+	env->hook.backforw = 0;
+	env->hook.left_right = 0;
+	env->hook.scale = 0;
+	env->hook.trans_x = 0;
+	env->hook.trans_y = 0;
+	env->hook.trans_z = 0;
+	env->hook.rot_x = 0;
+	env->hook.rot_y = 0;
+	env->hook.rot_z = 0;
+	return (0);
+}
+
 int		init_env(t_env *env)
 {
+	init_hook(env);
+	env->moving = 0;
+	env->aliasing = 0;
 	env->win_height = WIN_HEIGHT;
 	env->win_width = WIN_WIDTH;
 	env->fov = FOVX;
@@ -287,9 +305,9 @@ int		main(int argc, char **argv)
 	benchmark(1, "display time");
 	benchmark_total(1, "total time");
 	mlx_hook(env.win, 17, 0L, &quit, &args);
-	mlx_key_hook(env.win, move_cam, &args);
 	mlx_mouse_hook(env.win, select_obj, &args);
 	mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &keypress, &args);
+	mlx_hook(env.win, 2, 0, hook, &args);
 //	mlx_mouse_hook(env.win, &get_coord, (void*)&args);
 	mlx_loop(env.init);
 	return (0);
