@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 23:51:44 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/20 13:50:31 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ t_vec3		get_final_color(t_args *args, t_ray *ray, t_inter *inter, int depth, siz
 	refl_color = init_vec3(0, 0, 0);
 	refr_color = init_vec3(0, 0, 0);
 	inter->normal = args->norm_fct[inter->obj->content_type](ray, inter);
-	refl_ratio = get_refl_ratio(inter, ray);
-	refl_ratio = inter->obj->material.reflect;
+	if (inter->obj->material.opacity < 1)
+		refl_ratio = get_refl_ratio(inter, ray);
+	else
+		refl_ratio = inter->obj->material.reflect;
 	prim_color = get_primary_color(args, ray, inter);
 	if (double_not_null(refl_ratio))
 	{

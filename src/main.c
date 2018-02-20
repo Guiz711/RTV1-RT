@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/20 01:09:37 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/20 12:55:55 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	init_fct_arr(t_args *args)
 	args->text_fct[1] = &sine_cosine_wave;
 	args->text_fct[2] = &stripes;
 	args->text_fct[3] = &checkerboard;
+	args->text_fct[4] = &weight_sum_checkerboard;
 }
 
 /*static void	print_hoho(t_scene *scene)

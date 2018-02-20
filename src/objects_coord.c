@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:43:42 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 21:18:33 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/20 12:52:50 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ t_mtx4	world_to_plane_mtx(t_plane *plane)
 double	sine_wave(double angle, double scale, t_vec4 obj_coords)
 {
 	t_mtx4	rotation;
+	double sin1;
+	double sin2;
 
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
 	obj_coords = new_coord(obj_coords, rotation);
-	return ((sin(obj_coords.x * 2 * M_PI * scale) + 1) * 0.5);
+	sin1 = ((sin(obj_coords.x * 2 * M_PI * scale) + 1) * 0.5);
+	sin2 = ((sin(obj_coords.x * 2 * M_PI * scale * 0.5) + 1) * 0.5);
+	return (sin1 * sin2);
 }
 
 double	sine_cosine_wave(double angle, double scale, t_vec4 obj_coords)
@@ -69,6 +73,28 @@ double	checkerboard(double angle, double scale, t_vec4 obj_coords)
 	xmodulo = obj_coords.x * scale - floor(obj_coords.x * scale);
 	ymodulo = obj_coords.y * scale - floor(obj_coords.y * scale);
 	return ((xmodulo < 0.5) ^ (ymodulo < 0.5));
+}
+
+double	weight_sum_checkerboard(double angle, double scale, t_vec4 obj_coords)
+{
+	t_mtx4	rotation;
+	double	xmodulo;
+	double	ymodulo;
+	double	div;
+	double	sum;
+
+	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
+	obj_coords = new_coord(obj_coords, rotation);
+	div = 1;
+	sum = 0;
+	while (div < 10)
+	{
+		xmodulo = obj_coords.x * scale * div - floor(obj_coords.x * scale * div);
+		ymodulo = obj_coords.y * scale * div - floor(obj_coords.y * scale * div);
+		sum += 1 / pow(2, div) * (double)((xmodulo < 0.5) ^ (ymodulo < 0.5));
+		++div;
+	}
+	return (sum);
 }
 
 double	plane_texture(t_args *args, t_inter *inter)

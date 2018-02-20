@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:11:12 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/19 22:40:50 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/20 13:01:32 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_texture			char_to_texture(char *str)
 		return (STRIPES);
 	if (!ft_strcmp(str, "CHECKERBOARD"))
 		return (CHECKERBOARD);
+	if (!ft_strcmp(str, "WEIGHT_SUM_CHECKERBOARD"))
+		return (WEIGHT_SUM_CHECKERBOARD);
 	return (NO_TEXT);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/20 01:17:57 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/20 12:54:35 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@
 # define C_SCALE 8
 # define V_SCALE 9
 # define KEY_I 34
-# define WIN_WIDTH 1600
-# define WIN_HEIGHT 1000
+# define WIN_WIDTH 1400
+# define WIN_HEIGHT 700
 # define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1
@@ -101,6 +101,7 @@ typedef enum	e_texture
 	SINUS_COSINUS,
 	STRIPES,
 	CHECKERBOARD,
+	WEIGHT_SUM_CHECKERBOARD,
 	NO_TEXT
 }				t_texture;
 
@@ -299,7 +300,7 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
-	t_text_fct	text_fct[4];
+	t_text_fct	text_fct[5];
 	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
 	t_vec3		(*spec_fct[1])(t_inter*, t_light*);
 }				t_args;
@@ -353,7 +354,9 @@ double	sine_wave(double angle, double scale, t_vec4 obj_coords);
 double	sine_cosine_wave(double angle, double scale, t_vec4 obj_coords);
 double	stripes(double angle, double scale, t_vec4 obj_coords);
 double	checkerboard(double angle, double scale, t_vec4 obj_coords);
+double	weight_sum_checkerboard(double angle, double scale, t_vec4 obj_coords);
 int		redraw(t_args *args);
+
 /*
 **	Primitive intersection functions
 */
