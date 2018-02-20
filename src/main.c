@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 23:03:32 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/20 01:09:37 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ int		main(int argc, char **argv)
 	t_scene scene;
 	t_obj_lst *objs;
 
+	scene.path = argv[1];
 	benchmark_total(0, NULL);
 	if (argc != 2)
 	{
@@ -291,7 +292,7 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	benchmark(0, NULL);
-	init_args(&args, &env, &scene, argv[1]);
+	init_args(&args, &env, &scene, scene.path);
 	objs = scene.objs;
 	//add_texture(&scene);
 	benchmark(1, "init time");

@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/20 00:53:36 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/20 01:12:59 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,13 @@ void		trans_ori_cam(t_args *args, int keycode)
 		args->scene->cam.orig.y -= 0.5;
 }
 
+
 int			hook(int keycode, t_args *args)
 {
 	if (keycode == KEY_ESC)
 		quit((t_args*)args);
+	if (keycode == KEY_I)
+		redraw(args);
 	if (keycode == 257)
 	{
 		if (args->env->moving == 1)

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 00:34:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/16 10:59:06 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/20 01:22:23 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int				parsedoc(char *path, t_scene *scene)
 	if (scene->render_mode > 6 || scene->render_mode < 0)
 		scene->render_mode = 0;
 	scene->refra = ft_atoi((char *)xmlGetProp(root, BAD_CAST"global_refract"));
-	ft_putchar('a');
 	lst = get_objects_nodes(doc);
 	set_objs(lst, scene);
 	ft_lstfree(&lst);

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 09:47:55 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/08 11:07:20 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/20 01:17:18 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,21 @@ int				quit(t_args *args)
 	// 	free(args->env->init);
 	exit(EXIT_SUCCESS);
 }
+
+int			redraw(t_args *args)
+{
+
+	if (args->scene->objs)
+		free_obj_lst(&args->scene->objs);
+	if (args->scene->light)
+		ft_lstdel(&args->scene->light, &free_light);
+	args->scene->objs = NULL;
+	args->scene->light = NULL;
+	if(!xml_parse(args->scene->path, args->scene))
+		exit(-1);
+	free(args->pix_buf);
+	args->pix_buf = init_pix_buffer(args->env, get_camera_to_world(&args->scene->cam));
+	manage_threads(args);
+	return (1);
+}
+

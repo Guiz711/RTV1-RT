@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/20 00:42:50 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/20 01:17:57 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 # define H_ROTZ 4
 # define C_SCALE 8
 # define V_SCALE 9
-
+# define KEY_I 34
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 1000
 # define FOVX 90
@@ -249,6 +249,7 @@ typedef double	(*t_text_fct)(double, double, t_vec4);
 
 typedef struct	s_scene
 {
+	char			*path;
 	unsigned int	nb_obj;
 	int			shd[5];
 	int			render_mode;
@@ -352,7 +353,7 @@ double	sine_wave(double angle, double scale, t_vec4 obj_coords);
 double	sine_cosine_wave(double angle, double scale, t_vec4 obj_coords);
 double	stripes(double angle, double scale, t_vec4 obj_coords);
 double	checkerboard(double angle, double scale, t_vec4 obj_coords);
-
+int		redraw(t_args *args);
 /*
 **	Primitive intersection functions
 */

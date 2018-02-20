@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/19 22:07:15 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/20 01:19:56 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ t_mat		xml_parse_material(xmlNodePtr node)
 		material.model =
 			char_to_shd(((char *)xmlGetProp(child, BAD_CAST"model")));
 	if ((child = has_child(node, "texture")))
-	{
 		material.texture =
 			char_to_texture(((char *)xmlGetProp(child, BAD_CAST"texture")));
-		printf("text okay");
-	}
 	if ((child = has_child(node, "amb")))
 		material.amb = get_color_from_node(child);
 	if ((child = has_child(node, "diffuse")))
