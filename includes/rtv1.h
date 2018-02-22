@@ -371,7 +371,7 @@ double	weight_sum_checkerboard(double angle, double scale, t_vec4 obj_coords);
 void	plane_bump_mapping(t_args *args, t_inter *inter);
 t_vec4	sine_wave_bump(double angle, double scale, t_vec4 obj_coords);
 int		redraw(t_args *args);
-
+t_bump	char_to_bump(char *str);
 /*
 **	Primitive intersection functions
 */

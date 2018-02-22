@@ -35,7 +35,6 @@ t_mat		xml_parse_material(xmlNodePtr node)
 	if ((child = has_child(node, "refract")))
 		material.refract = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "reflect")))
-		// material.reflect = get_color_from_node(child);
 		material.reflect = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "opacity")))
 		material.opacity = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
@@ -43,11 +42,17 @@ t_mat		xml_parse_material(xmlNodePtr node)
 		material.text_angle = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "text_scale")))
 		material.text_scale = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
-	// if ((child = has_child(node, "transparency")))
-	// 	material.transparency = 1;
-	// else
-	// 	material.transparency = 0;
-// */
+	if ((child = has_child(node, "bump_text")))
+		material.texture =
+			char_to_bump(((char *)xmlGetProp(child, BAD_CAST"bump_text")));
+	if ((child = has_child(node, "bump_angle")))
+		material.bump_angle = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	if ((child = has_child(node, "bump_scale")))
+		material.bump_scale = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	if ((child = has_child(node, "absorb")))
+		material.absorb = get_color_from_node(child);
+
+
 	return (material);
 
 }

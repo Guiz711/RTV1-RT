@@ -39,6 +39,13 @@ void			shd_scene(int *shd_arr, char *string)
 	free(db);
 }
 
+t_bump			char_to_bump(char *str)
+{
+	if (!ft_strcmp(str, "B_SINUS"))
+		return (SINUS);
+	return (NO_BUMP);
+}
+
 t_texture			char_to_texture(char *str)
 {
 	if (!ft_strcmp(str, "SINUS"))
