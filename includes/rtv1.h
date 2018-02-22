@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 21:31:40 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/22 14:49:44 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,6 @@ typedef struct		s_light
 	double			range;
 	t_vec3			atten;
 }					t_light;
-
-typedef enum		e_texture
-{
-
-
-}					t_texture;
 
 typedef struct		s_mat
 {
