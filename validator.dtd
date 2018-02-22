@@ -127,7 +127,7 @@
 
 <!--OBJECTS-->
 
-<!ELEMENT objects (plane | cone | cylindre | sphere, bump_text, bump_angle, bump_scale, absorb)+>
+<!ELEMENT objects (plane | cone | cylindre | sphere)+>
 <!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb)>
 <!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess, refract, reflect, opacity, bump_text, bump_angle, bump_scale, absorb)>
 <!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess, refract, reflect, opacity, bump_text, bump_angle, bump_scale, absorb)>
