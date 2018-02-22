@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/20 13:50:31 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/22 09:33:33 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_vec3		get_primary_color(t_args *args, t_ray *ray, t_inter *inter)
 {
 	t_color	color_comp;
 	t_vec3	prim_color;
+	double	len;
 
 	color_comp.amb_ratio = init_vec3(0, 0, 0);
 	color_comp.diff_ratio = init_vec3(0, 0, 0);
@@ -63,6 +64,12 @@ t_vec3		get_primary_color(t_args *args, t_ray *ray, t_inter *inter)
 	prim_color = init_vec3(0, 0, 0);
 	args->rdr_fct[args->scene->render_mode](args, ray, inter, &color_comp);
 	prim_color = add_vec3(color_comp.diff_ratio, color_comp.amb_ratio);
+	if (ray->inside)
+	{
+		len = norm_vec4(sub_vec4(inter->p, ray->orig));
+		prim_color = mult_vec3(prim_color, init_vec3(exp(-inter->obj->material.absorb.x * len),
+			exp(-inter->obj->material.absorb.y * len), exp(-inter->obj->material.absorb.z * len)));
+	}
 	if (inter->obj->content_type == PLANE && inter->obj->material.texture != NO_TEXT)
 		prim_color = dmult_vec3(prim_color, plane_texture(args, inter));
 	prim_color = dmult_vec3(prim_color, inter->obj->material.opacity);
@@ -76,8 +83,9 @@ double		get_refl_ratio(t_inter *inter, t_ray *ray)
 
 	refl_ratio = fresnel_calc(inter->normal, ray->dir, 1,
 			inter->obj->material.refract);
-	refl_ratio = inter->obj->material.reflect
-		+ (1.0 - inter->obj->material.reflect) * refl_ratio;
+	// refl_ratio = inter->obj->material.reflect
+		// + (1.0 - inter->obj->material.reflect) * refl_ratio;
+	// refl_ratio = refl_ratio;
 	return (refl_ratio);
 }
 
@@ -92,9 +100,11 @@ t_vec3		get_final_color(t_args *args, t_ray *ray, t_inter *inter, int depth, siz
 	refl_color = init_vec3(0, 0, 0);
 	refr_color = init_vec3(0, 0, 0);
 	inter->normal = args->norm_fct[inter->obj->content_type](ray, inter);
-	if (inter->obj->material.opacity < 1)
-		refl_ratio = get_refl_ratio(inter, ray);
-	else
+	if (inter->obj->content_type == PLANE && inter->obj->material.bump_text != NO_BUMP)
+		plane_bump_mapping(args, inter);
+	// if (inter->obj->material.opacity < 1)
+		// refl_ratio = get_refl_ratio(inter, ray);
+	// else
 		refl_ratio = inter->obj->material.reflect;
 	prim_color = get_primary_color(args, ray, inter);
 	if (double_not_null(refl_ratio))

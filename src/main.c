@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/20 12:55:55 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/22 09:39:31 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	init_fct_arr(t_args *args)
 	args->text_fct[2] = &stripes;
 	args->text_fct[3] = &checkerboard;
 	args->text_fct[4] = &weight_sum_checkerboard;
+	args->bump_fct[0] = &sine_wave_bump;
 }
 
 /*static void	print_hoho(t_scene *scene)
@@ -259,7 +260,7 @@ int		get_coord(int button, int x, int y, void *args)
 	return (1);
 }
 
-/*void	add_texture(t_scene *scene)
+void	add_texture(t_scene *scene)
 {
 	t_obj_lst		*tmp;
 	unsigned int	id;
@@ -268,15 +269,15 @@ int		get_coord(int button, int x, int y, void *args)
 	id = 0;
 	while (tmp)
 	{
-		tmp->material.texture = CHECKERBOARD;
-		tmp->material.text_angle = -0;
-		tmp->material.text_scale = 0.25;
+		tmp->material.bump_text = B_SINUS;
+		tmp->material.bump_angle = -60;
+		tmp->material.bump_scale = 0.25;
 		// else if (tmp->id == 4)
-			// tmp->material.refl = init_vec3(0.8, 0.8, 0.8);
+		tmp->material.absorb = init_vec3(0, 0, 0);
 		tmp = tmp->next;
 	}
 	
-}*/
+}
 
 int		main(int argc, char **argv)
 {
@@ -295,7 +296,7 @@ int		main(int argc, char **argv)
 	benchmark(0, NULL);
 	init_args(&args, &env, &scene, scene.path);
 	objs = scene.objs;
-	//add_texture(&scene);
+	add_texture(&scene);
 	benchmark(1, "init time");
 	benchmark(0, NULL);
 	manage_threads(&args);

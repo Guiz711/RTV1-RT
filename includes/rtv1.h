@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/20 12:54:35 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/22 09:35:27 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,12 @@ typedef enum	e_texture
 	NO_TEXT
 }				t_texture;
 
+typedef enum	e_bump
+{
+	B_SINUS,
+	NO_BUMP
+}				t_bump;
+
 typedef enum	e_obj_type
 {
 	SPHERE,
@@ -171,9 +177,13 @@ typedef struct		s_mat
 	t_texture		texture;
 	double			text_angle;
 	double			text_scale;
+	t_bump			bump_text;
+	double			bump_angle;
+	double			bump_scale;
 	t_vec3			amb;
 	t_vec3			diff;
 	t_vec3			spec;
+	t_vec3			absorb;
 	double			refract;
 	double			reflect;
 	double			shin;
@@ -195,6 +205,7 @@ typedef	struct	s_ray
 	t_vec4		orig;
 	t_vec4		dir;
 	double		range;
+	int			inside;
 }				t_ray;
 
 typedef struct	s_inter
@@ -247,6 +258,7 @@ typedef struct	s_poly2
 typedef double	(*t_inter_fct)(t_ray, void*);
 typedef t_vec4	(*t_norm_fct)(t_ray*, t_inter*);
 typedef double	(*t_text_fct)(double, double, t_vec4);
+typedef t_vec4	(*t_bump_fct)(double, double, t_vec4);
 
 typedef struct	s_scene
 {
@@ -301,6 +313,7 @@ typedef struct	s_args
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
 	t_text_fct	text_fct[5];
+	t_bump_fct	bump_fct[1];
 	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
 	t_vec3		(*spec_fct[1])(t_inter*, t_light*);
 }				t_args;
@@ -355,6 +368,8 @@ double	sine_cosine_wave(double angle, double scale, t_vec4 obj_coords);
 double	stripes(double angle, double scale, t_vec4 obj_coords);
 double	checkerboard(double angle, double scale, t_vec4 obj_coords);
 double	weight_sum_checkerboard(double angle, double scale, t_vec4 obj_coords);
+void	plane_bump_mapping(t_args *args, t_inter *inter);
+t_vec4	sine_wave_bump(double angle, double scale, t_vec4 obj_coords);
 int		redraw(t_args *args);
 
 /*

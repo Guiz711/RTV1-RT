@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/16 10:31:33 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/16 10:38:29 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/21 10:09:50 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_ray	reflected_ray(t_vec4 ray_dir, t_inter *inter)
 		dmult_vec4(inter->normal, -2 * ndotr)));
 	refl.orig = add_vec4(inter->p, dmult_vec4(inter->normal, 0.0000007));
 	refl.range = 1e6;
+	refl.inside = 0;
 	return (refl);
 }
 
@@ -40,6 +41,7 @@ t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter)
 		refr.dir = add_vec4(dmult_vec4(ray_dir, r_ratio),
 			dmult_vec4(inter->normal, (r_ratio * -c1) - c2));
 		refr.orig = add_vec4(inter->p, dmult_vec4(inter->normal, -0.0000007));
+		refr.inside = 0;
 	}
 	else
 	{
@@ -48,6 +50,7 @@ t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter)
 		refr.dir = add_vec4(dmult_vec4(ray_dir, r_ratio),
 			dmult_vec4(rev_vec4(inter->normal), (r_ratio * c1) - c2));
 		refr.orig = add_vec4(inter->p, dmult_vec4(inter->normal, 0.0000007));
+		refr.inside = 1;
 	}
 	refr.range = 1e6;
 	return (refr);
