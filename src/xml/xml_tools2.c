@@ -42,7 +42,7 @@ void			shd_scene(int *shd_arr, char *string)
 t_bump			char_to_bump(char *str)
 {
 	if (!ft_strcmp(str, "B_SINUS"))
-		return (SINUS);
+		return (B_SINUS);
 	return (NO_BUMP);
 }
 
