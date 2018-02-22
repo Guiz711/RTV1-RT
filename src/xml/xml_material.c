@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/20 01:19:56 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/22 12:00:50 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_mat		xml_parse_material(xmlNodePtr node)
 	if ((child = has_child(node, "text_scale")))
 		material.text_scale = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "bump_text")))
-		material.texture =
+		material.bump_text =
 			char_to_bump(((char *)xmlGetProp(child, BAD_CAST"bump_text")));
 	if ((child = has_child(node, "bump_angle")))
 		material.bump_angle = atof((char *)xmlGetProp(child, BAD_CAST"nb"));

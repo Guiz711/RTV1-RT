@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:11:12 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/20 13:01:32 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/22 11:59:44 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			shd_scene(int *shd_arr, char *string)
 t_bump			char_to_bump(char *str)
 {
 	if (!ft_strcmp(str, "B_SINUS"))
-		return (SINUS);
+		return (B_SINUS);
 	return (NO_BUMP);
 }
 

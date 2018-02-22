@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/22 09:39:31 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/22 11:58:31 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ void	add_texture(t_scene *scene)
 	id = 0;
 	while (tmp)
 	{
-		tmp->material.bump_text = B_SINUS;
+		tmp->material.bump_text = NO_BUMP;
 		tmp->material.bump_angle = -60;
 		tmp->material.bump_scale = 0.25;
 		// else if (tmp->id == 4)
@@ -296,7 +296,7 @@ int		main(int argc, char **argv)
 	benchmark(0, NULL);
 	init_args(&args, &env, &scene, scene.path);
 	objs = scene.objs;
-	add_texture(&scene);
+	// add_texture(&scene);
 	benchmark(1, "init time");
 	benchmark(0, NULL);
 	manage_threads(&args);

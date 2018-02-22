@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/22 09:33:33 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/22 10:15:23 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,8 @@ double		get_refl_ratio(t_inter *inter, t_ray *ray)
 
 	refl_ratio = fresnel_calc(inter->normal, ray->dir, 1,
 			inter->obj->material.refract);
-	// refl_ratio = inter->obj->material.reflect
-		// + (1.0 - inter->obj->material.reflect) * refl_ratio;
-	// refl_ratio = refl_ratio;
+	refl_ratio = inter->obj->material.reflect
+		+ (1.0 - inter->obj->material.reflect) * refl_ratio;
 	return (refl_ratio);
 }
 
