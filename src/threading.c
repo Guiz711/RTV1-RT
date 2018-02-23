@@ -6,12 +6,22 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 23:04:20 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/22 08:09:48 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include <limits.h>
+
+t_vec3	ft_average(t_vec3 c1, t_vec3 c2)
+{
+	t_vec3	final;
+
+	final.x = (c1.x + c2.x) / 2;
+	final.y = (c1.y + c2.y) / 2;
+	final.z = (c1.z + c2.z) / 2;
+	return (final);
+}
 
 void	init(t_thread *t, t_args *args)
 {
@@ -35,24 +45,14 @@ static void	*trace_rays_threads(void *vt_args)
 	t_args		*args;
 	size_t		i;
 	t_pixel		*pix;
-	t_vec3		pix_col;
-	int			y;
 
-	y = -1;
 	args = ((t_thread*)vt_args)->args;
 	pix = args->pix_buf;
 	i = ((t_thread*)vt_args)->start;
-	while (i < ((t_thread*)vt_args)->end)
-	{
-		if ((unsigned int)y == args->env->aliasing || y == -1)
-		{
-			pix_col = recursive_ray(args, pix[i].p_ray, 0, i);
-			y = -1;
-		}
-		convert_color(args->env, i, pix_col);
-		++i;
-		++y;
-	}
+	if (args->env->aliasing <= 1)
+		antiAliasing(args, pix, i, ((t_thread*)vt_args)->end);
+	else
+		Aliasing(args, pix, i, ((t_thread*)vt_args)->end);
 	return (NULL);
 }
 

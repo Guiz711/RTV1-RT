@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/20 12:54:35 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/23 09:35:26 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 /*
 **	Properties
 */
+
+# define KEY_DIVIDE 75
+# define KEY_MULTIPLY 67
 # define FORWARD 126
 # define BACK 125
 # define UP 78
@@ -66,7 +69,7 @@
 # define ENDIAN 1
 # define BUFF_SIZE 4096
 
-# define THREADS_NUMBER 8
+# define THREADS_NUMBER 1
 
 # define REFLEXION_DEPTH 3
 # define EXTENSION_NAME ".scn"
@@ -283,7 +286,7 @@ typedef struct	s_env
 	t_hook			hook;
 	int				rendertmp;
 	unsigned int	moving;
-	unsigned int	aliasing;
+	double			aliasing;
 	unsigned int	sel_obj;
 	void		*init;
 	void		*win;
@@ -356,7 +359,9 @@ double	stripes(double angle, double scale, t_vec4 obj_coords);
 double	checkerboard(double angle, double scale, t_vec4 obj_coords);
 double	weight_sum_checkerboard(double angle, double scale, t_vec4 obj_coords);
 int		redraw(t_args *args);
-
+void	Aliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
+void	antiAliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
+int	set_aliasing(int keycode, t_args *args);
 /*
 **	Primitive intersection functions
 */
