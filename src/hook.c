@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/20 01:12:59 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/23 16:36:20 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ int			hook(int keycode, t_args *args)
 		quit((t_args*)args);
 	if (keycode == KEY_I)
 		redraw(args);
+	if (keycode == KEY_DIVIDE || keycode == KEY_MULTIPLY)
+		if (set_aliasing(keycode, args) == 1)
+		{
+			free(args->pix_buf);
+			args->pix_buf = init_pix_buffer(args->env, get_camera_to_world(&args->scene->cam));
+			manage_threads(args);
+		}
 	if (keycode == 257)
 	{
 		if (args->env->moving == 1)
@@ -79,7 +86,6 @@ int			hook(int keycode, t_args *args)
 	}
 	if (args->env->moving == 1)
 	{
-		args->env->aliasing = 19;
 		if (keycode == LEFT || keycode == RIGHT)
 			args->env->hook.left_right = (keycode == LEFT ? 1 : -1);
 		if (keycode == UP || keycode == DOWN)
@@ -100,6 +106,8 @@ int			hook(int keycode, t_args *args)
 			args->env->hook.rot_y = (keycode == T_ROTY ? 1 : -1);
 		if ((keycode == Y_ROTZ || keycode == H_ROTZ) && args->env->sel_obj != 0)
 			args->env->hook.rot_z = (keycode == Y_ROTZ ? 1 : -1);
+		if (keycode == KEY_DIVIDE || keycode == KEY_MULTIPLY)
+			args->env->aliasing = set_aliasing(keycode, args);
 		free(args->pix_buf);
 		args->pix_buf = init_pix_buffer(args->env, get_camera_to_world(&args->scene->cam));
 		manage_threads(args);
