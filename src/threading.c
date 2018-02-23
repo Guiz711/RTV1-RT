@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/22 08:09:48 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/23 16:11:32 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	init(t_thread *t, t_args *args)
 
 	len = args->env->win_height * args->env->win_width;
 	i = 0;
-	while (i < THREADS_NUMBER)
+	while ((int)i < args->env->thread_number)
 	{
 		t[i].args = args;
-		t[i].start = (i == 0) ? 0 : len / THREADS_NUMBER * i;
-		t[i].end = (i == THREADS_NUMBER - 1) ? len
-			: len / THREADS_NUMBER * (i + 1);
+		t[i].start = (i == 0) ? 0 : len / args->env->thread_number * i;
+		t[i].end = ((int)i == args->env->thread_number - 1) ? len
+			: len / args->env->thread_number * (i + 1);
 		i++;
 	}
 }
@@ -58,15 +58,15 @@ static void	*trace_rays_threads(void *vt_args)
 
 int		manage_threads(t_args *args)
 {
-	pthread_t	t[THREADS_NUMBER];
-	t_thread	thread[THREADS_NUMBER];
+	pthread_t	t[args->env->thread_number];
+	t_thread	thread[args->env->thread_number];
 	int			i;
 
 	i = 0;
 	if (args->env->moving == 1)
 		check_hook(args);
 	init(&thread[0], args);
-	while (i < THREADS_NUMBER)
+	while ((int)i < args->env->thread_number)
 	{
 		if (pthread_create(&t[i], NULL, &trace_rays_threads, &thread[i]))
 		{
@@ -77,12 +77,13 @@ int		manage_threads(t_args *args)
 		i++;
 	}
 	i = 0;
-	while (i < THREADS_NUMBER)
+	while ((int)i < args->env->thread_number)
 	{
 		if (pthread_join(t[i], NULL))
 			return (FAILURE);
 		i++;
 	}
+	printf("%d = thread\n",args->env->thread_number);
 	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
 	init_hook(args->env);
 	return (SUCCESS);

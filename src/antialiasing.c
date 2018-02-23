@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 07:59:35 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/23 09:38:34 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/23 16:32:34 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,44 @@
 int		set_aliasing(int keycode, t_args *args)
 {
 	double	aliasing;
-	int		popo;
 
 	aliasing = args->env->aliasing;
-	popo = aliasing - 1;
 	if (keycode == KEY_MULTIPLY)
 	{
-		if (aliasing <= 2 && aliasing >= 0.5)
-			aliasing /= 2;
-		else if (aliasing <= 50 && aliasing >= 0.25)
+		if (aliasing < 2 && aliasing >= 0.5)
 		{
-			while ((int)(args->env->win_width / aliasing) % 2 != 0)
-				aliasing--;
-			if ((int)(args->env->win_width / aliasing) % 2 != 0)
-				aliasing = args->env->aliasing;
+			args->env->thread_number = 8;
+			aliasing /= 2;
+		}
+		else if (aliasing >= 2 && aliasing <= 50)
+		{
+			args->env->thread_number = 1;
+			aliasing--;
+			if (fmod((args->env->win_width / aliasing), 2) != 0)
+			{
+				while (fmod((args->env->win_width / aliasing), 2) != 0 && aliasing > 2)
+					aliasing--;
+			}
 		}
 	}
 	else if (keycode == KEY_DIVIDE)
 	{
-		if (aliasing >= 0.25 && aliasing <= 1)
+		if (aliasing >= 0.25 && aliasing < 1)
 		{
+			args->env->thread_number = 8;
 			aliasing *= 2;
 		}
-		else if (aliasing >= 2 && aliasing <= 50)
+		else if (aliasing >= 1 && aliasing < 50)
 		{
-			while ((int)(args->env->win_width / aliasing) % 2 != 0)
-				aliasing++;
-			if ((int)(args->env->win_width / aliasing) % 2 != 0)
-				aliasing = args->env->aliasing;
+			args->env->thread_number = 1;
+			aliasing++;
+			if (fmod((args->env->win_width / aliasing), 2) != 0)
+			{
+				while (fmod((args->env->win_width / aliasing), 2) != 0 && aliasing < 50)
+					aliasing++;
+				if (fmod((args->env->win_width / aliasing), 2) != 0)
+					aliasing = 50;
+			}
 		}
 	}
 	printf("%f\n", aliasing);
@@ -100,13 +110,14 @@ void	Aliasing(t_args *args, t_pixel *pix, size_t i, size_t end)
 	size_t		w;
 	size_t		compteur;
 
-	pos = -1;
 	compteur = 0;
 	nb_pix = args->env->aliasing;
+	pos = (i / (nb_pix * nb_pix)) - 1;
 	while (i < end)
 	{
 		h = 0;
-		++pos;
+		if (pos < (int)((((WIN_HEIGHT / nb_pix) * (WIN_WIDTH / nb_pix)) / args->env->thread_number) * (end / ((WIN_HEIGHT *  WIN_WIDTH) / args->env->thread_number ))))
+			++pos;
 		pix_col = recursive_ray(args, pix[pos].p_ray, 0, pos);
 		while (h < nb_pix)
 		{
@@ -125,7 +136,8 @@ void	Aliasing(t_args *args, t_pixel *pix, size_t i, size_t end)
 		{
 			i += args->env->win_width * (nb_pix - 1);
 			compteur = 0;
-		}
-		printf("pos = %d, %d %d\n", pos, args->env->win_width, (int)(i % ((args->env->win_width / 2) - 1)));
+		} 
 	}
+
+
 }

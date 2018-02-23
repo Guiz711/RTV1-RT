@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 10:12:14 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/22 07:48:39 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/23 15:37:35 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ t_pixel			*init_pix_buffer(t_env *env, t_mtx4 v2w)
 		len = (env->win_height * env->win_width) / env->aliasing;
 	else
 		len = (env->win_height * env->win_width);
-	printf("%zu\n", len);
 	if (!(pix_buf = (t_pixel*)malloc(sizeof(*pix_buf) * len)))
 	{
 		env->win_width = WIN_WIDTH;
@@ -77,5 +76,6 @@ t_pixel			*init_pix_buffer(t_env *env, t_mtx4 v2w)
 	}
 	env->win_width = WIN_WIDTH;
 	env->win_height = WIN_HEIGHT;
+
 	return (pix_buf);
 }

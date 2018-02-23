@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/23 09:35:26 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/23 16:48:54 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@
 # define ENDIAN 1
 # define BUFF_SIZE 4096
 
-# define THREADS_NUMBER 1
+# define THREADS_NUMBER 8
 
 # define REFLEXION_DEPTH 3
 # define EXTENSION_NAME ".scn"
@@ -283,6 +283,7 @@ typedef struct	s_hook
 
 typedef struct	s_env
 {
+	int				thread_number;
 	t_hook			hook;
 	int				rendertmp;
 	unsigned int	moving;
