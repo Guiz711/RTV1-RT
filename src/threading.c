@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/23 16:11:32 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/23 17:29:41 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int		manage_threads(t_args *args)
 			return (FAILURE);
 		i++;
 	}
-	printf("%d = thread\n",args->env->thread_number);
 	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
 	init_hook(args->env);
 	return (SUCCESS);
