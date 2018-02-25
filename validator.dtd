@@ -107,6 +107,22 @@
 			g CDATA #REQUIRED
 			b CDATA #REQUIRED>
 
+<!ELEMENT p1 EMPTY>
+<!ATTLIST p1
+			x CDATA #REQUIRED
+			y CDATA #REQUIRED
+			z CDATA #REQUIRED>
+<!ELEMENT p2 EMPTY>
+<!ATTLIST p2
+			x CDATA #REQUIRED
+			y CDATA #REQUIRED
+			z CDATA #REQUIRED>
+<!ELEMENT p3 EMPTY>
+<!ATTLIST p3
+			x CDATA #REQUIRED
+			y CDATA #REQUIRED
+			z CDATA #REQUIRED>
+
 <!--LIGHTS-->
 
 <!ELEMENT lights (light+)>
@@ -127,8 +143,9 @@
 
 <!--OBJECTS-->
 
-<!ELEMENT objects (plane | cone | cylindre | sphere)+>
+<!ELEMENT objects (plane | cone | cylindre | sphere | triangle)+>
 <!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb)>
 <!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess, refract, reflect, opacity, bump_text, bump_angle, bump_scale, absorb)>
 <!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess, refract, reflect, opacity, bump_text, bump_angle, bump_scale, absorb)>
 <!ELEMENT cone (p, dir, angle, model, amb, spec, diffuse, shininess, refract, reflect, opacity, bump_text, bump_angle, bump_scale, absorb)>
+<!ELEMENT triangle(p1, p2, p3, normal, model, amb, spec, diffuse, shininess, refract, reflect, opacity, bump_text, bump_angle, bump_scale, absorb)>
