@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/23 17:48:21 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/25 17:18:48 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,6 +379,11 @@ t_bump	char_to_bump(char *str);
 void	Aliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
 void	antiAliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
 int	set_aliasing(int keycode, t_args *args);
+
+void	bandw_filter(t_img *img);
+void	negatif_filter(t_img *img);
+void	stereoscopie_filter(t_img *img);
+void	sepia_filter(t_img *img);
 /*
 **	Primitive intersection functions
 */

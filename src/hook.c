@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/23 17:42:41 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/25 17:18:33 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,14 @@ int			hook(int keycode, t_args *args)
 	else if (keycode == KEY_I)
 		redraw(args);
 	else if (keycode == KEY_DIVIDE || keycode == KEY_MULTIPLY)
+	{
 		if (set_aliasing(keycode, args) == 1)
 		{
 			free(args->pix_buf);
 			args->pix_buf = init_pix_buffer(args->env, get_camera_to_world(&args->scene->cam));
 			manage_threads(args);
 		}
+	}
 	if (keycode == 257)
 	{
 		if (args->env->moving == 1)
