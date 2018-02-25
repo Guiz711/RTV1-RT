@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/25 17:18:48 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/25 19:05:16 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -384,6 +384,9 @@ void	bandw_filter(t_img *img);
 void	negatif_filter(t_img *img);
 void	stereoscopie_filter(t_img *img);
 void	sepia_filter(t_img *img);
+void	motionblur_filter(t_img *img);
+int		cartoon_filter(t_img *img);
+
 /*
 **	Primitive intersection functions
 */
