@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jgourdin <jgourdin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:12:38 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/23 17:13:19 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/24 18:24:22 by arthurlabelle    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,12 @@ void	init_fct_arr(t_args *args)
 	args->obj_fct[1] = &plane_intersection;
 	args->obj_fct[2] = &cylinder_intersection;
 	args->obj_fct[3] = &cone_intersection;
+	args->obj_fct[4] = &triangle_intersection;
 	args->norm_fct[0] = &sphere_normal;
 	args->norm_fct[1] = &plane_normal;
 	args->norm_fct[2] = &cylinder_normal;
 	args->norm_fct[3] = &cone_normal;
+	args->norm_fct[4] = &triangle_normal;
 	args->rdr_fct[0] = &render_mode_0;
 	args->rdr_fct[1] = &render_mode_1;
 	args->rdr_fct[2] = &render_mode_2;
@@ -130,7 +132,7 @@ void	init_fct_arr(t_args *args)
 	printf("amb_i: %f %f %f\n", scene->amb_i.x, scene->amb_i.y, scene->amb_i.z);
 	printf("************ CAM ************\n");
 		printf("origin: %f %f %f %f\n", scene->cam.orig.x, scene->cam.orig.y, scene->cam.orig.z, scene->cam.orig.w);
-		
+
 		printf("orient: %f %f %f %f\n", scene->cam.orient.x, scene->cam.orient.y, scene->cam.orient.z, scene->cam.orient.w);
 	printf("*********** OBJ **********\n");
 	char *a[] = {"spere"," plane", "cylinder", "cone",};
@@ -277,7 +279,7 @@ void	add_texture(t_scene *scene)
 		tmp->material.absorb = init_vec3(0, 0, 0);
 		tmp = tmp->next;
 	}
-	
+
 }
 
 int		main(int argc, char **argv)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:00:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/12 18:09:54 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/24 17:49:54 by arthurlabelle    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec4	cylinder_normal(t_ray *ray, t_inter *inter)
 	t_vec4		diff;
 	double		m;
 	t_vec4		normal;
-	
+
 	cyl = (t_cylinder*)inter->obj->content;
 	diff = sub_vec4(ray->orig, cyl->p);
 	m = dot_vec4(ray->dir, cyl->dir) * inter->dist
@@ -47,7 +47,7 @@ t_vec4	cone_normal(t_ray *ray, t_inter *inter)
 	t_vec4		diff;
 	double		m;
 	t_vec4		normal;
-	
+
 	cone = (t_cone*)inter->obj->content;
 	diff = sub_vec4(ray->orig, cone->p);
 	m = (dot_vec4(ray->dir, cone->dir) * inter->dist
@@ -69,5 +69,18 @@ t_vec4	plane_normal(t_ray *ray, t_inter *inter)
 		normal = normalize_vec4(rev_vec4(pln->normal));
 	else
 		normal = normalize_vec4(pln->normal);
+	return (normal);
+}
+
+t_vec4	triangle_normal(t_ray *ray, t_inter *inter)
+{
+	t_triangle	*tri;
+	t_vec4			normal;
+
+	tri = (t_triangle*)inter->obj->content;
+	if (dot_vec4(ray->dir, tri->normal) > 0)
+		normal = normalize_vec4(rev_vec4(tri->normal));
+	else
+		normal = normalize_vec4(tri->normal);
 	return (normal);
 }
