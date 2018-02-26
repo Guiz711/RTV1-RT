@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/25 19:05:16 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/26 12:39:55 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,7 @@ typedef struct	s_scene
 	int			shd[5];
 	int			render_mode;
 	double		refra;
+	int			filtre;
 	t_view		cam;
 	t_obj_lst	*objs;
 	t_list		*light;
@@ -380,6 +381,7 @@ void	Aliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
 void	antiAliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
 int	set_aliasing(int keycode, t_args *args);
 
+void	filter_selector(t_args *args);
 void	bandw_filter(t_img *img);
 void	negatif_filter(t_img *img);
 void	stereoscopie_filter(t_img *img);

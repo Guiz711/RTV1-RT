@@ -6,11 +6,27 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 14:59:17 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/25 19:14:05 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/26 12:41:38 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void		filter_selector(t_args *args)
+{
+	if (args->scene->filtre == 1)
+		bandw_filter(args->env->img);
+	else if (args->scene->filtre == 2)
+		negatif_filter(args->env->img);
+	else if (args->scene->filtre == 3)
+		stereoscopie_filter(args->env->img);
+	else if (args->scene->filtre == 4)
+		sepia_filter(args->env->img);
+	else if (args->scene->filtre == 5)
+		motionblur_filter(args->env->img);
+	else if (args->scene->filtre == 6)
+		cartoon_filter(args->env->img);
+}
 
 void		bandw_filter(t_img *img)
 {

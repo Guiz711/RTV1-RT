@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:12:38 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/25 19:14:06 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/26 12:40:32 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int		init_hook(t_env *env)
 int		init_env(t_env *env)
 {
 	init_hook(env);
-	env->thread_number = 1;
+	env->thread_number = THREADS_NUMBER;
 	env->moving = 0;
 	env->aliasing = 1;
 	env->win_height = WIN_HEIGHT;

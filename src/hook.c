@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/25 17:18:33 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/26 12:30:15 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			hook(int keycode, t_args *args)
 		if (args->env->moving == 1)
 		{
 			args->env->aliasing = 1;
-			args->env->thread_number = 8;
+			args->env->thread_number = THREADS_NUMBER;
 			args->scene->render_mode = args->env->rendertmp;
 			args->env->moving = 0;
 			free(args->pix_buf);

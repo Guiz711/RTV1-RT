@@ -1,7 +1,8 @@
 <!ELEMENT scene (camera, lights, objects)>
 <!ATTLIST scene
 			render CDATA #IMPLIED
-			global_refract CDATA #IMPLIED>
+			global_refract CDATA #IMPLIED
+			filtre CDATA #IMPLIED>
 
 <!--CAMERA-->
 

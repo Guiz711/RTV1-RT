@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/26 11:01:54 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/26 12:37:34 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,7 @@ int		manage_threads(t_args *args)
 			return (FAILURE);
 		i++;
 	}
-	cartoon_filter(args->env->img);
-	//motionblur_filter(args->env->img);
-	//sepia_filter(args->env->img);
-	//stereoscopie_filter(args->env->img);
-	//negatif_filter(args->env->img);
-	//bandw_filter(args->env->img);
+	filter_selector(args);
 	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
 	init_hook(args->env);
 	return (SUCCESS);
