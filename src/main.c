@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/24 09:44:07 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/22 15:37:40 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/02/23 17:12:38 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/02/25 19:14:06 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,16 @@ int		init_hook(t_env *env)
 int		init_env(t_env *env)
 {
 	init_hook(env);
+	env->thread_number = 1;
 	env->moving = 0;
-	env->aliasing = 0;
+	env->aliasing = 1;
 	env->win_height = WIN_HEIGHT;
 	env->win_width = WIN_WIDTH;
 	env->fov = FOVX;
 	if (!(env->init = mlx_init()))
 		return (FAILURE);
-	if (!(env->win = mlx_new_window(env->init, env->win_width,
-		env->win_height, "RTV1")))
+	if (!(env->win = mlx_new_window(env->init, WIN_WIDTH,
+		WIN_HEIGHT, "RTV1")))
 		return (FAILURE);
 	if (!init_img(env))
 		return (FAILURE);

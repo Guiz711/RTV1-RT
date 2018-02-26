@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/20 01:12:59 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/25 17:18:33 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,39 @@ int			hook(int keycode, t_args *args)
 {
 	if (keycode == KEY_ESC)
 		quit((t_args*)args);
-	if (keycode == KEY_I)
+	else if (keycode == KEY_I)
 		redraw(args);
+	else if (keycode == KEY_DIVIDE || keycode == KEY_MULTIPLY)
+	{
+		if (set_aliasing(keycode, args) == 1)
+		{
+			free(args->pix_buf);
+			args->pix_buf = init_pix_buffer(args->env, get_camera_to_world(&args->scene->cam));
+			manage_threads(args);
+		}
+	}
 	if (keycode == 257)
 	{
 		if (args->env->moving == 1)
 		{
+			args->env->aliasing = 1;
+			args->env->thread_number = 8;
 			args->scene->render_mode = args->env->rendertmp;
 			args->env->moving = 0;
-			args->env->aliasing = 0;
 			free(args->pix_buf);
 			args->pix_buf = init_pix_buffer(args->env, get_camera_to_world(&args->scene->cam));
 			manage_threads(args);
 		}
 		else
 		{
+			args->env->aliasing = 14;
+			args->env->thread_number = 1;
 			args->env->rendertmp = args->scene->render_mode;
-			args->scene->render_mode = 0;
 			args->env->moving = 1;
 		}
 	}
 	if (args->env->moving == 1)
 	{
-		args->env->aliasing = 19;
 		if (keycode == LEFT || keycode == RIGHT)
 			args->env->hook.left_right = (keycode == LEFT ? 1 : -1);
 		if (keycode == UP || keycode == DOWN)
@@ -100,6 +110,8 @@ int			hook(int keycode, t_args *args)
 			args->env->hook.rot_y = (keycode == T_ROTY ? 1 : -1);
 		if ((keycode == Y_ROTZ || keycode == H_ROTZ) && args->env->sel_obj != 0)
 			args->env->hook.rot_z = (keycode == Y_ROTZ ? 1 : -1);
+		if (keycode == KEY_DIVIDE || keycode == KEY_MULTIPLY)
+			args->env->aliasing = set_aliasing(keycode, args);
 		free(args->pix_buf);
 		args->pix_buf = init_pix_buffer(args->env, get_camera_to_world(&args->scene->cam));
 		manage_threads(args);
@@ -112,18 +124,19 @@ int			select_obj(int button, int x, int y, t_args *args)
 	t_inter	inter;
 	size_t	pos;
 
-	button = 0;
-	printf("x = %d, y = %d\n", x, y);
-	y = (y < 0 ? y * -1 : y);
-	pos = y * args->env->win_width + x;
-	inter = trace_ray(args->pix_buf[pos].p_ray, args->scene->objs, args->obj_fct, 0);
-	if (inter.obj)
-		args->env->sel_obj = inter.obj->id_obj;
-	else
-		args->env->sel_obj = 0;
-	ft_putstr("Objet selectionne : ");
-	ft_putnbr(args->env->sel_obj);
-	ft_putstr("\n");
+	if (button == 1 && args->env->moving == 0)
+	{
+		y = (y < 0 ? y * -1 : y);
+		pos = y * args->env->win_width + x;
+		inter = trace_ray(args->pix_buf[pos].p_ray, args->scene->objs, args->obj_fct, 0);
+		if (inter.obj)
+			args->env->sel_obj = inter.obj->id_obj;
+		else
+			args->env->sel_obj = 0;
+		ft_putstr("Objet selectionne : ");
+		ft_putnbr(args->env->sel_obj);
+		ft_putstr("\n");
+	}
 	return (0);
 }
 

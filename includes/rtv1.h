@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/22 09:35:27 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/02/25 19:05:16 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 /*
 **	Properties
 */
+
+# define KEY_DIVIDE 75
+# define KEY_MULTIPLY 67
 # define FORWARD 126
 # define BACK 125
 # define UP 78
@@ -292,10 +295,11 @@ typedef struct	s_hook
 
 typedef struct	s_env
 {
+	int				thread_number;
 	t_hook			hook;
 	int				rendertmp;
 	unsigned int	moving;
-	unsigned int	aliasing;
+	double			aliasing;
 	unsigned int	sel_obj;
 	void		*init;
 	void		*win;
@@ -372,6 +376,17 @@ void	plane_bump_mapping(t_args *args, t_inter *inter);
 t_vec4	sine_wave_bump(double angle, double scale, t_vec4 obj_coords);
 int		redraw(t_args *args);
 t_bump	char_to_bump(char *str);
+void	Aliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
+void	antiAliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
+int	set_aliasing(int keycode, t_args *args);
+
+void	bandw_filter(t_img *img);
+void	negatif_filter(t_img *img);
+void	stereoscopie_filter(t_img *img);
+void	sepia_filter(t_img *img);
+void	motionblur_filter(t_img *img);
+int		cartoon_filter(t_img *img);
+
 /*
 **	Primitive intersection functions
 */
