@@ -45,6 +45,10 @@
 			<texture texture="NO_TEXT"/>
 			<text_angle nb="0"/>
 			<text_scale nb="0.25"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</plane>
 
 		<plane>
@@ -61,6 +65,10 @@
 			<texture texture="NO_TEXT"/>
 			<text_angle nb="0"/>
 			<text_scale nb="0.25"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</plane>
 
 		<plane>
@@ -77,6 +85,10 @@
 			<texture texture="NO_TEXT"/>
 			<text_angle nb="0"/>
 			<text_scale nb="0.25"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</plane>
 
 		<plane>
@@ -93,6 +105,10 @@
 			<texture texture="WEIGHT_SUM_CHECKERBOARD"/>
 			<text_angle nb="0"/>
 			<text_scale nb="0.20"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</plane>
 
 		<plane>
@@ -109,6 +125,10 @@
 			<texture texture="NO_TEXT"/>
 			<text_angle nb="0"/>
 			<text_scale nb="0.25"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</plane>
 
 		<sphere>
@@ -122,6 +142,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</sphere>
 
 		<cylindre>
@@ -136,6 +160,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</cylindre>
 
 		<sphere>
@@ -149,6 +177,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</sphere>
 
 		<sphere>
@@ -162,6 +194,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</sphere>
 
 		<cylindre>
@@ -176,6 +212,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</cylindre>
 
 		<sphere>
@@ -189,6 +229,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</sphere>
 
 		<sphere>
@@ -202,6 +246,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</sphere>
 
 		<cylindre>
@@ -216,6 +264,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</cylindre>
 
 		<sphere>
@@ -229,6 +281,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</sphere>
 
 		<sphere>
@@ -242,6 +298,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</sphere>
 
 		<cylindre>
@@ -256,6 +316,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</cylindre>
 
 		<sphere>
@@ -269,6 +333,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</sphere>
 
 		<sphere>
@@ -282,6 +350,10 @@
 			<refract nb="1.460"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
 		</sphere>
 	</objects>
 </scene>
