@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/26 12:39:55 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/27 03:14:21 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,13 @@
 
 # define THREADS_NUMBER 8
 
-# define REFLEXION_DEPTH 3
+# define REFLEXION_DEPTH 1
 # define EXTENSION_NAME ".scn"
 
 # define RAD(x) (M_PI * (x) / 180)
 # define SQUARE(x) ((x) * (x))
+
+# define LOADING_SCREEN "./pics/loadingscreen.xpm"
 
 /*
 **	Error handling
@@ -293,7 +295,6 @@ typedef struct	s_hook
 	int			rot_z;
 }				t_hook;
 
-
 typedef struct	s_env
 {
 	int				thread_number;
@@ -308,6 +309,7 @@ typedef struct	s_env
 	int			win_height;
 	int			fov;
 	t_img		*img;
+	t_img		*lodscreen;
 }				t_env;
 
 typedef struct	s_args
@@ -388,6 +390,9 @@ void	stereoscopie_filter(t_img *img);
 void	sepia_filter(t_img *img);
 void	motionblur_filter(t_img *img);
 int		cartoon_filter(t_img *img);
+
+
+int		init_loadingscreen(t_env *env);
 
 /*
 **	Primitive intersection functions

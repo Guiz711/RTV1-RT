@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/02/25 15:11:34 by jgourdin         ###   ########.fr        #
+#    Updated: 2018/02/27 01:53:52 by jgourdin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRC_PATH = src
 SRC_NAME = main.c init_rays.c obj_list.c intersection.c trace_ray.c utility.c\
 			render_modes.c normal.c shader.c threading.c events.c quit.c \
 			hook.c reflection_refraction.c objects_coord.c antialiasing.c \
-			filtre.c
+			filtre.c loading_screen.c
 
 SRC_VEC_PATH = vectors
 

@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:12:38 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/26 12:40:32 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/27 03:18:51 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		init_env(t_env *env)
 	init_hook(env);
 	env->thread_number = THREADS_NUMBER;
 	env->moving = 0;
-	env->aliasing = 1;
+	env->aliasing = 0.5;
 	env->win_height = WIN_HEIGHT;
 	env->win_width = WIN_WIDTH;
 	env->fov = FOVX;
@@ -90,6 +90,7 @@ int		init_env(t_env *env)
 	if (!(env->win = mlx_new_window(env->init, WIN_WIDTH,
 		WIN_HEIGHT, "RTV1")))
 		return (FAILURE);
+	init_loadingscreen(env);
 	if (!init_img(env))
 		return (FAILURE);
 	return (SUCCESS);
@@ -215,6 +216,7 @@ int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 	init_fct_arr(args);
 	args->env = env;
 	args->scene = scene;
+	mlx_put_image_to_window(args->env->init, args->env->win, args->env->lodscreen->ptr, 0, 0);
 	args->pix_buf = init_pix_buffer(env, get_camera_to_world(&scene->cam));
 	return (SUCCESS);
 }
