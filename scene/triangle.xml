@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scene render="4" global_refract="1">
+	<camera>
+		<origin x ="0" y="0" z="0" w="1"/>
+		<orientation x="0" y="0" z="-10" w="0"/>
+		<amb_i r="0" g="0" b="0"/>
+	</camera>
+
+	<lights>
+		<light>
+			<type type="POINT"/>
+			<vec x="15" y="-10" z="10" w="1"/>
+			<diffuse r="1.2" g="1.2" b="1.2"/>
+			<spec r="1.2" g="1.2" b="1.2"/>
+			<range nb="3000"/>
+			<atten r="0.0005" g="0.0005" b="1"/>
+		</light>
+		<!-- <light>
+			<type type="DIRECTIONAL"/>
+			<vec x="0.3" y="0" z="-1" w="0"/>
+			<diffuse r="1" g="1" b="1"/>
+			<spec r="1" g="1" b="1"/>
+			<range nb="3000"/>
+			<atten r="0.0005" g="0.0005" b="1"/>
+		</light> -->
+	</lights>
+
+
+	<objects>
+    <sphere>
+			<radius nb="2"/>
+			<center x="0" y="2" z="-10" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.4" g="0.1" b="0.1"/>
+			<spec r="0.2" g="0.2" b="0.2"/>
+			<diffuse r="0.4" g="0.1" b="0.1"/>
+			<shininess nb="1"/>
+			<refract nb="1.460"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="-60"/>
+			<bump_scale nb="0.1"/>
+			<absorb r="0" g="0" b="0"/>
+			<!-- <transparency nb="0"/> -->
+		</sphere>
+    <triangle>
+			<p1 x="-5" y="3" z="-10" w="1"/>
+			<p2 x="0" y="-4" z="-12" w="1"/>
+			<p3 x="3.6" y="3.3" z="-14" w="1"/>
+			<model model="PHONG"/>
+			<amb r="1" g="1" b="1"/>
+			<spec r="0.2" g="0.2" b="0.2"/>
+			<diffuse r="1" g="0.7" b="0.3"/>
+			<shininess nb="150"/>
+			<refract nb="0"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="-60"/>
+			<bump_scale nb="0.1"/>
+			<absorb r="0" g="0" b="0"/>
+		</triangle>
+    <triangle>
+			<p1 x="-1" y="1" z="-8" w="1"/>
+			<p2 x="-3" y="-5" z="-10" w="1"/>
+			<p3 x="4" y="-1" z="-10" w="1"/>
+			<model model="PHONG"/>
+			<amb r="1" g="1" b="1"/>
+			<spec r="0.2" g="0.2" b="0.2"/>
+			<diffuse r="0.2" g="0.3" b="0.4"/>
+			<shininess nb="50"/>
+			<refract nb="1.3"/>
+			<reflect nb="0"/>
+			<opacity nb="0.5"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="-60"/>
+			<bump_scale nb="0.1"/>
+			<absorb r="0" g="0" b="0"/>
+		</triangle>
+	</objects>
+</scene>

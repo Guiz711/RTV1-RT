@@ -128,6 +128,23 @@
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
 		</plane>
+		<triangle>
+			<p1 x="0" y="2" z="-10" w="1"/>
+			<p2 x="-2" y="2" z="-12" w="1"/>
+			<p3 x="5" y="2" z="-10" w="1"/>
+			<model model="PHONG"/>
+			<amb r="1" g="1" b="1"/>
+			<spec r="0" g="0" b="0"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="50"/>
+			<refract nb="0"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="-60"/>
+			<bump_scale nb="0.1"/>
+			<absorb r="0" g="0" b="0"/>
+		</triangle>
 		<!-- <plane>
 			<p x="0" y="0" z="7" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>

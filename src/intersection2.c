@@ -6,13 +6,13 @@
 /*   By: arthurla <arthurla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/24 18:38:52 by arthurla          #+#    #+#             */
-/*   Updated: 2018/02/25 12:48:33 by arthurlabelle    ###   ########.fr       */
+/*   Updated: 2018/03/01 16:12:17 by arthurlabelle    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static double	triPlane_intersection(t_ray ray, t_vector4 normal, t_vec4 p)
+static double	triPlane_intersection(t_ray ray, t_vec4 normal, t_vec4 p)
 {
 	t_vec4	diff;
 	double	denom;
@@ -29,26 +29,17 @@ static double	triPlane_intersection(t_ray ray, t_vector4 normal, t_vec4 p)
 	return (dist);
 }
 
-//fonction a appeller apres avoir parse un triangle : ici en envoyant les 3points
 t_vec4  			get_triangle_normal(t_vec4 p1, t_vec4 p2, t_vec4 p3)
 {
 	t_vec4	p1p2;
 	t_vec4	p1p3;
+	t_vec4	nrm;
 
 	p1p2 = sub_vec4(p2, p1);
 	p1p3 = sub_vec4(p3, p1);
-	return(cross_vec4(p1p2, p1p3));
-}
-
-//fonction a appeller apres avoir parse un triangle : ici en envoyant l'objet
-void  				get_triangle_normal(t_triangle *tri)
-{
-	t_vec4	p1p2;
-	t_vec4	p1p3;
-
-	p1p2 = sub_vec4(tri->p2, tri->p1);
-	p1p3 = sub_vec4(tri->p3, tri->p1);
-	tri->normal = cross_vec4(p1p2, p1p3);
+	nrm = cross_vec4(p1p2, p1p3);
+	nrm.w = 0;
+	return(normalize_vec4(nrm));
 }
 
 double				triangle_intersection(t_ray ray, void *obj)

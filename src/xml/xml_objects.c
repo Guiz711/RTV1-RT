@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <jgourdin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 06:12:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/25 14:57:28 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:21:16 by arthurlabelle    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int				create_triangle(xmlNodePtr node, t_scene *scn)
 		triangle.p2 = get_vec4_from_node(child);
 	if ((child = has_child(node, "p3")))
 		triangle.p3 = get_vec4_from_node(child);
-	if ((child = has_child(node, "normal")))
-		triangle.normal = normalize_vec4(get_vec4_from_node(child));
+	triangle.normal = get_triangle_normal(triangle.p1, triangle.p2, triangle.p3);//triangle.normal = normalize_vec4(get_vec4_from_node(child));
 	if (!(new = obj_lstnew(TRIANGLE, &triangle, sizeof(triangle))))
 		ft_putendl("error\n");
 	new->material = xml_parse_material(node);

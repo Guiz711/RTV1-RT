@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
+#    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/02/22 08:08:19 by jgourdin         ###   ########.fr        #
+#    Updated: 2018/02/28 20:55:15 by arthurlabelle    ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ CFLAGS = -Wall -Wextra -Werror #-flto -O3 -march=native
 
 SRC_PATH = src
 
-SRC_NAME = main.c init_rays.c obj_list.c intersection.c trace_ray.c utility.c\
+SRC_NAME = main.c init_rays.c obj_list.c intersection.c intersection2.c trace_ray.c utility.c\
 			render_modes.c normal.c shader.c threading.c events.c quit.c \
 			hook.c reflection_refraction.c objects_coord.c antialiasing.c
 

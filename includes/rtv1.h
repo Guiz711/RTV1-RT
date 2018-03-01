@@ -6,7 +6,7 @@
 /*   By: jgourdin <jgourdin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/24 18:29:41 by arthurlabelle    ###   ########.fr       */
+/*   Updated: 2018/03/01 16:02:18 by arthurlabelle    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -408,6 +408,7 @@ t_vec4		cylinder_normal(t_ray *ray, t_inter *inter);
 t_vec4		cone_normal(t_ray *ray, t_inter *inter);
 t_vec4		triangle_normal(t_ray *ray, t_inter *inter);
 
+t_vec4		get_triangle_normal(t_vec4 p1, t_vec4 p2, t_vec4 p3);
 /*
 **	Render management functions
 */

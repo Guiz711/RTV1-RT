@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 15:20:09 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/01 16:00:35 by arthurlabelle    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ double			cylinder_intersection(t_ray ray, void *obj)
 	t_cylinder	*cyl;
 	double		dot1;
 	double		dot2;
-	
+
 	cyl = (t_cylinder*)obj;
 	diff = sub_vec4(ray.orig, cyl->p);
 	dot1 = dot_vec4(ray.dir, cyl->dir);
@@ -79,7 +79,7 @@ double			cone_intersection(t_ray ray, void *obj)
 	t_cone		*cone;
 	double		dot1;
 	double		dot2;
-	
+
 	cone = (t_cone*)obj;
 	diff = sub_vec4(ray.orig, cone->p);
 	dot1 = dot_vec4(ray.dir, cone->dir);
