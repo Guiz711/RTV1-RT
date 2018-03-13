@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/13 09:41:43 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/13 21:37:31 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ typedef enum	e_texture
 	CHECKERBOARD,
 	WEIGHT_SUM_CHECKERBOARD,
 	PERLIN,
+	FRACTAL_SUM_PERLIN,
+	SINUS_SUM_PERLIN,
 	NO_TEXT
 }				t_texture;
 
@@ -184,6 +186,7 @@ typedef struct		s_mat
 	int				noise_seed;
 	t_vec4			noise_map[256];
 	int				permutation[512];
+	double			max_noise;
 	double			text_angle;
 	double			text_scale;
 	t_bump			bump_text;
@@ -324,7 +327,7 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
-	t_text_fct	text_fct[6];
+	t_text_fct	text_fct[8];
 	t_bump_fct	bump_fct[1];
 	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
 	t_vec3		(*spec_fct[1])(t_inter*, t_light*);
@@ -407,7 +410,10 @@ void	motionblur_filter(t_img *img);
 int		cartoon_filter(t_img *img);
 
 void	fill_text_map(t_mat *mat);
+double	eval_coord(t_mat *mat, t_vec4 coords);
 double	map_noise(t_mat *mat, t_vec4 obj_coords);
+double	fractal_sum_perlin(t_mat *mat, t_vec4 obj_coords);
+double	sinus_sum_perlin(t_mat *mat, t_vec4 obj_coords);
 void	put_pixel(int pos, t_img *img, unsigned int color);
 
 int		init_loadingscreen(t_env *env);

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:12:38 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/12 12:41:36 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/13 21:37:51 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ void	init_fct_arr(t_args *args)
 	args->text_fct[3] = &checkerboard;
 	args->text_fct[4] = &weight_sum_checkerboard;
 	args->text_fct[5] = &map_noise;
+	args->text_fct[6] = &fractal_sum_perlin;
+	args->text_fct[7] = &sinus_sum_perlin;
 	args->bump_fct[0] = &sine_wave_bump;
 }
 

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:10:18 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/12 13:49:32 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/13 11:02:54 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,6 @@ double	map_noise(t_mat *mat, t_vec4 obj_coords)
 	t_mtx4	rotation;
 
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(mat->text_angle)));
-	// obj_coords = new_coord(obj_coords, rotation);
-	return ((eval_coord(mat, obj_coords) + 1) * 0.5);
+	obj_coords = new_coord(obj_coords, rotation);
+	return ((eval_coord(mat, dmult_vec4(obj_coords, mat->text_scale)) + 1) * 0.5);
 }
