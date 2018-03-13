@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/22 15:38:05 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/02/27 13:20:22 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ t_vec3		get_final_color(t_args *args, t_ray *ray, t_inter *inter, int depth, siz
 	}
 	refr_color = dmult_vec3(refr_color,
 			(1 - refl_ratio) * (1 - inter->obj->material.opacity));
+	prim_color = dmult_vec3(prim_color, inter->obj->material.opacity - refl_ratio);
 	return (add_vec3(prim_color, add_vec3(refr_color, refl_color)));
 }
 
