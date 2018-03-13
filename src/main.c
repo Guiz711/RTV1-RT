@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:12:38 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/27 03:18:51 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/28 08:18:02 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,7 +216,7 @@ int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 	init_fct_arr(args);
 	args->env = env;
 	args->scene = scene;
-	mlx_put_image_to_window(args->env->init, args->env->win, args->env->lodscreen->ptr, 0, 0);
+//	mlx_put_image_to_window(args->env->init, args->env->win, args->env->lodscreen->ptr, 0, 0);
 	args->pix_buf = init_pix_buffer(env, get_camera_to_world(&scene->cam));
 	return (SUCCESS);
 }
@@ -282,6 +282,11 @@ void	add_texture(t_scene *scene)
 	
 }
 
+void	ft_loop(t_env env)
+{
+		mlx_loop(env.init);
+}
+
 int		main(int argc, char **argv)
 {
 	t_args	args;
@@ -303,6 +308,7 @@ int		main(int argc, char **argv)
 	benchmark(1, "init time");
 	benchmark(0, NULL);
 	manage_threads(&args);
+	//screenshot(env.img);
 	// if (manage_threads(&args) == FAILURE)
 		// trace_primary_rays(&args);
 	benchmark(1, "graphics calc time");
@@ -312,7 +318,7 @@ int		main(int argc, char **argv)
 	benchmark_total(1, "total time");
 	mlx_hook(env.win, 17, 0L, &quit, &args);
 	mlx_mouse_hook(env.win, select_obj, &args);
-	mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &keypress, &args);
+//	mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &keypress, &args);
 	mlx_hook(env.win, 2, 0, hook, &args);
 //	mlx_mouse_hook(env.win, &get_coord, (void*)&args);
 	mlx_loop(env.init);

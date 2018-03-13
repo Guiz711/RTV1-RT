@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/27 13:11:22 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/13 09:36:35 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,6 +310,7 @@ typedef struct	s_env
 	int			fov;
 	t_img		*img;
 	t_img		*lodscreen;
+	t_img		*loadbar;
 }				t_env;
 
 typedef struct	s_args
@@ -393,6 +394,8 @@ int		cartoon_filter(t_img *img);
 
 
 int		init_loadingscreen(t_env *env);
+
+void	screenshot(t_img *img);
 
 /*
 **	Primitive intersection functions

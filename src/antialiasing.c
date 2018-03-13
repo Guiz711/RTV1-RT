@@ -6,11 +6,28 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 07:59:35 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/27 03:12:31 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/28 04:04:21 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+int		val(t_env *env)
+{
+	static size_t p = 0;
+	static int  x = 0;
+
+	if  ((p * 100)/ (WIN_WIDTH * WIN_HEIGHT) >= 1)
+	{
+		mlx_put_image_to_window(env->init, env->win, env->loadbar->ptr, x, 650);
+		x += WIN_WIDTH / 100;
+		p = 0;
+	}
+	
+
+	return (++p);
+}
+
+
 
 int		set_aliasing(int keycode, t_args *args)
 {
@@ -55,7 +72,6 @@ int		set_aliasing(int keycode, t_args *args)
 			}
 		}
 	}
-	printf("%f\n", aliasing);
 	if (args->env->aliasing == aliasing)
 		return (0);
 	args->env->aliasing = aliasing;
@@ -75,27 +91,28 @@ void	antiAliasing(t_args *args, t_pixel *pix, size_t i, size_t end)
 	nb_ray = 1 / args->env->aliasing;
 	while (i < end)
 	{
-			j = 0;
-			popo = 0;
-			pix_col = (t_vec3){0, 0, 0};
-			while (popo++ < nb_ray)
+		j = 0;
+		popo = 0;
+		pix_col = (t_vec3){0, 0, 0};
+		while (popo++ < nb_ray)
+		{
+			k = 0;
+			pos = ((i % args->env->win_width) * nb_ray) + j + (((i / args->env->win_width) * nb_ray) *  (args->env->win_width * nb_ray));
+			while (k++ < nb_ray)
 			{
-				k = 0;
-				pos = ((i % args->env->win_width) * nb_ray) + j + (((i / args->env->win_width) * nb_ray) *  (args->env->win_width * nb_ray));
-				while (k++ < nb_ray)
-				{
-					pix_tmp = recursive_ray(args, pix[pos + k].p_ray, 0, pos + k),
-					pix_col.x += pix_tmp.x;
-					pix_col.y += pix_tmp.y;
-					pix_col.z += pix_tmp.z;
-				}
-				j += args->env->win_width * nb_ray;
+				pix_tmp = recursive_ray(args, pix[pos + k].p_ray, 0, pos + k),
+						pix_col.x += pix_tmp.x;
+				pix_col.y += pix_tmp.y;
+				pix_col.z += pix_tmp.z;
 			}
-			pix_col.x /= (nb_ray * nb_ray);
-			pix_col.y /= (nb_ray * nb_ray);
-			pix_col.z /= (nb_ray * nb_ray);
-			convert_color(args->env, i, pix_col);
-			++i;
+			j += args->env->win_width * nb_ray;
+		}
+		pix_col.x /= (nb_ray * nb_ray);
+		pix_col.y /= (nb_ray * nb_ray);
+		pix_col.z /= (nb_ray * nb_ray);
+		//val(args->env);
+		convert_color(args->env, i, pix_col);
+		++i;
 	}
 	return;
 }
@@ -125,6 +142,7 @@ void	Aliasing(t_args *args, t_pixel *pix, size_t i, size_t end)
 			pr_pos = i + (h * (args->env->win_width));
 			while (w < nb_pix)
 			{
+				//val(args->env);
 				convert_color(args->env, pr_pos + w, pix_col);
 				w++;
 			}
