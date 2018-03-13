@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/27 03:14:21 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/02/27 13:11:22 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@
 
 # define THREADS_NUMBER 8
 
-# define REFLEXION_DEPTH 1
+# define REFLEXION_DEPTH 10
 # define EXTENSION_NAME ".scn"
 
 # define RAD(x) (M_PI * (x) / 180)
