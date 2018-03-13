@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:12:38 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/28 08:18:02 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/12 12:41:36 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	init_fct_arr(t_args *args)
 	args->text_fct[2] = &stripes;
 	args->text_fct[3] = &checkerboard;
 	args->text_fct[4] = &weight_sum_checkerboard;
+	args->text_fct[5] = &map_noise;
 	args->bump_fct[0] = &sine_wave_bump;
 }
 

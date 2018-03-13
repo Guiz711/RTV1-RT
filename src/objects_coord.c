@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:43:42 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/22 09:37:08 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/12 13:42:55 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,42 @@ t_mtx4	plane_to_world_mtx(t_plane *plane)
 	return (mtx4_mult(translation, rotation));
 }
 
-double	sine_wave(double angle, double scale, t_vec4 obj_coords)
+double	sine_wave(t_mat *mat, t_vec4 obj_coords)
 {
 	t_mtx4	rotation;
+	double	angle;
+	double	scale;
 
+	angle = mat->text_angle;
+	scale = mat->text_scale;
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	return ((sin(obj_coords.x * 2 * M_PI * scale) + 1) * 0.5);
 }
 
-double	sine_cosine_wave(double angle, double scale, t_vec4 obj_coords)
+double	sine_cosine_wave(t_mat *mat, t_vec4 obj_coords)
 {
 	t_mtx4	rotation;
+	double	angle;
+	double	scale;
 
+	angle = mat->text_angle;
+	scale = mat->text_scale;
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	return ((cos(obj_coords.y * 2 * M_PI * scale)
 		* sin(obj_coords.x * 2 * M_PI * scale) + 1) * 0.5);
 }
 
-double	stripes(double angle, double scale, t_vec4 obj_coords)
+double	stripes(t_mat *mat, t_vec4 obj_coords)
 {
 	t_mtx4	rotation;
 	double	modulo;
+	double	angle;
+	double	scale;
 
+	angle = mat->text_angle;
+	scale = mat->text_scale;
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	modulo = obj_coords.x * scale - floor(obj_coords.x * scale);
@@ -71,12 +83,16 @@ double	stripes(double angle, double scale, t_vec4 obj_coords)
 		return (FALSE);
 }
 
-double	checkerboard(double angle, double scale, t_vec4 obj_coords)
+double	checkerboard(t_mat *mat, t_vec4 obj_coords)
 {
 	t_mtx4	rotation;
 	double	xmodulo;
 	double	ymodulo;
+	double	angle;
+	double	scale;
 
+	angle = mat->text_angle;
+	scale = mat->text_scale;
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	xmodulo = obj_coords.x * scale - floor(obj_coords.x * scale);
@@ -84,7 +100,7 @@ double	checkerboard(double angle, double scale, t_vec4 obj_coords)
 	return ((xmodulo < 0.5) ^ (ymodulo < 0.5));
 }
 
-double	weight_sum_checkerboard(double angle, double scale, t_vec4 obj_coords)
+double	weight_sum_checkerboard(t_mat *mat, t_vec4 obj_coords)
 {
 	t_mtx4	rotation;
 	double	xmodulo;
@@ -92,14 +108,15 @@ double	weight_sum_checkerboard(double angle, double scale, t_vec4 obj_coords)
 	double	div;
 	double	sum;
 
-	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
+	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0),
+		RAD(mat->text_angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	div = 1;
 	sum = 0;
 	while (div < 10)
 	{
-		xmodulo = obj_coords.x * scale * div - floor(obj_coords.x * scale * div);
-		ymodulo = obj_coords.y * scale * div - floor(obj_coords.y * scale * div);
+		xmodulo = obj_coords.x * mat->text_scale * div - floor(obj_coords.x * mat->text_scale * div);
+		ymodulo = obj_coords.y * mat->text_scale * div - floor(obj_coords.y * mat->text_scale * div);
 		sum += 1 / pow(2, div) * (double)((xmodulo < 0.5) ^ (ymodulo < 0.5));
 		++div;
 	}
@@ -118,8 +135,7 @@ double	plane_texture(t_args *args, t_inter *inter)
 	mat = &inter->obj->material;
 	obj_coords = new_coord(inter->p, world_to_plane_mtx(plane));
 	scale = 3;
-	pattern = args->text_fct[mat->texture](mat->text_angle, mat->text_scale,
-		obj_coords);
+	pattern = args->text_fct[mat->texture](mat, obj_coords);
 	return pattern;
 }
 

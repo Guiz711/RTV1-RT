@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:11:12 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/22 11:59:44 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/12 13:09:38 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_texture			char_to_texture(char *str)
 		return (CHECKERBOARD);
 	if (!ft_strcmp(str, "WEIGHT_SUM_CHECKERBOARD"))
 		return (WEIGHT_SUM_CHECKERBOARD);
+	if (!ft_strcmp(str, "PERLIN"))
+		return (PERLIN);
 	return (NO_TEXT);
 }
 

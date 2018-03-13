@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/22 15:33:52 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/12 13:51:02 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ t_mat		xml_parse_material(xmlNodePtr node)
 		material.bump_scale = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "absorb")))
 		material.absorb = get_color_from_node(child);
-
-
+	if (material.texture == PERLIN)
+		fill_text_map(&material);
 	return (material);
 
 }

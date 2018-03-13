@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/28 04:04:38 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/12 12:49:20 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@
 
 # define THREADS_NUMBER 8
 
-# define REFLEXION_DEPTH 1
+# define REFLEXION_DEPTH 10
 # define EXTENSION_NAME ".scn"
 
 # define RAD(x) (M_PI * (x) / 180)
@@ -107,6 +107,7 @@ typedef enum	e_texture
 	STRIPES,
 	CHECKERBOARD,
 	WEIGHT_SUM_CHECKERBOARD,
+	PERLIN,
 	NO_TEXT
 }				t_texture;
 
@@ -180,6 +181,9 @@ typedef struct		s_mat
 {
 	t_shd			model;
 	t_texture		texture;
+	int				noise_seed;
+	t_vec4			noise_map[256];
+	int				permutation[512];
 	double			text_angle;
 	double			text_scale;
 	t_bump			bump_text;
@@ -262,7 +266,7 @@ typedef struct	s_poly2
 
 typedef double	(*t_inter_fct)(t_ray, void*);
 typedef t_vec4	(*t_norm_fct)(t_ray*, t_inter*);
-typedef double	(*t_text_fct)(double, double, t_vec4);
+typedef double	(*t_text_fct)(t_mat*, t_vec4);
 typedef t_vec4	(*t_bump_fct)(double, double, t_vec4);
 
 typedef struct	s_scene
@@ -320,7 +324,7 @@ typedef struct	s_args
 	t_pixel		*pix_buf;
 	t_norm_fct 	norm_fct[4];
 	t_inter_fct	obj_fct[4];
-	t_text_fct	text_fct[5];
+	t_text_fct	text_fct[6];
 	t_bump_fct	bump_fct[1];
 	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
 	t_vec3		(*spec_fct[1])(t_inter*, t_light*);
@@ -339,6 +343,16 @@ typedef struct	s_thread
 	size_t		start;
 	size_t		end;
 }				t_thread;
+
+typedef struct	s_noise
+{
+	int		start[3];
+	int		end[3];
+	t_vec3	t;
+	t_vec4	grad[8];
+	t_vec4	dir[8];
+	t_vec4	interpol;
+}				t_noise;
 
 int			hook(int keycode, t_args *args);
 int			check_hook(t_args *args);
@@ -371,11 +385,11 @@ double	fresnel_calc(t_vec4 normal, t_vec4 ray_dir, double n1, double n2);
 t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter);
 t_ray	reflected_ray(t_vec4 ray_dir, t_inter *inter);
 double	plane_texture(t_args *args, t_inter *inter);
-double	sine_wave(double angle, double scale, t_vec4 obj_coords);
-double	sine_cosine_wave(double angle, double scale, t_vec4 obj_coords);
-double	stripes(double angle, double scale, t_vec4 obj_coords);
-double	checkerboard(double angle, double scale, t_vec4 obj_coords);
-double	weight_sum_checkerboard(double angle, double scale, t_vec4 obj_coords);
+double	sine_wave(t_mat *mat, t_vec4 obj_coords);
+double	sine_cosine_wave(t_mat *mat, t_vec4 obj_coords);
+double	stripes(t_mat *mat, t_vec4 obj_coords);
+double	checkerboard(t_mat *mat, t_vec4 obj_coords);
+double	weight_sum_checkerboard(t_mat *map, t_vec4 obj_coords);
 void	plane_bump_mapping(t_args *args, t_inter *inter);
 t_vec4	sine_wave_bump(double angle, double scale, t_vec4 obj_coords);
 int		redraw(t_args *args);
@@ -392,6 +406,9 @@ void	sepia_filter(t_img *img);
 void	motionblur_filter(t_img *img);
 int		cartoon_filter(t_img *img);
 
+void	fill_text_map(t_mat *mat);
+double	map_noise(t_mat *mat, t_vec4 obj_coords);
+void	put_pixel(int pos, t_img *img, unsigned int color);
 
 int		init_loadingscreen(t_env *env);
 
