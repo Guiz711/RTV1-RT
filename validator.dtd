@@ -103,10 +103,13 @@
 <!ELEMENT bump_scale EMPTY>
 <!ATTLIST bump_scale nb CDATA #REQUIRED>
 <!ELEMENT absorb EMPTY>
-<!ATTLIST absorb 
+<!ATTLIST absorb
 			r CDATA #REQUIRED
 			g CDATA #REQUIRED
 			b CDATA #REQUIRED>
+
+<!ELEMENT noise_seed EMPTY>
+<!ATTLIST noise_seed nb CDATA #REQUIRED>
 
 <!--LIGHTS-->
 
@@ -129,7 +132,7 @@
 <!--OBJECTS-->
 
 <!ELEMENT objects (plane | cone | cylindre | sphere)+>
-<!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb)>
-<!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess, refract, reflect, opacity, bump_text, bump_angle, bump_scale, absorb)>
-<!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess, refract, reflect, opacity, bump_text, bump_angle, bump_scale, absorb)>
-<!ELEMENT cone (p, dir, angle, model, amb, spec, diffuse, shininess, refract, reflect, opacity, bump_text, bump_angle, bump_scale, absorb)>
+<!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>
+<!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>
+<!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>
+<!ELEMENT cone (p, dir, angle, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>
