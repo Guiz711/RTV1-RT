@@ -6,12 +6,33 @@
 /*   By: jgourdin <jgourdin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 06:12:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/01 16:21:16 by arthurlabelle    ###   ########.fr       */
+/*   Updated: 2018/03/14 19:32:16 by arthurlabelle    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "xml_parser.h"
+
+int				create_rectangle(xmlNodePtr node, t_scene *scn)
+{
+	t_rectangle	rect;
+	xmlNodePtr	child;
+	t_obj_lst *new;
+
+	if ((child = has_child(node, "p")))
+		rect.p = get_vec4_from_node(child);
+	if ((child = has_child(node, "s1")))
+		rect.s1 = get_vec4_from_node(child);
+	if ((child = has_child(node, "s2")))
+		rect.s2 = get_vec4_from_node(child);
+	rect.normal = get_rectangle_normal(rect.s1, rect.s2);
+	if (!(new = obj_lstnew(RECTANGLE, &rect, sizeof(rect))))
+		ft_putendl("error\n");
+	new->material = xml_parse_material(node);
+	new->id_obj = scn->nb_obj;
+	obj_lstadd(&(scn->objs), new);
+	return (1);
+}
 
 int				create_triangle(xmlNodePtr node, t_scene *scn)
 {
@@ -25,6 +46,14 @@ int				create_triangle(xmlNodePtr node, t_scene *scn)
 		triangle.p2 = get_vec4_from_node(child);
 	if ((child = has_child(node, "p3")))
 		triangle.p3 = get_vec4_from_node(child);
+	if ((child = has_child(node, "translation")))
+	{
+		triangle.p1 = ft_obj_translation(child, triangle.p1);
+		triangle.p2 = ft_obj_translation(child, triangle.p2);
+		triangle.p3 = ft_obj_translation(child, triangle.p3);
+	}
+	//if ((child = has_child(node, "rotation")))
+	//	rotation des 3 points autour de leur centre
 	triangle.normal = get_triangle_normal(triangle.p1, triangle.p2, triangle.p3);//triangle.normal = normalize_vec4(get_vec4_from_node(child));
 	if (!(new = obj_lstnew(TRIANGLE, &triangle, sizeof(triangle))))
 		ft_putendl("error\n");
@@ -142,5 +171,7 @@ int				get_obj(xmlNodePtr node, t_scene *scn)
 		create_cylinder(node, scn);
 	if (!xmlStrcmp(node->name, BAD_CAST"triangle"))
 		create_triangle(node, scn);
+	if (!xmlStrcmp(node->name, BAD_CAST"square"))
+		create_rectangle(node, scn);
 	return (1);
 }

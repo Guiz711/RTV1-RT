@@ -6,7 +6,7 @@
 /*   By: jgourdin <jgourdin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/01 16:02:18 by arthurlabelle    ###   ########.fr       */
+/*   Updated: 2018/03/14 20:53:35 by arthurlabelle    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef enum	e_obj_type
 	CYLINDER,
 	CONE,
 	TRIANGLE,
+	RECTANGLE,
 	COUNT_OBJ,
 }				t_obj_type;
 
@@ -157,6 +158,14 @@ typedef struct		s_triangle
 	t_vec4		p3;
 	t_vec4		normal;
 }									t_triangle;
+
+typedef struct		s_rectangle
+{
+	t_vec4		p;
+	t_vec4		s1;
+	t_vec4		s2;
+	t_vec4		normal;
+}									t_rectangle;
 
 typedef struct		s_cone
 {
@@ -323,8 +332,8 @@ typedef struct	s_args
 	t_env		*env;
 	t_scene		*scene;
 	t_pixel		*pix_buf;
-	t_norm_fct 	norm_fct[5];
-	t_inter_fct	obj_fct[5];
+	t_norm_fct 	norm_fct[6];
+	t_inter_fct	obj_fct[6];
 	t_text_fct	text_fct[5];
 	t_bump_fct	bump_fct[1];
 	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
@@ -397,6 +406,7 @@ double		sphere_intersection(t_ray ray, void *obj);
 double		plane_intersection(t_ray ray, void *obj);
 double		cylinder_intersection(t_ray ray, void *obj);
 double		triangle_intersection(t_ray ray, void *obj);
+double		rectangle_intersection(t_ray ray, void *obj);
 
 /*
 **	Primitive surface normal functions
@@ -407,8 +417,10 @@ t_vec4		plane_normal(t_ray *ray, t_inter *inter);
 t_vec4		cylinder_normal(t_ray *ray, t_inter *inter);
 t_vec4		cone_normal(t_ray *ray, t_inter *inter);
 t_vec4		triangle_normal(t_ray *ray, t_inter *inter);
+t_vec4		rectangle_normal(t_ray *ray, t_inter *inter);
 
 t_vec4		get_triangle_normal(t_vec4 p1, t_vec4 p2, t_vec4 p3);
+t_vec4		get_rectangle_normal(t_vec4 s1, t_vec4 s2);
 /*
 **	Render management functions
 */

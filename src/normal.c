@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:00:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/24 17:49:54 by arthurlabelle    ###   ########.fr       */
+/*   Updated: 2018/03/14 20:56:00 by arthurlabelle    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,18 @@ t_vec4	triangle_normal(t_ray *ray, t_inter *inter)
 		normal = normalize_vec4(rev_vec4(tri->normal));
 	else
 		normal = normalize_vec4(tri->normal);
+	return (normal);
+}
+
+t_vec4	rectangle_normal(t_ray *ray, t_inter *inter)
+{
+	t_rectangle *rect;
+	t_vec4			normal;
+
+	rect = (t_rectangle*)inter->obj->content;
+	if (dot_vec4(ray->dir, rect->normal) > 0)
+		normal = normalize_vec4(rev_vec4(rect->normal));
+	else
+		normal = normalize_vec4(rect->normal);
 	return (normal);
 }
