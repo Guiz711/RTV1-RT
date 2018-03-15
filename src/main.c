@@ -320,20 +320,16 @@ void	ft_loop(t_env env)
 		mlx_loop(env.init);
 }
 
-int		main(int argc, char **argv)
+int		mainfileselect(char *file)
 {
 	t_args	args;
 	t_env	env;
 	t_scene scene;
 	t_obj_lst *objs;
 
-	scene.path = argv[1];
+	file = ft_strstr(file, "scene");
+	scene.path = file;
 	benchmark_total(0, NULL);
-	if (argc != 2)
-	{
-		ft_putstr("Usage: ./rtv1 docname\n");
-		return (0);
-	}
 	benchmark(0, NULL);
 	init_args(&args, &env, &scene, scene.path);
 	if (!init_textures(&args))
@@ -358,5 +354,29 @@ int		main(int argc, char **argv)
 	mlx_hook(env.win, 2, 0, hook, &args);
 //	mlx_mouse_hook(env.win, &get_coord, (void*)&args);
 	mlx_loop(env.init);
+	return (0);
+}
+
+int		main(int argc, char **argv)
+{
+	GtkBuilder      *builder; 
+    GtkWidget       *window;
+   	if (argc != 1)
+	{
+		ft_putstr("Usage: ./rtv1\n");
+		return (0);
+	}
+    gtk_init(&argc, &argv);
+ 
+    builder = gtk_builder_new();
+    gtk_builder_add_from_file (builder, "RT_menu.glade", NULL);
+ 
+    window = GTK_WIDGET(gtk_builder_get_object(builder, "main_menu"));
+    gtk_builder_connect_signals(builder, NULL);
+ 
+    g_object_unref(builder);
+ 
+    gtk_widget_show(window);                
+    gtk_main();
 	return (0);
 }

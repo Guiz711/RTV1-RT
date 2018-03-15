@@ -26,12 +26,13 @@
 # include <stdio.h> // to remove?
 # include <stdint.h>
 # include <pthread.h>
+# include <gtk/gtk.h>
 
 # define KEY_PRESS_MASK	(1L<<0)  
 # define KEY_PRESS 2
 
-# define TRUE 1
-# define FALSE 0
+# define TRUE (!FALSE)
+# define FALSE (0)
 # define SUCCESS 0
 # define FAILURE -1
 
@@ -372,6 +373,14 @@ typedef struct	s_noise
 	t_vec4	interpol;
 }				t_noise;
 
+typedef struct	s_ui
+{
+	int	hauteur;
+	int largeur;
+	int pixilation;	
+	char	*str;
+}				t_ui;
+
 int			hook(int keycode, t_args *args);
 int			check_hook(t_args *args);
 int			init_hook(t_env *env);
@@ -471,6 +480,18 @@ void	render_mode_4(t_args *args, t_ray *ray, t_inter *inter, t_color *color);
 */
 
 t_vec3		specular_phong(t_inter *inter, t_light *light);
+
+/*
+**	GTK related functions
+*/
+
+int			mainfileselect(char *file);
+gchar		*file_selected(GtkFileChooser *file_btn);
+void 		add_objectmenu();
+void		wheight_changed(GtkEntry *uiw_height);
+void		wwidth_changed(GtkEntry *uiw_width);
+void		pxlval_changed(GtkEntry *uipxl_val);
+void		apply_settings(t_ui *ui);
 
 /*
 **	Quit and initialize functions

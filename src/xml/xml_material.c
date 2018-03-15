@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/13 21:38:22 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/14 17:44:00 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ t_mat		xml_parse_material(xmlNodePtr node)
 		material.bump_angle = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "bump_scale")))
 		material.bump_scale = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	if ((child = has_child(node, "absorb")))
+		material.absorb = get_color_from_node(child);
 	if ((child = has_child(node, "absorb")))
 		material.absorb = get_color_from_node(child);
 	if (material.texture == PERLIN || material.texture == FRACTAL_SUM_PERLIN
