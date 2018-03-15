@@ -43,10 +43,14 @@
 			<refract nb="1.125"/>
 			<reflect nb="1"/>
 			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
 			<bump_text bump_text="NO_BUMP"/>
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 			<!-- <transparency nb="0"/> -->
 		</paraboloid>
 		<!-- <sphere>
@@ -77,10 +81,14 @@
 			<refract nb="0.470"/>
 			<reflect nb="0.5"/>
 			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
 			<bump_text bump_text="NO_BUMP"/>
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 			<!-- <reflect r="0.5" g="0.5" b="0.5"/> -->
 			<!-- <transparency nb="0"/> -->
 		</sphere>
@@ -99,10 +107,14 @@
 			<refract nb="1.125"/>
 			<reflect nb="0.1"/>
 			<opacity nb="0.3"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
 			<bump_text bump_text="NO_BUMP"/>
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 			<!-- <reflect r="0.4" g="0.1" b="0.1"/> -->
 			<!-- <transparency/> -->
 		</sphere>
@@ -126,6 +138,7 @@
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.25"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 		</plane>
 		<plane>
 			<p x="0" y="0" z="21" w="1"/>
@@ -140,11 +153,12 @@
 			<opacity nb="1"/>
 			<texture texture="NO_TEXT"/>
 			<text_angle nb="0"/>
-			<text_scale nb="0.25"/>
+			<text_scale nb="0"/>
 			<bump_text bump_text="NO_BUMP"/>
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 		</plane>
 		<!-- <plane>
 			<p x="0" y="0" z="7" w="1"/>
