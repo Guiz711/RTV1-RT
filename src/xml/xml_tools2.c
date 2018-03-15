@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:11:12 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/13 21:38:44 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:41:43 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ t_texture			char_to_texture(char *str)
 		return (FRACTAL_SUM_PERLIN);
 	if (!ft_strcmp(str, "SINUS_SUM_PERLIN"))
 		return (SINUS_SUM_PERLIN);
+	if (!ft_strcmp(str, "WALL"))
+		return (WALL);
 	return (NO_TEXT);
 }
 

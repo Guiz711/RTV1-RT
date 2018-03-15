@@ -205,6 +205,17 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="paraboloid">
+		<xsd:complexType>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element ref="material" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="point" minOccurs="1" maxOccurs="1"/>	
+				<xsd:element ref="dir" minOccurs="1" maxOccurs="1"/>
+			</xsd:choice>
+			<xsd:attribute type="xsd:int" name="radius"/>
+		</xsd:complexType>
+	</xsd:element>
+
 	<xsd:element name="plane">
 		<xsd:complexType>
 			<xsd:choice maxOccurs="unbounded">
@@ -241,6 +252,7 @@
 				<xsd:element ref="plane" minOccurs="0"/>
 				<xsd:element ref="sphere" minOccurs="0"/>
 				<xsd:element ref:"cylindre" minOccurs="0"/>
+				<xsd:element ref:"paraboloid" minOccurs="0"/>
 			</xsd:choice>
 		</xsd:complexType>
 	</xsd:element>

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:43:42 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/13 21:34:43 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/14 11:11:52 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,22 +173,56 @@ double	sinus_sum_perlin(t_mat *mat, t_vec4 obj_coords)
 	}
 	sum = (sin((x + sum * 100.0) * 2.0 * M_PI * mat->text_scale) + 1.0) * 0.5;
 	return (sum);
-}
+} 
 
-double	plane_texture(t_args *args, t_inter *inter)
+double	plane_procedural_texture(t_args *args, t_inter *inter)
 {
 	t_vec4	obj_coords;
 	t_plane	*plane;
 	t_mat	*mat;
-	double	scale;
 	double	pattern;
 
 	plane = (t_plane*)inter->obj->content;
 	mat = &inter->obj->material;
 	obj_coords = new_coord(inter->p, world_to_plane_mtx(plane));
-	scale = 3;
 	pattern = args->text_fct[mat->texture](mat, obj_coords);
 	return pattern;
+}
+
+void	map_texture(t_img *texture, t_mat *mat, t_vec4 obj_coords, t_vec3 *diff)
+{
+	t_mtx4		rotation;
+	double		angle;
+	int			color;
+	int			i;
+	int			j;
+
+	angle = mat->text_angle;
+	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0), RAD(angle)));
+	obj_coords = new_coord(obj_coords, rotation);
+	i = abs((int)fmodf(obj_coords.x * mat->text_scale, 1024.0));
+	j = abs((int)fmodf(obj_coords.y * mat->text_scale, 1024.0));
+	// printf("%d; %d\n", i, j);
+	color = ((int*)texture->data)[j * 1024 + i];
+	diff->x = (double)((color >> 16) & 0xFF) / 255.0;
+	diff->y = (double)((color >> 8) & 0xFF) / 255.0;
+	diff->z = (double)((color) & 0xFF) / 255.0;
+}
+
+void	plane_texture(t_args *args, t_inter *inter, t_vec3 *diff)
+{
+	t_vec4	obj_coords;
+	t_plane	*plane;
+	t_mat	*mat;
+
+	plane = (t_plane*)inter->obj->content;
+	mat = &inter->obj->material;
+	if (mat->texture != NO_TEXT)
+	{
+		// ft_putchar('a');
+		obj_coords = new_coord(inter->p, world_to_plane_mtx(plane));
+		map_texture(&args->textures.wall, mat, obj_coords, diff);
+	}
 }
 
 t_vec4	sine_wave_bump(double angle, double scale, t_vec4 obj_coords)

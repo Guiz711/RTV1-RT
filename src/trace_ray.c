@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/27 13:20:22 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/14 10:59:16 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ t_vec3		get_primary_color(t_args *args, t_ray *ray, t_inter *inter)
 		prim_color = mult_vec3(prim_color, init_vec3(exp(-inter->obj->material.absorb.x * len),
 			exp(-inter->obj->material.absorb.y * len), exp(-inter->obj->material.absorb.z * len)));
 	}
-	if (inter->obj->content_type == PLANE && inter->obj->material.texture != NO_TEXT)
-		prim_color = dmult_vec3(prim_color, plane_texture(args, inter));
+	if (inter->obj->content_type == PLANE && inter->obj->material.texture < WALL)
+		prim_color = dmult_vec3(prim_color, plane_procedural_texture(args, inter));
 	prim_color = dmult_vec3(prim_color, inter->obj->material.opacity);
 	prim_color = add_vec3(prim_color, color_comp.spec_ratio);
 	return (prim_color);

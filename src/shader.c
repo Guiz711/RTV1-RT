@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:46:04 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/19 23:41:29 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/14 11:01:17 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ double	light_attenuation(t_light *light, double dist)
 	return (fmax(0, fmin(1, intensity)));
 }
 
-t_vec3	diffuse_lambert(t_inter *inter, t_light *light)
+t_vec3	diffuse_lambert(t_args *args, t_inter *inter, t_light *light)
 {
 	t_vec4			dir;
 	t_vec3			col;
@@ -32,6 +32,8 @@ t_vec3	diffuse_lambert(t_inter *inter, t_light *light)
 	double			intensity;
 
 	diff = inter->obj->material.diff;
+	if (inter->obj->content_type == PLANE && inter->obj->material.texture >= WALL)
+		plane_texture(args, inter, &diff);
 	if (light->type == DIRECTIONAL)
 	{
 		dir = rev_vec4(light->vec);

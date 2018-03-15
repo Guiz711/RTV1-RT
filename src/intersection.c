@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/15 15:20:09 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:53:16 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,27 @@ double			cone_intersection(t_ray ray, void *obj)
 	poly.a = dot_vec4(ray.dir, ray.dir) - cone->ang_tan * SQUARE(dot1);
 	poly.b = 2 * (dot_vec4(ray.dir, diff) - cone->ang_tan * dot1 * dot2);
 	poly.c = dot_vec4(diff, diff) - cone->ang_tan * SQUARE(dot2);
+	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
+	if (poly.disc < 0)
+		return (-1);
+	return (get_sph_distance(poly));
+}
+
+double			paraboloid_intersection(t_ray ray, void *obj)
+{
+	t_vec4		diff;
+	t_poly2		poly;
+	t_parab		*parab;
+	double		dot1;
+	double		dot2;
+	
+	parab = (t_parab*)obj;
+	diff = sub_vec4(ray.orig, parab->p);
+	dot1 = dot_vec4(ray.dir, parab->dir);
+	dot2 = dot_vec4(diff, parab->dir);
+	poly.a = dot_vec4(ray.dir, ray.dir) - SQUARE(dot1);
+	poly.b = 2 * (dot_vec4(ray.dir, diff) - dot1 * (dot2 + 2 * parab->k));
+	poly.c = dot_vec4(diff, diff) - dot2 * (dot2 + 4 * parab->k);
 	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
 	if (poly.disc < 0)
 		return (-1);

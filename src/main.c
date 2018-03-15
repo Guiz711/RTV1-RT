@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:12:38 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/13 21:37:51 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:54:56 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,12 @@ void	init_fct_arr(t_args *args)
 	args->obj_fct[1] = &plane_intersection;
 	args->obj_fct[2] = &cylinder_intersection;
 	args->obj_fct[3] = &cone_intersection;
+	args->obj_fct[4] = &paraboloid_intersection;
 	args->norm_fct[0] = &sphere_normal;
 	args->norm_fct[1] = &plane_normal;
 	args->norm_fct[2] = &cylinder_normal;
 	args->norm_fct[3] = &cone_normal;
+	args->norm_fct[4] = &paraboloid_normal;
 	args->rdr_fct[0] = &render_mode_0;
 	args->rdr_fct[1] = &render_mode_1;
 	args->rdr_fct[2] = &render_mode_2;
@@ -121,6 +123,34 @@ void	init_fct_arr(t_args *args)
 	args->text_fct[6] = &fractal_sum_perlin;
 	args->text_fct[7] = &sinus_sum_perlin;
 	args->bump_fct[0] = &sine_wave_bump;
+}
+
+int		load_textures(t_args *args)
+{
+	int	w;
+
+	w = args->textures.wall.width * (COLOR_DEPTH / 8);
+	if (!(args->textures.wall.ptr = mlx_xpm_file_to_image(args->env->init,
+			"./textures/brick.xpm", &args->textures.wall.width,
+			&args->textures.wall.height)))
+		return (0);
+	if (!(args->textures.wall.data = mlx_get_data_addr(args->textures.wall.ptr,
+			&args->textures.wall.color_depth, &w, &args->textures.wall.endian)))
+		return (0);
+	return (1);
+}
+
+int		init_textures(t_args *args)
+{
+	args->textures.wall.color_depth = 64;
+	args->textures.wall.width = 1024;
+	args->textures.wall.height = 1024;
+	args->textures.wall.endian = 0;
+	args->textures.wall.ptr = NULL;
+	args->textures.wall.data = NULL;
+	if (!load_textures(args))
+		return(0);
+	return (1);
 }
 
 /*static void	print_hoho(t_scene *scene)
@@ -306,6 +336,8 @@ int		main(int argc, char **argv)
 	}
 	benchmark(0, NULL);
 	init_args(&args, &env, &scene, scene.path);
+	if (!init_textures(&args))
+		return (0);
 	objs = scene.objs;
 	// add_texture(&scene);
 	benchmark(1, "init time");
@@ -317,6 +349,7 @@ int		main(int argc, char **argv)
 	benchmark(1, "graphics calc time");
 	benchmark(0, NULL);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
+	// mlx_put_image_to_window(env.init, env.win, args.textures.wall.ptr, 0, 0);
 	benchmark(1, "display time");
 	benchmark_total(1, "total time");
 	mlx_hook(env.win, 17, 0L, &quit, &args);

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:00:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/12 18:09:54 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:34:43 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,26 @@ t_vec4	cone_normal(t_ray *ray, t_inter *inter)
 	normal = init_vec4(inter->p.x - cone->p.x - cone->dir.x * m,
 		inter->p.y - cone->p.y - cone->dir.y * m,
 		inter->p.z - cone->p.z - cone->dir.z * m, 0);
+	normal = normalize_vec4(normal);
+	return (normal);
+}
+
+t_vec4	paraboloid_normal(t_ray *ray, t_inter *inter)
+{
+	t_parab		*parab;
+	t_vec4		diff;
+	double		m;
+	t_vec4		normal;
+	
+	ray = NULL;
+	parab = (t_parab*)inter->obj->content;
+	diff = sub_vec4(inter->p, parab->p);
+	m = dot_vec4(diff, parab->dir);
+	// normal = init_vec4(inter->p.x - parab->p.x - parab->dir.x * m,
+	// 	inter->p.y - cone->p.y - cone->dir.y * m,
+	// 	inter->p.z - cone->p.z - cone->dir.z * m, 0);
+	normal = sub_vec4(diff,
+		dmult_vec4(parab->dir, m + parab->k));
 	normal = normalize_vec4(normal);
 	return (normal);
 }

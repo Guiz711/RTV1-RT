@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/13 21:37:31 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:07:16 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ typedef enum	e_texture
 	PERLIN,
 	FRACTAL_SUM_PERLIN,
 	SINUS_SUM_PERLIN,
+	WALL,
 	NO_TEXT
 }				t_texture;
 
@@ -125,6 +126,7 @@ typedef enum	e_obj_type
 	PLANE,
 	CYLINDER,
 	CONE,
+	PARABOLOID,
 	COUNT_OBJ,
 }				t_obj_type;
 
@@ -161,6 +163,13 @@ typedef struct		s_cone
 	double			angle;
 	double			ang_tan;
 }					t_cone;
+
+typedef struct		s_parab
+{
+	t_vec4			p;
+	t_vec4			dir;
+	double			k;
+}					t_parab;
 
 typedef struct		s_cylinder
 {
@@ -259,6 +268,11 @@ typedef struct	s_img
 	char		*data;
 }				t_img;
 
+typedef struct	s_text_img
+{
+	t_img		wall;
+}				t_text_img;
+
 typedef struct	s_poly2
 {
 	double		a;
@@ -325,8 +339,9 @@ typedef struct	s_args
 	t_env		*env;
 	t_scene		*scene;
 	t_pixel		*pix_buf;
-	t_norm_fct 	norm_fct[4];
-	t_inter_fct	obj_fct[4];
+	t_text_img	textures;
+	t_norm_fct 	norm_fct[5];
+	t_inter_fct	obj_fct[5];
 	t_text_fct	text_fct[8];
 	t_bump_fct	bump_fct[1];
 	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
@@ -372,7 +387,7 @@ t_vec4		new_coord(t_vec4 p, t_mtx4 mtx);
 t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
 
-t_vec3		diffuse_lambert(t_inter *inter, t_light *light);
+t_vec3		diffuse_lambert(t_args *args, t_inter *inter, t_light *light);
 void		convert_color(t_env *env, size_t pos, t_vec3 pix_col);
 double		shadow(t_args *args, t_inter *inter, t_light *light);
 int			trace_primary_rays(t_args *args);
@@ -387,7 +402,8 @@ t_vec3		recursive_ray(t_args *args, t_ray ray, int depth, size_t i);
 double	fresnel_calc(t_vec4 normal, t_vec4 ray_dir, double n1, double n2);
 t_ray	refracted_ray(t_vec4 ray_dir, t_inter *inter);
 t_ray	reflected_ray(t_vec4 ray_dir, t_inter *inter);
-double	plane_texture(t_args *args, t_inter *inter);
+void	plane_texture(t_args *args, t_inter *inter, t_vec3 *diff);
+double	plane_procedural_texture(t_args *args, t_inter *inter);
 double	sine_wave(t_mat *mat, t_vec4 obj_coords);
 double	sine_cosine_wave(t_mat *mat, t_vec4 obj_coords);
 double	stripes(t_mat *mat, t_vec4 obj_coords);
@@ -428,6 +444,7 @@ double		cone_intersection(t_ray ray, void *obj);
 double		sphere_intersection(t_ray ray, void *obj);
 double		plane_intersection(t_ray ray, void *obj);
 double		cylinder_intersection(t_ray ray, void *obj);
+double		paraboloid_intersection(t_ray ray, void *obj);
 
 /*
 **	Primitive surface normal functions
@@ -437,6 +454,7 @@ t_vec4		sphere_normal(t_ray *ray, t_inter *inter);
 t_vec4		plane_normal(t_ray *ray, t_inter *inter);
 t_vec4		cylinder_normal(t_ray *ray, t_inter *inter);
 t_vec4		cone_normal(t_ray *ray, t_inter *inter);
+t_vec4		paraboloid_normal(t_ray *ray, t_inter *inter);
 
 /*
 **	Render management functions
