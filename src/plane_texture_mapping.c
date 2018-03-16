@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:43:42 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 10:50:30 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/16 12:28:45 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	plane_texture(t_args *args, t_inter *inter, t_vec3 *diff)
 	if (mat->texture != NO_TEXT)
 	{
 		obj_coords = new_coord(inter->p, world_to_plane_mtx(plane));
-		map_texture(&args->textures.wall, mat, obj_coords, diff);
+		if (mat->texture == WALL)
+			map_texture(&args->textures.wall, mat, obj_coords, diff);
+		if (mat->texture == MARBLE)
+			map_texture(&args->textures.marble, mat, obj_coords, diff);
 	}
 }
 
