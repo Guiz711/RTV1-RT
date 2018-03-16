@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 13:15:42 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 17:53:19 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,6 +450,7 @@ int		init_textures(t_args *args);
 void	add_texture(t_scene *scene);
 
 void	screenshot(t_img *img);
+char	*fill_img(char *tmp, t_img *img, size_t p);
 
 /*
 **	Primitive intersection functions

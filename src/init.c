@@ -6,13 +6,13 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 12:48:35 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 15:12:06 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 17:27:16 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int		init_img(t_env	*env)
+int		init_img(t_env *env)
 {
 	t_img	*img;
 
@@ -76,7 +76,8 @@ int		init_args(t_args *args, t_env *env, t_scene *scene, char *path)
 	init_fct_arr(args);
 	args->env = env;
 	args->scene = scene;
-	mlx_put_image_to_window(args->env->init, args->env->win, args->env->lodscreen->ptr, 0, 0);
+	mlx_put_image_to_window(args->env->init, args->env->win,
+			args->env->lodscreen->ptr, 0, 0);
 	args->pix_buf = init_pix_buffer(env, get_camera_to_world(&scene->cam));
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 12:06:14 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 18:51:35 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ int		manage_threads(t_args *args)
 	filter_selector(args);
 	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
 	init_hook(args->env);
+	//screenshot(args->env->img);
 	return (SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 12:57:55 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 13:33:16 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/16 17:27:40 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/16 17:28:37 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int		load_textures(t_args *args)
 			"./textures/floor.xpm", &args->textures.marble.width,
 			&args->textures.marble.height)))
 		return (0);
-	if (!(args->textures.marble.data = mlx_get_data_addr(args->textures.marble.ptr,
-			&args->textures.marble.color_depth, &w, &args->textures.marble.endian)))
+	if (!(args->textures.marble.data =
+				mlx_get_data_addr(args->textures.marble.ptr,
+			&args->textures.marble.color_depth, &w,
+			&args->textures.marble.endian)))
 		return (0);
 	return (1);
 }
@@ -50,7 +52,7 @@ int		init_textures(t_args *args)
 	args->textures.marble.ptr = NULL;
 	args->textures.marble.data = NULL;
 	if (!load_textures(args))
-		return(0);
+		return (0);
 	return (1);
 }
 
@@ -66,9 +68,7 @@ void	add_texture(t_scene *scene)
 		tmp->material.bump_text = NO_BUMP;
 		tmp->material.bump_angle = -60;
 		tmp->material.bump_scale = 0.25;
-		// else if (tmp->id == 4)
 		tmp->material.absorb = init_vec3(0, 0, 0);
 		tmp = tmp->next;
 	}
 }
-

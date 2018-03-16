@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/03/16 13:04:34 by jgourdin         ###   ########.fr        #
+#    Updated: 2018/03/16 17:02:55 by jgourdin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC_NAME = main.c init_rays.c obj_list.c intersection_1.c intersection_2.c \
 			filtre.c loading_screen.c screenshot.c noise_1.c noise_2.c \
 			noise_3.c plane_texture_mapping.c texture.c procedural_bump.c \
 			procedural_textures_1.c procedural_textures_2.c set_aliasing.c \
-			set_aliasing2.c init.c init_texture.c init2.c
+			set_aliasing2.c init.c init_texture.c init2.c filtre2.c
 
 SRC_VEC_PATH = vectors
 
