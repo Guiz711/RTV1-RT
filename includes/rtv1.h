@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 12:34:46 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 13:04:03 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,6 +442,10 @@ double	sinus_sum_perlin(t_mat *mat, t_vec4 obj_coords);
 void	put_pixel(int pos, t_img *img, unsigned int color);
 
 int		init_loadingscreen(t_env *env);
+int		init_args(t_args *args, t_env *env, t_scene *scene, char *path);
+void	init_fct_arr(t_args *args);
+int		init_textures(t_args *args);
+void	add_texture(t_scene *scene);
 
 void	screenshot(t_img *img);
 
