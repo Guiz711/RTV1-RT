@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 14:59:17 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/26 12:41:38 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 13:48:51 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,48 +101,50 @@ void		sepia_filter(t_img *img)
 	i = 0;
 	while (i < max)
 	{
-		data[i + 2] = (0.393 * data[i + 2]) + (0.769 * data[i + 1]) + (0.189 * data[i]) > 255 ? 255 : (0.393 * data[i + 2]) + (0.769 * data[i + 1]) + (0.189 * data[i]);
-		data[i + 1] = (0.349 * data[i + 2]) + (0.686 * data[i + 1]) + (0.168 * data[i]) > 255 ? 255 : (0.349 * data[i + 2]) + (0.686 * data[i + 1]) + (0.168 * data[i]);
-		data[i] = (0.272 * data[i + 2]) + (0.534 * data[i + 1]) + (0.131 * data[i]) > 255 ? 255 : (0.272 * data[i + 2]) + (0.534 * data[i + 1]) + (0.131 * data[i]);
+		data[i + 2] = (0.393 * data[i + 2]) + (0.769 * data[i + 1]) +
+			(0.189 * data[i]) > 255 ? 255 : (0.393 * data[i + 2]) +
+			(0.769 * data[i + 1]) + (0.189 * data[i]);
+		data[i + 1] = (0.349 * data[i + 2]) + (0.686 * data[i + 1]) +
+			(0.168 * data[i]) > 255 ? 255 : (0.349 * data[i + 2]) +
+			(0.686 * data[i + 1]) + (0.168 * data[i]);
+		data[i] = (0.272 * data[i + 2]) + (0.534 * data[i + 1]) +
+			(0.131 * data[i]) > 255 ? 255 : (0.272 * data[i + 2]) +
+			(0.534 * data[i + 1]) + (0.131 * data[i]);
 		i += 4;
 	}
 }
 
 void		motionblur_filter(t_img *img)
 {
-	unsigned char	*data;
 	int				tmp;
 	int				x;
 	int				y;
 	int				moyenne;
 	int				i;
-	int				blurate;
 
-	blurate = 5;
-	data = (unsigned char *)img->data;
 	i = 0;
 	while (i < (WIN_HEIGHT * img->width))
 	{
 		x = 0;
 		moyenne = 0;
-		while (x < (blurate * 4))
+		while (x < (5 * 4))
 		{
 			y = 0;
-			while (y < (blurate * 4))
+			while (y < (5 * 4))
 			{
 				tmp = i + x + (y * img->width);
 				if (tmp > 0 && tmp < WIN_WIDTH * WIN_HEIGHT * 4)
 				{
-					moyenne += (data[tmp]);
-					if (data[tmp] < 0)
+					moyenne += (img->data[tmp]);
+					if (img->data[tmp] < 0)
 					moyenne += 256;
 				}
 				y += 4;
 			}
 			x += 4;
 		}
-		moyenne /= (blurate * blurate);
-		data[i] = moyenne;
+		moyenne /= 25;
+		img->data[i] = moyenne;
 		i++;
 	}
 }

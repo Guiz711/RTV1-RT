@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 12:48:35 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 12:51:06 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 15:12:06 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int		init_env(t_env *env)
 	init_hook(env);
 	env->thread_number = THREADS_NUMBER;
 	env->moving = 0;
-	env->aliasing = 0.5;
+	env->sel_obj = 0;
+	env->aliasing = 1;
 	env->win_height = WIN_HEIGHT;
 	env->win_width = WIN_WIDTH;
 	env->fov = FOVX;
