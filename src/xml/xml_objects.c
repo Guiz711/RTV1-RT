@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/30 06:12:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/14 13:41:55 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/16 09:57:49 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/16 09:57:51 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,32 +76,6 @@ int				create_cone(xmlNodePtr node, t_scene *scn)
 	if ((child = has_child(node, "rotation")))
 		cone.dir = ft_obj_rotation(child, cone.dir);
 	if (!(new = obj_lstnew(CONE, &cone, sizeof(cone))))
-		ft_putendl("error\n");
-	new->material = xml_parse_material(node);
-	new->id_obj = scn->nb_obj;
-	obj_lstadd(&(scn->objs), new);
-	return (1);
-}
-
-int				create_paraboloid(xmlNodePtr node, t_scene *scn)
-{
-	t_parab		parab;
-	xmlNodePtr	child;
-	t_obj_lst	*new;
-
-	if ((child = has_child(node, "k")))
-		parab.k = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
-	if ((child = has_child(node, "scale")))
-		parab.k *= atof((char *)xmlGetProp(child, BAD_CAST"scale"));
-	if ((child = has_child(node, "p")))
-		parab.p = get_vec4_from_node(child);
-	if ((child = has_child(node, "translation")))
-		parab.p = ft_obj_translation(child, parab.p);
-	if ((child = has_child(node, "dir")))
-		parab.dir = normalize_vec4(get_vec4_from_node(child));
-	if ((child = has_child(node, "rotation")))
-		parab.dir = ft_obj_rotation(child, parab.dir);
-	if (!(new = obj_lstnew(PARABOLOID, &parab, sizeof(parab))))
 		ft_putendl("error\n");
 	new->material = xml_parse_material(node);
 	new->id_obj = scn->nb_obj;

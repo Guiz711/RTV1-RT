@@ -3,21 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   xml_material.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/12 13:03:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/14 17:44:00 by jgourdin         ###   ########.fr       */
+/*   Created: 2018/03/16 09:35:28 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/16 09:44:45 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include "xml_parser.h"
 
-t_mat		xml_parse_material(xmlNodePtr node)
+t_mat		xml_material2(xmlNodePtr node, t_mat material, xmlNodePtr child)
 {
-	t_mat		material;
-	xmlNodePtr	child;
-
 	if ((child = has_child(node, "model")))
 		material.model =
 			char_to_shd(((char *)xmlGetProp(child, BAD_CAST"model")));
@@ -40,6 +37,14 @@ t_mat		xml_parse_material(xmlNodePtr node)
 		material.opacity = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "text_angle")))
 		material.text_angle = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	return (material);
+}
+
+t_mat		xml_parse_material(xmlNodePtr node)
+{
+	t_mat		material;
+	xmlNodePtr	child;
+
 	if ((child = has_child(node, "text_scale")))
 		material.text_scale = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
 	if ((child = has_child(node, "bump_text")))
@@ -56,8 +61,8 @@ t_mat		xml_parse_material(xmlNodePtr node)
 	if (material.texture == PERLIN || material.texture == FRACTAL_SUM_PERLIN
 		|| material.texture == SINUS_SUM_PERLIN)
 		fill_text_map(&material);
+	material = xml_material2(node, material, child);
 	return (material);
-
 }
 
 int			set_objs(t_list *lst, t_scene *scn)

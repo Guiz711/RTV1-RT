@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/30 00:34:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/26 12:35:50 by jgourdin         ###   ########.fr       */
+/*   Created: 2018/03/16 09:33:14 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/16 09:54:24 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,7 @@ int				parsedoc(char *path, t_scene *scene)
 		ft_putstr("Empty document\n");
 		return (0);
 	}
-	scene->render_mode = ft_atoi((char *)xmlGetProp(root, BAD_CAST"render"));
-	if (scene->render_mode > 6 || scene->render_mode < 0)
-		scene->render_mode = 0;
-	scene->refra = ft_atoi((char *)xmlGetProp(root, BAD_CAST"global_refract"));
-	if (scene->refra > 1 || scene->render_mode < 1)
-		scene->render_mode = 1;
-	scene->filtre = ft_atoi((char *)xmlGetProp(root, BAD_CAST"filtre"));
-	if (scene->filtre > 6 || scene->render_mode < 0)
-		scene->filtre = 0;
+	xml_img_att(scene, root);
 	lst = get_objects_nodes(doc);
 	set_objs(lst, scene);
 	ft_lstfree(&lst);

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/27 03:19:12 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 12:06:14 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static void	*trace_rays_threads(void *vt_args)
 	pix = args->pix_buf;
 	i = ((t_thread*)vt_args)->start;
 	if (args->env->aliasing <= 1)
-		antiAliasing(args, pix, i, ((t_thread*)vt_args)->end);
+		antialiasing(args, pix, i, ((t_thread*)vt_args)->end);
 	else
-		Aliasing(args, pix, i, ((t_thread*)vt_args)->end);
+		aliasing(args, pix, i, ((t_thread*)vt_args)->end);
 	return (NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/15 11:37:43 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/16 12:29:50 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -413,9 +413,14 @@ void	plane_bump_mapping(t_args *args, t_inter *inter);
 t_vec4	sine_wave_bump(double angle, double scale, t_vec4 obj_coords);
 int		redraw(t_args *args);
 t_bump	char_to_bump(char *str);
-void	Aliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
-void	antiAliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
-int	set_aliasing(int keycode, t_args *args);
+void	aliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
+void	antialiasing(t_args *args, t_pixel *pix, size_t i, size_t end);
+int		set_aliasing(int keycode, t_args *args);
+double		multiply_aliasing(t_args *args, double aliasing);
+double		divide_aliasing(t_args *args, double aliasing);
+size_t		draw_pos_anti(t_args *args, int i, t_pixel *pix,
+		size_t nb_ray);
+void		draw_pos_alia(t_args *args, t_vec3 pix_col, size_t nb_pix, size_t i);
 
 void	filter_selector(t_args *args);
 void	bandw_filter(t_img *img);
