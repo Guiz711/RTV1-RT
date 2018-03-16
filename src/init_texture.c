@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 12:57:55 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 13:12:27 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 13:33:16 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ int		load_textures(t_args *args)
 	if (!(args->textures.wall.data = mlx_get_data_addr(args->textures.wall.ptr,
 			&args->textures.wall.color_depth, &w, &args->textures.wall.endian)))
 		return (0);
-	ft_putchar('a');
 	w = args->textures.marble.width * (COLOR_DEPTH / 8);
 	if (!(args->textures.marble.ptr = mlx_xpm_file_to_image(args->env->init,
 			"./textures/floor.xpm", &args->textures.marble.width,
 			&args->textures.marble.height)))
 		return (0);
-	ft_putchar('b');
 	if (!(args->textures.marble.data = mlx_get_data_addr(args->textures.marble.ptr,
 			&args->textures.marble.color_depth, &w, &args->textures.marble.endian)))
 		return (0);
