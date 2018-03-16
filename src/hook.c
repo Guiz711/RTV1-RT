@@ -53,22 +53,8 @@ void		trans_ori_cam(t_args *args, int keycode)
 }
 
 
-void 	add_mv_menu(t_args *args)
-{
-    GtkBuilder      *builder; 
-    builder = gtk_builder_new();
-    gtk_builder_add_from_file (builder, "RT_menu.glade", NULL);
-    args->ui.mv_menu = GTK_WIDGET(gtk_builder_get_object(builder, "mv_menu"));
-    gtk_builder_connect_signals(builder, NULL);
-    g_object_unref(builder); 
-    gtk_widget_show(args->ui.mv_menu);
-}
-
 int			hook(int keycode, t_args *args)
 {
-	GtkWidget 	*win;
-	win = NULL;
-	printf("keycode is : %d\n", keycode);
 	if (keycode == KEY_ESC)
 		quit((t_args*)args);
 	else if (keycode == KEY_I)
@@ -82,11 +68,10 @@ int			hook(int keycode, t_args *args)
 			manage_threads(args);
 		}
 	}
-	if (keycode == 257) /* shift */
+	if (keycode == 257)
 	{
 		if (args->env->moving == 1)
 		{
-			gtk_widget_destroy(args->ui.mv_menu);
 			args->env->aliasing = 1;
 			args->env->thread_number = THREADS_NUMBER;
 			args->scene->render_mode = args->env->rendertmp;
@@ -97,7 +82,6 @@ int			hook(int keycode, t_args *args)
 		}
 		else
 		{
-			add_mv_menu(args);
 			args->env->aliasing = 14;
 			args->env->thread_number = 1;
 			args->env->rendertmp = args->scene->render_mode;
@@ -106,8 +90,6 @@ int			hook(int keycode, t_args *args)
 	}
 	if (args->env->moving == 1)
 	{
-		// g_signal_connect(G_OBJECT(args->ui.mv_menu),
-		// 						"key_press_event", G_CALLBACK(hook), NULL);
 		if (keycode == LEFT || keycode == RIGHT)
 			args->env->hook.left_right = (keycode == LEFT ? 1 : -1);
 		if (keycode == UP || keycode == DOWN)

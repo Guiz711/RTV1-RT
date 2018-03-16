@@ -335,15 +335,9 @@ typedef struct	s_env
 	t_img		*loadbar;
 }				t_env;
 
-typedef struct	s_gtk
-{
-	GtkWidget	*mv_menu;
-}				t_gtk;
-
 typedef struct	s_args
 {
 	t_env		*env;
-	t_gtk 		ui;
 	t_scene		*scene;
 	t_pixel		*pix_buf;
 	t_text_img	textures;
@@ -387,6 +381,7 @@ typedef struct	s_ui
 	char	*str;
 	t_env	gtk;
 }				t_ui;
+
 
 int			hook(int keycode, t_args *args);
 int			check_hook(t_args *args);
