@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersection.c                                     :+:      :+:    :+:   */
+/*   intersection_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/14 12:53:16 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/16 09:40:27 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-static double	get_sph_distance(t_poly2 poly)
+double			resolve_poly2(t_poly2 poly)
 {
 	double	res;
 	double	dist_1;
@@ -48,7 +48,7 @@ double			sphere_intersection(t_ray ray, void *obj)
 	poly.disc = poly.b * poly.b - 4 * poly.a * poly.c;
 	if (poly.disc < 0)
 		return (-1);
-	return (get_sph_distance(poly));
+	return (resolve_poly2(poly));
 }
 
 double			cylinder_intersection(t_ray ray, void *obj)
@@ -69,7 +69,7 @@ double			cylinder_intersection(t_ray ray, void *obj)
 	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
 	if (poly.disc < 0)
 		return (-1);
-	return (get_sph_distance(poly));
+	return (resolve_poly2(poly));
 }
 
 double			cone_intersection(t_ray ray, void *obj)
@@ -90,29 +90,10 @@ double			cone_intersection(t_ray ray, void *obj)
 	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
 	if (poly.disc < 0)
 		return (-1);
-	return (get_sph_distance(poly));
+	return (resolve_poly2(poly));
 }
 
-double			paraboloid_intersection(t_ray ray, void *obj)
-{
-	t_vec4		diff;
-	t_poly2		poly;
-	t_parab		*parab;
-	double		dot1;
-	double		dot2;
-	
-	parab = (t_parab*)obj;
-	diff = sub_vec4(ray.orig, parab->p);
-	dot1 = dot_vec4(ray.dir, parab->dir);
-	dot2 = dot_vec4(diff, parab->dir);
-	poly.a = dot_vec4(ray.dir, ray.dir) - SQUARE(dot1);
-	poly.b = 2 * (dot_vec4(ray.dir, diff) - dot1 * (dot2 + 2 * parab->k));
-	poly.c = dot_vec4(diff, diff) - dot2 * (dot2 + 4 * parab->k);
-	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
-	if (poly.disc < 0)
-		return (-1);
-	return (get_sph_distance(poly));
-}
+
 
 double			plane_intersection(t_ray ray, void *obj)
 {
