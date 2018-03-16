@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 15:24:33 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 19:47:55 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,17 +245,17 @@ t_vec3			feed_rot(t_hook hook)
 	t_vec3		rot;
 
 	if (hook.rot_x == 1 || hook.rot_x == 0)
-			rot.x = (hook.rot_x == 1 ? 1 : 0);
+			rot.x = (hook.rot_x == 1 ? 0.1 : 0);
 	else
-		rot.x = -1;
+		rot.x = -0.1;
 	if (hook.rot_y == 1 || hook.rot_y == 0)
-			rot.y = (hook.rot_y == 1 ? 1 : 0);
+			rot.y = (hook.rot_y == 1 ? 0.1 : 0);
 	else
-		rot.y = -1;
+		rot.y = -0.1;
 	if (hook.rot_z == 1 || hook.rot_z == 0)
-			rot.z = (hook.rot_z == 1 ? 1 : 0);
+			rot.z = (hook.rot_z == 1 ? 0.1 : 0);
 	else
-		rot.z = -1;
+		rot.z = - 0.1;
 	return(rot);
 }
 
