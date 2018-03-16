@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/15 11:37:43 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/16 10:49:57 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,6 +387,7 @@ t_vec4		new_coord(t_vec4 p, t_mtx4 mtx);
 t_obj_lst	*obj_lstnew(t_obj_type type, void const *content, size_t size);
 void		obj_lstadd(t_obj_lst **alst, t_obj_lst *new);
 
+double			resolve_poly2(t_poly2 poly);
 t_vec3		diffuse_lambert(t_args *args, t_inter *inter, t_light *light);
 void		convert_color(t_env *env, size_t pos, t_vec3 pix_col);
 double		shadow(t_args *args, t_inter *inter, t_light *light);
@@ -425,9 +426,12 @@ void	sepia_filter(t_img *img);
 void	motionblur_filter(t_img *img);
 int		cartoon_filter(t_img *img);
 
+void	map_texture(t_img *texture, t_mat *mat, t_vec4 obj_coords, t_vec3 *diff);
 void	fill_text_map(t_mat *mat);
 double	eval_coord(t_mat *mat, t_vec4 coords);
 double	map_noise(t_mat *mat, t_vec4 obj_coords);
+void	compute_corners(t_vec4 *map, int *perm, t_noise *p);
+void	compute_directions(t_noise *p);
 double	fractal_sum_perlin(t_mat *mat, t_vec4 obj_coords);
 double	sinus_sum_perlin(t_mat *mat, t_vec4 obj_coords);
 void	put_pixel(int pos, t_img *img, unsigned int color);

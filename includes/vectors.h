@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:14:06 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/22 09:31:05 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/16 09:31:11 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,16 @@ t_vec4			rev_vec4(t_vec4 u);
 
 t_vec4			normalize_vec4(t_vec4 v);
 double			norm_vec4(t_vec4 v);
+
 t_vec4			cross_vec3(t_vec3 u, t_vec3 v);
 t_vec4			cross_vec4(t_vec4 u, t_vec4 v);
+
 double			dot_vec3(t_vec3 u, t_vec3 v);
 double			dot_vec4(t_vec4 u, t_vec4 v);
+
 t_vec3			dmult_vec3(t_vec3 u, double n);
 t_vec4			dmult_vec4(t_vec4 u, double n);
+
 t_vec3			mult_vec3(t_vec3 u, t_vec3 v);
 t_vec4			mult_vec4(t_vec4 u, t_vec4 v);
 

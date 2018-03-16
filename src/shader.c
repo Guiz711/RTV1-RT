@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:46:04 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/14 11:01:17 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/16 11:28:22 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_vec3	diffuse_lambert(t_args *args, t_inter *inter, t_light *light)
 	double			intensity;
 
 	diff = inter->obj->material.diff;
-	if (inter->obj->content_type == PLANE && inter->obj->material.texture >= WALL)
+	if (inter->obj->content_type == PLANE
+		&& inter->obj->material.texture >= WALL)
 		plane_texture(args, inter, &diff);
 	if (light->type == DIRECTIONAL)
 	{
@@ -46,9 +47,8 @@ t_vec3	diffuse_lambert(t_args *args, t_inter *inter, t_light *light)
 		dir = normalize_vec4(dir);
 	}
 	ratio = intensity * dot_vec4(inter->normal, dir);
-	col.z = fmax(0, diff.z * light->diff_i.z * ratio);
-	col.y = fmax(0, diff.y * light->diff_i.y * ratio);
-	col.x = fmax(0, diff.x * light->diff_i.x * ratio);
+	col = init_vec3(fmax(0, diff.x * light->diff_i.x * ratio), fmax(0, diff.y
+		* light->diff_i.y * ratio), fmax(0, diff.z * light->diff_i.z * ratio));
 	return (col);
 }
 

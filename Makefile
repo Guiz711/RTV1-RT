@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/03/14 20:56:18 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/03/16 12:08:33 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,13 @@ CFLAGS = -Wall -Wextra -Werror #-flto -O3 -march=native
 
 SRC_PATH = src
 
-SRC_NAME = main.c init_rays.c obj_list.c intersection.c trace_ray.c utility.c\
+SRC_NAME = main.c init_rays.c obj_list.c intersection_1.c intersection_2.c \
+			trace_ray_1.c trace_ray_2.c utility.c\
 			render_modes.c normal.c shader.c threading.c events.c quit.c \
-			hook.c reflection_refraction.c objects_coord.c antialiasing.c \
-			filtre.c loading_screen.c screenshot.c noise.c \
+			hook.c reflection_refraction.c antialiasing.c \
+			filtre.c loading_screen.c screenshot.c noise_1.c noise_2.c \
+			noise_3.c plane_texture_mapping.c texture.c procedural_bump.c \
+			procedural_textures_1.c procedural_textures_2.c
 
 SRC_VEC_PATH = vectors
 

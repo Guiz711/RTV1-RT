@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:13:37 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/23 17:16:42 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 09:35:20 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,21 @@ static t_ray	init_ray(t_env *env, size_t pos)
 	return (ray);
 }
 
+static void		init_pixel(t_pixel *pixel, t_env *env, t_mtx4 v2w, size_t pos)
+{
+	pixel->p_ray = init_ray(env, pos);
+	pixel->p_ray.orig = new_coord(pixel->p_ray.orig, v2w);
+	pixel->p_ray.dir = new_coord(pixel->p_ray.dir, v2w);
+	pixel->p_ray.range = 1e6;
+	pixel->inter.dist = 1e6;
+	pixel->inter.obj = NULL;
+	pixel->inter.p = init_vec4(0, 0, 0, 1);
+	pixel->inter.normal = init_vec4(0, 0, 0, 0);
+	pixel->color.amb_ratio = init_vec3(0, 0, 0);
+	pixel->color.diff_ratio = init_vec3(0, 0, 0);
+	pixel->color.spec_ratio = init_vec3(0, 0, 0);
+}
+
 t_pixel			*init_pix_buffer(t_env *env, t_mtx4 v2w)
 {
 	size_t	len;
@@ -61,21 +76,10 @@ t_pixel			*init_pix_buffer(t_env *env, t_mtx4 v2w)
 	pos = 0;
 	while (pos < len)
 	{
-		pix_buf[pos].p_ray = init_ray(env, pos);
-		pix_buf[pos].p_ray.orig = new_coord(pix_buf[pos].p_ray.orig, v2w);
-		pix_buf[pos].p_ray.dir = new_coord(pix_buf[pos].p_ray.dir, v2w);
-		pix_buf[pos].p_ray.range = 1e6;
-		pix_buf[pos].inter.dist = 1e6;
-		pix_buf[pos].inter.obj = NULL;
-		pix_buf[pos].inter.p = init_vec4(0, 0, 0, 1);
-		pix_buf[pos].inter.normal = init_vec4(0, 0, 0, 0);
-		pix_buf[pos].color.amb_ratio = init_vec3(0, 0, 0);
-		pix_buf[pos].color.diff_ratio = init_vec3(0, 0, 0);
-		pix_buf[pos].color.spec_ratio = init_vec3(0, 0, 0);
+		init_pixel(&pix_buf[pos], env, v2w, pos);
 		pos++;
 	}
 	env->win_width = WIN_WIDTH;
 	env->win_height = WIN_HEIGHT;
-
 	return (pix_buf);
 }
