@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:06 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 10:01:11 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 13:42:58 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void				xml_img_att(t_scene *scene, xmlNodePtr root)
 	if (scene->render_mode > 6 || scene->render_mode < 0)
 		scene->render_mode = 0;
 	scene->refra = ft_atoi((char *)xmlGetProp(root, BAD_CAST"global_refract"));
-	if (scene->refra > 1 || scene->render_mode < 1)
-		scene->render_mode = 1;
+	if (scene->refra > 1 || scene->refra < 1)
+		scene->refra = 1;
 	scene->filtre = ft_atoi((char *)xmlGetProp(root, BAD_CAST"filtre"));
-	if (scene->filtre > 6 || scene->render_mode < 0)
+	if (scene->filtre > 6 || scene->filtre < 1)
 		scene->filtre = 0;
 }
 
