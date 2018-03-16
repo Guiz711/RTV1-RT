@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 15:13:51 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 15:24:33 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ int			modif_trans_obj(t_args *args)
 	t_plane			*plan;
 	t_cone			*cone;
 	t_cylinder		*cyl;
+	t_parab			*parab;
 	t_vec3			trans_pos;
 	t_obj_lst		*tmp;
 
@@ -229,7 +230,12 @@ int			modif_trans_obj(t_args *args)
 		sphere->center =  new_coord(sphere->center, translate(trans_pos.x, trans_pos.y, trans_pos.z));
 		args->scene->objs->content = sphere;
 	}
-
+	else if (args->scene->objs->content_type == PARABOLOID)
+	{
+		parab = (t_parab*)args->scene->objs->content;
+		parab->p = new_coord(parab->p, translate(trans_pos.x, trans_pos.y, trans_pos.z));
+		args->scene->objs->content = parab;
+	}
 	args->scene->objs = tmp;
 	return (0);
 }
@@ -258,6 +264,7 @@ int			modif_rot_obj(t_args *args)
 	t_plane			*plan;
 	t_cone			*cone;
 	t_cylinder		*cyl;
+	t_parab			*parab;
 	t_vec3			trans_rot;
 	t_obj_lst		*tmp;
 
@@ -283,6 +290,13 @@ int			modif_rot_obj(t_args *args)
 		cyl->dir =  new_coord(cyl->dir, quat_to_mtx(euler_to_quat(trans_rot)));
 		args->scene->objs->content = cyl;
 	}
+	else if (args->scene->objs->content_type == PARABOLOID)
+	{
+		parab = (t_parab*)args->scene->objs->content;
+		parab->dir =  new_coord(parab->dir, quat_to_mtx(euler_to_quat(trans_rot)));
+		args->scene->objs->content = parab;
+	}
+
 	args->scene->objs = tmp;
 	return (0);
 }
