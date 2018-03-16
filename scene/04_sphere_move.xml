@@ -131,7 +131,7 @@
 			<reflect nb="0"/>
 			<opacity nb="1"/>
 			<!-- <texture texture="WEIGHT_SUM_CHECKERBOARD"/> -->
-			<texture texture="WALL"/>
+			<texture texture="MARBLE"/>
 			<text_angle nb="-30"/>
 			<text_scale nb="100"/>
 			<bump_text bump_text="NO_BUMP"/>
@@ -160,17 +160,5 @@
 			<absorb r="0" g="0" b="0"/>
 			<noise_seed nb="0"/>
 		</plane>
-		<!-- <plane>
-			<p x="0" y="0" z="7" w="1"/>
-			<normal x="0" y="0" z="1" w="0"/>
-			<model model="LAMBERT"/>
-			<amb r="0" g="0" b="0"/>
-			<spec r="0.3" g="0.3" b="0.3"/>
-			<diffuse r="0.7" g="0.7" b="0.7"/>
-			<shininess nb="50"/>
-			<refract nb="1.5"/>
-			<reflect r="0.3" g="0.3" b="0.3"/>
-			<transparency/>
-		</plane> -->
 	</objects>
 </scene>

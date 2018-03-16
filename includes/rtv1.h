@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 13:04:03 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 13:15:42 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@
 
 # define THREADS_NUMBER 8
 
-# define REFLEXION_DEPTH 10
+# define REFLEXION_DEPTH 5
 # define EXTENSION_NAME ".scn"
 
 # define RAD(x) (M_PI * (x) / 180)
@@ -111,6 +111,7 @@ typedef enum	e_texture
 	FRACTAL_SUM_PERLIN,
 	SINUS_SUM_PERLIN,
 	WALL,
+	MARBLE,
 	NO_TEXT
 }				t_texture;
 
@@ -271,6 +272,7 @@ typedef struct	s_img
 typedef struct	s_text_img
 {
 	t_img		wall;
+	t_img		marble;
 }				t_text_img;
 
 typedef struct	s_poly2

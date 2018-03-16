@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:38:49 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 09:40:06 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/16 12:48:56 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ double			paraboloid_intersection(t_ray ray, void *obj)
 	t_parab		*parab;
 	double		dot1;
 	double		dot2;
-	
+
 	parab = (t_parab*)obj;
 	diff = sub_vec4(ray.orig, parab->p);
 	dot1 = dot_vec4(ray.dir, parab->dir);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:01:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 10:01:38 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/16 13:03:51 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ t_texture			char_to_texture(char *str)
 		return (SINUS_SUM_PERLIN);
 	if (!ft_strcmp(str, "WALL"))
 		return (WALL);
+	if (!ft_strcmp(str, "MARBLE"))
+		return (MARBLE);
 	return (NO_TEXT);
 }
 
