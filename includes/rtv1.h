@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:14:09 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 17:53:19 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 17:58:04 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@
 # define C_SCALE 8
 # define V_SCALE 9
 # define KEY_I 34
+# define SEL args->env->sel_obj
 # define WIN_WIDTH 1400
 # define WIN_HEIGHT 700
 # define FOVX 90
@@ -345,6 +346,9 @@ typedef struct	s_args
 	t_norm_fct 	norm_fct[5];
 	t_inter_fct	obj_fct[5];
 	t_text_fct	text_fct[8];
+	void		(*modif_scale[5])(struct s_args*);
+	void		(*modif_trans[6])(struct s_args*, t_vec3);
+	void		(*modif_rot[5])(struct s_args*, t_vec3);
 	t_bump_fct	bump_fct[1];
 	void		(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
 	t_vec3		(*spec_fct[1])(t_inter*, t_light*);
@@ -374,6 +378,9 @@ typedef struct	s_noise
 	t_vec4	interpol;
 }				t_noise;
 
+typedef void *(*modif_scale)(t_args*);
+
+
 int			hook(int keycode, t_args *args);
 int			check_hook(t_args *args);
 int			init_hook(t_env *env);
@@ -381,6 +388,20 @@ int			select_obj(int button, int x, int y, t_args *args);
 int			modif_scale_obj(t_args *args);
 int			modif_trans_obj(t_args *args);
 int			modif_rot_obj(t_args *args);
+void		scale_sphere(t_args *args);
+void		scale_cone(t_args *args);
+void		scale_cylinder(t_args *args);
+void		scale_parab(t_args *args);
+void		trans_sphere(t_args *args, t_vec3 trans_pos);
+void		trans_cone(t_args *args, t_vec3 trans_pos);
+void		trans_cylinder(t_args *args, t_vec3 trans_pos);
+void		trans_parab(t_args *args, t_vec3 trans_pos);
+void		trans_plane(t_args *args, t_vec3 trans_pos);
+void		rot_sphere(t_args *args, t_vec3 trans_rot);
+void		rot_cone(t_args *args, t_vec3 trans_rot);
+void		rot_cylinder(t_args *args, t_vec3 trans_rot);
+void		rot_parab(t_args *args, t_vec3 trans_rot);
+void		rot_plane(t_args *args, t_vec3 trans_rot);
 
 t_mtx4		get_camera_to_world(t_view *view);
 t_pixel		*init_pix_buffer(t_env *env, t_mtx4 v2w);
@@ -414,7 +435,7 @@ double	checkerboard(t_mat *mat, t_vec4 obj_coords);
 double	weight_sum_checkerboard(t_mat *map, t_vec4 obj_coords);
 void	plane_bump_mapping(t_args *args, t_inter *inter);
 t_vec4	sine_wave_bump(double angle, double scale, t_vec4 obj_coords);
-int		redraw(t_args *args);
+void		redraw(t_args *args);
 t_bump	char_to_bump(char *str);
 void	aliasing(t_args *args, t_pixel *pix, size_t i, size_t end);
 void	antialiasing(t_args *args, t_pixel *pix, size_t i, size_t end);

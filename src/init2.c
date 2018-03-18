@@ -6,11 +6,28 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 13:02:32 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 13:03:54 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 17:22:33 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
+
+void	init_fct_arr3(t_args *args)
+{
+	args->modif_scale[0] = &scale_sphere;
+	args->modif_scale[2] = &scale_cylinder;
+	args->modif_scale[3] = &scale_cone;
+	args->modif_scale[4] = &scale_parab;
+	args->modif_trans[0] = &trans_sphere;
+	args->modif_trans[1] = &trans_plane;
+	args->modif_trans[2] = &trans_cylinder;
+	args->modif_trans[3] = &trans_cone;
+	args->modif_trans[4] = &trans_parab;
+	args->modif_rot[1] = &rot_plane;
+	args->modif_rot[2] = &rot_cylinder;
+	args->modif_rot[3] = &rot_cone;
+	args->modif_rot[4] = &rot_parab;
+}
 
 void	init_fct_arr2(t_args *args)
 {
@@ -26,6 +43,7 @@ void	init_fct_arr2(t_args *args)
 	args->text_fct[6] = &fractal_sum_perlin;
 	args->text_fct[7] = &sinus_sum_perlin;
 	args->bump_fct[0] = &sine_wave_bump;
+	init_fct_arr3(args);
 }
 
 void	init_fct_arr(t_args *args)

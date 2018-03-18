@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 02:56:01 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 17:53:48 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 18:05:25 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void			screenshot(t_img *img)
 	char		*tmp;
 	size_t		p;
 
-	tmp = ft_strnew(((WIN_WIDTH * WIN_HEIGHT) * 3) + ((WIN_WIDTH * WIN_HEIGHT * 3) * 3) + WIN_HEIGHT + 1);
+	tmp = ft_strnew(((WIN_WIDTH * WIN_HEIGHT) * 3) +
+			((WIN_WIDTH * WIN_HEIGHT * 3) * 3) + WIN_HEIGHT + 1);
 	p = 0;
 	name = find_new_name();
 	fp = fopen(name, "w+");
@@ -57,10 +58,10 @@ void			screenshot(t_img *img)
 	fwrite(tmp, sizeof(char), ft_strlen(tmp), fp);
 }
 
-char		*fill_img(char *tmp, t_img *img, size_t p)
+char			*fill_img(char *tmp, t_img *img, size_t p)
 {
-	char	*nbr;
-	size_t	i;
+	char		*nbr;
+	size_t		i;
 
 	i = 0;
 	while (i < WIN_WIDTH * WIN_HEIGHT * 4)

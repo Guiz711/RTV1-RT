@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/18 09:47:55 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/20 01:17:18 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 14:44:10 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int				quit(t_args *args)
 	exit(EXIT_SUCCESS);
 }
 
-int			redraw(t_args *args)
+/*int			redraw(t_args *args)
 {
 
 	if (args->scene->objs)
@@ -71,4 +71,4 @@ int			redraw(t_args *args)
 	manage_threads(args);
 	return (1);
 }
-
+*/
