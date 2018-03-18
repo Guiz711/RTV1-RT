@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 02:56:01 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:05:25 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 20:56:00 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char			*find_new_name(void)
 
 	i = 0;
 	while (fopen(ft_strjoin("./screenshots/",
-					ft_strjoin(ft_itoa(i), ".ppm")), "r"))
+					ft_strjoin(ft_itoa(i), ".ppm")), "r") && i < 20)
 		i++;
 	filename = ft_strjoin("./screenshots/", ft_strjoin(ft_itoa(i), ".ppm"));
 	printf("%s\n", filename);

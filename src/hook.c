@@ -6,42 +6,11 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 20:42:56 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 20:55:07 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-void		trans_ori_cam(t_args *args, int keycode)
-{
-	t_vec3	rot;
-
-	rot.y = 0;
-	rot.z = 0;
-	printf("???\n");
-	if (keycode == LEFT)
-	{
-		rot.x = 10000;
-		args->scene->cam.orient = new_coord(args->scene->cam.orient,
-				quat_to_mtx(euler_to_quat(rot)));
-		printf("helpp\n");
-	}
-	if (keycode == RIGHT)
-	{
-		rot.x = -10000;
-		args->scene->cam.orient = new_coord(args->scene->cam.orient,
-				quat_to_mtx(euler_to_quat(rot)));
-		printf("why\n");
-	}
-	if (keycode == UP)
-		args->scene->cam.orig.z -= 0.5;
-	if (keycode == BACK)
-		args->scene->cam.orig.z += 0.5;
-	if (keycode == 78)
-		args->scene->cam.orig.y += 0.5;
-	if (keycode == 69)
-		args->scene->cam.orig.y -= 0.5;
-}
 
 void		redraw(t_args *args)
 {
@@ -108,6 +77,8 @@ int			hook(int keycode, t_args *args)
 	}
 	if (keycode == 257)
 		moving_mode(args);
+	if (keycode == 9)
+		screenshot(args->env->img);
 	if (args->env->moving == 1)
 		moving(keycode, args);
 	return (0);
