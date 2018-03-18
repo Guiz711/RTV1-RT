@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec_op_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/30 11:51:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/02/14 13:49:44 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/18 19:52:13 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/18 19:52:16 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ t_vec3	mult_vec3(t_vec3 u, t_vec3 v)
 
 double	dot_vec4(t_vec4 u, t_vec4 v)
 {
-	return(u.x * v.x + u.y * v.y + u.z * v.z + u.w * v.w);
+	return (u.x * v.x + u.y * v.y + u.z * v.z + u.w * v.w);
 }
 
 double	dot_vec3(t_vec3 u, t_vec3 v)
 {
-	return(u.x * v.x + u.y * v.y + u.z * v.z);
+	return (u.x * v.x + u.y * v.y + u.z * v.z);
 }

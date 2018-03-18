@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 07:59:35 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 12:15:36 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 19:43:18 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	aliasing(t_args *args, t_pixel *pix, size_t i, size_t end)
 				args->env->thread_number) * (end / ((WIN_HEIGHT * WIN_WIDTH)
 					/ args->env->thread_number))))
 			++pos;
-		pix_col = recursive_ray(args, pix[pos].p_ray, 0, pos);
+		pix_col = recursive_ray(args, pix[pos].p_ray, 0);
 		draw_pos_alia(args, pix_col, nb_pix, i);
 		i += nb_pix;
 		compteur++;

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 03:07:36 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 16:51:01 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 18:14:54 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,6 @@ int				dtd_validate(char *path, xmlDocPtr doc)
 ** xmlSchemaParse, create a structure that will be used to validate xml file.
 */
 
-xmlSchemaPtr	get_xsd(char *path)
-{
-	xmlSchemaPtr			ptr_schema;
-	xmlSchemaParserCtxtPtr	ptr_ctxt;
-
-	ptr_schema = NULL;
-	ptr_ctxt = xmlSchemaNewParserCtxt(path);
-	xmlSchemaSetParserErrors(ptr_ctxt, (xmlSchemaValidityErrorFunc)NULL,
-			(xmlSchemaValidityWarningFunc)NULL, stderr);
-	ptr_schema = xmlSchemaParse(ptr_ctxt);
-	xmlSchemaFreeParserCtxt(ptr_ctxt);
-	return (ptr_schema);
-}
-
 /*
 ** Here we check if our xml file and xsd (schema xml) file are valid.
 ** ctxt structures are validations structures, they stock information
@@ -71,32 +57,6 @@ xmlSchemaPtr	get_xsd(char *path)
 ** xmlSchemaSetValidErrors, set the options to be used during validation.
 ** xmlSchemaValidateDoc, validate or not the xml file.
 */
-
-int				xsd_validate(char *path, xmlDocPtr doc)
-{
-	xmlSchemaPtr			ptr_schema;
-	xmlSchemaValidCtxtPtr	ptr_validctxt;
-	int						val;
-
-	if (!(ptr_schema = get_xsd(path)))
-		return (xsd_error());
-	if (doc)
-	{
-		ptr_validctxt = xmlSchemaNewValidCtxt(ptr_schema);
-		xmlSchemaSetValidErrors(ptr_validctxt,
-			(xmlSchemaValidityErrorFunc)NULL,
-			(xmlSchemaValidityWarningFunc)NULL, stderr);
-		val = xmlSchemaValidateDoc(ptr_validctxt, doc);
-		if (val == 0)
-		{
-			xmlSchemaFreeValidCtxt(ptr_validctxt);
-			return (1);
-		}
-		else
-			return (val > 0 ? 0 : 1);
-	}
-	return (-1);
-}
 
 /*
 ** The xml file need to fit in the form set in two validations files.

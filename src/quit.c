@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/18 09:47:55 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/18 14:44:10 by jgourdin         ###   ########.fr       */
+/*   Created: 2018/03/18 18:45:42 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/18 18:45:45 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,7 @@ int				quit(t_args *args)
 		free(args->pix_buf);
 	if (args->env->win)
 		mlx_destroy_window(args->env->init, args->env->win);
-	// if (args->env->init)
-	// 	free(args->env->init);
+	if (args->env->init)
+		free(args->env->init);
 	exit(EXIT_SUCCESS);
 }
-
-/*int			redraw(t_args *args)
-{
-
-	if (args->scene->objs)
-		free_obj_lst(&args->scene->objs);
-	if (args->scene->light)
-		ft_lstdel(&args->scene->light, &free_light);
-	args->scene->objs = NULL;
-	args->scene->light = NULL;
-	if(!xml_parse(args->scene->path, args->scene))
-		exit(-1);
-	free(args->pix_buf);
-	args->pix_buf = init_pix_buffer(args->env, get_camera_to_world(&args->scene->cam));
-	manage_threads(args);
-	return (1);
-}
-*/

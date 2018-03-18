@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 01:27:29 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/28 00:26:02 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 18:20:09 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int		init_loadingscreen(t_env *env)
 		return (FAILURE);
 	if (!(img = (t_img*)malloc(sizeof(t_img))))
 		return (FAILURE);
-	img->ptr = mlx_xpm_file_to_image(env->init, "./pics/loadingscreen.xpm", &img->width,
-			&img->height);
+	img->ptr = mlx_xpm_file_to_image(env->init,
+			"./pics/loadingscreen.xpm", &img->width, &img->height);
 	load->ptr = mlx_xpm_file_to_image(env->init, "./pics/loadbar.xpm",
 		&load->width, &load->height);
 	env->lodscreen = img;

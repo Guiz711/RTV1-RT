@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   render_modes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/08 11:12:13 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/14 11:04:11 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/18 18:59:53 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/18 18:59:55 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-void	render_mode_0(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
+void		render_mode_0(t_args *args, t_ray *ray,
+		t_inter *inter, t_color *color)
 {
 	args = NULL;
 	ray = NULL;
@@ -20,7 +21,8 @@ void	render_mode_0(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 		color->diff_ratio = dmult_vec3(inter->obj->material.amb, 1);
 }
 
-void	render_mode_1(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
+void		render_mode_1(t_args *args, t_ray *ray,
+		t_inter *inter, t_color *color)
 {
 	double	dot;
 
@@ -32,7 +34,8 @@ void	render_mode_1(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 	}
 }
 
-void	render_mode_2(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
+void		render_mode_2(t_args *args, t_ray *ray,
+		t_inter *inter, t_color *color)
 {
 	t_list	*light;
 
@@ -43,15 +46,16 @@ void	render_mode_2(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 		while (light)
 		{
 			color->diff_ratio = add_vec3(color->diff_ratio,
-			diffuse_lambert(args, inter, (t_light*)light->content));
+					diffuse_lambert(args, inter, (t_light*)light->content));
 			light = light->next;
 		}
 		color->amb_ratio = add_vec3(color->amb_ratio,
-			mult_vec3(inter->obj->material.amb, args->scene->amb_i));
+				mult_vec3(inter->obj->material.amb, args->scene->amb_i));
 	}
 }
 
-void	render_mode_3(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
+void		render_mode_3(t_args *args, t_ray *ray,
+		t_inter *inter, t_color *color)
 {
 	t_list	*light;
 
@@ -64,38 +68,40 @@ void	render_mode_3(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
 			if (shadow(args, inter, (t_light*)light->content))
 			{
 				color->diff_ratio = add_vec3(color->diff_ratio,
-				diffuse_lambert(args, inter, (t_light*)light->content));
+						diffuse_lambert(args, inter, (t_light*)light->content));
 			}
 			light = light->next;
 		}
 		color->amb_ratio = add_vec3(color->amb_ratio,
-			mult_vec3(inter->obj->material.amb, args->scene->amb_i));
+				mult_vec3(inter->obj->material.amb, args->scene->amb_i));
 	}
 }
 
-void	render_mode_4(t_args *args, t_ray *ray, t_inter *inter, t_color *color)
+void		render_mode_4(t_args *args, t_ray *ray,
+		t_inter *inter, t_color *color)
 {
 	t_list	*light;
 	double	shad_ratio;
 
 	ray = NULL;
-		light = args->scene->light;
-		while (light)
+	light = args->scene->light;
+	while (light)
+	{
+		shad_ratio = shadow(args, inter, (t_light*)light->content);
+		if (double_not_null(shad_ratio))
 		{
-			shad_ratio = shadow(args, inter, (t_light*)light->content);
-			if (double_not_null(shad_ratio))
+			color->diff_ratio = add_vec3(color->diff_ratio,
+					dmult_vec3(diffuse_lambert(args, inter,
+							(t_light*)light->content), shad_ratio));
+			if (inter->obj->material.model != LAMBERT)
 			{
-				color->diff_ratio = add_vec3(color->diff_ratio,
-					dmult_vec3(diffuse_lambert(args, inter, (t_light*)light->content), shad_ratio));
-				if (inter->obj->material.model != LAMBERT)
-				{
-					color->spec_ratio = add_vec3(color->spec_ratio,
-					dmult_vec3(args->spec_fct[inter->obj->material.model - 1](inter,
-						(t_light*)light->content), shad_ratio));
-				}
+				color->spec_ratio = add_vec3(color->spec_ratio,
+					dmult_vec3(args->spec_fct[inter->obj->material.model
+					- 1](inter, (t_light*)light->content), shad_ratio));
 			}
-			light = light->next;
 		}
-		color->amb_ratio = add_vec3(color->amb_ratio,
+		light = light->next;
+	}
+	color->amb_ratio = add_vec3(color->amb_ratio,
 			mult_vec3(inter->obj->material.amb, args->scene->amb_i));
 }

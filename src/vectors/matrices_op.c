@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 11:20:46 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 11:58:57 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/18 19:50:11 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 ** returns a t_mtx4 matrix containing the matricial product mtx1 * mtx2.
 */
 
-static t_mtx4 mtx_mult_a_b(t_mtx4 m1, t_mtx4 m2)
+static t_mtx4	mtx_mult_a_b(t_mtx4 m1, t_mtx4 m2)
 {
-	t_mtx4 m;
+	t_mtx4		m;
 
 	m.a[0] = m1.a[0] * m2.a[0] + m1.a[1] * m2.b[0] + m1.a[2] * m2.c[0]
 		+ m1.a[3] * m2.d[0];
@@ -41,9 +41,9 @@ static t_mtx4 mtx_mult_a_b(t_mtx4 m1, t_mtx4 m2)
 	return (m);
 }
 
-t_mtx4		mtx4_mult(t_mtx4 m1, t_mtx4 m2)
+t_mtx4			mtx4_mult(t_mtx4 m1, t_mtx4 m2)
 {
-	t_mtx4	m;
+	t_mtx4		m;
 
 	m = mtx_mult_a_b(m1, m2);
 	m.c[0] = m1.c[0] * m2.a[0] + m1.c[1] * m2.b[0] + m1.c[2] * m2.c[0]

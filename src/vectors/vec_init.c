@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 13:05:43 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 11:50:45 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/18 19:51:20 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_vec4		init_vec4(double x, double y, double z, double w)
 	return (vec4);
 }
 
-t_vec3		vec4_to_vec3(t_vec4  v)
+t_vec3		vec4_to_vec3(t_vec4 v)
 {
 	return (init_vec3(v.x, v.y, v.z));
 }

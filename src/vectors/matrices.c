@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/10 11:01:48 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/01/30 12:00:31 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/18 19:48:41 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/18 19:49:39 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_mtx4		identity(void)
 	return (mtx);
 }
 
-t_mtx4	quat_to_mtx(t_vec4	q)
+t_mtx4		quat_to_mtx(t_vec4 q)
 {
 	t_mtx4	m;
 

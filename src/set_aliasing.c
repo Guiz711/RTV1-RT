@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:06:23 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 12:27:42 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 19:45:43 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_vec3		pix_col_anti(size_t pos, t_vec3 pix_col,
 {
 	t_vec3	pix_tmp;
 
-	pix_tmp = recursive_ray(args, pix[pos].p_ray, 0, pos);
+	pix_tmp = recursive_ray(args, pix[pos].p_ray, 0);
 	pix_col.x += pix_tmp.x;
 	pix_col.y += pix_tmp.y;
 	pix_col.z += pix_tmp.z;

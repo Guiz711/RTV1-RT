@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/18 14:42:04 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/18 18:18:52 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/18 18:18:54 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ double			plane_intersection(t_ray ray, void *obj)
 	frac = dot_vec4(diff, pln->normal);
 	denom = dot_vec4(ray.dir, pln->normal);
 	if ((denom > 1e-6 && frac < 0) || (denom < 1e6 && frac > 0))
-		dist =  -frac / denom;
+		dist = -frac / denom;
 	else
 		dist = -1;
 	return (dist);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/08 11:02:24 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 12:07:06 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/18 19:35:54 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/18 19:44:08 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,3 @@ t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *ob_fct, int shad)
 	inter.p.w = 1;
 	return (inter);
 }
-
-// int			trace_primary_rays(t_args *args)
-// {
-// 	size_t		i;
-// 	size_t		len;
-// 	t_pixel		*pix;
-// 	t_vec3		pix_col;
-
-// 	pix = args->pix_buf;
-// 	len = args->env->win_width * args->env->win_height;
-// 	i = 0;
-// 	while (i < len)
-// 	{
-// 		pix[i].inter = trace_ray(pix[i].p_ray, args->scene->objs,
-// 			args->obj_fct, 0);
-// 		if (pix[i].inter.obj)
-// 			pix[i].inter.normal =
-// 				args->norm_fct[pix[i].inter.obj->content_type](&pix[i].p_ray, &pix[i].inter);
-// 		args->rdr_fct[args->scene->render_mode](args, &pix[i]);
-// 		pix_col = init_vec3(0, 0, 0);
-// 		convert_color(args->env, i, pix_col);
-// 		++i;
-// 	}
-// 	return (0);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/28 09:46:04 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 11:28:22 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/18 19:01:57 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/18 19:02:00 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ double	shadow(t_args *args, t_inter *inter, t_light *light)
 	}
 	else
 	{
-		light_ray.dir = rev_vec4(sub_vec4(inter->p, light->vec));;
+		light_ray.dir = rev_vec4(sub_vec4(inter->p, light->vec));
 		light_ray.range = norm_vec4(light_ray.dir);
 		light_ray.dir = normalize_vec4(light_ray.dir);
 	}

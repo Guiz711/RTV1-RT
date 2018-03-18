@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 12:06:18 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 12:07:30 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/18 19:36:28 by jgourdin          #+#    #+#             */
+/*   Updated: 2018/03/18 19:46:35 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ t_vec3		get_primary_color(t_args *args, t_ray *ray, t_inter *inter)
 	return (prim_color);
 }
 
-t_vec3		get_final_color(t_args *args, t_ray *ray, t_inter *inter, int depth,
-	size_t i)
+t_vec3		get_final_color(t_args *args, t_ray *ray, t_inter *inter, int depth)
 {
 	t_vec3	prim_color;
 	t_vec3	refl_color;
@@ -59,10 +58,10 @@ t_vec3		get_final_color(t_args *args, t_ray *ray, t_inter *inter, int depth,
 	prim_color = get_primary_color(args, ray, inter);
 	if (double_not_null(refl_ratio))
 		refl_color = dmult_vec3(recursive_ray(args,
-			reflected_ray(ray->dir, inter), depth + 1, i), refl_ratio);
+			reflected_ray(ray->dir, inter), depth + 1), refl_ratio);
 	if (double_not_null(1 - inter->obj->material.opacity))
 		refr_color = recursive_ray(args, refracted_ray(ray->dir, inter),
-			depth + 1, i);
+			depth + 1);
 	refr_color = dmult_vec3(refr_color,
 			(1 - refl_ratio) * (1 - inter->obj->material.opacity));
 	prim_color = dmult_vec3(prim_color,
@@ -70,7 +69,7 @@ t_vec3		get_final_color(t_args *args, t_ray *ray, t_inter *inter, int depth,
 	return (add_vec3(prim_color, add_vec3(refr_color, refl_color)));
 }
 
-t_vec3		recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
+t_vec3		recursive_ray(t_args *args, t_ray ray, int depth)
 {
 	t_inter	inter;
 	t_vec3	final_color;
@@ -80,6 +79,6 @@ t_vec3		recursive_ray(t_args *args, t_ray ray, int depth, size_t i)
 		return (final_color);
 	inter = trace_ray(ray, args->scene->objs, args->obj_fct, 0);
 	if (inter.obj)
-			final_color = get_final_color(args, &ray, &inter, depth, i);
+		final_color = get_final_color(args, &ray, &inter, depth);
 	return (final_color);
 }
