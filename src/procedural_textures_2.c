@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:34:34 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 10:54:25 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/18 14:50:02 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,3 @@ double	sinus_sum_perlin(t_mat *mat, t_vec4 obj_coords)
 	sum = (sin((x + sum * 100.0) * 2.0 * M_PI * mat->text_scale) + 1.0) * 0.5;
 	return (sum);
 }
- 

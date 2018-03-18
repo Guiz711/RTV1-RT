@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:31:43 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 10:53:30 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/18 14:50:33 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ double	stripes(t_mat *mat, t_vec4 obj_coords)
 		RAD(angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	modulo = obj_coords.x * scale - floor(obj_coords.x * scale);
-	if (modulo < 0.5) 
+	if (modulo < 0.5)
 		return (TRUE);
 	else
 		return (FALSE);

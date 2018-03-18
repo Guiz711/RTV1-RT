@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:39:08 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 09:40:27 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/18 14:42:04 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ double			cylinder_intersection(t_ray ray, void *obj)
 	t_cylinder	*cyl;
 	double		dot1;
 	double		dot2;
-	
+
 	cyl = (t_cylinder*)obj;
 	diff = sub_vec4(ray.orig, cyl->p);
 	dot1 = dot_vec4(ray.dir, cyl->dir);
@@ -79,7 +79,7 @@ double			cone_intersection(t_ray ray, void *obj)
 	t_cone		*cone;
 	double		dot1;
 	double		dot2;
-	
+
 	cone = (t_cone*)obj;
 	diff = sub_vec4(ray.orig, cone->p);
 	dot1 = dot_vec4(ray.dir, cone->dir);
@@ -92,8 +92,6 @@ double			cone_intersection(t_ray ray, void *obj)
 		return (-1);
 	return (resolve_poly2(poly));
 }
-
-
 
 double			plane_intersection(t_ray ray, void *obj)
 {

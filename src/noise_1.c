@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:10:18 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 10:29:24 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/18 14:43:56 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,15 @@ static void		shuffle_permutation_table(int *table)
 	}
 }
 
-static t_vec4	generate_vec4()
+static t_vec4	generate_vec4(void)
 {
 	double	theta;
 	double	phi;
 
-	theta = acos(2 * drand48() - 1); 
-	phi = 2 * drand48() * M_PI; 
- 
+	theta = acos(2 * drand48() - 1);
+	phi = 2 * drand48() * M_PI;
 	return (init_vec4(cos(phi) * sin(theta), sin(phi) * sin(theta),
-		cos(theta), 0)); 
+		cos(theta), 0));
 }
 
 void			fill_text_map(t_mat *mat)
