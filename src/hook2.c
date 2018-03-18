@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 14:49:44 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:00:22 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 20:53:47 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int			select_obj(int button, int x, int y, t_args *args)
 int			check_hook(t_args *args)
 {
 	if (args->env->hook.left_right == 1)
-		args->scene->cam.orig.x -= 0.1;
+		args->scene->cam.orient.y -= 1;
 	if (args->env->hook.left_right == -1)
-		args->scene->cam.orig.x += 0.1;
+		args->scene->cam.orient.y += 1;
 	if (args->env->hook.up_down == 1)
 		args->scene->cam.orig.z -= 0.1;
 	if (args->env->hook.up_down == -1)

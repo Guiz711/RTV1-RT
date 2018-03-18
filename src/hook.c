@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 17:59:36 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/18 20:42:56 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,25 @@
 
 void		trans_ori_cam(t_args *args, int keycode)
 {
+	t_vec3	rot;
+
+	rot.y = 0;
+	rot.z = 0;
+	printf("???\n");
 	if (keycode == LEFT)
-		args->scene->cam.orig.x -= 0.5;
+	{
+		rot.x = 10000;
+		args->scene->cam.orient = new_coord(args->scene->cam.orient,
+				quat_to_mtx(euler_to_quat(rot)));
+		printf("helpp\n");
+	}
 	if (keycode == RIGHT)
-		args->scene->cam.orig.x += 0.5;
+	{
+		rot.x = -10000;
+		args->scene->cam.orient = new_coord(args->scene->cam.orient,
+				quat_to_mtx(euler_to_quat(rot)));
+		printf("why\n");
+	}
 	if (keycode == UP)
 		args->scene->cam.orig.z -= 0.5;
 	if (keycode == BACK)
