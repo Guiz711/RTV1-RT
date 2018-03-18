@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:43:42 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 12:28:45 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/18 14:48:58 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_mtx4	plane_to_world_mtx(t_plane *plane)
 	return (mtx4_mult(translation, rotation));
 }
 
-double	plane_procedural_texture(t_args *args, t_inter *inter)
+double			plane_procedural_texture(t_args *args, t_inter *inter)
 {
 	t_vec4	obj_coords;
 	t_plane	*plane;
@@ -49,10 +49,10 @@ double	plane_procedural_texture(t_args *args, t_inter *inter)
 	mat = &inter->obj->material;
 	obj_coords = new_coord(inter->p, world_to_plane_mtx(plane));
 	pattern = args->text_fct[mat->texture](mat, obj_coords);
-	return pattern;
+	return (pattern);
 }
 
-void	plane_texture(t_args *args, t_inter *inter, t_vec3 *diff)
+void			plane_texture(t_args *args, t_inter *inter, t_vec3 *diff)
 {
 	t_vec4	obj_coords;
 	t_plane	*plane;
@@ -70,7 +70,7 @@ void	plane_texture(t_args *args, t_inter *inter, t_vec3 *diff)
 	}
 }
 
-void	plane_bump_mapping(t_args *args, t_inter *inter)
+void			plane_bump_mapping(t_args *args, t_inter *inter)
 {
 	t_vec4	obj_coords;
 	t_plane	*plane;

@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/08 16:00:30 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 10:27:55 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/18 14:48:08 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_vec4	cylinder_normal(t_ray *ray, t_inter *inter)
 	t_vec4		diff;
 	double		m;
 	t_vec4		normal;
-	
+
 	cyl = (t_cylinder*)inter->obj->content;
 	diff = sub_vec4(ray->orig, cyl->p);
 	m = dot_vec4(ray->dir, cyl->dir) * inter->dist
@@ -47,7 +47,7 @@ t_vec4	cone_normal(t_ray *ray, t_inter *inter)
 	t_vec4		diff;
 	double		m;
 	t_vec4		normal;
-	
+
 	cone = (t_cone*)inter->obj->content;
 	diff = sub_vec4(ray->orig, cone->p);
 	m = (dot_vec4(ray->dir, cone->dir) * inter->dist
@@ -65,7 +65,7 @@ t_vec4	paraboloid_normal(t_ray *ray, t_inter *inter)
 	t_vec4		diff;
 	double		m;
 	t_vec4		normal;
-	
+
 	ray = NULL;
 	parab = (t_parab*)inter->obj->content;
 	diff = sub_vec4(inter->p, parab->p);

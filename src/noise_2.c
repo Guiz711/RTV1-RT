@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:42:56 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/16 10:26:30 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/18 14:46:22 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static double	lerp(double start, double end, double t)
 	return (start * (1 - t) + end * t);
 }
 
-static float	smooth(const float t) 
+static float	smooth(const float t)
 {
-	return t * t * (3 - 2 * t);
-} 
+	return (t * t * (3 - 2 * t));
+}
 
 static void		interpolate(t_noise *p)
 {
@@ -52,15 +52,15 @@ double			eval_coord(t_mat *mat, t_vec4 coords)
 	p.end[2] = p.start[2] + 1 & 255;
 	compute_corners(mat->noise_map, mat->permutation, &p);
 	compute_directions(&p);
-	p.t.x  = smooth(p.t.x);
-	p.t.y  = smooth(p.t.y);
-	p.t.z  = smooth(p.t.z);
+	p.t.x = smooth(p.t.x);
+	p.t.y = smooth(p.t.y);
+	p.t.z = smooth(p.t.z);
 	interpolate(&p);
 	return (lerp(lerp(p.interpol.x, p.interpol.y, p.t.y),
 		lerp(p.interpol.z, p.interpol.w, p.t.y), p.t.z));
 }
 
-double		map_noise(t_mat *mat, t_vec4 obj_coords)
+double			map_noise(t_mat *mat, t_vec4 obj_coords)
 {
 	t_mtx4	rotation;
 
