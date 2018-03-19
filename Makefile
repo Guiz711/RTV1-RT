@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/19 14:03:15 by jgourdin          #+#    #+#              #
-#    Updated: 2018/03/19 14:04:01 by jgourdin         ###   ########.fr        #
+#    Updated: 2018/03/19 16:17:24 by hbouchet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRC_PATH = src
 
 SRC_NAME = main.c init_rays.c obj_list.c intersection_1.c intersection_2.c \
 			trace_ray_1.c trace_ray_2.c utility.c\
-			render_modes.c normal.c shader.c threading.c events.c quit.c \
+			render_modes.c normal.c normal_2.c shader.c threading.c events.c quit.c \
 			hook.c reflection_refraction.c antialiasing.c \
 			filtre.c loading_screen.c screenshot.c noise_1.c noise_2.c \
 			noise_3.c plane_texture_mapping.c texture.c procedural_bump.c \

@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/18 18:21:15 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 11:11:30 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/19 16:15:37 by hbouchet          #+#    #+#             */
+/*   Updated: 2018/03/19 16:17:06 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-t_vec4	sphere_normal(t_ray *ray, t_inter *inter)
-{
-	t_sphere	*sph;
-	t_vec4		normal;
-
-	ray = NULL;
-	sph = (t_sphere*)inter->obj->content;
-	normal = normalize_vec4(sub_vec4(inter->p, sph->center));
-	return (normal);
-}
 
 t_vec4	cylinder_normal(t_ray *ray, t_inter *inter)
 {
@@ -92,7 +81,7 @@ t_vec4	plane_normal(t_ray *ray, t_inter *inter)
 t_vec4	triangle_normal(t_ray *ray, t_inter *inter)
 {
 	t_triangle	*tri;
-	t_vec4			normal;
+	t_vec4		normal;
 
 	tri = (t_triangle*)inter->obj->content;
 	if (dot_vec4(ray->dir, tri->normal) > 0)
