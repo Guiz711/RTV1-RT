@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 19:54:30 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 20:07:31 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:33:18 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,7 +303,6 @@ typedef struct		s_scene
 	t_vec3			amb_i;
 }					t_scene;
 
-# include "xml_parser.h"
 
 typedef struct		s_hook
 {
@@ -416,6 +415,7 @@ double				shadow(t_args *args, t_inter *inter, t_light *light);
 int					trace_primary_rays(t_args *args);
 t_inter				trace_ray(t_ray ray, t_obj_lst *objs,
 						t_inter_fct *obj_fct, int shad);
+void				trace_rays_mono(t_args *args);
 int					manage_threads(t_args *args);
 int					keypress(int keycode, void *args);
 int					quit(t_args *args);

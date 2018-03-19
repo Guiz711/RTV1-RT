@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   xml_material.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 15:19:14 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:03:02 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
 #include "xml_parser.h"
 
 t_mat		xml_material2(xmlNodePtr node, t_mat material, xmlNodePtr child)

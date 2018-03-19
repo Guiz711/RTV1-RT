@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   xml_lights.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 16:51:56 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 16:52:21 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:02:59 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
 #include "xml_parser.h"
 
 t_lgt_type		char_to_lgt(char *str)

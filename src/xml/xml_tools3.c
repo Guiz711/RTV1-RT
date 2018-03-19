@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   xml_tools3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:06 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 13:42:58 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:03:21 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "xml_parser.h"
 
 void				xml_img_att(t_scene *scene, xmlNodePtr root)
 {

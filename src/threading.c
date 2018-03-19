@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/18 19:25:50 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:13:11 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ t_vec3	ft_average(t_vec3 c1, t_vec3 c2)
 	final.y = (c1.y + c2.y) / 2;
 	final.z = (c1.z + c2.z) / 2;
 	return (final);
+}
+
+int		display_image(t_args *args)
+{
+	filter_selector(args);
+	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
+	init_hook(args->env);
+	//screenshot(args->env->img);
+	return (SUCCESS);
 }
 
 void	init(t_thread *t, t_args *args)
@@ -66,7 +75,7 @@ int		manage_threads(t_args *args)
 	if (args->env->moving == 1)
 		check_hook(args);
 	init(&thread[0], args);
-	while ((int)i < args->env->thread_number)
+	while (i < args->env->thread_number)
 	{
 		if (pthread_create(&t[i], NULL, &trace_rays_threads, &thread[i]))
 		{
@@ -77,15 +86,10 @@ int		manage_threads(t_args *args)
 		i++;
 	}
 	i = 0;
-	while ((int)i < args->env->thread_number)
+	while (i < args->env->thread_number)
 	{
-		if (pthread_join(t[i], NULL))
+		if (pthread_join(t[i++], NULL))
 			return (FAILURE);
-		i++;
 	}
-	filter_selector(args);
-	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
-	init_hook(args->env);
-	//screenshot(args->env->img);
-	return (SUCCESS);
+	return (display_image(args));
 }

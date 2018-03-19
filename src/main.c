@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 15:31:25 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 15:33:43 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:36:26 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int							main(int argc, char **argv)
 	if (!init_textures(&args))
 		return (0);
 	objs = scene.objs;
-	manage_threads(&args);
+	if (!manage_threads(&args))
+		trace_rays_mono(&args);
 	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	mlx_hook(env.win, 17, 0L, &quit, &args);
 	mlx_mouse_hook(env.win, select_obj, &args);

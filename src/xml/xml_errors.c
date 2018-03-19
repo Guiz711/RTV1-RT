@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   xml_errors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 05:59:23 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 16:52:48 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:02:56 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
 #include "xml_parser.h"
 
 /*

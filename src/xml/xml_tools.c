@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   xml_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:08:20 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 16:41:16 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:03:15 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
 #include "xml_parser.h"
 
 xmlNodePtr		has_child(xmlNodePtr a_node, char *attr)

@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   xml_transform.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 17:53:46 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/02/12 16:42:11 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:03:24 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
 #include "xml_parser.h"
 
 t_vec3			feed_trans(xmlNodePtr node)

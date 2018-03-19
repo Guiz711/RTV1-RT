@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   xml_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:57:49 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/16 15:14:36 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:03:05 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
 #include "xml_parser.h"
 
 int				create_sphere(xmlNodePtr node, t_scene *scn)

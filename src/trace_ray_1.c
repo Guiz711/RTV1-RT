@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trace_ray_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 19:35:54 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 19:44:08 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:32:54 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,17 @@ t_inter		trace_ray(t_ray ray, t_obj_lst *objs, t_inter_fct *ob_fct, int shad)
 	inter.p = add_vec4(ray.orig, dmult_vec4(ray.dir, inter.dist));
 	inter.p.w = 1;
 	return (inter);
+}
+
+void		trace_rays_mono(t_args *args)
+{
+	size_t		end;
+	t_pixel		*pix;
+
+	end = args->env->win_width * args->env->win_height;
+	pix = args->pix_buf;
+	if (args->env->aliasing <= 1)
+		antialiasing(args, pix, 0, end);
+	else
+		aliasing(args, pix, 0, end);
 }

@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   xml_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:12:03 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:12:06 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 09:03:18 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
 #include "xml_parser.h"
 
 void				shd_scene(int *shd_arr, char *string)
