@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/19 15:56:04 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 17:40:40 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@
 # include "xmlreader.h"
 
 int			create_paraboloid(xmlNodePtr node, t_scene *scn);
+int			create_cone(xmlNodePtr node, t_scene *scn);
 int			create_triangle(xmlNodePtr node, t_scene *scn);
+int			create_sphere(xmlNodePtr node, t_scene *scn);
+int			create_plane(xmlNodePtr node, t_scene *scn);
+int			create_cylinder(xmlNodePtr node, t_scene *scn);
 void		xml_img_att(t_scene *scene, xmlNodePtr root);
 t_texture	char_to_texture(char *str);
 int			get_obj(xmlNodePtr node, t_scene *scn);
