@@ -17,11 +17,19 @@ int				create_paraboloid(xmlNodePtr node, t_scene *scn)
 	t_parab		parab;
 	xmlNodePtr	child;
 	t_obj_lst	*new;
-
+	xmlChar		*tmp;
 	if ((child = has_child(node, "k")))
-		parab.k = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	{
+		tmp = ((xmlGetProp(child, BAD_CAST"nb")));
+		parab.k = atof((char *)tmp);
+		free_xml((void**)&tmp);
+	}
 	if ((child = has_child(node, "scale")))
-		parab.k *= atof((char *)xmlGetProp(child, BAD_CAST"scale"));
+	{
+		tmp = ((xmlGetProp(child, BAD_CAST"scale")));
+		parab.k *= atof((char *)tmp);
+		free_xml((void**)&tmp);
+	}
 	if ((child = has_child(node, "p")))
 		parab.p = get_vec4_from_node(child);
 	if ((child = has_child(node, "translation")))
