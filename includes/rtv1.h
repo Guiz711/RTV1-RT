@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 19:54:30 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 13:13:29 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 14:23:43 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,7 +342,6 @@ typedef struct		s_env
 	int				fov;
 	t_img			*img;
 	t_img			*lodscreen;
-	t_img			*loadbar;
 }					t_env;
 
 typedef struct		s_args
