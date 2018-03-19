@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:06 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:03:21 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:57:02 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,31 @@
 
 void				xml_img_att(t_scene *scene, xmlNodePtr root)
 {
-	scene->render_mode = ft_atoi((char *)xmlGetProp(root, BAD_CAST"render"));
-	if (scene->render_mode > 6 || scene->render_mode < 0)
+	if (xmlGetProp(root, BAD_CAST"render") == NULL)
 		scene->render_mode = 0;
-	scene->refra = ft_atoi((char *)xmlGetProp(root, BAD_CAST"global_refract"));
-	if (scene->refra > 1 || scene->refra < 1)
-		scene->refra = 1;
-	scene->filtre = ft_atoi((char *)xmlGetProp(root, BAD_CAST"filtre"));
-	if (scene->filtre > 6 || scene->filtre < 1)
+	else
+	{
+		scene->render_mode = ft_atoi((char *)xmlGetProp(root, BAD_CAST"render"));
+		printf("%d\n", scene->render_mode);
+		if (scene->render_mode > 6 || scene->render_mode < 0)
+			scene->render_mode = 0;
+	}
+	if (xmlGetProp(root, BAD_CAST"global_refract") == NULL)
 		scene->filtre = 0;
+	else
+	{
+		scene->refra = ft_atoi((char *)xmlGetProp(root, BAD_CAST"global_refract"));
+		if (scene->refra != 1)
+			scene->refra = 1;
+	}
+	if (xmlGetProp(root, BAD_CAST"filtre") == NULL)
+		scene->filtre = 0;
+	else
+	{
+		scene->filtre = ft_atoi((char *)xmlGetProp(root, BAD_CAST"filtre"));
+		if (scene->filtre > 6 || scene->filtre < 1)
+			scene->filtre = 0;
+	}
 }
 
 t_vec4				get_vec4_from_node(xmlNodePtr node)

@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 20:55:07 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:41:06 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int			hook(int keycode, t_args *args)
 	}
 	if (keycode == 257)
 		moving_mode(args);
-	if (keycode == 9)
+	if (keycode == 46)
 		screenshot(args->env->img);
 	if (args->env->moving == 1)
 		moving(keycode, args);

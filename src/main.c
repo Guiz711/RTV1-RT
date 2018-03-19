@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 15:31:25 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:36:26 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 12:42:11 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int							main(int argc, char **argv)
 	objs = scene.objs;
 	if (!manage_threads(&args))
 		trace_rays_mono(&args);
-	mlx_put_image_to_window(env.init, env.win, env.img->ptr, 0, 0);
 	mlx_hook(env.win, 17, 0L, &quit, &args);
 	mlx_mouse_hook(env.win, select_obj, &args);
 	mlx_hook(env.win, 2, 0, hook, &args);
