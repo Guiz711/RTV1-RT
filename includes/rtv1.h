@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/18 19:54:30 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 14:23:43 by jgourdin         ###   ########.fr       */
+/*   Created: 2018/03/19 16:28:18 by hbouchet          #+#    #+#             */
+/*   Updated: 2018/03/19 16:30:54 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,7 +312,6 @@ typedef struct		s_scene
 	t_vec3			amb_i;
 }					t_scene;
 
-
 typedef struct		s_hook
 {
 	int				up_down;
@@ -510,7 +509,7 @@ t_vec4				plane_normal(t_ray *ray, t_inter *inter);
 t_vec4				cylinder_normal(t_ray *ray, t_inter *inter);
 t_vec4				cone_normal(t_ray *ray, t_inter *inter);
 t_vec4				paraboloid_normal(t_ray *ray, t_inter *inter);
-t_vec4  			get_triangle_normal(t_vec4 p1, t_vec4 p2, t_vec4 p3);
+t_vec4				get_triangle_normal(t_vec4 p1, t_vec4 p2, t_vec4 p3);
 t_vec4				triangle_normal(t_ray *ray, t_inter *inter);
 
 /*
