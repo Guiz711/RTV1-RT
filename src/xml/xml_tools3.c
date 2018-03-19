@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_tools3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:06 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 18:09:56 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:11:03 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@ void				free_xml(void **ptr)
 		if (*ptr)
 			xmlFree(*ptr);
 		*ptr = NULL;
+	}
+}
+
+void				xml_img_att2(t_scene *scene, xmlNodePtr root, xmlChar *tmp)
+{
+	tmp = xmlGetProp(root, BAD_CAST"filtre");
+	if (tmp == NULL)
+		scene->filtre = 0;
+	else
+	{
+		scene->filtre = ft_atoi((char *)tmp);
+		if (scene->filtre > 6 || scene->filtre < 1)
+			scene->filtre = 0;
+		xmlFree(tmp);
 	}
 }
 
@@ -46,16 +60,7 @@ void				xml_img_att(t_scene *scene, xmlNodePtr root)
 			scene->refra = 1;
 		xmlFree(tmp);
 	}
-	tmp = xmlGetProp(root, BAD_CAST"filtre");
-	if (tmp == NULL)
-		scene->filtre = 0;
-	else
-	{
-		scene->filtre = ft_atoi((char *)tmp);
-		if (scene->filtre > 6 || scene->filtre < 1)
-			scene->filtre = 0;
-		xmlFree(tmp);
-	}
+	xml_img_att2(scene, root, tmp);
 }
 
 t_vec4				get_vec4_from_node(xmlNodePtr node)

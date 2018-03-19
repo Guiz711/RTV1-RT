@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_lights.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 16:51:56 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 16:01:30 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 17:02:38 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int				get_lights(xmlNodePtr node, t_scene *scn)
 		light.vec = get_vec4_from_node(child);
 	if ((child = has_child(node, "range")))
 		tmp = xmlGetProp(child, BAD_CAST"nb");
-		light.range = ft_atoi((char *)tmp);
+	light.range = ft_atoi((char *)tmp);
 	free_xml((void**)&tmp);
 	if ((child = has_child(node, "diffuse")))
 		light.diff_i = get_color_from_node(child);
