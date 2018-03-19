@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_transform.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 17:53:46 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:03:24 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:02:56 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,23 @@
 t_vec3			feed_trans(xmlNodePtr node)
 {
 	t_vec3		pos;
+	xmlChar		*tmp;
 
-	pos.x = atof((char *)(xmlGetProp(node, BAD_CAST "x")));
-	pos.y = atof((char *)(xmlGetProp(node, BAD_CAST "y")));
-	pos.z = atof((char *)(xmlGetProp(node, BAD_CAST "z")));
+	tmp = NULL;
+	tmp = xmlGetProp(node, BAD_CAST "x");
+	pos.x = atof((char *)tmp);
+	if (tmp)
+		xmlFree(tmp);
+	tmp = NULL;
+	tmp = xmlGetProp(node, BAD_CAST "y");
+	pos.y = atof((char *)tmp);
+	if (tmp)
+		xmlFree(tmp);
+	tmp = NULL;
+	tmp = xmlGetProp(node, BAD_CAST "z");
+	pos.z = atof((char *)tmp);
+	if (tmp)
+		xmlFree(tmp);
 	return (pos);
 }
 
