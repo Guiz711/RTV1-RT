@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   threading.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/29 12:45:40 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/19 12:47:01 by jgourdin         ###   ########.fr       */
+/*   Created: 2018/03/19 16:21:06 by hbouchet          #+#    #+#             */
+/*   Updated: 2018/03/19 16:22:39 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 #include <limits.h>
 
-t_vec3	ft_average(t_vec3 c1, t_vec3 c2)
+t_vec3		ft_average(t_vec3 c1, t_vec3 c2)
 {
 	t_vec3	final;
 
@@ -23,15 +23,16 @@ t_vec3	ft_average(t_vec3 c1, t_vec3 c2)
 	return (final);
 }
 
-int		display_image(t_args *args)
+int			display_image(t_args *args)
 {
 	filter_selector(args);
-	mlx_put_image_to_window(args->env->init, args->env->win, args->env->img->ptr, 0, 0);
+	mlx_put_image_to_window(args->env->init, args->env->win,
+		args->env->img->ptr, 0, 0);
 	init_hook(args->env);
 	return (SUCCESS);
 }
 
-void	init(t_thread *t, t_args *args)
+void		init(t_thread *t, t_args *args)
 {
 	size_t	len;
 	size_t	i;
@@ -64,7 +65,7 @@ static void	*trace_rays_threads(void *vt_args)
 	return (NULL);
 }
 
-int		manage_threads(t_args *args)
+int			manage_threads(t_args *args)
 {
 	pthread_t	t[args->env->thread_number];
 	t_thread	thread[args->env->thread_number];

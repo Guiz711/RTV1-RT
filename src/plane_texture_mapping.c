@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_texture_mapping.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/18 18:21:36 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 12:56:36 by gmichaud         ###   ########.fr       */
+/*   Created: 2018/03/19 16:19:48 by hbouchet          #+#    #+#             */
+/*   Updated: 2018/03/19 16:19:48 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

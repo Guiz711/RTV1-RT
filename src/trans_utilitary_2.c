@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trans_utilitary2.c                                 :+:      :+:    :+:   */
+/*   trans_utilitary_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 11:47:04 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 11:58:47 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:22:45 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ void			trans_triangle(t_args *args, t_vec3 trans_pos)
 			translate(trans_pos.x, trans_pos.y, trans_pos.z));
 	args->scene->objs->content = triangle;
 }
-
