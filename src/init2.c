@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 13:02:32 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 10:42:04 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 11:57:41 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_fct_arr3(t_args *args)
 	args->modif_trans[2] = &trans_cylinder;
 	args->modif_trans[3] = &trans_cone;
 	args->modif_trans[4] = &trans_parab;
+	args->modif_trans[5] = &trans_triangle;
 	args->modif_rot[1] = &rot_plane;
 	args->modif_rot[2] = &rot_cylinder;
 	args->modif_rot[3] = &rot_cone;
