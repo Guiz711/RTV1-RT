@@ -17,11 +17,20 @@ int				create_sphere(xmlNodePtr node, t_scene *scn)
 	t_sphere	sphere;
 	xmlNodePtr	child;
 	t_obj_lst	*new;
+	xmlChar		*tmp;
 
 	if ((child = has_child(node, "radius")))
-		sphere.radius = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	{
+		tmp = ((xmlGetProp(child, BAD_CAST"nb")));
+		sphere.radius = atof((char *)tmp);
+		free_xml((void**)&tmp);
+	}
 	if ((child = has_child(node, "scale")))
-		sphere.radius *= atof((char *)xmlGetProp(child, BAD_CAST"scale"));
+	{
+		tmp = ((xmlGetProp(child, BAD_CAST"scale")));
+		sphere.radius *= atof((char *)tmp);
+		free_xml((void**)&tmp);
+	}
 	if ((child = has_child(node, "center")))
 		sphere.center = get_vec4_from_node(child);
 	if ((child = has_child(node, "translation")))
@@ -61,11 +70,20 @@ int				create_cone(xmlNodePtr node, t_scene *scn)
 	t_cone		cone;
 	xmlNodePtr	child;
 	t_obj_lst	*new;
+	xmlChar 	*tmp;
 
 	if ((child = has_child(node, "angle")))
-		cone.angle = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	{
+		tmp = ((xmlGetProp(child, BAD_CAST"nb")));
+		cone.angle = atof((char *)tmp);
+		free_xml((void**)&tmp);
+	}
 	if ((child = has_child(node, "scale")))
-		cone.angle *= atof((char *)xmlGetProp(child, BAD_CAST"scale"));
+	{
+		tmp = ((xmlGetProp(child, BAD_CAST"scale")));
+		cone.angle *= atof((char *)tmp);
+		free_xml((void**)&tmp);
+	}
 	if ((child = has_child(node, "p")))
 		cone.p = get_vec4_from_node(child);
 	if ((child = has_child(node, "translation")))
@@ -87,11 +105,21 @@ int				create_cylinder(xmlNodePtr node, t_scene *scn)
 	t_cylinder	cyl;
 	xmlNodePtr	child;
 	t_obj_lst	*new;
+	xmlChar		*tmp;
 
 	if ((child = has_child(node, "radius")))
-		cyl.radius = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+	{
+		tmp = ((xmlGetProp(child, BAD_CAST"nb")));
+		cyl.radius = atof((char *)tmp);
+		free_xml((void**)&tmp);
+	}
+
 	if ((child = has_child(node, "scale")))
-		cyl.radius *= atof((char *)xmlGetProp(child, BAD_CAST"scale"));
+	{
+		tmp = ((xmlGetProp(child, BAD_CAST"scale")));
+		cyl.radius *= atof((char *)tmp);
+		free_xml((void**)&tmp);
+	}
 	if ((child = has_child(node, "p")))
 		cyl.p = get_vec4_from_node(child);
 	if ((child = has_child(node, "translation")))
