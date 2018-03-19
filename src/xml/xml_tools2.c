@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:12:03 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:03:18 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:46:04 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,16 @@ t_shd				char_to_shd(char *str)
 t_vec3				get_color_from_node(xmlNodePtr node)
 {
 	t_vec3			new;
+	xmlChar			*tmp;
 
-	new.x = atof((char *)(xmlGetProp(node, BAD_CAST"r")));
-	new.y = atof((char *)(xmlGetProp(node, BAD_CAST"g")));
-	new.z = atof((char *)(xmlGetProp(node, BAD_CAST"b")));
+	tmp = ((xmlGetProp(node, BAD_CAST"r")));
+	new.x = atof((char *)tmp);
+	xmlFree(tmp);
+	tmp = ((xmlGetProp(node, BAD_CAST"g")));
+	new.y = atof((char *)tmp);
+	xmlFree(tmp);
+	tmp = ((xmlGetProp(node, BAD_CAST"b")));
+	new.z = atof((char *)tmp);
+	xmlFree(tmp);
 	return (new);
 }

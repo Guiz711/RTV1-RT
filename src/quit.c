@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:45:42 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 14:26:30 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 14:51:16 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void		free_obj_lst(t_obj_lst **obj_lst)
 			tmp = tmp->next;
 		}
 		*obj_lst = NULL;
+		free(tmp);
 	}
 }
 
@@ -42,6 +43,10 @@ int				quit(t_args *args)
 		exit(EXIT_SUCCESS);
 	if (args->env->lodscreen)
 		mlx_destroy_image(args->env->init, args->env->lodscreen->ptr);
+	if (args->textures.marble.ptr)
+		mlx_destroy_image(args->env->init, args->textures.marble.ptr);
+	if (args->textures.wall.ptr)
+		mlx_destroy_image(args->env->init, args->textures.wall.ptr);
 	if (args->env->img)
 		mlx_destroy_image(args->env->init, args->env->img->ptr);
 	if (args->scene->objs)
