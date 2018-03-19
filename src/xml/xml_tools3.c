@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   xml_tools3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:06 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 15:41:42 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:55:50 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "xml_parser.h"
+
+void				free_xml(void **ptr)
+{
+	if (ptr)
+	{
+		if (*ptr)
+			xmlFree(*ptr);
+		*ptr = NULL;
+	}
+}
 
 void				xml_img_att(t_scene *scene, xmlNodePtr root)
 {

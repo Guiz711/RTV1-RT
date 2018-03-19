@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_lights.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 16:51:56 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:02:59 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:48:45 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,21 @@ int				get_lights(xmlNodePtr node, t_scene *scn)
 {
 	t_light		light;
 	xmlNodePtr	child;
+	xmlChar		*tmp;
 
+	tmp = NULL;
 	if ((child = has_child(node, "type")))
-		light.type = char_to_lgt(((char *)xmlGetProp(child, BAD_CAST"type")));
+		tmp = xmlGetProp(child, BAD_CAST"type");
+	light.type = char_to_lgt(((char *)tmp));
+	if (tmp)
+		xmlFree(tmp);
 	if ((child = has_child(node, "vec")))
 		light.vec = get_vec4_from_node(child);
 	if ((child = has_child(node, "range")))
-		light.range = ft_atoi((char *)xmlGetProp(child, BAD_CAST"nb"));
+		tmp = xmlGetProp(child, BAD_CAST"nb");
+		light.range = ft_atoi((char *)tmp);
+	if (tmp)
+		xmlFree(tmp);
 	if ((child = has_child(node, "diffuse")))
 		light.diff_i = get_color_from_node(child);
 	if ((child = has_child(node, "spec")))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_parser.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/19 10:36:39 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:56:04 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void		get_nodes_by_name(xmlNodePtr cur, char *name, t_list **lst);
 xmlNodePtr	has_child(xmlNodePtr a_node, char *attr);
 void		shd_scene(int *shd_arr, char *string);
 t_list		*get_objects_nodes(xmlDocPtr doc);
+void		free_xml(void **ptr);
 
 #endif

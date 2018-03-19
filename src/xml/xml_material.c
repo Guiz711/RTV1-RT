@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_material.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:03:02 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:55:30 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ t_mat		xml_parse_material(xmlNodePtr node)
 {
 	t_mat		material;
 	xmlNodePtr	child;
+	xmlChar		*tmp;
 
+	tmp = NULL;
 	if ((child = has_child(node, "text_scale")))
-		material.text_scale = atof((char *)xmlGetProp(child, BAD_CAST"nb"));
+		tmp = xmlGetProp(child, BAD_CAST"nb");
+	material.text_scale = atof((char *)tmp);
+	if (tmp)
+		xmlFree(tmp);
 	if ((child = has_child(node, "bump_text")))
 		material.bump_text =
 			char_to_bump(((char *)xmlGetProp(child, BAD_CAST"bump_text")));
