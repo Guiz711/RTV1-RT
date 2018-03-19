@@ -6,7 +6,7 @@
 #    By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/19 14:03:15 by jgourdin          #+#    #+#              #
-#    Updated: 2018/03/19 18:23:04 by gmichaud         ###   ########.fr        #
+#    Updated: 2018/03/19 18:24:45 by gmichaud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRC_NAME = main.c init_rays.c obj_list.c intersection_1.c intersection_2.c \
 			quaternions_op.c \
 			xml_check.c xml_lights.c xml_parser.c xml_camera.c xml_errors.c \
 			xml_objects.c xml_tools.c xml_tools2.c xml_material.c xml_transform.c \
-			xml_tools3.c xml_objects2.c
+			xml_tools3.c xml_objects2.c xml_objects3.c
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 

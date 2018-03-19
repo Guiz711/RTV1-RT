@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: guizmo <guizmo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 11:48:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2017/07/04 10:44:36 by guizmo           ###   ########.fr       */
+/*   Updated: 2018/03/19 18:32:05 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	bufftostock(char *buff, char **stock, size_t size)
 
 char		*getstock(t_list *file_lst, int fd)
 {
-	while(file_lst)
+	while (file_lst)
 	{
 		if (((t_file*)file_lst->content)->fd == fd)
 			return (((t_file*)file_lst->content)->stock);
@@ -110,27 +110,27 @@ void		manage_lst(t_list **file_lst, int fd, char *stock, int ret)
 	t_list	*prec;
 	t_list	*tmp;
 
-	prec  = NULL;
-	tmp = *file_lst;
-	while (tmp)
-	{
-		if (((t_file*)tmp->content)->fd == fd)
-		{
-			((t_file*)tmp->content)->stock = stock;
-			if (!stock && !ret)
-			{
-				prec ? (prec->next = tmp->next) : (*file_lst = tmp->next);
-				free(tmp->content);
-				free(tmp);
-			}
-			return ;
-		}
-		prec = tmp;
-		tmp = tmp->next;
-	}
 	file.fd = fd;
 	file.stock = stock;
-	ft_lstadd(file_lst, ft_lstnew(&file, sizeof(file)));
+	prec = *file_lst;
+	tmp = *file_lst;
+	while (tmp && ((t_file*)tmp->content)->fd != fd)
+		tmp = tmp->next;
+	if (!tmp)
+		ft_lstadd(file_lst, ft_lstnew(&file, sizeof(file)));
+	else
+	{
+		((t_file*)tmp->content)->stock = stock;
+		while (prec != tmp && prec->next != tmp)
+			prec = prec->next;
+		if (!stock && !ret)
+		{
+			prec->next = prec ? tmp->next : prec->next;
+			*file_lst = (prec == *file_lst) ? (*file_lst)->next : *file_lst;
+			free(tmp->content);
+			free(tmp);
+		}
+	}
 }
 
 int			get_next_line(int fd, char **line)
