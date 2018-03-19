@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 13:02:32 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 10:42:04 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:06:22 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_fct_arr3(t_args *args)
 	args->modif_scale[2] = &scale_cylinder;
 	args->modif_scale[3] = &scale_cone;
 	args->modif_scale[4] = &scale_parab;
+	args->modif_scale[5] = &scale_triangle;
 	args->modif_trans[0] = &trans_sphere;
 	args->modif_trans[1] = &trans_plane;
 	args->modif_trans[2] = &trans_cylinder;
@@ -27,6 +28,7 @@ void	init_fct_arr3(t_args *args)
 	args->modif_rot[2] = &rot_cylinder;
 	args->modif_rot[3] = &rot_cone;
 	args->modif_rot[4] = &rot_parab;
+	args->modif_rot[5] = &rot_triangle;
 }
 
 void	init_fct_arr2(t_args *args)

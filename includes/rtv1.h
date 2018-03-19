@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 19:54:30 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 10:42:32 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:06:52 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,9 +354,9 @@ typedef struct		s_args
 	t_norm_fct		norm_fct[6];
 	t_inter_fct		obj_fct[6];
 	t_text_fct		text_fct[8];
-	void			(*modif_scale[5])(struct s_args*);
+	void			(*modif_scale[6])(struct s_args*);
 	void			(*modif_trans[6])(struct s_args*, t_vec3);
-	void			(*modif_rot[5])(struct s_args*, t_vec3);
+	void			(*modif_rot[6])(struct s_args*, t_vec3);
 	t_bump_fct		bump_fct[1];
 	void			(*rdr_fct[6])(struct s_args*, t_ray*, t_inter*, t_color*);
 	t_vec3			(*spec_fct[1])(t_inter*, t_light*);
@@ -397,6 +397,7 @@ void				scale_sphere(t_args *args);
 void				scale_cone(t_args *args);
 void				scale_cylinder(t_args *args);
 void				scale_parab(t_args *args);
+void				scale_triangle(t_args *args);
 void				trans_sphere(t_args *args, t_vec3 trans_pos);
 void				trans_cone(t_args *args, t_vec3 trans_pos);
 void				trans_cylinder(t_args *args, t_vec3 trans_pos);
@@ -407,6 +408,7 @@ void				rot_cone(t_args *args, t_vec3 trans_rot);
 void				rot_cylinder(t_args *args, t_vec3 trans_rot);
 void				rot_parab(t_args *args, t_vec3 trans_rot);
 void				rot_plane(t_args *args, t_vec3 trans_rot);
+void				rot_triangle(t_args *args, t_vec3 trans_rot);
 
 t_mtx4				get_camera_to_world(t_view *view);
 t_pixel				*init_pix_buffer(t_env *env, t_mtx4 v2w);
