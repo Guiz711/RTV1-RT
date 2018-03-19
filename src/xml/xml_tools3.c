@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:06 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 18:03:03 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:09:56 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void				xml_img_att(t_scene *scene, xmlNodePtr root)
 	else
 	{
 		scene->render_mode = ft_atoi((char *)tmp);
-		if (scene->render_mode > 6 || scene->render_mode < 0)
+		if (scene->render_mode > 4 || scene->render_mode < 0)
 			scene->render_mode = 0;
 		free_xml((void**)&tmp);
 	}
