@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:33:14 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:03:12 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 14:59:12 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ int				xml_parse(char *path, t_scene *scn)
 	if ((fd = check_file(path)) != -1)
 	{
 		if (parsedoc(path, scn) > 0)
+		{
+			xmlCleanupParser();
 			return (1);
+		}
 	}
 	return (0);
 }

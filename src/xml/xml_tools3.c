@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:06 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 14:04:27 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:41:42 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,17 @@ void				xml_img_att(t_scene *scene, xmlNodePtr root)
 t_vec4				get_vec4_from_node(xmlNodePtr node)
 {
 	t_vec4			new;
+	xmlChar			*tmp;
 
-	new.x = atof((char *)(xmlGetProp(node, BAD_CAST"x")));
-	new.y = atof((char *)(xmlGetProp(node, BAD_CAST"y")));
-	new.z = atof((char *)(xmlGetProp(node, BAD_CAST"z")));
-	new.w = atof((char *)(xmlGetProp(node, BAD_CAST"w")));
+	tmp = ((xmlGetProp(node, BAD_CAST"x")));
+	new.x = atof((char *)tmp);
+	xmlFree(tmp);
+	tmp = ((xmlGetProp(node, BAD_CAST"y")));
+	new.y = atof((char *)tmp);
+	xmlFree(tmp);
+	tmp = ((xmlGetProp(node, BAD_CAST"z")));
+	new.z = atof((char *)tmp);
+	xmlFree(tmp);
 	return (new);
 }
 
