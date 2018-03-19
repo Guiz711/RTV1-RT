@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/12 16:51:56 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 15:48:45 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:01:30 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,13 @@ int				get_lights(xmlNodePtr node, t_scene *scn)
 	if ((child = has_child(node, "type")))
 		tmp = xmlGetProp(child, BAD_CAST"type");
 	light.type = char_to_lgt(((char *)tmp));
-	if (tmp)
-		xmlFree(tmp);
+	free_xml((void**)&tmp);
 	if ((child = has_child(node, "vec")))
 		light.vec = get_vec4_from_node(child);
 	if ((child = has_child(node, "range")))
 		tmp = xmlGetProp(child, BAD_CAST"nb");
 		light.range = ft_atoi((char *)tmp);
-	if (tmp)
-		xmlFree(tmp);
+	free_xml((void**)&tmp);
 	if ((child = has_child(node, "diffuse")))
 		light.diff_i = get_color_from_node(child);
 	if ((child = has_child(node, "spec")))
