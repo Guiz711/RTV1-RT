@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 03:07:36 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:02:53 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 17:17:16 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ int				check_valid(xmlDocPtr doc)
 	if (!(vctxt = xmlNewValidCtxt()))
 		return (0);
 	if (!(dtd = dtd_validate("validator.dtd", doc)))
+	{
+		xmlFreeValidCtxt(vctxt);
 		return (0);
+	}
+	xmlFreeValidCtxt(vctxt);
 	return (1);
 }

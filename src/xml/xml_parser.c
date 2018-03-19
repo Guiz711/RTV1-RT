@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:33:14 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 14:59:12 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 17:32:13 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int				parsedoc(char *path, t_scene *scene)
 	ft_lstfree(&lst);
 	get_nodes_by_name(root, "light", &lst);
 	set_lights(lst, scene);
+	ft_lstfree(&lst);
 	return (1);
 }
 

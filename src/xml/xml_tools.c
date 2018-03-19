@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 03:08:20 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:03:15 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 17:30:50 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void			ft_lstfree(t_list **lst)
 	if (*lst)
 	{
 		ft_lstfree(&((*lst)->next));
+		if ((*lst)->content)
+			free((*lst)->content);
 		free(*lst);
 		*lst = NULL;
 	}
@@ -103,5 +105,6 @@ t_list			*get_objects_nodes(xmlDocPtr doc)
 		ft_lstpush(&lst2, new);
 		tmp = tmp->next;
 	}
+	ft_lstfree(&lst);
 	return (lst2);
 }
