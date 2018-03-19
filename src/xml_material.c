@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   xml_material.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 16:19:57 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 17:10:55 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "xml_parser.h"
 
-t_mat		xml_material2(xmlNodePtr node, t_mat material, xmlNodePtr child)
+static t_mat	xml_material3(xmlNodePtr node, t_mat material, xmlNodePtr child)
 {
 	xmlChar		*tmp;
 
@@ -21,6 +21,30 @@ t_mat		xml_material2(xmlNodePtr node, t_mat material, xmlNodePtr child)
 		tmp = xmlGetProp(child, BAD_CAST"model");
 	material.model = char_to_shd((char *)tmp);
 	free_xml((void**)&tmp);
+	if ((child = has_child(node, "refract")))
+		tmp = xmlGetProp(child, BAD_CAST"nb");
+	material.refract = atof((char *)tmp);
+	free_xml((void**)&tmp);
+	if ((child = has_child(node, "reflect")))
+		tmp = xmlGetProp(child, BAD_CAST"nb");
+	material.reflect = atof((char *)tmp);
+	free_xml((void**)&tmp);
+	if ((child = has_child(node, "opacity")))
+		tmp = xmlGetProp(child, BAD_CAST"nb");
+	material.opacity = atof((char *)tmp);
+	free_xml((void**)&tmp);
+	if ((child = has_child(node, "text_angle")))
+		tmp = xmlGetProp(child, BAD_CAST"nb");
+	material.text_angle = atof((char *)tmp);
+	free_xml((void**)&tmp);
+	return (material);
+}
+
+t_mat			xml_material2(xmlNodePtr node, t_mat material, xmlNodePtr child)
+{
+	xmlChar		*tmp;
+
+	tmp = NULL;
 	if ((child = has_child(node, "texture")))
 		tmp = xmlGetProp(child, BAD_CAST"texture");
 	material.texture = char_to_texture((char *)tmp);
@@ -35,26 +59,14 @@ t_mat		xml_material2(xmlNodePtr node, t_mat material, xmlNodePtr child)
 		tmp = xmlGetProp(child, BAD_CAST"nb");
 	material.shin = ft_atoi((char *)tmp);
 	free_xml((void**)&tmp);
-	if ((child = has_child(node, "refract")))
-		tmp = xmlGetProp(child, BAD_CAST"nb");
-	material.refract = atof((char *)tmp);
-	free_xml((void**)&tmp);
-	if ((child = has_child(node, "reflect")))
-		tmp = xmlGetProp(child, BAD_CAST"nb");
-		material.reflect = atof((char *)tmp);
-	free_xml((void**)&tmp);
-	if ((child = has_child(node, "opacity")))
-		tmp = xmlGetProp(child, BAD_CAST"nb");
-	material.opacity = atof((char *)tmp);
-	free_xml((void**)&tmp);
-	if ((child = has_child(node, "text_angle")))
-		tmp = xmlGetProp(child, BAD_CAST"nb");
-		material.text_angle = atof((char *)tmp);
-	free_xml((void**)&tmp);
+	if (material.texture == PERLIN || material.texture == FRACTAL_SUM_PERLIN
+		|| material.texture == SINUS_SUM_PERLIN)
+		fill_text_map(&material);
+	material = xml_material3(node, material, child);
 	return (material);
 }
 
-t_mat		xml_parse_material(xmlNodePtr node)
+t_mat			xml_parse_material(xmlNodePtr node)
 {
 	t_mat		material;
 	xmlNodePtr	child;
@@ -79,14 +91,11 @@ t_mat		xml_parse_material(xmlNodePtr node)
 	free_xml((void**)&tmp);
 	if ((child = has_child(node, "absorb")))
 		material.absorb = get_color_from_node(child);
-	if (material.texture == PERLIN || material.texture == FRACTAL_SUM_PERLIN
-		|| material.texture == SINUS_SUM_PERLIN)
-		fill_text_map(&material);
 	material = xml_material2(node, material, child);
 	return (material);
 }
 
-int			set_objs(t_list *lst, t_scene *scn)
+int				set_objs(t_list *lst, t_scene *scn)
 {
 	scn->nb_obj = 0;
 	if (!lst)
