@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:06 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 15:57:11 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:10:17 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void				xml_img_att(t_scene *scene, xmlNodePtr root)
 		scene->render_mode = ft_atoi((char *)tmp);
 		if (scene->render_mode > 6 || scene->render_mode < 0)
 			scene->render_mode = 0;
-		free(tmp);
+		free_xml((void**)&tmp);
 	}
 	tmp = xmlGetProp(root, BAD_CAST"global_refract");
 	if (tmp == NULL)
