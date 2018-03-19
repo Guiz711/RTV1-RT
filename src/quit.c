@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:45:42 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:45:45 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 14:26:30 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int				quit(t_args *args)
 {
 	if (!args)
 		exit(EXIT_SUCCESS);
+	if (args->env->lodscreen)
+		mlx_destroy_image(args->env->init, args->env->lodscreen->ptr);
 	if (args->env->img)
 		mlx_destroy_image(args->env->init, args->env->img->ptr);
 	if (args->scene->objs)
