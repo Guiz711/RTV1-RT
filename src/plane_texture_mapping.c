@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane_texture_mapping.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:21:36 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:21:39 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 12:56:36 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_mtx4	world_to_plane_mtx(t_plane *plane)
 	t_mtx4	translation;
 
 	z_axis = init_vec4(0, 0, 1, 0);
-	translation = translate(plane->p.x, plane->p.y, plane->p.z);
+	translation = translate(-plane->p.x, -plane->p.y, -plane->p.z);
 	rotation = quat_to_mtx(axisangle_to_quat(cross_vec4(z_axis, plane->normal),
 		acos(dot_vec4(z_axis, plane->normal))));
 	return (mtx4_mult(translation, rotation));
@@ -32,7 +32,7 @@ static t_mtx4	plane_to_world_mtx(t_plane *plane)
 	t_mtx4	translation;
 
 	z_axis = init_vec4(0, 0, 1, 0);
-	translation = translate(-plane->p.x, -plane->p.y, -plane->p.z);
+	translation = translate(plane->p.x, plane->p.y, plane->p.z);
 	rotation = quat_to_mtx(axisangle_to_quat(cross_vec4(z_axis, plane->normal),
 		acos(-dot_vec4(z_axis, plane->normal))));
 	return (mtx4_mult(translation, rotation));

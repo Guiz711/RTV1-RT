@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+         #
+#    By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/11/04 15:56:40 by gmichaud          #+#    #+#              #
-#    Updated: 2018/03/19 11:53:50 by jgourdin         ###   ########.fr        #
+#    Created: 2018/03/19 14:03:15 by jgourdin          #+#    #+#              #
+#    Updated: 2018/03/19 14:04:01 by jgourdin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,9 @@ SRC_NAME = main.c init_rays.c obj_list.c intersection_1.c intersection_2.c \
 			noise_3.c plane_texture_mapping.c texture.c procedural_bump.c \
 			procedural_textures_1.c procedural_textures_2.c set_aliasing.c \
 			set_aliasing2.c init.c init_texture.c init2.c filtre2.c \
-			trans_hook.c rot_hook.c hook2.c scale_utilitary.c \
-			trans_utilitary.c rot_utilitary.c trans_utilitary2.c
+			trans_hook.c rot_hook.c hook2.c scale_utilitary_1.c \
+			trans_utilitary_1.c rot_utilitary_1.c rot_utilitary_2.c \
+			scale_utilitary_2.c trans_utilitary_2.c
 
 SRC_VEC_PATH = vectors
 
