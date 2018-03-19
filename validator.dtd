@@ -111,6 +111,25 @@
 			g CDATA #REQUIRED
 			b CDATA #REQUIRED>
 
+<!ELEMENT p1 EMPTY>
+<!ATTLIST p1
+			x CDATA #REQUIRED
+			y CDATA #REQUIRED
+			z CDATA #REQUIRED
+			w CDATA #REQUIRED>
+<!ELEMENT p2 EMPTY>
+<!ATTLIST p2
+			x CDATA #REQUIRED
+			y CDATA #REQUIRED
+			z CDATA #REQUIRED
+			w CDATA #REQUIRED>
+<!ELEMENT p3 EMPTY>
+<!ATTLIST p3
+			x CDATA #REQUIRED
+			y CDATA #REQUIRED
+			z CDATA #REQUIRED
+			w CDATA #REQUIRED>
+
 <!ELEMENT noise_seed EMPTY>
 <!ATTLIST noise_seed nb CDATA #REQUIRED>
 
@@ -134,9 +153,10 @@
 
 <!--OBJECTS-->
 
-<!ELEMENT objects (plane | cone | cylindre | sphere | paraboloid)+>
+<!ELEMENT objects (plane | cone | cylindre | sphere | paraboloid | triangle)+>
 <!ELEMENT plane (p, normal, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>
 <!ELEMENT sphere (radius, center, model,amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>
 <!ELEMENT cylindre (p, dir, radius, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>
 <!ELEMENT cone (p, dir, angle, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>
 <!ELEMENT paraboloid (p, dir, k, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>
+<!ELEMENT triangle (p1, p2, p3, model, amb, spec, diffuse, shininess, refract, reflect, opacity, texture, text_angle, text_scale, bump_text, bump_angle, bump_scale, absorb, noise_seed)>

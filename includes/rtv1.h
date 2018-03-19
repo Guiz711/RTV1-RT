@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 19:54:30 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:33:18 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 10:42:32 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef enum		e_obj_type
 	CYLINDER,
 	CONE,
 	PARABOLOID,
+	TRIANGLE,
 	COUNT_OBJ,
 }					t_obj_type;
 
@@ -179,6 +180,14 @@ typedef struct		s_cylinder
 	t_vec4			dir;
 	double			radius;
 }					t_cylinder;
+
+typedef struct		s_triangle
+{
+	t_vec4		p1;
+	t_vec4		p2;
+	t_vec4		p3;
+	t_vec4		normal;
+}					t_triangle;
 
 typedef struct		s_light
 {
@@ -342,8 +351,8 @@ typedef struct		s_args
 	t_scene			*scene;
 	t_pixel			*pix_buf;
 	t_text_img		textures;
-	t_norm_fct		norm_fct[5];
-	t_inter_fct		obj_fct[5];
+	t_norm_fct		norm_fct[6];
+	t_inter_fct		obj_fct[6];
 	t_text_fct		text_fct[8];
 	void			(*modif_scale[5])(struct s_args*);
 	void			(*modif_trans[6])(struct s_args*, t_vec3);
@@ -488,6 +497,7 @@ double				sphere_intersection(t_ray ray, void *obj);
 double				plane_intersection(t_ray ray, void *obj);
 double				cylinder_intersection(t_ray ray, void *obj);
 double				paraboloid_intersection(t_ray ray, void *obj);
+double				triangle_intersection(t_ray ray, void *obj);
 
 /*
 **	Primitive surface normal functions
@@ -498,6 +508,8 @@ t_vec4				plane_normal(t_ray *ray, t_inter *inter);
 t_vec4				cylinder_normal(t_ray *ray, t_inter *inter);
 t_vec4				cone_normal(t_ray *ray, t_inter *inter);
 t_vec4				paraboloid_normal(t_ray *ray, t_inter *inter);
+t_vec4  			get_triangle_normal(t_vec4 p1, t_vec4 p2, t_vec4 p3);
+t_vec4				triangle_normal(t_ray *ray, t_inter *inter);
 
 /*
 **	Render management functions

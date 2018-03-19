@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:57:49 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:03:05 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 10:37:12 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,7 @@ int				get_obj(xmlNodePtr node, t_scene *scn)
 		create_paraboloid(node, scn);
 	if (!xmlStrcmp(node->name, BAD_CAST"cylindre"))
 		create_cylinder(node, scn);
+	if (!xmlStrcmp(node->name, BAD_CAST"triangle"))
+		create_triangle(node, scn);
 	return (1);
 }

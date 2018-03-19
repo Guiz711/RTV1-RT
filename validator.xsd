@@ -112,6 +112,42 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="p1">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute  type="xsd:double" name="x" use="required"/>
+					<xsd:attribute  type="xsd:double" name="y" use="required"/>
+					<xsd:attribute  type="xsd:double" name="z" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="p2">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute  type="xsd:double" name="x" use="required"/>
+					<xsd:attribute  type="xsd:double" name="y" use="required"/>
+					<xsd:attribute  type="xsd:double" name="z" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="p3">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute  type="xsd:double" name="x" use="required"/>
+					<xsd:attribute  type="xsd:double" name="y" use="required"/>
+					<xsd:attribute  type="xsd:double" name="z" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+
 	<!--INFO-->
 
 	<xsd:element name="shininess">

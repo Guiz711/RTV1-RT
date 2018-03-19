@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:21:15 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:21:19 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/19 11:11:30 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,18 @@ t_vec4	plane_normal(t_ray *ray, t_inter *inter)
 		normal = normalize_vec4(rev_vec4(pln->normal));
 	else
 		normal = normalize_vec4(pln->normal);
+	return (normal);
+}
+
+t_vec4	triangle_normal(t_ray *ray, t_inter *inter)
+{
+	t_triangle	*tri;
+	t_vec4			normal;
+
+	tri = (t_triangle*)inter->obj->content;
+	if (dot_vec4(ray->dir, tri->normal) > 0)
+		normal = normalize_vec4(rev_vec4(tri->normal));
+	else
+		normal = normalize_vec4(tri->normal);
 	return (normal);
 }

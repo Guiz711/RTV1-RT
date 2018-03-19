@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 13:02:32 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 09:04:01 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 10:42:04 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ void	init_fct_arr(t_args *args)
 	args->obj_fct[2] = &cylinder_intersection;
 	args->obj_fct[3] = &cone_intersection;
 	args->obj_fct[4] = &paraboloid_intersection;
+	args->obj_fct[5] = &triangle_intersection;
 	args->norm_fct[0] = &sphere_normal;
 	args->norm_fct[1] = &plane_normal;
 	args->norm_fct[2] = &cylinder_normal;
 	args->norm_fct[3] = &cone_normal;
 	args->norm_fct[4] = &paraboloid_normal;
+	args->norm_fct[5] = &triangle_normal;
 	args->rdr_fct[0] = &render_mode_0;
 	args->rdr_fct[1] = &render_mode_1;
 	args->rdr_fct[2] = &render_mode_2;
