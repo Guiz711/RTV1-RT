@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:06 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 16:10:17 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:03:03 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ t_vec4				get_vec4_from_node(xmlNodePtr node)
 	xmlFree(tmp);
 	tmp = ((xmlGetProp(node, BAD_CAST"z")));
 	new.z = atof((char *)tmp);
+	xmlFree(tmp);
+	tmp = ((xmlGetProp(node, BAD_CAST"w")));
+	new.w = atof((char *)tmp);
 	xmlFree(tmp);
 	return (new);
 }
