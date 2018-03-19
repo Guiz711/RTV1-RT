@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 19:54:30 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 13:06:52 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:13:29 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,6 +398,7 @@ void				scale_cone(t_args *args);
 void				scale_cylinder(t_args *args);
 void				scale_parab(t_args *args);
 void				scale_triangle(t_args *args);
+void				trans_triangle(t_args *args, t_vec3 trans_pos);
 void				trans_sphere(t_args *args, t_vec3 trans_pos);
 void				trans_cone(t_args *args, t_vec3 trans_pos);
 void				trans_cylinder(t_args *args, t_vec3 trans_pos);
