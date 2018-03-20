@@ -60,6 +60,8 @@
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.25"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+
 		</plane>
 		<plane>
 			<p x="0" y="0" z="12" w="1"/>
@@ -79,6 +81,7 @@
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 		</plane>
 		<plane>
 			<p x="-12" y="0" z="0" w="1"/>
@@ -98,6 +101,8 @@
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+
 		</plane>
 		<plane>
 			<p x="12" y="0" z="0" w="1"/>
@@ -117,6 +122,8 @@
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+
 		</plane>
 		<plane>
 			<p x="0" y="-12" z="0" w="1"/>
@@ -136,6 +143,8 @@
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+
 		</plane>
 		<plane>
 			<p x="0" y="12" z="0" w="1"/>
@@ -155,6 +164,7 @@
 			<bump_angle nb="-60"/>
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 		</plane>
 	</objects>
 </scene>
