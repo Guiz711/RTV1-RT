@@ -24,9 +24,9 @@
 			<radius nb="2"/>
 			<center x="0" y="0" z="-10" w="1"/>
 			<model model="LAMBERT"/>
-			<amb r="0" g="0" b="1"/>
+			<amb r="0.2" g="0.2" b="0.6"/>
 			<spec r="0" g="0" b="0"/>
-			<diffuse r="0.5" g="0.5" b="0.5"/>
+			<diffuse r="0.2" g="0.2" b="0.6"/>
 			<shininess nb="0"/>
 			<refract nb="1"/>
 			<reflect nb="0"/>

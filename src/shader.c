@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 19:01:57 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/20 10:12:47 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:38:44 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ t_vec3	specular_phong(t_inter *inter, t_light *light)
 	t_vec4	light_dir;
 	t_ray	refl;
 
-	light_dir = normalize_vec4(rev_vec4(sub_vec4(inter->p, light->vec)));
+	if (light->type == POINT)
+		light_dir = normalize_vec4(rev_vec4(sub_vec4(inter->p, light->vec)));
+	else
+		light_dir = normalize_vec4(light->vec);
 	refl = reflected_ray(light_dir, inter);
 	ratio.x = light->spec_i.x * inter->obj->material.spec.x *
 		(pow(dot_vec4(inter->normal, light_dir), inter->obj->material.shin));

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scene render ="4">
+	<camera>
+		<origin x ="0" y="0" z="0" w="1"/>
+		<orientation x="-30" y="0" z="0" w="0"/>
+		<amb_i r="0" g="0" b="0"/>
+	</camera>
+
+	<lights>
+		<light>
+			<type type="DIRECTIONAL"/>
+			<vec x="0.5" y="-0.5" z="-0.2" w="0"/>
+			<diffuse r="1.5" g="1.5" b="1.5"/>
+			<spec r="1.5" g="1.5" b="1.5"/>
+			<range nb="3000"/>
+			<atten r="0.0005" g="0.0005" b="1"/>
+		</light>
+	</lights>
+
+
+	<objects>
+		<plane>
+			<p x="0" y="-15" z="0" w="1"/>
+			<normal x="0" y="1" z="0" w="0"/>
+			<model model="PHONG"/>
+			<amb r="1" g="1" b="1"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="100"/>
+			<refract nb="1"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<texture texture="CHECKERBOARD"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0.2"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</plane>
+
+		<sphere>
+			<radius nb="5"/>
+			<center x="0" y="-10" z="-20" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0" g="0" b="0.7"/>
+			<spec r="1.5" g="1.5" b="1.5"/>
+			<diffuse r="0" g="0" b="0.7"/>
+			<shininess nb="100"/>
+			<refract nb="1.125"/>
+			<reflect nb="0.1"/>
+			<opacity nb="0.4"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</sphere>
+	</objects>
+</scene>
