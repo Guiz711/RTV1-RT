@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reflection_refraction.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
+/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 16:19:58 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/20 09:21:07 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/20 14:48:03 by hbouchet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
