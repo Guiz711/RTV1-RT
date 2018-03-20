@@ -18,7 +18,6 @@
 		</light>
 	</lights>
 
-
 	<objects>
 		<plane>
 			<p x="0" y="0" z="-20" w="1"/>
