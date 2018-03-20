@@ -37,6 +37,15 @@
 			<refract nb="1.331"/>
 			<reflect nb="0.1"/>
 			<opacity nb="0.1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="-60"/>
+			<bump_scale nb="0.1"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+
 		</sphere>
 		<plane>
 			<!-- <p x="0" y="-5" z="-20" w="1"/> -->
@@ -54,6 +63,12 @@
 			<texture texture="WEIGHT_SUM_CHECKERBOARD"/>
 			<text_angle nb="0"/>
 			<text_scale nb="0.1"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="-60"/>
+			<bump_scale nb="0.1"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+
 		</plane>
 	</objects>
 </scene>
