@@ -98,6 +98,28 @@
 			<noise_seed nb="0"/>
 		</sphere>
 
+		<paraboloid>
+			<p x="10" y="-10" z="0" w="1"/>
+			<dir x="1" y="1" z="0" w="0"/>
+			<k nb="1"/>
+			<model model="PHONG"/>
+			<amb r="0" g="0" b="0"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="150"/>
+			<refract nb="1"/>
+			<reflect nb="1"/>
+			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</paraboloid>
+
 		<plane>
 			<p x="0" y="0" z="-20" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>
