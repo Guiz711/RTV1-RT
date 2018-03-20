@@ -32,17 +32,17 @@
 	<objects>
 
 	<triangle>
-			<p1 x="0" y="4" z="10" w="1"/>
-			<p2 x="-2" y="-9" z="10" w="1"/>
-			<p3 x="5" y="-" z="10" w="1"/>
+			<p1 x="0.5" y="-1" z="2" w="1"/>
+			<p2 x="-3" y="-10" z="2" w="1"/>
+			<p3 x="3" y="-13" z="2" w="1"/>
 			<model model="PHONG"/>
-			<amb r="0" g="0" b="0"/>
-			<spec r="1" g="1" b="1"/>
-			<diffuse r="0.9" g="0.1" b="0.1"/>
+			<amb r="0.1" g="0.2" b="0.3"/>
+			<spec r="0.1" g="0.1" b="0.1"/>
+			<diffuse r="0.1" g="0.2" b="0.3"/>
 			<shininess nb="150"/>
-			<refract nb="1.125"/>
+			<refract nb="0"/>
 			<reflect nb="1"/>
-			<opacity nb="1"/>
+			<opacity nb="0"/>
 			<texture texture="NO_TEXT"/>
 			<text_angle nb="0"/>
 			<text_scale nb="0"/>
@@ -54,15 +54,15 @@
 	</triangle>
 
 	<sphere>
-			<radius nb="2"/>
-			<center x="2" y="4" z="-10" w="1"/>
+			<radius nb="6"/>
+			<center x="-8" y="-4" z="-10" w="1"/>
 			<model model="PHONG"/>
-			<amb r="0.5" g="0.5" b="0.5"/>
-			<spec r="0.5" g="0.5" b="0.5"/>
-			<diffuse r="0.5" g="0.5" b="0.5"/>
+			<amb r="1" g="1" b="0"/>
+			<spec r="1" g="1" b="0"/>
+			<diffuse r="1" g="1" b="0"/>
 			<shininess nb="150"/>
-			<refract nb="0.470"/>
-			<reflect nb="0.5"/>
+			<refract nb="0"/>
+			<reflect nb="0"/>
 			<opacity nb="1"/>
 			<texture texture="NO_TEXT"/>
 			<text_angle nb="0"/>
@@ -73,9 +73,10 @@
 			<absorb r="0" g="0" b="0"/>
 			<noise_seed nb="0"/>
 		</sphere>
+
 		<sphere>
 			<radius nb="2"/>
-			<center x="4" y="0" z="-10" w="1"/>
+			<center x="7" y="-8" z="-10" w="1"/>
 			<model model="PHONG"/>
 			<amb r="0" g="0" b="0"/>
 			<!-- <amb r="0" g="0" b="0"/> -->
@@ -85,8 +86,8 @@
 			<shininess nb="150"/>
 			<!-- <refract nb="1.08"/> -->
 			<refract nb="1.125"/>
-			<reflect nb="0.1"/>
-			<opacity nb="0.3"/>
+			<reflect nb="0.5"/>
+			<opacity nb="0.1"/>
 			<texture texture="NO_TEXT"/>
 			<text_angle nb="0"/>
 			<text_scale nb="0"/>
