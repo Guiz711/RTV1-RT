@@ -6,7 +6,7 @@
 /*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 16:28:18 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/20 14:54:24 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/20 15:05:06 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@
 # define V_SCALE 9
 # define KEY_I 34
 # define SEL args->env->sel_obj
-# define WIN_WIDTH 1400
-# define WIN_HEIGHT 700
+# define WIN_WIDTH 1900
+# define WIN_HEIGHT 1200
 # define FOVX 90
 # define COLOR_DEPTH 32
 # define ENDIAN 1

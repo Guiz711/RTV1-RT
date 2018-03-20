@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 13:41:06 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/20 15:05:17 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		moving_mode(t_args *args)
 	}
 	else
 	{
-		args->env->aliasing = 14;
+		args->env->aliasing = 19;
 		args->env->thread_number = 1;
 		args->env->rendertmp = args->scene->render_mode;
 		args->env->moving = 1;
