@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<scene render ="4" global_refract="1" filtre="0">
+	<camera>
+		<origin x="0" y="0" z="30" w="1"/>
+		<orientation x="0" y="0" z="0" w="0"/>
+		<amb_i r="0.2" g="0.2" b="0.2"/>
+	</camera>
+
+	<lights>
+		<light>
+			<type type="DIRECTIONNAL"/>
+			<vec x="0" y="8" z="0" w="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<spec r="0.3" g="0.3" b="0.3"/>
+			<range nb="3000"/>
+			<atten r="0.005" g="0.005" b="1"/>
+		</light>
+
+		<!--
+		<light>
+			<type type="POINT"/>
+			<vec x="14" y="8" z="5" w="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<spec r="0.3" g="0.3" b="0.3"/>
+			<range nb="3000"/>
+			<atten r="0.0005" g="0.0005" b="1"/>
+		</light>
+		-->
+	</lights>
+
+	<objects>
+
+	<triangle>
+			<p1 x="0.5" y="-1" z="2" w="1"/>
+			<p2 x="-3" y="-10" z="2" w="1"/>
+			<p3 x="3" y="-13" z="2" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0.1" g="0.2" b="0.3"/>
+			<spec r="0.1" g="0.1" b="0.1"/>
+			<diffuse r="0.1" g="0.2" b="0.3"/>
+			<shininess nb="150"/>
+			<refract nb="0"/>
+			<reflect nb="1"/>
+			<opacity nb="0"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="-60"/>
+			<bump_scale nb="0.1"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+	</triangle>
+
+	<sphere>
+			<radius nb="6"/>
+			<center x="-8" y="-4" z="-10" w="1"/>
+			<model model="PHONG"/>
+			<amb r="1" g="1" b="0"/>
+			<spec r="1" g="1" b="0"/>
+			<diffuse r="1" g="1" b="0"/>
+			<shininess nb="150"/>
+			<refract nb="0"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="-60"/>
+			<bump_scale nb="0.1"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</sphere>
+
+		<sphere>
+			<radius nb="2"/>
+			<center x="7" y="-8" z="-10" w="1"/>
+			<model model="PHONG"/>
+			<amb r="0" g="0" b="0"/>
+			<!-- <amb r="0" g="0" b="0"/> -->
+			<spec r="0.25" g="0.25" b="0.25"/>
+			<!-- <diffuse r="1" g="1" b="1"/> -->
+			<diffuse r="0" g="0" b="0"/>
+			<shininess nb="150"/>
+			<!-- <refract nb="1.08"/> -->
+			<refract nb="1.125"/>
+			<reflect nb="0.5"/>
+			<opacity nb="0.1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="-60"/>
+			<bump_scale nb="0.1"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</sphere>
+
+		<plane>
+			<p x="0" y="0" z="-20" w="1"/>
+			<normal x="0" y="0" z="1" w="0"/>
+			<model model="PHONG"/>
+			<amb r="1" g="1" b="1"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="50"/>
+			<refract nb="1"/>
+			<reflect nb="0.01"/>
+			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="100"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</plane>
+
+<!-- LEFT_WALL -->
+
+		<plane>
+			<p x="-20" y="0" z="0" w="1"/>
+			<normal x="1" y="0" z="0" w="0"/>
+			<model model="PHONG"/>
+			<amb r="1" g="0" b="0"/>
+			<spec r="0.4" g="0.4" b="0.4"/>
+			<diffuse r="1" g="0" b="0"/>
+			<shininess nb="0"/>
+			<refract nb="1"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="100"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</plane>
+
+<!-- RIGHT_WALL -->
+
+		<plane>
+			<p x="20" y="0" z="0" w="1"/>
+			<normal x="1" y="0" z="0" w="0"/>
+			<model model="PHONG"/>
+			<amb r="0" g="1" b="0"/>
+			<spec r="0" g="0" b="0"/>
+			<diffuse r="0" g="1" b="0"/>
+			<shininess nb="0"/>
+			<refract nb="1"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="100"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</plane>
+
+<!-- FLOOR -->
+
+		<plane>
+			<p x="0" y="-10" z="0" w="1"/>
+			<normal x="0" y="1" z="0" w="0"/>
+			<model model="PHONG"/>
+			<amb r="1" g="1" b="1"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="0"/>
+			<refract nb="1"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="100"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</plane>
+
+<!-- CEILING -->
+
+		<plane>
+			<p x="0" y="10" z="0" w="1"/>
+			<normal x="0" y="1" z="0" w="0"/>
+			<model model="PHONG"/>
+			<amb r="1" g="1" b="1"/>
+			<spec r="1" g="1" b="1"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="0"/>
+			<refract nb="1"/>
+			<reflect nb="0"/>
+			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="200"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
+		</plane>
+	</objects>
+</scene>
