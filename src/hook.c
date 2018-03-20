@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 01:50:41 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/20 15:48:34 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/20 16:45:37 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		moving_mode(t_args *args)
 	else
 	{
 		init_hook(args->env);
-		args->env->aliasing = 19;
+		args->env->aliasing = 14;
 		args->env->thread_number = 1;
 		args->env->rendertmp = args->scene->render_mode;
 		args->env->moving = 1;
@@ -75,6 +75,7 @@ int			hook(int keycode, t_args *args)
 		quit((t_args*)args);
 	else if (keycode == KEY_DIVIDE || keycode == KEY_MULTIPLY)
 	{
+		args->env->moving = 0;
 		if (set_aliasing(keycode, args) == 1)
 			redraw(args);
 	}

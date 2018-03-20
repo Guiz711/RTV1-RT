@@ -6,7 +6,7 @@
 /*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 16:19:03 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/19 16:19:04 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/20 16:58:35 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		init_env(t_env *env)
 	if (!(env->init = mlx_init()))
 		return (FAILURE);
 	if (!(env->win = mlx_new_window(env->init, WIN_WIDTH,
-		WIN_HEIGHT, "RTV1")))
+		WIN_HEIGHT, "RT")))
 		return (FAILURE);
 	init_loadingscreen(env);
 	if (!init_img(env))

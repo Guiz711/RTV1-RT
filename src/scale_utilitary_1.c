@@ -6,7 +6,7 @@
 /*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 17:48:54 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:04:48 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/20 16:52:36 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void			scale_cone(t_args *args)
 	cone = (t_cone*)args->scene->objs->content;
 	cone->angle =
 		(args->env->hook.scale == 1 ? cone->angle * 1.1 : cone->angle / 1.1);
+	cone->ang_tan = 1 + square(tan(rad(cone->angle * 0.5)));
 	args->scene->objs->content = cone;
 }
 
