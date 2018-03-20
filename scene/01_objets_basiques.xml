@@ -11,7 +11,7 @@
 		<light>
 			<type type="POINT"/>
 			<vec x="-20" y="0" z="20" w="1"/>
-			<diffuse r="1.2" g="1.2" b="1.2"/>
+			<diffuse r="1" g="1" b="1"/>
 			<spec r="0.3" g="0.3" b="0.3"/>
 			<range nb="3000"/>
 			<atten r="0.0005" g="0.0005" b="1"/>
@@ -23,30 +23,43 @@
 		<plane>
 			<p x="0" y="0" z="-20" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>
-			<model model="PHONG"/>
-			<amb r="0.5" g="0.5" b="0.8"/>
-			<spec r="1" g="1" b="1"/>
-			<diffuse r="0.8" g="0.8" b="0.8"/>
-			<shininess nb="1"/>
-			<refract nb="1.460"/>
+			<model model="LAMBERT"/>
+			<amb r="1" g="1" b="1"/>
+			<spec r="0" g="0" b="0"/>
+			<diffuse r="1" g="1" b="1"/>
+			<shininess nb="0"/>
+			<refract nb="1"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
-			<texture texture="CHECKERBOARD"/>
+			<texture texture="NO_TEXT"/>
 			<text_angle nb="0"/>
-			<text_scale nb="0.25"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 		</plane>
 
 		<sphere>
 			<radius nb="2"/>
 			<center x="0" y="5" z="-10" w="1"/>
-			<model model="PHONG"/>
-			<amb r="0.2" g="0.8" b="0.2"/>
-			<spec r="1.5" g="1.5" b="1.5"/>
-			<diffuse r="0.2" g="0.8" b="0.2"/>
-			<shininess nb="100"/>
-			<refract nb="1.460"/>
+			<model model="LAMBERT"/>
+			<amb r="0" g="0" b="1"/>
+			<spec r="0" g="0" b="0"/>
+			<diffuse r="0" g="0" b="1"/>
+			<shininess nb="0"/>
+			<refract nb="1"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 		</sphere>
 
 		<cylindre>
@@ -54,27 +67,43 @@
 			<dir x="0" y="1" z="0" w="0"/>
 			<radius nb="2"/>
 			<model model="PHONG"/>
-			<amb r="0.2" g="0.2" b="0.8"/>
-			<spec r="1" g="1" b="1"/>
-			<diffuse r="0.2" g="0.2" b="0.8"/>
-			<shininess nb="1"/>
-			<refract nb="1.460"/>
+			<amb r="0" g="0" b="1"/>
+			<spec r="0" g="0" b="0"/>
+			<diffuse r="0" g="1" b="0"/>
+			<shininess nb="0"/>
+			<refract nb="1"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 		</cylindre>
 
 		<cone>
 			<p x="15" y="0" z="-10" w="1"/>
 			<dir x="0" y="1" z="0" w="0"/>
-			<angle nb="45"/>
+			<angle nb="30"/>
 			<model model="PHONG"/>
-			<amb r="0.9" g="0.6" b="0.05"/>
-			<spec r="1.2" g="1.2" b="1.2"/>
-			<diffuse r="0.9" g="0.6" b="0.05"/>
-			<shininess nb="10"/>
-			<refract nb="1.460"/>
+			<amb r="0" g="0" b="1"/>
+			<spec r="0" g="0" b="0"/>
+			<diffuse r="1" g="0" b="0"/>
+			<shininess nb="0"/>
+			<refract nb="1"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
+			<texture texture="NO_TEXT"/>
+			<text_angle nb="0"/>
+			<text_scale nb="0"/>
+			<bump_text bump_text="NO_BUMP"/>
+			<bump_angle nb="0"/>
+			<bump_scale nb="0"/>
+			<absorb r="0" g="0" b="0"/>
+			<noise_seed nb="0"/>
 		</cone>
 	</objects>
 </scene>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 19:01:57 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 19:02:00 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/20 10:12:47 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,15 @@ t_vec3	specular_phong(t_inter *inter, t_light *light)
 	ratio.z = light->spec_i.z * inter->obj->material.spec.z *
 		(pow(dot_vec4(inter->normal, light_dir), inter->obj->material.shin));
 	return (ratio);
+}
+
+t_vec3	amb_color(t_args *args, t_inter *inter)
+{
+	t_vec3	amb;
+
+	amb = inter->obj->material.amb;
+	if (inter->obj->content_type == PLANE
+		&& inter->obj->material.texture >= WALL)
+		plane_texture(args, inter, &amb);
+	return (mult_vec3(amb, args->scene->amb_i));
 }

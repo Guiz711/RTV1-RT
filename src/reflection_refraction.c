@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reflection_refraction.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 16:19:58 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/19 16:19:58 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/20 09:21:07 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_ray	ray_in(t_vec4 ray_dir, t_inter *inter, double c1)
 	double	c2;
 
 	r_ratio = 1 / inter->obj->material.refract;
-	c2 = sqrt(1 - SQUARE(r_ratio) * (1 - SQUARE(-c1)));
+	c2 = sqrt(1 - square(r_ratio) * (1 - square(-c1)));
 	refr.dir = add_vec4(dmult_vec4(ray_dir, r_ratio),
 		dmult_vec4(inter->normal, (r_ratio * -c1) - c2));
 	refr.orig = add_vec4(inter->p, dmult_vec4(inter->normal, -0.0000007));
@@ -35,7 +35,7 @@ static t_ray	ray_out(t_vec4 ray_dir, t_inter *inter, double c1)
 	double	c2;
 
 	r_ratio = inter->obj->material.refract;
-	c2 = sqrt(1 - SQUARE(r_ratio) * (1 - SQUARE(c1)));
+	c2 = sqrt(1 - square(r_ratio) * (1 - square(c1)));
 	refr.dir = add_vec4(dmult_vec4(ray_dir, r_ratio),
 		dmult_vec4(rev_vec4(inter->normal), (r_ratio * c1) - c2));
 	refr.orig = add_vec4(inter->p, dmult_vec4(inter->normal, 0.0000007));

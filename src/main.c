@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 16:19:35 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/19 16:19:36 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/20 10:11:27 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_mtx4						get_camera_to_world(t_view *view)
 	t_mtx4					translation;
 	t_mtx4					rotation;
 
-	orient = init_vec3(RAD(view->orient.x),
-		RAD(view->orient.y), RAD(view->orient.z));
+	orient = init_vec3(rad(view->orient.x),
+		rad(view->orient.y), rad(view->orient.z));
 	translation = translate(view->orig.x, view->orig.y, view->orig.z);
 	rotation = quat_to_mtx(euler_to_quat(orient));
 	return (mtx4_mult(translation, rotation));

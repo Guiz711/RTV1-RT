@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 16:28:18 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/19 16:30:54 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/20 09:48:13 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,6 @@
 
 # define REFLEXION_DEPTH 5
 # define EXTENSION_NAME ".scn"
-
-# define RAD(x) (M_PI * (x) / 180)
-# define SQUARE(x) ((x) * (x))
 
 # define LOADING_SCREEN "./pics/loadingscreen.xpm"
 
@@ -384,6 +381,9 @@ typedef struct		s_noise
 	t_vec4			interpol;
 }					t_noise;
 
+double				rad(double angle);
+double				square(double x);
+
 int					hook(int keycode, t_args *args);
 int					check_hook(t_args *args);
 int					init_hook(t_env *env);
@@ -437,6 +437,7 @@ double				fresnel_calc(t_vec4 normal, t_vec4 ray_dir,
 						double n1, double n2);
 t_ray				refracted_ray(t_vec4 ray_dir, t_inter *inter);
 t_ray				reflected_ray(t_vec4 ray_dir, t_inter *inter);
+t_vec3				amb_color(t_args *args, t_inter *inter);
 void				plane_texture(t_args *args, t_inter *inter, t_vec3 *diff);
 double				plane_procedural_texture(t_args *args, t_inter *inter);
 double				sine_wave(t_mat *mat, t_vec4 obj_coords);

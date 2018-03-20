@@ -4,10 +4,7 @@
 	<camera>
 		<origin x ="0" y="-10" z="0" w="1"/>
 		<orientation x="40" y="-20" z="-25" w="0"/>
-		<!-- <origin x ="0" y="0" z="20" w="1"/> -->
-		<!-- <orientation x="0" y="0" z="0" w="0"/> -->
-		<!-- <amb_i r="0.2" g="0.2" b="0.2"/> -->
-		<amb_i r="0" g="0" b="0"/>
+		<amb_i r="0.2" g="0.2" b="0.2"/>
 	</camera>
 
 	<lights>
@@ -19,14 +16,6 @@
 			<range nb="3000"/>
 			<atten r="0.0005" g="0.0005" b="1"/>
 		</light>
-		<!-- <light>
-			<type type="DIRECTIONAL"/>
-			<vec x="0.3" y="0" z="-1" w="0"/>
-			<diffuse r="1" g="1" b="1"/>
-			<spec r="1" g="1" b="1"/>
-			<range nb="3000"/>
-			<atten r="0.0005" g="0.0005" b="1"/>
-		</light> -->
 	</lights>
 
 
@@ -110,13 +99,10 @@
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
 			<noise_seed nb="0"/>
-			<!-- <reflect r="0.5" g="0.5" b="0.5"/> -->
-			<!-- <transparency nb="0"/> -->
 		</sphere>
 		<sphere>
 			<radius nb="2"/>
 			<center x="4" y="0" z="-10" w="1"/>
-			<!-- <center x="0" y="-21" z="10" w="1"/> -->
 			<model model="PHONG"/>
 			<amb r="0" g="0" b="0"/>
 			<!-- <amb r="0" g="0" b="0"/> -->
@@ -136,17 +122,15 @@
 			<bump_scale nb="0.1"/>
 			<absorb r="0" g="0" b="0"/>
 			<noise_seed nb="0"/>
-			<!-- <reflect r="0.4" g="0.1" b="0.1"/> -->
-			<!-- <transparency/> -->
 		</sphere>
 		<plane>
 			<p x="0" y="0" z="-12" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>
 			<model model="PHONG"/>
-			<amb r="0.5" g="0.2" b="0"/>
+			<amb r="1" g="1" b="1"/>
 			<spec r="0.4" g="0.4" b="0.4"/>
 			<!-- <diffuse r="0.5" g="0.2" b="0"/> -->
-			<diffuse r="1" g="0.5" b="0.5"/>
+			<diffuse r="1" g="1" b="1"/>
 			<shininess nb="150"/>
 			<refract nb="1.635"/>
 			<reflect nb="0"/>
@@ -165,7 +149,7 @@
 			<p x="0" y="0" z="21" w="1"/>
 			<normal x="0" y="0" z="1" w="0"/>
 			<model model="PHONG"/>
-			<amb r="1" g="1" b="1"/>
+			<amb r="1" g="0.5" b="0.5"/>
 			<spec r="0" g="0" b="0"/>
 			<diffuse r="1" g="0.5" b="0.5"/>
 			<shininess nb="50"/>

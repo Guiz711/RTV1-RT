@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   procedural_textures_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:22:17 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:22:20 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/20 09:17:16 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	fractal_sum_perlin(t_mat *mat, t_vec4 obj_coords)
 	double	div;
 
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0),
-		RAD(mat->text_angle)));
+		rad(mat->text_angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	sum = 0;
 	div = 1;
@@ -46,7 +46,7 @@ double	sinus_sum_perlin(t_mat *mat, t_vec4 obj_coords)
 	double	x;
 
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0),
-		RAD(mat->text_angle)));
+		rad(mat->text_angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	x = obj_coords.x;
 	sum = 0;

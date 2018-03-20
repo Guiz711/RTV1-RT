@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xml_objects2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:11:22 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/19 17:43:29 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/20 11:15:46 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static int		new_cone(xmlNodePtr node, t_scene *scn, t_cone cone)
 {
 	t_obj_lst	*new;
 
+	cone.ang_tan = 1 + square(tan(rad(cone.angle * 0.5)));
 	if (!(new = obj_lstnew(CONE, &cone, sizeof(cone))))
 		ft_putendl("error\n");
 	new->material = xml_parse_material(node);

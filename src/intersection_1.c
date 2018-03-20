@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:18:52 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:18:54 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/20 09:19:51 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ double			cylinder_intersection(t_ray ray, void *obj)
 	diff = sub_vec4(ray.orig, cyl->p);
 	dot1 = dot_vec4(ray.dir, cyl->dir);
 	dot2 = dot_vec4(diff, cyl->dir);
-	poly.a = dot_vec4(ray.dir, ray.dir) - SQUARE(dot1);
+	poly.a = dot_vec4(ray.dir, ray.dir) - square(dot1);
 	poly.b = 2 * (dot_vec4(ray.dir, diff) - dot1 * dot2);
-	poly.c = dot_vec4(diff, diff) - SQUARE(dot2) - SQUARE(cyl->radius);
-	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
+	poly.c = dot_vec4(diff, diff) - square(dot2) - square(cyl->radius);
+	poly.disc = square(poly.b) - 4 * poly.a * poly.c;
 	if (poly.disc < 0)
 		return (-1);
 	return (resolve_poly2(poly));
@@ -84,10 +84,10 @@ double			cone_intersection(t_ray ray, void *obj)
 	diff = sub_vec4(ray.orig, cone->p);
 	dot1 = dot_vec4(ray.dir, cone->dir);
 	dot2 = dot_vec4(diff, cone->dir);
-	poly.a = dot_vec4(ray.dir, ray.dir) - cone->ang_tan * SQUARE(dot1);
+	poly.a = dot_vec4(ray.dir, ray.dir) - cone->ang_tan * square(dot1);
 	poly.b = 2 * (dot_vec4(ray.dir, diff) - cone->ang_tan * dot1 * dot2);
-	poly.c = dot_vec4(diff, diff) - cone->ang_tan * SQUARE(dot2);
-	poly.disc = SQUARE(poly.b) - 4 * poly.a * poly.c;
+	poly.c = dot_vec4(diff, diff) - cone->ang_tan * square(dot2);
+	poly.disc = square(poly.b) - 4 * poly.a * poly.c;
 	if (poly.disc < 0)
 		return (-1);
 	return (resolve_poly2(poly));

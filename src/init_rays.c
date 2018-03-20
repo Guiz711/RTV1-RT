@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:18:11 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:18:14 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/20 09:15:03 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static t_ray	init_ray(t_env *env, size_t pos)
 	pix.x = pos - ((pix.y - 0.5) * env->win_width) + 0.5;
 	pix = ft_ndc_conv_2(pix, (double)env->win_width, (double)env->win_height);
 	ray.dir = normalize_vec4(init_vec4(
-				(2 * pix.x - 1) * tan(RAD(fovy / 2)) * scale,
-				(1 - 2 * pix.y) * tan(RAD(fovy / 2)), -1, 0));
+				(2 * pix.x - 1) * tan(rad(fovy / 2)) * scale,
+				(1 - 2 * pix.y) * tan(rad(fovy / 2)), -1, 0));
 	ray.orig = init_vec4(0, 0, 0, 1);
 	return (ray);
 }

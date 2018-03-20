@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_modes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:59:53 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:59:55 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/20 09:49:17 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,5 @@ void		render_mode_4(t_args *args, t_ray *ray,
 		}
 		light = light->next;
 	}
-	color->amb_ratio = add_vec3(color->amb_ratio,
-			mult_vec3(inter->obj->material.amb, args->scene->amb_i));
+	color->amb_ratio = add_vec3(color->amb_ratio, amb_color(args, inter));
 }

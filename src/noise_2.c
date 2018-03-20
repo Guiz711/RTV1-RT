@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   noise_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgourdin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmichaud <gmichaud@student.42,fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 18:20:39 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/18 18:20:41 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/20 09:16:04 by gmichaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ double			map_noise(t_mat *mat, t_vec4 obj_coords)
 	t_mtx4	rotation;
 
 	rotation = quat_to_mtx(axisangle_to_quat(init_vec4(0, 0, 1, 0),
-		RAD(mat->text_angle)));
+		rad(mat->text_angle)));
 	obj_coords = new_coord(obj_coords, rotation);
 	return ((eval_coord(mat,
 		dmult_vec4(obj_coords, mat->text_scale)) + 1) * 0.5);
