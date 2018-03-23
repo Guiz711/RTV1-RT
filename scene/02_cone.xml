@@ -19,14 +19,15 @@
 	</lights>
 
 	<objects>
-		<sphere>
-			<radius nb="2"/>
-			<center x="0" y="0" z="-10" w="1"/>
+		<cone>
+			<p x="0" y="0" z="-10" w="1"/>
+			<dir x="0" y="1" z="0" w="0"/>
+			<angle nb="75"/>
 			<model model="LAMBERT"/>
-			<amb r="0.2" g="0.2" b="0.6"/>
+			<amb r="1" g="0" b="0"/>
 			<spec r="0" g="0" b="0"/>
-			<diffuse r="0.2" g="0.2" b="0.6"/>
-			<shininess nb="0"/>
+			<diffuse r="1" g="0" b="0"/>
+			<shininess nb="3"/>
 			<refract nb="1"/>
 			<reflect nb="0"/>
 			<opacity nb="1"/>
@@ -38,6 +39,6 @@
 			<bump_scale nb="0"/>
 			<absorb r="0" g="0" b="0"/>
 			<noise_seed nb="0"/>
-		</sphere>
+		</cone>
 	</objects>
 </scene>
