@@ -6,7 +6,7 @@
 /*   By: gmichaud <gmichaud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:33:14 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 17:32:13 by gmichaud         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:29:42 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ int				parsedoc(char *path, t_scene *scene)
 	}
 	xml_img_att(scene, root);
 	lst = get_objects_nodes(doc);
-	set_objs(lst, scene);
+	if (!(set_objs(lst, scene)))
+		return (0);
 	ft_lstfree(&lst);
 	get_nodes_by_name(root, "camera", &lst);
 	set_camera((xmlNodePtr)(lst->content), scene);

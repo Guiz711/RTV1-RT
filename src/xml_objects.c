@@ -6,18 +6,22 @@
 /*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:08:26 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/19 18:13:49 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:48:12 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "xml_parser.h"
+#include "rtv1.h"
 
 static int		new_sphere(xmlNodePtr node, t_scene *scn, t_sphere sphere)
 {
 	t_obj_lst	*new;
 
 	if (!(new = obj_lstnew(SPHERE, &sphere, sizeof(sphere))))
+	{
 		ft_putendl("error\n");
+		return (0);
+	}
 	new->material = xml_parse_material(node);
 	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);
@@ -64,7 +68,10 @@ int				create_plane(xmlNodePtr node, t_scene *scn)
 	if ((child = has_child(node, "rotation")))
 		plane.normal = ft_obj_rotation(child, plane.normal);
 	if (!(new = obj_lstnew(PLANE, &plane, sizeof(plane))))
+	{
 		ft_putendl("error\n");
+		return (0);
+	}
 	new->material = xml_parse_material(node);
 	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);
@@ -76,7 +83,10 @@ static int		new_cylinder(xmlNodePtr node, t_scene *scn, t_cylinder cyl)
 	t_obj_lst	*new;
 
 	if (!(new = obj_lstnew(CYLINDER, &cyl, sizeof(cyl))))
+	{
 		ft_putendl("error\n");
+		return (0);
+	}
 	new->material = xml_parse_material(node);
 	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);

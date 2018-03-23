@@ -6,7 +6,7 @@
 /*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 09:45:29 by gmichaud          #+#    #+#             */
-/*   Updated: 2018/03/19 17:40:40 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:54:15 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "xmlstring.h"
 # include "xmlreader.h"
 
+int		new_triangle(xmlNodePtr node, t_scene *scn, t_triangle triangle);
 int			create_paraboloid(xmlNodePtr node, t_scene *scn);
 int			create_cone(xmlNodePtr node, t_scene *scn);
 int			create_triangle(xmlNodePtr node, t_scene *scn);
