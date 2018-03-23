@@ -6,7 +6,7 @@
 /*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:08:26 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/23 11:22:00 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:48:12 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		new_sphere(xmlNodePtr node, t_scene *scn, t_sphere sphere)
 	if (!(new = obj_lstnew(SPHERE, &sphere, sizeof(sphere))))
 	{
 		ft_putendl("error\n");
-		return(0);
+		return (0);
 	}
 	new->material = xml_parse_material(node);
 	new->id_obj = scn->nb_obj;
@@ -72,7 +72,6 @@ int				create_plane(xmlNodePtr node, t_scene *scn)
 		ft_putendl("error\n");
 		return (0);
 	}
-
 	new->material = xml_parse_material(node);
 	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);

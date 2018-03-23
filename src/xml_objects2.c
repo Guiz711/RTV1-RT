@@ -6,7 +6,7 @@
 /*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:11:22 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/23 11:21:07 by jgourdin         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:51:53 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int				create_triangle(xmlNodePtr node, t_scene *scn)
 {
 	t_triangle	triangle;
 	xmlNodePtr	child;
-	t_obj_lst	*new;
 
 	if ((child = has_child(node, "p1")))
 		triangle.p1 = get_vec4_from_node(child);
@@ -76,15 +75,7 @@ int				create_triangle(xmlNodePtr node, t_scene *scn)
 	}
 	triangle.normal = get_triangle_normal(triangle.p1,
 		triangle.p2, triangle.p3);
-	if (!(new = obj_lstnew(TRIANGLE, &triangle, sizeof(triangle))))
-	{
-		ft_putendl("error\n");
-		return (0);
-	}
-	new->material = xml_parse_material(node);
-	new->id_obj = scn->nb_obj;
-	obj_lstadd(&(scn->objs), new);
-	return (1);
+	return (new_triangle(node, scn, triangle));
 }
 
 static int		new_cone(xmlNodePtr node, t_scene *scn, t_cone cone)
