@@ -6,7 +6,7 @@
 /*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 09:35:28 by jgourdin          #+#    #+#             */
-/*   Updated: 2018/03/19 17:10:55 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:28:56 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ int				set_objs(t_list *lst, t_scene *scn)
 	while (lst)
 	{
 		scn->nb_obj++;
-		get_obj((xmlNodePtr)lst->content, scn);
+		if (!(get_obj((xmlNodePtr)lst->content, scn)))
+			return (0);
 		lst = lst->next;
 	}
 	ft_lstfree(&lst);

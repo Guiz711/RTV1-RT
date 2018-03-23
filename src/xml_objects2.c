@@ -6,7 +6,7 @@
 /*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:11:22 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/20 14:46:46 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:21:07 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static int		new_paraboloid(xmlNodePtr node, t_scene *scn, t_parab parab)
 	t_obj_lst	*new;
 
 	if (!(new = obj_lstnew(PARABOLOID, &parab, sizeof(parab))))
+	{
 		ft_putendl("error\n");
+		return (0);
+	}
 	new->material = xml_parse_material(node);
 	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);
@@ -74,7 +77,10 @@ int				create_triangle(xmlNodePtr node, t_scene *scn)
 	triangle.normal = get_triangle_normal(triangle.p1,
 		triangle.p2, triangle.p3);
 	if (!(new = obj_lstnew(TRIANGLE, &triangle, sizeof(triangle))))
+	{
 		ft_putendl("error\n");
+		return (0);
+	}
 	new->material = xml_parse_material(node);
 	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);
@@ -87,7 +93,10 @@ static int		new_cone(xmlNodePtr node, t_scene *scn, t_cone cone)
 
 	cone.ang_tan = 1 + square(tan(rad(cone.angle * 0.5)));
 	if (!(new = obj_lstnew(CONE, &cone, sizeof(cone))))
+	{
 		ft_putendl("error\n");
+		return (0);
+	}
 	new->material = xml_parse_material(node);
 	new->id_obj = scn->nb_obj;
 	obj_lstadd(&(scn->objs), new);

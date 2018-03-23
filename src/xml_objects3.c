@@ -6,7 +6,7 @@
 /*   By: hbouchet <hbouchet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:38:10 by hbouchet          #+#    #+#             */
-/*   Updated: 2018/03/19 18:16:05 by hbouchet         ###   ########.fr       */
+/*   Updated: 2018/03/23 11:25:34 by jgourdin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,22 @@
 int				get_obj(xmlNodePtr node, t_scene *scn)
 {
 	if (!xmlStrcmp(node->name, BAD_CAST"sphere"))
-		create_sphere(node, scn);
+		if (!(create_sphere(node, scn)))
+			return (0);
 	if (!xmlStrcmp(node->name, BAD_CAST"plane"))
-		create_plane(node, scn);
+		if (!(create_plane(node, scn)))
+			return (0);
 	if (!xmlStrcmp(node->name, BAD_CAST"cone"))
-		create_cone(node, scn);
+		if (!(create_cone(node, scn)))
+			return (0);
 	if (!xmlStrcmp(node->name, BAD_CAST"paraboloid"))
-		create_paraboloid(node, scn);
+		if (!(create_paraboloid(node, scn)))
+			return (0);
 	if (!xmlStrcmp(node->name, BAD_CAST"cylindre"))
-		create_cylinder(node, scn);
+		if (!(create_cylinder(node, scn)))
+			return (0);
 	if (!xmlStrcmp(node->name, BAD_CAST"triangle"))
-		create_triangle(node, scn);
+		if (!(create_triangle(node, scn)))
+			return (0);
 	return (1);
 }
